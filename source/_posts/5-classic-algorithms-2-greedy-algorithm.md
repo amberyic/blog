@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 
   GreedyChoose(11,s,f,mark);
   for(int i=0;i<11;i++)
-    if(mark[i])
+    if (mark[i])
       cout<<i<<" ";
   system("pause");
   return 0;
@@ -51,7 +51,7 @@ void GreedyChoose(int len,int *s,int *f,bool *flag) {
   flag[0] = true;
   int j = 0;
   for(int i=1;i<len;++i)
-    if(s[i] >= f[j]) {
+    if (s[i] >= f[j]) {
       flag[i] = true;
       j = i;
     }
@@ -135,7 +135,7 @@ int main(int argc, char* argv[]) {
 
   while(weight_all <= 150) {
     for(int index=0;index < 7; ++index) {
-      if(array[index].pre_weight_value > max && array[index].mark == false) {
+      if (array[index].pre_weight_value > max && array[index].mark == false) {
         max = array[index].pre_weight_value ;
         flag = index;
       }
@@ -181,11 +181,11 @@ int main(int argc, char* argv[]) {
   int TotalLength = (3-2);
 
   for(int i=1,int j=0; i<10 ; ++i) {
-    if(s[i] >= f[j]) {
+    if (s[i] >= f[j]) {
       TotalLength += (f[i]-s[i]);
       j = i;
     } else {
-      if(f[i] <= f[j]) {
+      if (f[i] <= f[j]) {
         continue;
       } else {
         TotalLength += f[i] - f[j];
@@ -226,7 +226,7 @@ int main(int argc, char* argv[]) {
   int temp;
   for(i=0; i<=9 ; ++i)
     for(int j=0;j<10-1-i;j++)
-      if(array[j] > array[j+1]) {
+      if (array[j] > array[j+1]) {
         temp = array[j];
         array[j] = array[j+1];
         array[j+1] = temp;
@@ -263,7 +263,7 @@ int main(int argc, char* argv[]) {
   cin>>MoneyAll;
 
   for(int i=0;i<6;) {    //只有这个循环才是主体
-    if( MoneyCount+MoneyClass[i] > MoneyAll) {
+    if ( MoneyCount+MoneyClass[i] > MoneyAll) {
       i++;
       continue;
     }
@@ -272,12 +272,12 @@ int main(int argc, char* argv[]) {
     ++ MoneyIndex[i];
     ++ count;
 
-    if(MoneyCount == MoneyAll)
+    if (MoneyCount == MoneyAll)
       break;
   }
 
   for(i=0;i<6;++i) {     //控制输出的循环
-    if(MoneyIndex[i] !=0 ) {
+    if (MoneyIndex[i] !=0 ) {
       switch(i) {
       case 0:
         cout<<"the 100 have:"<<MoneyIndex[i]<<endl;
@@ -371,8 +371,8 @@ int main() {
       sum=min(sum+a[1]+a[0]+a[n-1]+a[1],sum+a[n-1]+a[0]+a[n-2]+a[0]);
       n-=2;
     }
-    if(n==3) sum+=a[0]+a[1]+a[2];
-    else if(n==2) sum+=a[1];
+    if (n==3) sum+=a[0]+a[1]+a[2];
+    else if (n==2) sum+=a[1];
     else sum+=a[0];
     printf("%d\n",sum);
   }
@@ -414,8 +414,8 @@ int main() {
     for(int i=2;i<=n-1;i=i+2) {
       long long int buy=min(price[i],price[i+1]);
       long long int sell=max(price[i],price[i+1]);
-      if(!q.empty()) {
-        if(buy>q.top()) {
+      if (!q.empty()) {
+        if (buy>q.top()) {
           res=res-2*q.top()+buy+sell;
           q.pop();
           q.push(buy);
