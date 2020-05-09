@@ -1,12 +1,11 @@
 ---
 title: hadoop & spark 分布式集群搭建
 ---
-[TOC]
-## 一、系统安装与配置
-### 1.1 下载
+## 系统安装与配置
+### 下载
 https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64
 
-### 1.2 修改主机名
+### 修改主机名
 - 命令行修改
 
 ```
@@ -30,7 +29,7 @@ $ vi /etc/hosts
 将127.0.0.1 后指定的hosts改为新的hostname并保存文件退出
 ```
 
-### 1.3 安装open-ssh
+### 安装open-ssh
 ```
 $ sudo apt update
 $ sudo apt install openssh-server
@@ -38,14 +37,14 @@ $ sudo systemctl status ssh
 $ sudo ufw allow ssh
 ```
 
-### 1.4 创建用户
+### 创建用户
 ```
 $ sudo useradd -m hadoop -s /bin/bash
-$ sudo passwd hadoop 
+$ sudo passwd hadoop
 修改/etc/sudoder文件，给hadoop用户增加sudo权限。
 ```
 
-### 1.6 修改Host
+### 修改Host
 - 修改/etc/hosts文件，删除原来127.0.0.1到主机名的映射，增加如下配置。
     - 前面是集群的IP，可以通过ip -a查看
     - 后面是主机名
@@ -56,15 +55,15 @@ $ sudo passwd hadoop
 172.30.50.84    UbuntuSlave2
 ```
 
-### 1.5 配置免密码登陆
+### 配置免密码登陆
 ```
-$ ssh-keygen -t rsa   #产生公钥与私钥对，执行三次回车 
+$ ssh-keygen -t rsa   #产生公钥与私钥对，执行三次回车
 $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 将～/.ssh目录下的id_rsa.pub,id_rsa,authorized_keys拷贝到其他两台server
 ```
 
-## 二、软件安装与配置
-### 2.1 Java环境配置
+## 软件安装与配置
+### Java环境配置
 - 下载Java JDK，放置到/opt目录下，并解压
 
 ```
@@ -89,7 +88,7 @@ java -version
 sudo apt-get install lib32stdc++6
 ```
 
-### 2.2 scala环境配置
+### scala环境配置
 - 下载scala，放置到/opt目录下，并解压
 
 ```
@@ -110,8 +109,8 @@ export PATH=$PATH:$SCALA_HOME/bin
 source /etc/profile
 scala -version
 ```
-## 三、hadoop & spark安装与配置
-### 3.1 hadoop的安装与配置
+## hadoop & spark安装与配置
+### hadoop的安装与配置
 - 1) 下载hadoop2.7，放置在/opt目录下，并解压
 
 ```
@@ -250,7 +249,7 @@ cp mapred-site.xml.template mapred-site.xml
 </configuration>
 ```
 
-### 3.2 spark的安装与配置
+### spark的安装与配置
 - 1) 下载hadoop2.7，放置在/opt目录下，并解压
 
 ```
@@ -288,7 +287,7 @@ UbuntuSlave1
 UbuntuSlave2
 ```
 
-### 3.3 同步配置&初始化集群
+### 同步配置&初始化集群
 - 1) 拷贝软件配置
 
 ```
@@ -334,11 +333,11 @@ export PATH=$PATH:$SPARK_HOME/bin
 $ hadoop namenode -format
 ```
 
-## 四、集群启动&部署验证
-### 4.1 hadoop集群启动
+## 集群启动&部署验证
+### hadoop集群启动
 - 1) 在Master节点，执行一下命令，启动集群。
 ```
-/opt/hadoop-2.7.0/sbin/start-all.sh 
+/opt/hadoop-2.7.0/sbin/start-all.sh
 ```
 - 2）查看Hadoop是否启动成功，输入命令：jps
 Master显示：SecondaryNameNode，ResourceManager，NameNode
@@ -346,22 +345,22 @@ Slaver显示：NodeManager，DataNode
 - 3) 管理界面
 访问http://UbuntuMaster:50070, 查看 NameNode 和 Datanode 信息，还可以在线查看 HDFS 中的文件。
 
-### 4.2 hadoop集群验证
+### hadoop集群验证
 
 ```
-cd  $HADOOP_HOME 
+cd  $HADOOP_HOME
 
 bin/hadoop fs -rm -r /output
-bin/hadoop fs -mkdir /input 
+bin/hadoop fs -mkdir /input
 bin/hadoop fs -put $HADOOP_HOME/README.txt /input
-bin/hadoop fs -ls  /input 
+bin/hadoop fs -ls  /input
 bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.0.jar wordcount  /input/README.txt  /output
 
-bin/hadoop fs -ls  /output 
-bin/hadoop fs -cat /output/part-r-00000  
+bin/hadoop fs -ls  /output
+bin/hadoop fs -cat /output/part-r-00000
 ```
 
-### 4.3 spark集群启动
+### spark集群启动
 - 1) 在Master节点，执行一下命令，启动集群。
 ```
 /opt/spark-2.4.5-bin-hadoop2.7/sbin/start-all.sh
@@ -372,7 +371,7 @@ Slaver显示：Worker
 - 3）管理界面
 访问http://UbuntuMaster:8080, 可以看到三个Worker
 
-### 4.4 spark集群验证
+### spark集群验证
 ```
 $ spark-submit \
 --class org.apache.spark.examples.SparkPi \
@@ -382,15 +381,15 @@ $ spark-submit \
 100
 ```
 
-## 五、集成阿里云
+## 集成阿里云
 hadoop 2.9以后才支持oss的读写，我们使用的是2.7，需要自己配置。
 - 1）下载支持包，并解压hadoop-aliyun-2.7.2.jar
 http://gosspublic.alicdn.com/hadoop-spark/hadoop-oss-2.7.2.tar.gz
 
 - 2）将文件hadoop-aliyun-2.7.2.jar复制到```$HADOOP_HOME/share/hadoop/tools/lib/```目录下
 
-- 3）修改​​```$HADOOP_HOME/libexec/hadoop-config.sh```文件，再文件末尾增加```CLASSPATH=$CLASSPATH:$TOOL_PATH```
-  
+- 3）修改```$HADOOP_HOME/libexec/hadoop-config.sh```文件，再文件末尾增加```CLASSPATH=$CLASSPATH:$TOOL_PATH```
+
 - 4）修改core-site.xml的配置
 
 ```
@@ -429,3 +428,6 @@ http://gosspublic.alicdn.com/hadoop-spark/hadoop-oss-2.7.2.tar.gz
         <value>2048</value>
     </property>
 ```
+
+## 通过IDEA提交任务到spark
+https://blog.csdn.net/yiluohan0307/article/details/80048765

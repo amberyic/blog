@@ -2,7 +2,6 @@
 title: Hexo + Github Page搭建博客
 ---
 # Hexo + Github Page搭建博客
-[TOC]
 ## 准备环境
 - Hexo是基于Node.js驱动的一款博客框架。
 
@@ -67,5 +66,3 @@ $ npm install hexo-cli -g
 $ npm install
 $ npm install hexo-deployer-git
 ```
-
-
