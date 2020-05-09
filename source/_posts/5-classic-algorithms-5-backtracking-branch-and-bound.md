@@ -2,8 +2,7 @@
 title: 五大经典算法-5.回溯法&分支界定法
 ---
 # 回溯法&分支界定法
-
-  这个部分在我们的课程中主要是在树及图的深度广度搜索部分有涉及，另外迷宫问题求解也有涉及。
+这个部分在我们的课程中主要是在树及图的深度广度搜索部分有涉及，另外迷宫问题求解也有涉及。
 
 ## 概念
 * 回溯法
@@ -97,7 +96,7 @@ struct Point{
     }
 
     bool operator!=(const Point& rhs){
-        if(this->row!=rhs.row||this->col!=rhs.col)
+        if (this->row!=rhs.row||this->col!=rhs.col)
             return true;
         return false;
     }
@@ -108,22 +107,22 @@ struct Point{
 //ret:邻接未被访问的结点
 Point getAdjacentNotVisitedNode(bool** mark,Point point,int m,int n){
     Point resP(-1,-1);
-    if(point.row-1>=0&&mark[point.row-1][point.col]==false){//上节点满足条件
+    if (point.row-1>=0&&mark[point.row-1][point.col]==false){//上节点满足条件
         resP.row=point.row-1;
         resP.col=point.col;
         return resP;
     }
-    if(point.col+1<n&&mark[point.row][point.col+1]==false){//右节点满足条件
+    if (point.col+1<n&&mark[point.row][point.col+1]==false){//右节点满足条件
         resP.row=point.row;
         resP.col=point.col+1;
         return resP;
     }
-    if(point.row+1<m&&mark[point.row+1][point.col]==false){//下节点满足条件
+    if (point.row+1<m&&mark[point.row+1][point.col]==false){//下节点满足条件
         resP.row=point.row+1;
         resP.col=point.col;
         return resP;
     }
-    if(point.col-1>=0&&mark[point.row][point.col-1]==false){//左节点满足条件
+    if (point.col-1>=0&&mark[point.row][point.col-1]==false){//左节点满足条件
         resP.row=point.row;
         resP.col=point.col-1;
         return resP;
@@ -138,20 +137,20 @@ Point getAdjacentNotVisitedNode(bool** mark,Point point,int m,int n){
 void mazePath(void* maze,int m,int n,const Point& startP,Point endP,stack<Point>& pointStack){
     //将给定的任意列数的二维数组还原为指针数组，以支持下标操作
     int** maze2d=new int*[m];
-    for(int i=0;i<m;++i){
+    for (int i=0;i<m;++i){
         maze2d[i]=(int*)maze+i*n;
     }
 
-    if(maze2d[startP.row][startP.col]==1||maze2d[endP.row][endP.col]==1)
+    if (maze2d[startP.row][startP.col]==1||maze2d[endP.row][endP.col]==1)
         return ;                    //输入错误
 
     //建立各个节点访问标记
     bool** mark=new bool*[m];
-    for(int i=0;i<m;++i){
+    for (int i=0;i<m;++i){
         mark[i]=new bool[n];
     }
-    for(int i=0;i<m;++i){
-        for(int j=0;j<n;++j){
+    for (int i=0;i<m;++i){
+        for (int j=0;j<n;++j){
             mark[i][j]=*((int*)maze+i*n+j);
         }
     }
@@ -163,7 +162,7 @@ void mazePath(void* maze,int m,int n,const Point& startP,Point endP,stack<Point>
     //栈不空并且栈顶元素不为结束节点
     while(pointStack.empty()==false&&pointStack.top()!=endP){
         Point adjacentNotVisitedNode=getAdjacentNotVisitedNode(mark,pointStack.top(),m,n);
-        if(adjacentNotVisitedNode.row==-1){ //没有未被访问的相邻节点
+        if (adjacentNotVisitedNode.row==-1){ //没有未被访问的相邻节点
             pointStack.pop(); //回溯到上一个节点
             continue;
         }
@@ -189,7 +188,7 @@ int main(){
     mazePath(maze,5,5,startP,endP,pointStack);
 
     //没有找打可行解
-    if(pointStack.empty()==true)
+    if (pointStack.empty()==true)
         cout<<"no right path"<<endl;
     else{
         stack<Point> tmpStack;
@@ -236,13 +235,13 @@ struct Point{
     }
 
     bool operator!=(const Point& rhs){
-        if(this->row!=rhs.row||this->col!=rhs.col)
+        if (this->row!=rhs.row||this->col!=rhs.col)
             return true;
         return false;
     }
 
     bool operator==(const Point& rhs) const{
-        if(this->row==rhs.row&&this->col==rhs.col)
+        if (this->row==rhs.row&&this->col==rhs.col)
             return true;
         return false;
     }
@@ -261,29 +260,29 @@ int maze[5][5]={
 //ret:邻接未被访问的结点
 Point getAdjacentNotVisitedNode(int** mark,Point point,int m,int n,Point endP){
     Point resP(-1,-1);
-    if(point.row-1>=0){
-        if(mark[point.row-1][point.col]==0||mark[point.row][point.col]+1<mark[point.row-1][point.col]){//上节点满足条件
+    if (point.row-1>=0){
+        if (mark[point.row-1][point.col]==0||mark[point.row][point.col]+1<mark[point.row-1][point.col]){//上节点满足条件
             resP.row=point.row-1;
             resP.col=point.col;
             return resP;
         }
     }
-    if(point.col+1<n){
-        if(mark[point.row][point.col+1]==0||mark[point.row][point.col]+1<mark[point.row][point.col+1]){//右节点满足条件
+    if (point.col+1<n){
+        if (mark[point.row][point.col+1]==0||mark[point.row][point.col]+1<mark[point.row][point.col+1]){//右节点满足条件
             resP.row=point.row;
             resP.col=point.col+1;
             return resP;
         }
     }
-    if(point.row+1<m){
-        if(mark[point.row+1][point.col]==0||mark[point.row][point.col]+1<mark[point.row+1][point.col]){//下节点满足条件
+    if (point.row+1<m){
+        if (mark[point.row+1][point.col]==0||mark[point.row][point.col]+1<mark[point.row+1][point.col]){//下节点满足条件
             resP.row=point.row+1;
             resP.col=point.col;
             return resP;
         }
     }
-    if(point.col-1>=0){
-        if(mark[point.row][point.col-1]==0||mark[point.row][point.col]+1<mark[point.row][point.col-1]){//左节点满足条件
+    if (point.col-1>=0){
+        if (mark[point.row][point.col-1]==0||mark[point.row][point.col]+1<mark[point.row][point.col-1]){//左节点满足条件
             resP.row=point.row;
             resP.col=point.col-1;
             return resP;
@@ -298,24 +297,24 @@ Point getAdjacentNotVisitedNode(int** mark,Point point,int m,int n,Point endP){
 void mazePath(void* maze,int m,int n, Point& startP, Point endP,stack<Point>& pointStack,vector<Point>& vecPath){
     //将给定的任意列数的二维数组还原为指针数组，以支持下标操作
     int** maze2d=new int*[m];
-    for(int i=0;i<m;++i){
+    for (int i=0;i<m;++i){
         maze2d[i]=(int*)maze+i*n;
     }
 
-    if(maze2d[startP.row][startP.col]==-1||maze2d[endP.row][endP.col]==-1)
+    if (maze2d[startP.row][startP.col]==-1||maze2d[endP.row][endP.col]==-1)
         return ;                    //输入错误
 
     //建立各个节点访问标记，表示结点到到起点的权值，也记录了起点到当前结点路径的长度
     int** mark=new int*[m];
-    for(int i=0;i<m;++i){
+    for (int i=0;i<m;++i){
         mark[i]=new int[n];
     }
-    for(int i=0;i<m;++i){
-        for(int j=0;j<n;++j){
+    for (int i=0;i<m;++i){
+        for (int j=0;j<n;++j){
             mark[i][j]=*((int*)maze+i*n+j);
         }
     }
-    if(startP==endP){//起点等于终点
+    if (startP==endP){//起点等于终点
         vecPath.push_back(startP);
         return;
     }
@@ -330,11 +329,11 @@ void mazePath(void* maze,int m,int n, Point& startP, Point endP,stack<Point>& po
     //栈不空并且栈顶元素不为结束节点
     while(pointStack.empty()==false){
         Point adjacentNotVisitedNode=getAdjacentNotVisitedNode(mark,pointStack.top(),m,n,endP);
-        if(adjacentNotVisitedNode.row==-1){ //没有符合条件的相邻节点
+        if (adjacentNotVisitedNode.row==-1){ //没有符合条件的相邻节点
             pointStack.pop(); //回溯到上一个节点
             continue;
         }
-        if(adjacentNotVisitedNode==endP){//以较短的路劲，找到了终点,
+        if (adjacentNotVisitedNode==endP){//以较短的路劲，找到了终点,
             mark[adjacentNotVisitedNode.row][adjacentNotVisitedNode.col]=mark[pointStack.top().row][pointStack.top().col]+1;
             pointStack.push(endP);
             stack<Point> pointStackTemp=pointStack;
@@ -360,11 +359,11 @@ int main(){
     vector<Point> vecPath;
     mazePath(maze,5,5,startP,endP,pointStack,vecPath);
 
-    if(vecPath.empty()==true)
+    if (vecPath.empty()==true)
         cout<<"no right path"<<endl;
     else{
         cout<<"shortest path:";
-        for(auto i=vecPath.rbegin();i!=vecPath.rend();++i)
+        for (auto i=vecPath.rbegin();i!=vecPath.rend();++i)
             printf("(%d,%d) ",i->row,i->col);
     }
 
@@ -402,7 +401,7 @@ struct Point{
     }
 
     bool operator==(const Point& rhs) const{
-        if(this->row==rhs.row&&this->col==rhs.col)
+        if (this->row==rhs.row&&this->col==rhs.col)
             return true;
         return false;
     }
@@ -418,20 +417,20 @@ int maze[5][5]={
 
 void mazePath(void* maze,int m,int n, Point& startP, Point endP,vector<Point>& shortestPath){
     int** maze2d=new int*[m];
-    for(int i=0;i<m;++i){
+    for (int i=0;i<m;++i){
         maze2d[i]=(int*)maze+i*n;
     }
 
-    if(maze2d[startP.row][startP.col]==1||maze2d[startP.row][startP.col]==1) return ; //输入错误
+    if (maze2d[startP.row][startP.col]==1||maze2d[startP.row][startP.col]==1) return ; //输入错误
 
-    if(startP==endP){ //起点即终点
+    if (startP==endP){ //起点即终点
         shortestPath.push_back(startP);
         return;
     }
 
     //mark标记每一个节点的前驱节点，如果没有则为(-1，-1)，如果有，则表示已经被访问
     Point** mark=new Point*[m];
-    for(int i=0;i<m;++i){
+    for (int i=0;i<m;++i){
         mark[i]=new Point[n];
     }
 
@@ -444,47 +443,47 @@ void mazePath(void* maze,int m,int n, Point& startP, Point endP,vector<Point>& s
         Point pointFront=queuePoint.front();
         queuePoint.pop();
 
-        if(pointFront.row-1>=0 && maze2d[pointFront.row-1][pointFront.col]==0){//上节点连通
-            if(mark[pointFront.row-1][pointFront.col]==Point()){//上节点未被访问，满足条件，如队列
+        if (pointFront.row-1>=0 && maze2d[pointFront.row-1][pointFront.col]==0){//上节点连通
+            if (mark[pointFront.row-1][pointFront.col]==Point()){//上节点未被访问，满足条件，如队列
                 mark[pointFront.row-1][pointFront.col]=pointFront;
                 queuePoint.push(Point(pointFront.row-1,pointFront.col)); //入栈
-                if(Point(pointFront.row-1,pointFront.col)==endP){ //找到终点
+                if (Point(pointFront.row-1,pointFront.col)==endP){ //找到终点
                     break;
                 }
             }
         }
 
-        if(pointFront.col+1<n && maze2d[pointFront.row][pointFront.col+1]==0){//右节点连通
-            if(mark[pointFront.row][pointFront.col+1]==Point()){//右节点未被访问，满足条件，如队列
+        if (pointFront.col+1<n && maze2d[pointFront.row][pointFront.col+1]==0){//右节点连通
+            if (mark[pointFront.row][pointFront.col+1]==Point()){//右节点未被访问，满足条件，如队列
                 mark[pointFront.row][pointFront.col+1]=pointFront;
                 queuePoint.push(Point(pointFront.row,pointFront.col+1));    //入栈
-                if(Point(pointFront.row,pointFront.col+1)==endP){ //找到终点
+                if (Point(pointFront.row,pointFront.col+1)==endP){ //找到终点
                     break;
                 }
             }
         }
 
-        if(pointFront.row+1<m && maze2d[pointFront.row+1][pointFront.col]==0){//下节点连通
-            if(mark[pointFront.row+1][pointFront.col]==Point()){//下节点未被访问，满足条件，如队列
+        if (pointFront.row+1<m && maze2d[pointFront.row+1][pointFront.col]==0){//下节点连通
+            if (mark[pointFront.row+1][pointFront.col]==Point()){//下节点未被访问，满足条件，如队列
                 mark[pointFront.row+1][pointFront.col]=pointFront;
                 queuePoint.push(Point(pointFront.row+1,pointFront.col));    //入栈
-                if(Point(pointFront.row+1,pointFront.col)==endP){ //找到终点
+                if (Point(pointFront.row+1,pointFront.col)==endP){ //找到终点
                     break;
                 }
             }
         }
 
-        if(pointFront.col-1>=0 && maze2d[pointFront.row][pointFront.col-1]==0){//左节点连通
-            if(mark[pointFront.row][pointFront.col-1]==Point()){//上节点未被访问，满足条件，如队列
+        if (pointFront.col-1>=0 && maze2d[pointFront.row][pointFront.col-1]==0){//左节点连通
+            if (mark[pointFront.row][pointFront.col-1]==Point()){//上节点未被访问，满足条件，如队列
                 mark[pointFront.row][pointFront.col-1]=pointFront;
                 queuePoint.push(Point(pointFront.row,pointFront.col-1));    //入栈
-                if(Point(pointFront.row,pointFront.col-1)==endP){ //找到终点
+                if (Point(pointFront.row,pointFront.col-1)==endP){ //找到终点
                     break;
                 }
             }
         }
     }
-    if(queuePoint.empty()==false){
+    if (queuePoint.empty()==false){
         int row=endP.row;
         int col=endP.col;
         shortestPath.push_back(endP);
@@ -503,11 +502,11 @@ int main(){
     vector<Point> vecPath;
     mazePath(maze,5,5,startP,endP,vecPath);
 
-    if(vecPath.empty()==true)
+    if (vecPath.empty()==true)
         cout<<"no right path"<<endl;
     else{
         cout<<"shortest path:";
-        for(auto i=vecPath.rbegin();i!=vecPath.rend();++i)
+        for (auto i=vecPath.rbegin();i!=vecPath.rend();++i)
             printf("(%d,%d) ",i->row,i->col);
     }
 
@@ -558,16 +557,16 @@ public:
      }
 
     void backtrack(int i){//回溯法
-        if(i > n){
-            if(cp > bestp){
+        if (i > n){
+            if (cp > bestp){
                bestp = cp;
-               for(int i = 0; i < n; i++)
+               for (int i = 0; i < n; i++)
              x[i] = cx[i];
             }
             return;
         }
 
-        if(cw + w[i] <= c){//搜索右子树
+        if (cw + w[i] <= c){//搜索右子树
           cw += w[i];
           cp += p[i];
           cx[i] = 1;
@@ -582,8 +581,8 @@ public:
     void printResult(){
        cout << "可以装入的最大价值为:" << bestp << endl;
        cout << "装入的物品依次为:";
-       for(int i = 0; i < n; i++){
-         if(x[i] == 1)
+       for (int i = 0; i < n; i++){
+         if (x[i] == 1)
              cout << i+1 << " ";
        }
        cout << endl;
@@ -634,28 +633,28 @@ using namespace std;
 
 int x[9];
 void print(){
-    for(int i = 1; i <= 8; i++)
+    for (int i = 1; i <= 8; i++)
            cout << x[i] << " ";
     cout << endl;
 }
 
 bool canPlace(int k){
-    for(int i = 1; i < k; i++){
+    for (int i = 1; i < k; i++){
             //判断处于同一列或同一斜线
-       if(x[i] == x[k] || abs(k-i) == abs(x[k]-x[i]))
+       if (x[i] == x[k] || abs(k-i) == abs(x[k]-x[i]))
            return false;
     }
     return true;
 }
 
 void queen(int i){
-    if(i > 8){
+    if (i > 8){
         print();
         return;
     }
-    for(int j = 1; j <= 8; j++){
+    for (int j = 1; j <= 8; j++){
       x[i] = j;
-      if(canPlace(i)) queen(i+1);
+      if (canPlace(i)) queen(i+1);
     }
 }
 
@@ -691,10 +690,10 @@ char *element;
 void OutputPowerSet(int len){ //输出幂集中的元素
   cout<<"{ ";
   int eln = 0;
-  for(int i = 0; i < len; i++){
-    if(result[i] != 0)
+  for (int i = 0; i < len; i++){
+    if (result[i] != 0)
     {
-      if(eln > 0)
+      if (eln > 0)
         cout<<", "<<result[i];
       else
         cout<<result[i];
@@ -704,7 +703,7 @@ void OutputPowerSet(int len){ //输出幂集中的元素
   cout<<" }; ";
 }
 void PowerSet(int k,int n){
-  if(k > n)
+  if (k > n)
   {
     OutputPowerSet(n);
   }else{
@@ -755,9 +754,9 @@ int main(){
 bool next(int a[],int n, int i, int s, int r, int c, int bextx[], int x[])
 {
   int j;
-  if(i >= n) {//到达叶子结点
-    if(s == c) { //找到一个子集
-      for(int k=0;k<n;k++) {//记录下子集
+  if (i >= n) {//到达叶子结点
+    if (s == c) { //找到一个子集
+      for (int k=0;k<n;k++) {//记录下子集
         bextx[k] = x[k];
       }
       return true;
@@ -765,11 +764,11 @@ bool next(int a[],int n, int i, int s, int r, int c, int bextx[], int x[])
       return false;
     }
   }
-  if(s >c || s+r <c) {
+  if (s >c || s+r <c) {
     return false;
   }
   x[i] = 1;
-  if(next(a, n, i+1, s+a[i], r-a[i], c, bextx, x)) {
+  if (next(a, n, i+1, s+a[i], r-a[i], c, bextx, x)) {
     return true;
   }
   x[i] = 0;
@@ -780,7 +779,7 @@ bool solve(int a[],int n,int c,int bextx[]) {
   //int *bextx = new int[n];
   int *x = new int[n];
   int r = 0;
-  for(int i=0; i<n; i++) {
+  for (int i=0; i<n; i++) {
     r += a[i];
   }
   return  next(a, n, 0, 0, r, c, bextx, x);
@@ -791,10 +790,9 @@ int main() {
   int n=4;
   int c=8;
   int *bextx = new int[n];
-  if(solve(a,n,c,bextx)) {
+  if (solve(a,n,c,bextx)) {
     printf("找到子集： \n\r");
-    for(int i=0;i<n;i++)
-    {
+    for (int i=0;i<n;i++) {
       printf("%d ",bextx[i]);
     }
   } else {
