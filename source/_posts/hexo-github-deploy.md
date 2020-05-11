@@ -1,7 +1,7 @@
 ---
 title: Hexo + Github Page搭建博客
 ---
-# Hexo + Github Page搭建博客
+
 ## 准备环境
 - Hexo是基于Node.js驱动的一款博客框架。
 
