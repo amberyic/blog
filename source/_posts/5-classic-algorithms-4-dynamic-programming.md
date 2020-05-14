@@ -1,7 +1,12 @@
 ---
 title: 五大经典算法-4.动态规划
-date: 2020-05-10 21:01:34
+date: 2020-04-25
 ---
+> dynamic programming is a method for solving a complex problem by breaking it down into a collection of simpler subproblems.
+> 动态规划是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推(或者说分治)的方式去解决。
+> 经典例题: 1)最长公共子串LCS,2)最长递增子序列LIS,3)最大连续子序列之和,4)01背包问题,5)青蛙跳台阶问题,6)收集苹果,7)数塔取数问题,8)免费馅饼问题
+<!-- more -->
+
 ## 概念
 > dynamic programming is a method for solving a complex problem by breaking it down into a collection of simpler subproblems.
 > 动态规划是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推(或者说分治)的方式去解决。

@@ -32,5 +32,9 @@
   },
   "engines": {
     "node": ">=10.9.0"
+  },
+  "dependencies": {
+    "hexo-generator-searchdb": "^1.3.0",
+    "hexo-wordcount": "^6.0.1"
   }
 }

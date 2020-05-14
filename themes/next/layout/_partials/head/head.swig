@@ -88,3 +88,5 @@
     motion: {{ theme.motion | json }}
   };
 </script>
+
+<script data-ad-client="ca-pub-4128258433761966" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
