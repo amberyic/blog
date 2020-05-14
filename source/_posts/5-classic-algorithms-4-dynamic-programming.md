@@ -1,5 +1,6 @@
 ---
 title: 五大经典算法-4.动态规划
+date: 2020-05-10 21:01:34
 ---
 ## 概念
 > dynamic programming is a method for solving a complex problem by breaking it down into a collection of simpler subproblems.
