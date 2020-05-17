@@ -1,6 +1,10 @@
 ---
 title: 五大经典算法-4.动态规划
 date: 2020-04-25
+categories:
+- 五大经典算法
+tags:
+- 动态规划
 ---
 > dynamic programming is a method for solving a complex problem by breaking it down into a collection of simpler subproblems.
 > 动态规划是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推(或者说分治)的方式去解决。
