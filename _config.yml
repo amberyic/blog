@@ -106,5 +106,6 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/amberyic/amberyic.github.io.git
+  repository:
+    github: https://github.com/amberyic/amberyic.github.io.git
   branch: master
