@@ -121,10 +121,10 @@ scheme: Pisces
 # External url should start with http:// or https://
 menu:
   home: / || home
-  about: /about/ || user
+  categories: /categories/ || th
   tags: /tags/ || tags
-  #categories: /categories/ || th
   archives: /archives/ || archive
+  about: /about/ || user
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
