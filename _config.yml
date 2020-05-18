@@ -108,4 +108,5 @@ deploy:
   type: git
   repository:
     github: https://github.com/amberyic/amberyic.github.io.git
+    server: root@47.105.106.15:/var/repo/blog.git
   branch: master

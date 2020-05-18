@@ -3,7 +3,8 @@
 <meta name="theme-color" content="{{ theme.android_chrome_color }}">
 <meta name="generator" content="Hexo {{ hexo_version }}">
 <meta name="baidu-site-verification" content="sQB1vh2KeG" />
-<meta name="shenma-site-verification" content="142706695a47156bb1eafc7c9cc28602_1589718210">
+<meta name="shenma-site-verification" content="142706695a47156bb1eafc7c9cc28602_1589771821">
+
 
 
 {%- if theme.favicon.apple_touch_icon %}
