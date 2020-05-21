@@ -14,7 +14,7 @@ tags:
 4.联盟营销赚钱的案例
 <!-- more -->
 # 联盟营销的工作原理
-## 1.什么是联盟营销
+## 什么是联盟营销
 - Affiliate Marketing:通常是指网络联盟营销，其实是一种按营销效果付费的新型网络营销方式。
 
 >  Affiliate marketing is a type of performance-based marketing in which a business rewards one or more affiliates for each visitor or customer brought by the affiliate's own marketing efforts. The industry has four core players: the merchant (also known as 'retailer' or 'brand'), the network (that contains offers for the affiliate to choose from and also takes care of the payments), the publisher (also known as 'the affiliate'), and the customer.
@@ -29,7 +29,7 @@ tags:
 
 > 简单来讲：商家给你一件商品，如果你把这个产品推广出去，并且有人下单付费了，那么你就可以赚到佣金。
 
-## 2.为什么选择联盟营销来赚钱
+## 为什么选择联盟营销来赚钱
 - 起步门槛底，没有任何风险
 - 没有库存，没有资金压力
 - 不需要客服，维护起来方便
@@ -38,7 +38,7 @@ tags:
 - 潜力无限大
 > 中国生产的货品，老外通过包装可以获得很大的溢价空间，我们其实可以取赚这部分钱。
 
-## 3.联盟营销的运作流程
+## 联盟营销的运作流程
 - 选取产品->进行推广->客户购买->获取佣金
 - 基本过程：
     - 1.建好网站（利用网站推广联盟及其产品这是最常规的方法），然后至少加入1-3个联盟项目（对于新手，建议初期先加入一个，先熟悉一下），然后获得对方批准。

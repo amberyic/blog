@@ -15,7 +15,7 @@ tags:
 <!-- more -->
 
 # Niche市场挖掘的实用工具介绍
-## 1.如何挖掘Niche市场？
+## 如何挖掘Niche市场？
 - 产品挖掘的方法和工具很多，渠道很多。
 - 选一个走上升趋势的产品
 - 工具
@@ -27,7 +27,7 @@ tags:
     - thisiswhyimbroke：ttps://www.thisiswhyimbroke.com/， 好玩有趣的网站
 > 产品挖掘好以后，需要靠内容和关键词来吸引流量。
 
-## 2.创作内容的工具有那些？
+## 创作内容的工具有那些？
 - 有内容才能吸引用户，内容创作需要紧跟潮流。
 - 工具
     - Keyword Tool：https://keywordtool.io/
@@ -36,7 +36,7 @@ tags:
     - portent： https://www.portent.com/tools/title-maker
 
 
-## 3.关键词的调研工具有哪些？
+## 关键词的调研工具有哪些？
 - amz520.com 上面提供的关键词工具
 - 两个非常专业的关键词挖掘工具
     - Ahrefs
