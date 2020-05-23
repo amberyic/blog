@@ -11,13 +11,9 @@ tags:
 - Commission Junction(CJ)
 ---
 1.自己建一个网站
-shein
-Anker
+shein/Anker
 2.依托于第三方渠道
-亚马逊联盟amazon associate
-ShareAsale
-Clickbank
-Commission Junction(CJ)
+亚马逊联盟amazon associate/ShareAsale/Clickbank/Commission Junction(CJ)
 3.总结
 <!-- more -->
 # 如何开启赚取佣金之路
