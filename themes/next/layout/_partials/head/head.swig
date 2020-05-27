@@ -3,8 +3,8 @@
 <meta name="theme-color" content="{{ theme.android_chrome_color }}">
 <meta name="generator" content="Hexo {{ hexo_version }}">
 <meta name="baidu-site-verification" content="sQB1vh2KeG" />
-<meta name="shenma-site-verification" content="142706695a47156bb1eafc7c9cc28602_1589772436">
-
+<meta name="shenma-site-verification" content="142706695a47156bb1eafc7c9cc28602_1590550933">
+<meta name="360-site-verification" content="f27b0d2d893155c9abee1f0021113a52" />
 
 {%- if theme.favicon.apple_touch_icon %}
   <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for(theme.favicon.apple_touch_icon) }}">
