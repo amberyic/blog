@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Zhang Hao's Blog
+title: 张浩写字的地方
 subtitle: '算法工程师的世界'
 description: ''
 keywords: 算法工程师 机器学习 深度学习 推荐系统 计算广告
 author: ZhangHao
 language: zh-Hans
-timezone: ''
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://amberyic.github.io
+url: https://imzhanghao.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -29,7 +29,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: [README.md]
 
 # Writing
 new_post_name: :title.md # File name of new posts
