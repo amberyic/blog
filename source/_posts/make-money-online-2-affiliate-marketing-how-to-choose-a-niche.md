@@ -1,10 +1,9 @@
 ---
-title: 网赚系列-2.如何挖掘到有竞争力的Niche市场
+title: 2.如何挖掘到有竞争力的Niche市场
 date: 2020-05-18
 categories:
 - 联盟营销
 tags:
-- 网赚项目
 - 联盟营销
 - Niche
 ---

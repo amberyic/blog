@@ -1,10 +1,9 @@
 ---
-title: 网赚系列-4.如何开展赚取佣金之路
+title: 4.如何开展赚取佣金之路
 date: 2020-05-20
 categories:
 - 联盟营销
 tags:
-- 网赚项目
 - 联盟营销
 - ShareAsale
 - Clickbank
