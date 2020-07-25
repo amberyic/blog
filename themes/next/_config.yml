@@ -83,9 +83,9 @@ footer:
     # The digit in the num of gongan beian.
     gongan_id: 20008129
     # The full num of gongan beian.
-    gongan_num: 陕公网安备20008129号
+    gongan_num:
     # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download
-    gongan_icon_url: /images/beian.png
+    gongan_icon_url:
 
 # Creative Commons 4.0 International License.
 # See: https://creativecommons.org/share-your-work/licensing-types-examples
@@ -192,7 +192,7 @@ social:
   #YouTube: https://youtube.com/yourname || youtube
   Instagram: https://instagram.com/amberyic || instagram
   #Skype: skype:yourname?call|chat || skype
-  #RSS: /atom.xml || rss
+  RSS: /atom.xml || rss
 
 social_icons:
   enable: true
@@ -359,7 +359,7 @@ codeblock:
   # Code Highlight theme
   # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
   # See: https://github.com/chriskempson/tomorrow-theme
-  highlight_theme: normal
+  highlight_theme: night
   # Add copy button on codeblock
   copy_button:
     enable: true
@@ -413,7 +413,7 @@ github_banner:
 # ---------------------------------------------------------------
 
 font:
-  enable: false
+  enable: true
 
   # Uri of fonts host, e.g. //fonts.googleapis.com (Default).
   host:
@@ -426,19 +426,19 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    family: Lato
+    family: Noto Serif SC
     size:
 
   # Font settings for site title (.site-title).
   title:
     external: true
-    family:
-    size:
+    family: Noto Sans SC
+    size: 20px
 
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
-    family:
+    family: Roboto Slab
     size:
 
   # Font settings for posts (.post-body).
@@ -465,7 +465,7 @@ disable_baidu_transformation: false
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post / page titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, site-subtitle will be added to index page.
 # Remember to set up your site-subtitle in Hexo `_config.yml` (e.g. subtitle: Subtitle)
