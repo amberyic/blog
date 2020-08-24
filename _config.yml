@@ -101,7 +101,7 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 plugins: hexo-generate-feed
-theme: next
+theme: Chic
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
