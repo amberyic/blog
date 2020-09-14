@@ -49,7 +49,7 @@ tags:
 <details>
   <summary>活动时间安排问题C语言实现代码</summary>
 
-```
+``` C
 #include <iostream>
 using namespace std;
 
@@ -130,7 +130,7 @@ W=30，根据策略，三种物品单位重量价值一样，程序无法依据�
 <details>
   <summary>贪心算法求解背包问题C语言实现代码</summary>
 
-```
+``` C
 #include <iostream>
 using namespace std;
 
@@ -200,7 +200,7 @@ int main(int argc, char* argv[]) {
 <details>
   <summary>贪心算法求解线段覆盖问题C语言实现代码</summary>
 
-```
+``` C
 #include <iostream>
 using namespace std;
 
@@ -245,7 +245,7 @@ int main(int argc, char* argv[]) {
 <details>
   <summary>贪心算法求解数字组合问题C语言实现代码</summary>
 
-```
+``` C
 #include <iostream>
 using namespace std;
 
@@ -283,7 +283,7 @@ int main(int argc, char* argv[]) {
 <details>
   <summary>贪心算法求解找零钱问题C语言实现代码</summary>
 
-```
+``` C
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -354,7 +354,7 @@ n个作业组成的作业集，可由m台相同机器加工处理。要求给出
 <details>
   <summary>贪心算法求解多机调度问题C语言实现代码</summary>
 
-```
+``` C
 #include<iostream>
 #include<algorithm>
 using namespace std;
@@ -398,7 +398,7 @@ int main() {
 <details>
   <summary>贪心算法求解小船过河问题C语言实现代码</summary>
 
-```
+``` C
 #include<iostream>
 #include<algorithm>
 using namespace std;
@@ -431,12 +431,10 @@ int main() {
 
 首先要明白，第一天必须买，最后一天必须卖，并且最后手上没有物品。那么除了第一天和最后一天之外我们每次取两天，小的买大的卖，并且把卖的价格放进一个最小堆。如果买的价格比堆顶还大，就交换。这样我们保证了卖的价格总是大于买的价格，一定能取得最大收益。
 
-
-
 <details>
   <summary>贪心算法求解销售比赛问题C语言实现代码</summary>
   
-```
+``` C
 #include<queue>
 #include<vector>
 #include<cstdio>
