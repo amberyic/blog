@@ -8,7 +8,7 @@ tags:
 
 mathjax: true
 ---
-# 3.相关知识
+# 计算广告相关知识
 ## 最优化Optimization
 ### 什么是最优化问题
 * 无约束最优化问题：
