@@ -9,14 +9,14 @@ nav:
   About: /about
 
 # favicon
-favicon: /favicon.ico
+favicon: /image/favicon.ico
 
 # Profile
 nickname: Hao Zhang
 
 ### this variable is MarkDown form.
 description: 算法工程师，关注机器学习，计算广告，推荐系统.
-avatar: /images/avatar.png
+avatar: /image/avatar.png
 
 # main menu navigation
 ## links key words should not be changed.
