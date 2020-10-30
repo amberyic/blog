@@ -11,22 +11,20 @@ date: 2020-03-21
 https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64
 
 ### 修改主机名
-- 命令行修改
-
-```
+命令行修改
+``` 
 使用 hostname 修改当前主机名。
 hostname new-hostname
 ```
-- 修改/etc/sysconfig/network文件,将localhost.localdomain修改为指定hostname并保存文件退出
 
-```
+修改/etc/sysconfig/network文件,将localhost.localdomain修改为指定hostname并保存文件退出
+``` 
 $ sudo vim /etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=localhost.localdomain
-
 ```
-- 修改host
 
+修改host
 ```
 $ vi /etc/hosts
 127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
@@ -50,10 +48,9 @@ $ sudo passwd hadoop
 ```
 
 ### 修改Host
-- 修改/etc/hosts文件，删除原来127.0.0.1到主机名的映射，增加如下配置。
-    - 前面是集群的IP，可以通过ip -a查看
-    - 后面是主机名
-
+修改/etc/hosts文件，删除原来127.0.0.1到主机名的映射，增加如下配置。
+* 前面是集群的IP，可以通过ip -a查看
+* 后面是主机名
 ```
 172.30.50.42    UbuntuMaster
 172.30.50.81    UbuntuSlave1
@@ -69,24 +66,23 @@ $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
 ## 软件安装与配置
 ### Java环境配置
-- 下载Java JDK，放置到/opt目录下，并解压
-
-```
+下载Java JDK，放置到/opt目录下，并解压
+``` shell
 sudo mv jdk-8u241-linux-i586.tar.gz /opt
 cd /opt
 sudo tar -zxvf ./jdk-8u241-linux-i586.tar.gz
 ```
-- 修改 /etc/profile文件，增加如下语句
 
-```
+修改 /etc/profile文件，增加如下语句
+``` shell
 # java
 export JAVA_HOME=/opt/jdk1.8.0_241
 export CLASSPATH=:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH
 export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
 ```
-- 刷新环境配置, 然后检测Java版本。
 
-```
+刷新环境配置, 然后检测Java版本。
+``` shell
 source /etc/profile
 java -version
 如果报文件找不到，执行下面的语句
@@ -94,38 +90,37 @@ sudo apt-get install lib32stdc++6
 ```
 
 ### scala环境配置
-- 下载scala，放置到/opt目录下，并解压
-
-```
+下载scala，放置到/opt目录下，并解压
+``` shell
 wget https://downloads.lightbend.com/scala/2.12.10/scala-2.12.10.tgz
 sudo mv ./scala-2.12.10.tgz /opt/
 cd /opt/
 sudo tar -zxf scala-2.12.10.tgz
 ```
-- 修改环境变量,  vim /etc/profile，添加如下语句
 
-```
+修改环境变量,  vim /etc/profile，添加如下语句
+``` shell
 export SCALA_HOME=/opt/scala-2.12.10
 export PATH=$PATH:$SCALA_HOME/bin
 ```
-- 刷新环境配置, 然后检测Scala版本。
 
-```
+刷新环境配置, 然后检测Scala版本。
+``` shell
 source /etc/profile
 scala -version
 ```
+
 ## hadoop & spark安装与配置
 ### hadoop的安装与配置
-- 1) 下载hadoop2.7，放置在/opt目录下，并解压
-
-```
+下载hadoop2.7，放置在/opt目录下，并解压
+``` shell
 $ wget https://archive.apache.org/dist/hadoop/core/hadoop-2.7.0/hadoop-2.7.0.tar.gz
 $ tar -zxvf ./hadoop-2.7.0.tar.gz
 $ sudo mv hadoop-2.7.0 /opt
 ```
-- 2) 修改环境变量，编辑/etc/profile文件，添加如下程序
 
-```
+修改环境变量，编辑/etc/profile文件，添加如下程序
+``` shell
 export HADOOP_HOME=/opt/hadoop-2.7.0
 export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
@@ -137,31 +132,27 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
 ```
 
-- 3) 在hadoop-2.7.0目录下添加目录
-
-```
+在hadoop-2.7.0目录下添加目录
+``` shell
 $ mkdir tmp
 $ mkdir hdfs
 $ mkdir hdfs/name
 $ mkdir hdfs/data
 ```
 
-- 4) 修改$HADOOP_HOME/etc/hadoop/hadoop-env.sh，修改JAVA_HOME 如下：
-
+修改$HADOOP_HOME/etc/hadoop/hadoop-env.sh，修改JAVA_HOME 如下：
 ```
 export JAVA_HOME=/opt/jdk1.8.0_241
 ```
 
-- 5) 修改$HADOOP_HOME/etc/hadoop/slaves，将原来的localhost删除，添加如下内容：
-
+修改$HADOOP_HOME/etc/hadoop/slaves，将原来的localhost删除，添加如下内容：
 ```
 UbuntuSlaver1
 UbuntuSlaver2
 ```
 
-- 6) 修改$HADOOP_HOME/etc/hadoop/core-site.xml，修改为如下内容：
-
-```
+修改$HADOOP_HOME/etc/hadoop/core-site.xml，修改为如下内容：
+``` xml
 <configuration>
     <property>
         <name>fs.defaultFS</name>
@@ -178,9 +169,8 @@ UbuntuSlaver2
 </configuration>
 ```
 
-- 7) 修改$HADOOP_HOME/etc/hadoop/hdfs-site.xml
-
-```
+修改$HADOOP_HOME/etc/hadoop/hdfs-site.xml
+``` xml
 <configuration>
     <property>
       <name>dfs.namenode.secondary.http-address</name>
@@ -201,9 +191,8 @@ UbuntuSlaver2
 </configuration>
 ```
 
-- 8) 在$HADOOP_HOME/etc/hadoop目录下复制template，生成xml，命令如下：
-
-```
+在$HADOOP_HOME/etc/hadoop目录下复制template，生成xml，命令如下：
+``` xml
 cp mapred-site.xml.template mapred-site.xml
 修改$HADOOP_HOME/etc/hadoop/mapred-site.xml
 
@@ -223,9 +212,8 @@ cp mapred-site.xml.template mapred-site.xml
 </configuration>
 ```
 
-- 9) 修改$HADOOP_HOME/etc/hadoop/yarn-site.xml
-
-```
+修改$HADOOP_HOME/etc/hadoop/yarn-site.xml
+``` xml
 <configuration>
      <property>
          <name>yarn.nodemanager.aux-services</name>
@@ -255,22 +243,21 @@ cp mapred-site.xml.template mapred-site.xml
 ```
 
 ### spark的安装与配置
-- 1) 下载hadoop2.7，放置在/opt目录下，并解压
-
-```
+下载hadoop2.7，放置在/opt目录下，并解压
+``` shell
 $ wget http://apache.communilink.net/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
 $ tar -zxvf spark-2.4.5-bin-hadoop2.7.tgz
 $ sudo mv spark-2.4.5-bin-hadoop2.7 /opt
 ```
-- 2) 修改/etc/profile，增加如下内容。
 
-```
+修改/etc/profile，增加如下内容。
+``` shell
 export SPARK_HOME=/opt/spark-2.4.5-bin-hadoop2.7
 export PATH=$PATH:$SPARK_HOME/bin
 ```
-- 3) 配置spark-env.sh文件
 
-```
+配置spark-env.sh文件
+``` shell
 $ cp $SPARK_HOME/conf/spark-env.sh.template $SPARK_HOME/conf/spark-env.sh
 在文件末尾添加如下内容：
 export SCALA_HOME=/opt/scala-2.12.10
@@ -282,9 +269,8 @@ export SPARK_MASTER_IP=172.30.50.42
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HADOOP_HOME/lib/native
 ```
 
-- 4) 配置slaves文件,添加如下内容
-
-```
+配置slaves文件,添加如下内容
+``` shell
 cp $SPARK_HOME/conf/slaves.template $SPARK_HOME/conf/slaves
 在文件末尾添加如下内容：
 UbuntuMaster
@@ -293,9 +279,8 @@ UbuntuSlave2
 ```
 
 ### 同步配置&初始化集群
-- 1) 拷贝软件配置
-
-```
+拷贝软件配置
+``` shell
 $ scp -r /opt/jdk1.8.0_241 hadoop@UbuntuSlave1:/opt
 $ scp -r /opt/jdk1.8.0_241 hadoop@UbuntuSlave2:/opt
 $ scp -r /opt/hadoop-2.7.0 hadoop@UbuntuSlave1:/opt
@@ -304,9 +289,8 @@ $ scp -r /opt/spark-2.4.5-bin-hadoop2.7 hadoop@UbuntuSlave1:/opt
 $ scp -r /opt/spark-2.4.5-bin-hadoop2.7 hadoop@UbuntuSlave2:/opt
 ```
 
-- 2) 复制/etc/profile的配置到Slave
-
-```
+复制/etc/profile的配置到Slave
+``` shell
 # java
 export JAVA_HOME=/opt/jdk1.8.0_241
 export CLASSPATH=:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH
@@ -332,27 +316,28 @@ export SPARK_HOME=/opt/spark-2.4.5-bin-hadoop2.7
 export PATH=$PATH:$SPARK_HOME/bin
 ```
 
-- 3) 初始化Hadoop集群
-
-```
+初始化Hadoop集群
+``` shell
 $ hadoop namenode -format
 ```
 
 ## 集群启动&部署验证
 ### hadoop集群启动
-- 1) 在Master节点，执行一下命令，启动集群。
-```
+在Master节点，执行一下命令，启动集群。
+``` shell
 /opt/hadoop-2.7.0/sbin/start-all.sh
 ```
-- 2）查看Hadoop是否启动成功，输入命令：jps
+
+查看Hadoop是否启动成功，输入命令：jps
 Master显示：SecondaryNameNode，ResourceManager，NameNode
 Slaver显示：NodeManager，DataNode
-- 3) 管理界面
+
+管理界面
 访问http://UbuntuMaster:50070, 查看 NameNode 和 Datanode 信息，还可以在线查看 HDFS 中的文件。
 
 ### hadoop集群验证
 
-```
+``` shell
 cd  $HADOOP_HOME
 
 bin/hadoop fs -rm -r /output
@@ -366,18 +351,20 @@ bin/hadoop fs -cat /output/part-r-00000
 ```
 
 ### spark集群启动
-- 1) 在Master节点，执行一下命令，启动集群。
+在Master节点，执行一下命令，启动集群。
 ```
 /opt/spark-2.4.5-bin-hadoop2.7/sbin/start-all.sh
 ```
-- 2）查看Hadoop是否启动成功，输入命令：jps
+
+查看Hadoop是否启动成功，输入命令：jps
 Master显示：Master
 Slaver显示：Worker
-- 3）管理界面
+
+管理界面
 访问http://UbuntuMaster:8080, 可以看到三个Worker
 
 ### spark集群验证
-```
+``` shell
 $ spark-submit \
 --class org.apache.spark.examples.SparkPi \
 --master spark://UbuntuMaster:7077 \
@@ -388,16 +375,15 @@ $ spark-submit \
 
 ## 集成阿里云
 hadoop 2.9以后才支持oss的读写，我们使用的是2.7，需要自己配置。
-- 1）下载支持包，并解压hadoop-aliyun-2.7.2.jar
+下载支持包，并解压hadoop-aliyun-2.7.2.jar
 http://gosspublic.alicdn.com/hadoop-spark/hadoop-oss-2.7.2.tar.gz
 
-- 2）将文件hadoop-aliyun-2.7.2.jar复制到```$HADOOP_HOME/share/hadoop/tools/lib/```目录下
+将文件hadoop-aliyun-2.7.2.jar复制到```$HADOOP_HOME/share/hadoop/tools/lib/```目录下
 
-- 3）修改```$HADOOP_HOME/libexec/hadoop-config.sh```文件，再文件末尾增加```CLASSPATH=$CLASSPATH:$TOOL_PATH```
+修改```$HADOOP_HOME/libexec/hadoop-config.sh```文件，再文件末尾增加```CLASSPATH=$CLASSPATH:$TOOL_PATH```
 
-- 4）修改core-site.xml的配置
-
-```
+修改core-site.xml的配置
+``` xml
     <property>
         <name>fs.oss.accessKeyId</name>
         <value>xxxx</value>

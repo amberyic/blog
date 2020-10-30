@@ -4,10 +4,9 @@ date: 2020-07-03
 categories:
 - 计算广告
 tags:
+- 计算广告
 - 流量保护
 - 反作弊
-
-mathjax: true
 ---
 
 # 永无止境的博弈：流量保护和反作弊
@@ -25,13 +24,13 @@ mathjax: true
 * 5.第三方将统计数据交给广告主，广告主据此与媒体结算。
 
 ### 广告监测代码
-* 参数
-  - OS：客户端操作系统的种类，0-Android，1-iOS，2-WP，3-Others
-  - IMEI：15位，适用于Android，需要MD5加密
-  - MAC：用户终端硬件地址，适用于Android和iOS，字母转换成大写后MD5加密
-  - AndoridID：适用于Android，需要MD5加密
-  - IDFA：适用于iOS，保留原始值
-  - openUDID：适用于iOS，保留原始值
+参数
+* OS：客户端操作系统的种类，0-Android，1-iOS，2-WP，3-Others
+* IMEI：15位，适用于Android，需要MD5加密
+* MAC：用户终端硬件地址，适用于Android和iOS，字母转换成大写后MD5加密
+* AndoridID：适用于Android，需要MD5加密
+* IDFA：适用于iOS，保留原始值
+* openUDID：适用于iOS，保留原始值
 
 ### CPA/CPS广告归因
 * 1.用户ID碰撞归因
@@ -59,11 +58,12 @@ mathjax: true
 
 ### 运营商弹窗
 ### CPS作弊手段
-* 运营商落地页劫持
-  - http://www.jd.com --> http://www.jd.com?utm_source=ABC
-* Cookie Stuffing
-  - 在CPS联盟机制下，只要给用户打上标签标识媒体来源的Cookie，该用户的购买行为就会到该媒体
-  - 基本原理是在浏览器上悄悄对推广链接发器HTTP请求，在用户不点击广告的情况下打上媒体的Cookie。
+运营商落地页劫持
+* http://www.jd.com --> http://www.jd.com?utm_source=ABC
+
+Cookie Stuffing
+* 在CPS联盟机制下，只要给用户打上标签标识媒体来源的Cookie，该用户的购买行为就会到该媒体
+* 基本原理是在浏览器上悄悄对推广链接发器HTTP请求，在用户不点击广告的情况下打上媒体的Cookie。
 
 ### CPI常见作弊手段
 * Click Spam（帮用户点击，转化率低，后续效果好）
@@ -76,5 +76,4 @@ mathjax: true
 * 羊毛党（P2P理财）
 * 买栗子（汽车行业，销售线索，宝马）
 
-### 思考
-移动广告反作弊与PC相比有什么难易？
+>思考: 移动广告反作弊与PC相比有什么难易？

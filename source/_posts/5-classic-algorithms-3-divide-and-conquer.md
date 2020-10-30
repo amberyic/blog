@@ -56,13 +56,13 @@ int found(int x,int y) {
         return -1;
     }
 
-    if (a[m]==k) 
+    if (a[m]==k)
         return m; //找到!返回位置.
     else if (a[m]>k)
         return found(x,m-1);//找左边
     else
         return found(m+1,y);//找右边
-    
+
 }
 
 int main(){
@@ -82,7 +82,7 @@ int main(){
 
 举个例子：
 
-$1234*9876=（12*98）*10000+(12*76+98*34)*100+34*76$
+$1234*9876=(12*98)*10000+(12*76+98*34)*100+34*76$
 
 对于这个算法的时间复杂度，我们需要做4次n/2级别的乘法和3加法。即T(n)=4*T(n/2)+O(n),时间复杂度是O(n²）.
 
@@ -131,7 +131,7 @@ string multiply(string num1, string num2) {
 		string c0 = multiply(a0, b0);
 		string temp_c1_1 = add(a0, a1);
 		string temp_c1_2 = add(b1, b0);
-		string temp_c1_3 = add(c2, c0);	
+		string temp_c1_3 = add(c2, c0);
 		string temp_c1 = multiply(temp_c1_1, temp_c1_2);
 		string c1 = subtract(temp_c1, temp_c1_3);
 		string s1 = add_last_zero(c1, n / 2);
@@ -179,7 +179,7 @@ public:
         swap(vec,++i,high);//找到划界元的位置
         return i;//返回位置
     }
-    
+
     //交换数组元素i和j的位置
     void swap(vector<int>& nums, int i, int j){
         int temp = nums[i];
@@ -230,28 +230,28 @@ void table(int k, int n) {
     for(int i = 1; i <= n; i ++) {
         a[1][i] = i;
     }
-    int m = 1;  //每次填充起始位置  
+    int m = 1;  //每次填充起始位置
     for(int s = 1; s <= k; s++) {
         n/=2;
-        for(int t = 1; t <= n; t++)  //分的块数                        
+        for(int t = 1; t <= n; t++)  //分的块数
             for(int i = m+1; i <= 2*m; i++)
                 for(int j = m+1; j <= 2*m; j++) {
                     a[i][j+(t-1)*m*2] = a[i-m][j+(t-1)*m*2-m];  //右下角的值等于左上角的值
                     a[i][j+(t-1)*m*2-m] = a[i-m][j+(t-1)*m*2];  //左下角的值等于右上角的值
                     //printf("i = %d\t j+(t-1)*m*2 = %d\t j+(t-1)*m*2-m = %d\t, i-m=%d\n", i, j+(t-1)*m*2, j+(t-1)*m*2-m, i-m);
                 }
-        m *= 2; //更新填充起始位置  
+        m *= 2; //更新填充起始位置
     }
 }
 int main() {
     int k;
     cin >> k;
- 
+
     int n = 1;
     for(int i = 1; i <= k; i++)
         n *= 2;
     table(k, n);
- 
+
     for(int i = 1; i <= n; i ++) {
         for(int j = 1; j <= n; j ++) {
             printf("%d%c", a[i][j], j!=n?' ':'\n');

@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 张浩写字的地方
-subtitle: '算法工程师的世界'
-description: ''
+title: 张浩在路上
+subtitle: '张浩在路上'
+description: '张浩的博客'
 keywords: 算法工程师 机器学习 深度学习 推荐系统 计算广告
 author: ZhangHao
 language: zh-Hans
@@ -77,7 +77,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+updated_option: 'date'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -101,7 +101,7 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 plugins: hexo-generate-feed
-theme: Chic
+theme: yinwang
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
