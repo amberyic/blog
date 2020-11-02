@@ -26,7 +26,7 @@ list:
 # 脚部
 footer:
   display: true               # 是否显示footer
-  context: © ZhangHao | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | <a target="_blank" href="https://beian.miit.gov.cn/"> 陕ICP备20008129号</a> # footer内容
+  context: © ZhangHao | <a target="_blank" href="https://beian.miit.gov.cn/"> 陕ICP备20008129号</a> # footer内容
 
 # 文章页
 post:
