@@ -18,11 +18,9 @@ html(lang=config.language)
     link(rel="dns-prefetch" href="https://www.googletagmanager.com")
   if theme.baidu_analytics
     link(rel="dns-prefetch" href="https://hm.baidu.com")
-  if theme.tencent_analytics
-    link(rel="dns-prefetch" href="https://tajs.qq.com")
 
-  include ./_third-party/analytics/index.pug
-  include ./_third-party/advertising/index.pug
+  include ./analytics/index.pug
+  include ./advertising/index.pug
 
   body 　　
     if is_home()
@@ -49,4 +47,4 @@ html(lang=config.language)
     if is_home()
       script(src="/js/bootstrap.min.js")
 
-    include ./_third-party/math/index.pug
+    include ./math/index.pug
