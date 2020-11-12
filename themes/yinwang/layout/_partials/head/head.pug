@@ -7,20 +7,20 @@
   var title_suffix = ' | ' + title;
 
   if (is_home()) {
-    title = title + ((theme.index_subtitle && subtitle) ? (' | ' + subtitle) : '');
+    title = title;
   } else if (is_archive()) {
-    title = __('title.archive') + title_suffix;
+    title = __('归档') + title_suffix;
   } else if (is_category()) {
-    title = __('title.category') + ': ' + page.category + title_suffix;
+    title = __('分类') + ': ' + page.category + title_suffix;
   } else if (is_tag()) {
-    title = __('title.tag') + ': ' + page.tag + title_suffix;
+    title = __('标签') + ': ' + page.tag + title_suffix;
   } else if (is_post()) {
-    title = (page.title || __('post.untitled')) + title_suffix;
+    title = (page.title || __('未命名')) + title_suffix;
   } else {
     if (page.type === 'tags') {
-      title = __('title.tag') + title_suffix;
+      title = __('标签') + title_suffix;
     } else if (page.type === 'categories') {
-      title = __('title.category') + title_suffix;
+      title = __('分类') + title_suffix;
     } else {
       title = page.title + title_suffix;
     }
@@ -34,6 +34,7 @@ meta(name="format-detection" content="telephone=no")
 meta(name="apple-mobile-web-app-capable" content="yes")
 meta(name="apple-mobile-web-app-status-bar-style" content="black")
 
+title= title
 
 if theme.google_analytics
   link(rel="dns-prefetch" href="https://www.googletagmanager.com")
