@@ -10,7 +10,7 @@ menu:
   关于: /about
 
 # 图标
-favicon: /images/favicon.ico
+favicon: /favicon.ico
 
 # 建议页数大于1开启
 paginator: true
