@@ -19,8 +19,8 @@ html(lang=config.language)
   if theme.baidu_analytics
     link(rel="dns-prefetch" href="https://hm.baidu.com")
 
-  include ./analytics/index.pug
-  include ./advertising/index.pug
+  include ./_third-party/analytics/index.pug
+  include ./_third-party/advertising/index.pug
 
   body 　　
     if is_home()
@@ -47,4 +47,4 @@ html(lang=config.language)
     if is_home()
       script(src="/js/bootstrap.min.js")
 
-    include ./math/index.pug
+    include ./_third-party/math/index.pug
