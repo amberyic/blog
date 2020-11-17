@@ -4,8 +4,8 @@
 
 # Site
 title: 张浩在路上
-subtitle: '张浩在路上'
-description: '张浩的博客'
+subtitle: 张浩在路上
+description: 张浩的博客
 keywords: 算法工程师 机器学习 深度学习 推荐系统 计算广告
 author: ZhangHao
 language: zh-Hans
@@ -62,7 +62,7 @@ index_generator:
   order_by: -date
 
 # Category & Tag
-default_category: uncategorized
+default_category: 未分类
 category_map:
 tag_map:
 

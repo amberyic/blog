@@ -4,7 +4,7 @@
   var author = __('author') !== 'author' ? __('author') : config.author;
   var description = __('description') !== 'description' ? __('description') : config.description;
   var keywords = config.author + ', ' + config.title;
-  var title_suffix = ' | ' + title;
+  var title_suffix = ' - ' + title;
 
   if (is_home()) {
     title = title;
@@ -35,7 +35,7 @@ meta(name="apple-mobile-web-app-capable" content="yes")
 meta(name="apple-mobile-web-app-status-bar-style" content="black")
 
 title= title
-link(rel="icon" href='/img/favicon_16X16.ico')
+link(rel="icon" href='/img/favicon.ico')
 
 if theme.google_analytics
   link(rel="dns-prefetch" href="https://www.googletagmanager.com")
