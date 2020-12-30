@@ -43,6 +43,9 @@ post:
 tags:
   all: true       # 标签云页面是否显示全部标签
 
+# ---------------------------------------------------------------
+# Google and Baidu Analytics Config
+# ---------------------------------------------------------------
 # Google analytics ID
 # See: https://analytics.google.com/
 google_analytics: UA-166608124-1
@@ -51,6 +54,9 @@ google_analytics: UA-166608124-1
 # See: https://tongji.baidu.com/
 baidu_analytics: 0c64a5657309290fd8f5efe33fcbcdb4
 
+# ---------------------------------------------------------------
+# Google AdSense Config
+# ---------------------------------------------------------------
 # Google AdSense
 google_adsense:
   enable: true
