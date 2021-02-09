@@ -19,7 +19,7 @@ paginator: true
 
 # 头部
 header:
-  blank: true     # 头部链接是否新标签页打开
+  blank: false     # 头部链接是否新标签页打开
 
 # 文章列表
 list:
