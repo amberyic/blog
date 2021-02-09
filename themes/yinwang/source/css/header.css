@@ -232,3 +232,74 @@ body {
 div.inner {
   margin-top: 5%;
 }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #888;
+}
+.navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.navbar-toggle .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+.navbar-header:before {
+  content: " ";
+  display: table;
+}
+
+.navbar-header:after {
+  clear: both;
+}
+
+body.mobile .navbar-nav {
+  font-size: 36px;
+}
+
+.collapse {
+  display: none;
+}
+
+.collapse.in {
+  display: block;
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height 0.35s ease;
+  transition: height 0.35s ease;
+}
+
+body.mobile {
+  font-size: 36px;
+}
+
+body.mobile .navbar-brand {
+  font-size: 36px;
+}
+
+body.mobile div.outer {
+  margin: 4% 2% 2% 2%;
+}
+
+body.mobile .navbar-nav {
+  font-size: 36px;
+  margin: 70px 0;
+}
