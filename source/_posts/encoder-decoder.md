@@ -42,7 +42,7 @@ $$\max _{\boldsymbol{\theta}} \frac{1}{N} \sum_{n=1}^{N} \log p_{\boldsymbol{\th
 Seq2Seq（是 Sequence-to-sequence 的缩写），他输入一个序列，输出另一个序列。这种结构最重要的地方在于输入序列和输出序列的长度是可变的。
 
 2014年Google的Sutskever提出了[Seq2Seq](https://arxiv.org/pdf/1409.3215.pdf)，只不过比Cho晚了一点。论文中的模型结构更简单，Decoder在t时刻yt是由ht，yt−1决定，而没有c，Encoder 和 Decoder都用的LSTM结构。
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210827093601.png)
+![Seq2Seq](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210827093601.png)
 
 ## Encoder-Decoder和Seq2Seq的关系
 这两种叫法基本都是前后脚被提出来的，其实是技术发展到一定阶段自然的一次演进，基本上可以划上等号，如果非要讲他们的差别，那么就只能说下面着两条了。
@@ -54,8 +54,7 @@ Seq2Seq（是 Sequence-to-sequence 的缩写），他输入一个序列，输出
 下面是一个Seq2Seq模型在机器翻译中使用的示意图。编码器位于左侧，仅需要源语言的序列作为输入。解码器位于右边，需要两种版本的目标语言序列，一种用于输入，一种用于目标（Loss计算）
 ![Seq2Seq模型在机器翻译中使用的示意图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202108280938271.png)
 
-网上找到了一个比较好的实现，基于Tensorflow2.x的KerasAPI实现，可读性很高。
-https://github.com/ChunML/NLP/blob/master/machine_translation/train_simple_tf2.py
+网上找到了一个比较好的[实现](https://github.com/ChunML/NLP/blob/master/machine_translation/train_simple_tf2.py)，基于Tensorflow2.x的KerasAPI实现，可读性很高。
 
 **模型定义**
 模型结构定义部分，Encoder和Docoder都是继承tf.keras.Model基类构建自定义模型，实现了__init__和call方法。
