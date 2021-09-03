@@ -19,8 +19,16 @@ body.mobile {
   font-size: 30px;
 }
 
+
+.katex{
+  width: 100%;
+  overflow-x: auto
+}
+
+
 P, li {
 line-height: 1.8;
+word-break: break-word;
 }
 
 H1 {
