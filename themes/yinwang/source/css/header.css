@@ -151,10 +151,6 @@ navbar-default .navbar-collapse,
   }
 }
 
-.navbar-brand,
-.navbar-nav {
-  font-size: 24px;
-}
 @media (min-width: 768px) {
   .navbar-right {
     float: right !important;

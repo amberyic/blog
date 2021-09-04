@@ -23,13 +23,15 @@ html(lang=config.language)
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href="#")= config.subtitle
+          a.navbar-brand(href="/", "_blank")= config.subtitle
         div.navbar-collapse.collapse#bs-example-navbar-collapse-1(style={height:"1px"})
           ul.nav.navbar-nav.navbar-right
             each url, label in theme.menu
               //- li(class=(url == '/tags' ? 'active' : ''))
               li()
                 a(href=url, target=theme.header.blank ? "_blank" : "_self")= label
+
+
     if body
       div!= body
     else
