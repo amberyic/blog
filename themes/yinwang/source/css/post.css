@@ -15,10 +15,6 @@ body {
   font-size: 18px;
 }
 
-.navbar-brand {
-  cursor: pointer;
-}
-
 body.mobile {
   font-size: 30px;
 }
