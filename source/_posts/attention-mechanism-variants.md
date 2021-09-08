@@ -1,6 +1,6 @@
 ---
-title: Attention机制的变体:hard&soft, global&local, bahdanau&luong
-date: 2021-09-05
+title: Attention机制多种变体的介绍和对比
+date: 2021-09-06
 categories:
 - 机器学习
 tags:
@@ -105,13 +105,6 @@ luong attention和bahdanau attention是比较流行和经典的两种attention�
 1.在Bahdanau Attention机制中，第t步的注意力对齐中，使用的是Decoder中第t-1步的隐藏状态$h_{t-1}$和Encoder中所有的隐藏状态$\overline{\mathbf{h}}_{s}$加权得出的，但是在Luong使用的是第t步的隐藏状态$h_{t}$。
 2.在Bahdanau Attention机制中，decoder在第t步时，输入是由$c_t$和Decoder第t-1步的隐藏状态$h_{t-1}$拼接得出的，得到第t步的隐藏状态$h_{t}$并直接输出$\hat{\mathbf{y}}_{t+1}$。而 Luong Attention 机制在 decoder部分建立了一层额外的网络结构，输入是有$c_t$和Decoder第t步的隐藏状态$h_{t}$拼接作为输入，得到第t步的隐藏状态$\tilde{\mathbf{h}}_{t}$并输出$\hat{\mathbf{y}}_{t}$。
 3.Bahdanau Attention 机制只尝试了concat作为对齐函数，而Luong Attention 机制的论文在多种对齐函数上做了实验。
-$$
-\operatorname{score}\left(\boldsymbol{h}_{t}, \overline{\boldsymbol{h}}_{s}\right)=\left\{\begin{array}{ll}
-\boldsymbol{h}_{t}^{\top} \overline{\boldsymbol{h}}_{s} & \text { dot } \\
-\boldsymbol{h}_{t}^{\top} \boldsymbol{W}_{a} \overline{\boldsymbol{h}}_{s} & \text { general } \\
-\boldsymbol{v}_{a}^{\top} \tanh \left(\boldsymbol{W}_{\boldsymbol{a}}\left[\boldsymbol{h}_{t} ; \overline{\boldsymbol{h}}_{s}\right]\right) & \text { concat }
-\end{array}\right.
-$$
 
 ## 参考资料
 [1][Soft & hard attention / Jonathan Hui](https://jhui.github.io/2017/03/15/Soft-and-hard-attention/)

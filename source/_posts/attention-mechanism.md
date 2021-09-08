@@ -1,5 +1,5 @@
 ---
-title: 浅谈注意力机制(Attention Mechanism)
+title: Attention机制的基本思想与实现原理
 date: 2021-09-01
 categories:
 - 机器学习
