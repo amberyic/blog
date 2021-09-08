@@ -58,9 +58,9 @@ $$(Tom,0.3) (Chase,0.2) (Jerry,0.5)$$
 ![引入注意力模型的Encoder-Decoder框架](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210526150157.png)
 即生成目标句子单词的过程成了下面的形式：
 $$\begin{array}{l}
-\mathbf{y}_{\mathbf{1}}=\mathbf{f} \mathbf{1}\left(\mathbf{C}_{\mathbf{1}}\right) \\
-\mathbf{y}_{2}=\mathbf{f} \mathbf{1}\left(\mathbf{C}_{2}, \mathbf{y}_{\mathbf{1}}\right) \\
-\mathbf{y}_{3}=\mathbf{f} \mathbf{1}\left(\mathbf{C}_{3}, \mathbf{y}_{\mathbf{1}}, \mathbf{y}_{2}\right)
+\mathbf{Y}_{\mathbf{1}}=\mathbf{f} \mathbf{1}\left(\mathbf{C}_{\mathbf{1}}\right) \\
+\mathbf{Y}_{2}=\mathbf{f} \mathbf{1}\left(\mathbf{C}_{2}, \mathbf{Y}_{\mathbf{1}}\right) \\
+\mathbf{Y}_{3}=\mathbf{f} \mathbf{1}\left(\mathbf{C}_{3}, \mathbf{Y}_{\mathbf{1}}, \mathbf{Y}_{2}\right)
 \end{array}$$
 
 而每个Ci可能对应着不同的源语句子单词的注意力分配概率分布，比如对于上面的英汉翻译来说，其对应的信息可能如下：
@@ -112,6 +112,6 @@ Attention函数共有三步完成得到Attention值。
 
 
 ## 参考文献
-[1][深度学习中的注意力模型（2017版）/张俊林/知乎](https://zhuanlan.zhihu.com/p/37601161)
-[2][Attention_Network_With_Keras/Choco31415/github](https://github.com/Choco31415/Attention_Network_With_Keras)
-[3][Attn: Illustrated Attention](https://towardsdatascience.com/attn-illustrated-attention-5ec4ad276ee3)
+[1][深度学习中的注意力模型（2017版）/ 张俊林 / 知乎](https://zhuanlan.zhihu.com/p/37601161)
+[2][Attention_Network_With_Keras / Choco31415 / github](https://github.com/Choco31415/Attention_Network_With_Keras)
+[3][Attn: Illustrated Attention / Raimi Karim](https://towardsdatascience.com/attn-illustrated-attention-5ec4ad276ee3)
