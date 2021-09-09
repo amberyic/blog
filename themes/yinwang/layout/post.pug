@@ -2,7 +2,7 @@ extends _layout.pug
 
 block content
   .inner
-    h2= page.title
+    h1= page.title
     != page.content
     if theme.post.backHome
       if theme.post.backHome_hr
@@ -10,6 +10,6 @@ block content
       p
         - var prefix = theme.post.backHome_prefix
         - var suffix = theme.post.backHome_suffix
-        span!= prefix 
+        span!= prefix
         a(href="/")= theme.post.backHome_content
         span!= suffix
