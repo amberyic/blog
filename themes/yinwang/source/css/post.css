@@ -20,7 +20,7 @@ body.mobile {
 }
 
 
-.katex{
+.katex-display{
   width: 100%;
   overflow-x: auto
 }

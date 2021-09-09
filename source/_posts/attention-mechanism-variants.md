@@ -1,5 +1,5 @@
 ---
-title: Attention机制多种变体的介绍和对比
+title: Attention机制多种变体的介绍与对比
 date: 2021-09-06
 categories:
 - 机器学习
