@@ -5,6 +5,9 @@ categories:
 - 机器学习
 tags:
 - 编码器-解码器
+- Seq2Seq
+description:
+- 分别介绍了Encoder-Decoder框架和Seq2Seq模型的结构，完成的工作，以及两者之间的关系。最后给予Encoder-Decoder的框架实现了Seq2Seq的模型，方便大家理解。
 ---
 
 ## Encoder-Decoder简介

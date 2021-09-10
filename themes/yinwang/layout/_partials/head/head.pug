@@ -1,15 +1,10 @@
 -
   var title = __('title') !== 'title' ? __('title') : config.title;
   var subtitle = __('subtitle') !== 'subtitle' ? __('subtitle') : config.subtitle;
-  var author = __('author') !== 'author' ? __('author') : config.author;
-  var description = __('description') !== 'description' ? __('description') : config.description;
-  var keywords = config.author + ', ' + config.title;
   var title_suffix = ' - ' + title;
 
   if (is_home()) {
     title = title;
-  } else if (is_archive()) {
-    title = __('归档') + title_suffix;
   } else if (is_category()) {
     title = __('分类') + ': ' + page.category + title_suffix;
   } else if (is_tag()) {
@@ -26,9 +21,24 @@
     }
   }
 
+- var pageKeywords
+- if (page.keywords) pageKeywords = Array.isArray(page.keywords) ? (page.keywords).join(',') :  ([]).join(',') || page.keywords
+- else if (page.tags && page.tags.length) pageKeywords = page.tags.data.map(function(tag) {return tag.name;}).join(',')                                                                                                                       
+- else pageKeywords = Array.isArray(config.keywords) ? (config.keywords).join(','):  ([]).join(',') || config.keywords
+
+- var pageDescription
+- if (page.description) pageDescription = Array.isArray(page.description) ? (page.description).join(','):  ([]).join(',') || page.description || '' 
+- else pageDescription = Array.isArray(config.description) ? (config.description).join(','):  ([]).join(',') || config.description
+
+- var pageAuthor = config.author
+
 meta(charset="UTF-8")
 meta(http-equiv="X-UA-Compatible" content="IE=edge")
 meta(http-equiv="content-type", content="text/html; charset=utf-8")
+meta(name="keywords" content=pageKeywords)
+meta(name="description" content=pageDescription)
+meta(name="author" content=pageAuthor)                                         
+
 meta(name="viewport", content="width=device-width, initial-scale=0.5")
 meta(name="format-detection" content="telephone=no")
 meta(name="apple-mobile-web-app-capable" content="yes")

@@ -1,10 +1,21 @@
 ---
 title: Attention机制变体的介绍与对比
 date: 2021-09-06
+updated: 2021-09-10
 categories:
 - 机器学习
 tags:
 - 注意力机制
+- Hard Attention
+- Soft Attention
+- Global Attention
+- Local Attention
+- Bahdanau Attention
+- Luong Attention
+keywords: 
+- Hard Attention, Soft Attention, Global Attention, Local Attention, Bahdanau Attention, Luong Attention, attention variants
+description: 
+- 介绍Attention机制多种变体，对进行对比。包括hard attention和soft attention的对比，global attention 和 local attention的对比，bahdanau attention 和 luong attention的对比。
 ---
 
 ## hard attention vs soft attention
