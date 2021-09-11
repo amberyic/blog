@@ -63,7 +63,7 @@ $$y=\sum_{i=1}^{n} g(x)_{i} f_{i}(x)$$
 **MoE Layer**
 - MoE Layer具有与MoE Model相同的结构，但接受前一层的输出作为输入，并输出到连续的层。然后以端到端的方式训练整个模型。
 - MoE Layer结构的主要目标是实现条件计算，其中每个实例仅激活部分网络。 对于每个输入示例，模型都可以通过以输入为条件的门控网络来选择专家的子集。
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111111843.png)
+![MoE Layer](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111111843.png)
 
 ### MMoE
 ![MoE和MTL结合](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/实现范式.png)
@@ -98,12 +98,12 @@ y_{k} &=h^{k}\left(f^{k}(x)\right) \\
 - 对于所有模型，具有较高相关性的数据的效果要优于具有较低相关性的数据的效果；
 - 在两个任务相关性搞的情况下，MMoE模型和OMoE模型之间的效果几乎没有区别；但是，当任务之间的相关性降低时，OMoE模型的效果就会明显下降，而对MMoE模型的影响却很小。因此，在低关联性情况下，具有特定于任务的门来建模任务差异至关重要；
 - OMoE和MMoE的效果在不同相关度任务的数据中都好于Shared-Bottom。
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111174615.png)
+![OMoE和MMoE实验结果](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111174615.png)
 
 **模型的可训练性（Trainability）对比**
 模型的可训练性，就是指模型在超参数设置和模型初始化范围内的鲁棒性。
 针对数据和模型初始化中的随机性研究模型的鲁棒性，并在每种设置下重复进行多次实验，每次从相同的分布生成数据，但随机种子不同，并且模型也分别初始化，绘制了重复运行的最终损失值的直方图：
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111175123.png)
+![模型的可训练性对比结果](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111175123.png)
 
 结论：
 - 首先，在所有任务相关性设置中，Shared-Bottom模型的性能差异远大于基于MoE的模型的性能差异。这意味着，与基于MoE的模型相比，Shared-Bottom模型通常具有质量较差的局部最小值。

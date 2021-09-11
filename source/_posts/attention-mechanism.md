@@ -77,7 +77,7 @@ $$C_{i}=\sum_{j=1}^{L_{x}} a_{i j} h_{j}$$
 ### 注意力分配的方法
 上面的注意力(a11、a12、a13)是我们人工分配的，那模型中注意力是怎么计算的呢？
 这就需要用到对齐模型，来衡量encoder端的位置j的词，对于decoder端的位置i个词的对齐程度（影响程度），换句话说：decoder端生成位置i的词时，有多少程度受encoder端的位置j的词影响。对齐模型的计算方式有很多种，不同的计算方式，代表不同的Attention模型，最简单且最常用的的对齐模型是dot product乘积矩阵，即把target端的输出隐状态ht与source端的输出隐状态进行矩阵乘。下面是常见的对齐计算方式：
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210526154026.png)
+![常见的对齐计算方法](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210526154026.png)
 其中,Score(ht,hs) = aij表示源端与目标单单词对齐程度。常见的对齐关系计算方式有：点乘（Dot product），权值网络映射（General）和concat映射几种方式。
 
 **注意力系数的计算过程**

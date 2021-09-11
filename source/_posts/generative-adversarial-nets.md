@@ -11,7 +11,7 @@ description: GAN是最近几年最火热的研究方向之一，本文讲解生�
 ---
 
 ## 问题
-深度学习在判别模型上取得了显著的成功，特别是那种高维、丰富的感官输入映射到一个类标签上的场景，但是在生成模型中成果较小，主要是因为以下两个问题： 
+深度学习在判别模型上取得了显著的成功，特别是那种高维、丰富的感官输入映射到一个类标签上的场景，但是在生成模型中成果较小，主要是因为以下两个问题：
 - 在极大似然估计和相关策略中出现的许多难以处理的概率计算的近似性
 - 难以在生成环境中利用分段线性单元的优点
 
@@ -24,7 +24,7 @@ description: GAN是最近几年最火热的研究方向之一，本文讲解生�
 
 adversarial nets是通过对抗过程估计生成模型的框架，同时训练两个模型，一个**生成模型G**捕获数据分布，一个**判别模型D**估计样本来自训练数据而不是G的概率。
 
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210317165621.png)
+![GAN](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210317165621.png)
 
 ## Adversarial nets
 Adversarial nets框架最直接的应用就是将生成模型$G$和判别模型$D$都配置成多层感知器。为了在数据$x$上学习生成模型G的分布$p_g$，我们定义了一个先验的输入噪声变量$p_z(z)$，然后将噪声变量到数据空间的映射表示为$G(z;θg)$，其中$G$是由多层感知器表示的微分函数。我们还定义了输出单个标量的多层感知器$D(x;θd)$。$D(x)$代表$x$来自训练数据而不是由$p_g$生成的概率。我们训练判别模型$D$来最大化区分生成模型$G$产生的样本和训练样本，同时训练生成模型$G$来最小化$log(1-D(G(z)))$:
@@ -64,7 +64,7 @@ $$\mathbb{E}_{\boldsymbol{x} \sim p_{\text {data }}}\left[\log D_{G}^{*}(\boldsy
 
 
 ## 对比其他建模方案
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210318112054.png)
+![GAN对比其他方案](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210318112054.png)
 
 ## 优缺点
 优点
@@ -89,6 +89,3 @@ $$\mathbb{E}_{\boldsymbol{x} \sim p_{\text {data }}}\left[\log D_{G}^{*}(\boldsy
 [2][github源码](https://github.com/goodfeli/adversarial)
 [3][通俗理解生成对抗网络GAN / 陈诚 / 知乎](https://zhuanlan.zhihu.com/p/33752313)
 [4][生成模型与判别模型/ zouxy09 / csdn](https://blog.csdn.net/zouxy09/article/details/8195017)
-
-
-

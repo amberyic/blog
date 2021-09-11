@@ -66,7 +66,7 @@ $$\underbrace{p(y=1, z=1 \mid \boldsymbol{x})}_{pCTCVR}=\underbrace{p(y=1 \mid \
 ### 预估CVR
 常规的CVR模型只用了点击以后的样本去预估pCVR，这个会有样本选择偏差的问题，好消息是pCTCVR和pCTR是可以在全量数据集上学习的，我们变换一下上面的公式，就可以根据pCTCVR和pCTR这两个在全量数据集上学习到的值计算出pCVR。
 $$p(z=1 \mid y=1, \boldsymbol{x})=\frac{p(y=1, z=1 \mid \boldsymbol{x})}{p(y=1 \mid \boldsymbol{x})}$$
-然而，实际上，pCTR很小，除以pCTR会引起数值不稳定，而且有可能是的pCVR超过1，这明显不合理。 
+然而，实际上，pCTR很小，除以pCTR会引起数值不稳定，而且有可能是的pCVR超过1，这明显不合理。
 
 ESMM通过乘法形式避免了这种情况，就是用全样本使用一个模型来同时学习pCTR以及pCVR，然后二者相乘拟合pCTCVR，pCTR预估以及pCTCVR预估是可以使用全样本训练的。
 
@@ -113,7 +113,7 @@ $$L\left(\theta_{cvr}, \theta_{ctr}\right)=\sum_{i=1}^{N} l\left(y_{i}, f\left(x
 与BASE模型相比，ESMM在CVR任务上实现了2.56％的AUC绝对值提升，这表明，即使对于有偏差的样本，它也具有良好的泛化性能。在具有完整样本的CTCVR任务上，它带来3.25％的AUC增益。这些结果验证了我们建模方法的有效性。
 
 ### Comparison of different models w.r.t. different sampling rates on Product Dataset
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/ESMM在生产环境中的效果.png)
+![ESMM在生产环境中的效果](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/ESMM在生产环境中的效果.png)
 与BASE模型相比，ESMM在CVR任务上实现2.18％的绝对AUC提升，在CTCVR任务上实现2.32％的绝对AUC提升。 对于工业应用而言，这是一项重大改进，在这种应用中，AUC提升高达0.1％
 
 
