@@ -8,6 +8,8 @@ tags:
 - 多任务学习
 - Multi-Task Learning
 - MTL
+keywords: 多目标学习,多任务学习,Multi-Task Learning,MTL
+description: 本文介绍为了满足业务上的多目标学习，实践多任务学习的多种方法的介绍和优缺点对比，讨论了多任务学习的实现机制以及多任务学习的有效性。
 ---
 
 ## 多目标优化背景

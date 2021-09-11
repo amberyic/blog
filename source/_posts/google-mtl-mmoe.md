@@ -7,6 +7,9 @@ tags:
 - MMoE
 - Multi-Task Learning
 - MTL
+keywords: Google,多任务学习,Multi-Task Learning,MTL,MMoE,MoE
+description: MMoE是Google实践多目标学习的一个实验成果，本文对《Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts》论文进行了讲解，是一片结合自己理解的论文笔记。
+
 ---
 
 ## 摘要

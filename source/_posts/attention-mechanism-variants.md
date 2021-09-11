@@ -12,10 +12,8 @@ tags:
 - Local Attention
 - Bahdanau Attention
 - Luong Attention
-keywords: 
-- Hard Attention, Soft Attention, Global Attention, Local Attention, Bahdanau Attention, Luong Attention, attention variants
-description: 
-- 介绍Attention机制多种变体，对进行对比。包括hard attention和soft attention的对比，global attention 和 local attention的对比，bahdanau attention 和 luong attention的对比。
+keywords: Hard Attention, Soft Attention, Global Attention, Local Attention, Bahdanau Attention, Luong Attention, attention variants
+description: 介绍Attention机制多种变体，对进行对比。包括hard attention和soft attention的对比，global attention 和 local attention的对比，bahdanau attention 和 luong attention的对比。
 ---
 
 ## hard attention vs soft attention

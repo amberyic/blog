@@ -8,6 +8,8 @@ tags:
 - Multi-Task Learning
 - MTL
 - CVR
+keywords: ESMM,Multi-Task Learning,MTL,CVR,多任务学习,多目标学习,阿里巴巴,点击率预估,转化率预估,Entire Space Multi-Task Model
+description: ESMM是阿里巴巴践行多目标任务优化模型的一个实践成果，算法紧密结合阿里的电商场景，是一个非常巧妙的模式。本文通过介绍CVR预估过程中存在的问题和挑战，讲解了阿里ESMM算法的模型结构、损失函数以及创新算法。
 ---
 
 ## CVR预估的场景

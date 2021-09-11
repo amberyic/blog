@@ -6,8 +6,7 @@ categories:
 tags:
 - 注意力机制
 - 编码器-解码器
-- 注意力值
-keywords: 注意力机制，编码器-解码器，Attention Value
+keywords: 注意力机制,编码器-解码器,Attention Value,
 description: 从人类注意力机制，到编码器-解码器框架的缺陷，引入注意力机制的必要性。详细介绍了Attention的基本思想，Attention Value的计算方法。
 ---
 

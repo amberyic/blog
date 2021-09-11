@@ -1,6 +1,8 @@
 ---
 title: Hexo + Github Page搭建博客
 date: 2020-03-21
+keywords: hexo,Github,Github Page,博客搭建
+description: 自己搭建在github Page上搭建博客的笔记.
 ---
 自己搭建在github Page上搭建博客的笔记.
 Hexo是基于Node.js驱动的一款博客框架

@@ -5,11 +5,12 @@ categories:
 - 五大经典算法
 tags:
 - 动态规划
+keywords: 动态规划, 最长公共子串LCS, 最长递增子序列LIS, 最大连续子序列之和, 01背包问题, 青蛙跳台阶问题, 收集苹果, 数塔取数问题, 免费馅饼问题
+description: 动态规划是面试中最经常考到的问题，它是功过拆解问题，定义问题状态和状态之间的关系，是的问题能够用递推的方式来解决。本文讲解动态规划的概念、基本思路，以及在经典问题中的实际应用，配合代码，直观明了。
 ---
 动态规划是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推(或者说分治)的方式去解决。
 
 经典例题: 最长公共子串LCS, 最长递增子序列LIS, 最大连续子序列之和, 01背包问题, 青蛙跳台阶问题, 收集苹果, 数塔取数问题, 免费馅饼问题
-<!-- more -->
 
 ## 概念
 dynamic programming is a method for solving a complex problem by breaking it down into a collection of simpler subproblems.
@@ -40,7 +41,6 @@ dp[i,j] = 0                               IF:   i=0 || j=0
 dp[i,j] = dp[i-1][j-1]+1                  IF:   i>0,j>0, a[i] = b[j]
 
 dp[i,j] = max(dp[i-1][j],dp[i][j-1])      IF:   i>0,j>0, a[i] != b[j]
-
 
 
 <details>

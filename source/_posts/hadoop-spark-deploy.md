@@ -1,6 +1,14 @@
 ---
 title: hadoop & spark 分布式集群搭建
 date: 2020-03-21
+categories:
+- 大数据
+tags:
+- hadoop
+- spark
+keywords: hadoop,spark,分布式集群,搭建,ubuntu
+description: 本文是自己用三台服务器搭建hadoop和spark分布式集群环境的过程记录。
+
 ---
 使用三台主机搭建hadoop&spark完整教程
 主要内容: 1)系统安装与配置,2)软件安装与配置,3)hadoop&spark安装与配置,4)集群启动&部署验证,5)集成阿里云,6)通过IDEA提交任务到spark
