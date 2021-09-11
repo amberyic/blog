@@ -86,3 +86,7 @@ math:
       enable: true
       copy_tex_js: https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js
       copy_tex_css: https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css
+
+copyright:
+  enable: true
+  license: All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.

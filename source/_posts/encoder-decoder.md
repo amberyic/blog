@@ -1,6 +1,7 @@
 ---
 title: 基于Encoder-Decoder框架实现Seq2Seq模型
 date: 2021-08-26
+updated: 2021-09-10
 categories:
 - 机器学习
 tags:
