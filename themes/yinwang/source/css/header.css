@@ -264,9 +264,6 @@ div.inner {
   clear: both;
 }
 
-body.mobile .navbar-nav {
-  font-size: 36px;
-}
 
 .collapse {
   display: none;
