@@ -1,5 +1,5 @@
 ---
-title: Self-Attention和Multi-Head Attention机制
+title: 详解Self-Attention和Multi-Head Attention
 date: 2021-09-15
 updated: 2021-09-15
 categories:
