@@ -5,7 +5,7 @@ html(lang=config.language)
   head
     include ./_partials/head/head.pug
 
-    if is_home()
+    if is_home() || is_current('technology') || is_current('monetization') || is_current('thinking')
       link(rel='stylesheet', href="/css/bootstrap.min.css")
       link(rel='stylesheet', href="/css/bootstrap-theme.min.css")
       link(rel='stylesheet', href="/css/home.css")

@@ -5,6 +5,12 @@
 
   if (is_home()) {
     title = title;
+  } else if (is_current('technology')) {
+    title = __('技术')  + title_suffix;
+  } else if (is_current('monetization')) {
+    title = __('变现')  + title_suffix;
+  } else if (is_current('thinking')) {
+    title = __('思考')  + title_suffix;
   } else if (is_category()) {
     title = __('分类') + ': ' + page.category + title_suffix;
   } else if (is_tag()) {

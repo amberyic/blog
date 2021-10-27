@@ -2,7 +2,7 @@
 title: hadoop & spark 分布式集群搭建
 date: 2020-03-21
 categories:
-- 大数据
+- 并行计算
 tags:
 - hadoop
 - spark
@@ -20,13 +20,13 @@ https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64
 
 ### 修改主机名
 命令行修改
-``` 
+```
 使用 hostname 修改当前主机名。
 hostname new-hostname
 ```
 
 修改/etc/sysconfig/network文件,将localhost.localdomain修改为指定hostname并保存文件退出
-``` 
+```
 $ sudo vim /etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=localhost.localdomain

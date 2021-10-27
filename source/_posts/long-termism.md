@@ -3,7 +3,7 @@ title: 我理解的长期主义
 date: 2021-10-26
 updated: 2021-10-26
 categories:
-- 思考
+- 思维精进
 tags:
 - 长期主义
 keywords: 长期主义, long-termist

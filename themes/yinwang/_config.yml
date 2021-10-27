@@ -4,9 +4,10 @@ language: en
 
 # 导航栏
 menu:
-  博客: /
-  标签: /tags
-  分类: /categories
+  首页: /
+  技术: /technology
+  变现: /monetization
+  思考: /thinking
   关于: /about
 
 # 图标
@@ -28,7 +29,7 @@ list:
 # 脚部
 footer:
   display: true               # 是否显示footer
-  context: © ZhangHao | <a target="_blank" href="https://beian.miit.gov.cn/"> 陕ICP备20008129号</a> # footer内容
+  context: © <a target="_blank" href="/about"> Zhanghao </a> | <a target="_blank" href="/tags"> 标签 </a> | <a target="_blank" href="/categories"> 分类 </a> | <a target="_blank" href="https://beian.miit.gov.cn/"> 陕ICP备20008129号</a> # footer内容
 
 # 文章页
 post:

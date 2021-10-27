@@ -1,6 +1,6 @@
 if theme.math.enable
   - var isHomeHasMath = false;
-  if is_home()
+  if is_home() || is_current('technology') || is_current('monetization') || is_current('thinking')
     - page.posts.each(function (post) {
       if post.math && !isHomeHasMath
         - isHomeHasMath = true;
