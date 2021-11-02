@@ -277,7 +277,7 @@
 
   
   <url>
-    <loc>https://imzhanghao.com/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://imzhanghao.com/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/</loc>
     <lastmod>2021-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -298,7 +298,7 @@
   </url>
   
   <url>
-    <loc>https://imzhanghao.com/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/</loc>
+    <loc>https://imzhanghao.com/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -326,6 +326,20 @@
   </url>
   
   <url>
+    <loc>https://imzhanghao.com/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
+    <lastmod>2021-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/%E5%88%86%E6%94%AF%E7%95%8C%E5%AE%9A%E6%B3%95/</loc>
+    <lastmod>2021-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://imzhanghao.com/tags/ShareAsale/</loc>
     <lastmod>2021-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -341,20 +355,6 @@
   
   <url>
     <loc>https://imzhanghao.com/tags/Commission-Junction-CJ/</loc>
-    <lastmod>2021-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
-    <lastmod>2021-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/%E5%88%86%E6%94%AF%E7%95%8C%E5%AE%9A%E6%B3%95/</loc>
     <lastmod>2021-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -522,13 +522,6 @@
   </url>
   
   <url>
-    <loc>https://imzhanghao.com/tags/MMoE/</loc>
-    <lastmod>2021-11-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://imzhanghao.com/tags/hadoop/</loc>
     <lastmod>2021-11-02</lastmod>
     <changefreq>daily</changefreq>
@@ -537,6 +530,13 @@
   
   <url>
     <loc>https://imzhanghao.com/tags/spark/</loc>
+    <lastmod>2021-11-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/MMoE/</loc>
     <lastmod>2021-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
