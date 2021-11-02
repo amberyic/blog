@@ -24,7 +24,6 @@
     "hexo-generator-tag": "^1.0.0",
     "hexo-renderer-markdown-it-plus": "^1.0.4",
     "hexo-renderer-pug": "^1.0.0",
-    "hexo-seo-autopush": "^2.0.5",
     "hexo-server": "^1.0.0"
   }
 }
