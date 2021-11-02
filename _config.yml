@@ -129,24 +129,8 @@ theme: yinwang
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  - type: git
-    repository:
-      github: https://github.com/amberyic/blog.git,master
-      server: root@47.105.106.15:/var/repo/blog.git,master
-    ignore_hidden: false
-  - type: GooglePush
-
-# enable: 开启/关闭 推送
-# count: 每次提交最新的10篇文章
-# https://github.com/lete114/hexo-seo-autopush
-hexo_seo_autopush:
-  baidu:
-    enable: true
-    count: 100
-  bing:
-    enable: true
-    count: 10
-  google:
-    enable: false
-    count: 10
-    google_file: google_service_account.json # 谷歌服务账户
+  type: git
+  repository:
+    github: https://github.com/amberyic/blog.git,master
+    server: root@47.105.106.15:/var/repo/blog.git,master
+  ignore_hidden: false
