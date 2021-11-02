@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="hexo,Github,Github Page,博客搭建"><meta name="description" content="自己搭建在github Page上搭建博客的笔记."><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>Hexo + Github Page搭建博客 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-166608124-1');
+}</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
+  hm.async = true;
+
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(hm, s);
+})();</script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" data-ad-client="ca-pub-4128258433761966" async=""></script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
+</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>Hexo + Github Page搭建博客</h1><p>自己搭建在github Page上搭建博客的笔记.<br />
+Hexo是基于Node.js驱动的一款博客框架<br />
+主要内容:1)准备环境,2)安装)Hexo,3)GitHub绑定,4)常用命令,5)绑定域名,6)hexo备份,7)hexo恢复</p>
+<span id="more"></span>
+<h2 id="准备环境"><a class="markdownIt-Anchor" href="#准备环境"></a> 准备环境</h2>
+<p>Hexo是基于Node.js驱动的一款博客框架。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git version</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> node -v</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm -v</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装-hexo"><a class="markdownIt-Anchor" href="#安装-hexo"></a> 安装 Hexo</h2>
+<p>安装方法参考官网: <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">https://hexo.io/zh-cn/</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-cli -g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo init blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo server</span></span><br></pre></td></tr></table></figure>
+<h2 id="github绑定"><a class="markdownIt-Anchor" href="#github绑定"></a> GitHub绑定</h2>
+<p>创建仓库名为abc.github.io的项目，其中abc为自己github的昵称<br />
+然后项目就建成了，点击Settings，向下拉到最后有个GitHub Pages，点击Choose a theme选择一个主题。<br />
+在博客根目录下的_config.yml文件最后增加下面的配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/abc/abc.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h2 id="常用命令"><a class="markdownIt-Anchor" href="#常用命令"></a> 常用命令</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo new post <span class="string">&quot;article title&quot;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d</span></span><br></pre></td></tr></table></figure>
+<h2 id="绑定域名"><a class="markdownIt-Anchor" href="#绑定域名"></a> 绑定域名</h2>
+<p>自己github域名的地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ping abc.github.io</span><br></pre></td></tr></table></figure>
+<p>购买域名并将域名的A记录指到上一步得到的IP<br />
+在hexo目录下的source目录下添加CNAME，写上自己的域名。</p>
+<h2 id="hexo备份"><a class="markdownIt-Anchor" href="#hexo备份"></a> hexo备份</h2>
+<p>clone博客的项目，创建hexo分支。<br />
+如果已经hexo d了，切换到hexo分支后，将内容从git中删除。<br />
+然后将hexo 文件夹中的_config.yml、themes/、source/、scaffolds/、package.json 和 .gitignore 复制至 <a target="_blank" rel="noopener" href="http://abc.github.io">abc.github.io</a> 文件夹，并删除 themes/next/下的.git目录。将内容加入到代码仓库。<br />
+执行npm install 和 npm install hexo-deployer-git<br />
+执行 hexo g -d 生成静态网页部署至 Github 上</p>
+<h2 id="hexo恢复"><a class="markdownIt-Anchor" href="#hexo恢复"></a> hexo恢复</h2>
+<p>克隆博客的代码仓库</p>
+<p>切换到hexo分支，执行以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ npm install</span><br><span class="line">$ npm install hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<!-- lincense--><div class="license-wrapper"><p><span>文章作者: </span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接: </span><a href="https://imzhanghao.com/2020/03/21/hexo-github-deploy/">https://imzhanghao.com/2020/03/21/hexo-github-deploy/</a></p><p><span>版权声明: </span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>

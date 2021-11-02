@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="原生广告,信息流广告,移动广告"><meta name="description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解原生广告，这是对场景数据的深入挖掘和利用。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>计算广告|8.场景数据利用 -- 原生广告 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-166608124-1');
+}</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
+  hm.async = true;
+
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(hm, s);
+})();</script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" data-ad-client="ca-pub-4128258433761966" async=""></script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
+</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|8.场景数据利用 -- 原生广告</h1><h2 id="原生不是新问题原生广告初级形态"><a class="markdownIt-Anchor" href="#原生不是新问题原生广告初级形态"></a> 原生不是新问题：原生广告初级形态</h2>
+<h3 id="搜索广告的原生性"><a class="markdownIt-Anchor" href="#搜索广告的原生性"></a> 搜索广告的原生性</h3>
+<p><strong>表现形式</strong>：广告结果和自然结果非常接近<br />
+<strong>触发原则</strong>：同样根据关键词出发，与自然结果也保持一致</p>
+<h3 id="信息流广告"><a class="markdownIt-Anchor" href="#信息流广告"></a> 信息流广告</h3>
+<p><strong>表现形式</strong>：广告结果和自然结果基本一致<br />
+<strong>触发原则</strong>：在社交类媒体中，用户往往无明确意图，因此根据投放条件触发</p>
+<h3 id="软文"><a class="markdownIt-Anchor" href="#软文"></a> 软文</h3>
+<p><strong>表现形式</strong>：与自然结果非常一致地呈现<br />
+<strong>触发原则</strong>：内容本身即按广告主需求生产</p>
+<blockquote>
+<p>规模化比较困难</p>
+</blockquote>
+<h3 id="cpscpa联盟affilicate"><a class="markdownIt-Anchor" href="#cpscpa联盟affilicate"></a> CPS/CPA联盟（Affilicate）</h3>
+<p><strong>表现形式</strong>:渠道可以灵活决定，比较容易适配环境<br />
+<strong>触发原则</strong>:可以完全融入到垂直内容当中</p>
+<blockquote>
+<p>平台不易控制作弊</p>
+</blockquote>
+<blockquote>
+<p>思考：信息流中的显示广告和普通横幅相比，有什么本质区别？</p>
+</blockquote>
+<h2 id="与pc有何不同移动广告机遇与挑战"><a class="markdownIt-Anchor" href="#与pc有何不同移动广告机遇与挑战"></a> 与PC有何不同：移动广告机遇与挑战</h2>
+<h3 id="移动广告的特点"><a class="markdownIt-Anchor" href="#移动广告的特点"></a> 移动广告的特点</h3>
+<p>情景广告的可能性：</p>
+<ul>
+<li>移动设备与PC最大的不同，是可以对用户进行模式进行全天候的检测和分析。</li>
+<li>从地理位置、生活状态、需求意图等各方面都可能对用户有深入的理解。</li>
+</ul>
+<p>大量的潜在O2O广告主</p>
+<ul>
+<li>GPS、蜂窝、wifi等多种精确定位和手段，是的基于精确地理位置的O2O广告变的可行</li>
+</ul>
+<p>移动广告的创意形式</p>
+<ul>
+<li>条幅（Banner），全屏，应用推荐、积分墙</li>
+</ul>
+<h3 id="移动广告的挑战"><a class="markdownIt-Anchor" href="#移动广告的挑战"></a> 移动广告的挑战</h3>
+<ul>
+<li>应用生态造成的行为数据割裂</li>
+<li>许多PC时代广告主移动化程度还不够，无法充分消化广告带来的流量</li>
+<li>移动广告的产品形态需要一次革命</li>
+</ul>
+<h3 id="应用下载归因attribution"><a class="markdownIt-Anchor" href="#应用下载归因attribution"></a> 应用下载归因（Attribution）</h3>
+<p>归因于最后一次点击，一般1～3天内有效</p>
+<p><strong>应用下载归因原理</strong></p>
+<ul>
+<li>iOS：点击时向检测商发送iDFA</li>
+<li>Android：利用Google Play的refer机制</li>
+<li>WAP：根据点击和转化的fingerprint进行匹配</li>
+</ul>
+<p><strong>主要技术提供商</strong></p>
+<ul>
+<li>全球：Appsflyer，Adjust 点击、转化都收费</li>
+<li>国内：TalkingData 只有转化收费</li>
+</ul>
+<blockquote>
+<p>思考： CPI/CPA广告在移动盛行的原因是什么？</p>
+</blockquote>
+<h2 id="移动场景定向"><a class="markdownIt-Anchor" href="#移动场景定向"></a> 移动场景定向</h2>
+<h3 id="什么时场景"><a class="markdownIt-Anchor" href="#什么时场景"></a> 什么时场景</h3>
+<p>用户当前所处的场合和状态</p>
+<ul>
+<li>例如：地铁上、上厕所、开会中、运动中。。。</li>
+</ul>
+<p>丰富的场景是移动设备所特有的：</p>
+<ul>
+<li>台式机：位置固定、只有极简单的场景</li>
+<li>笔记本：可以移动，但是只有工作和娱乐类场景</li>
+<li>移动设备：人体器官，具有人们所有可能的场景</li>
+</ul>
+<p>场景是不是上下文</p>
+<ul>
+<li>不是，场景是用户的状态，而非媒体的特征</li>
+</ul>
+<h3 id="如何检测场景"><a class="markdownIt-Anchor" href="#如何检测场景"></a> 如何检测场景？</h3>
+<p>根据移动多种信息来源和传感器进行检测</p>
+<p>例：检测用户是否处于工作状态</p>
+<ul>
+<li>每天上午十点，对用户地理位置采样，如果大多数采样在同一位置，则该位置为用户上班地点</li>
+<li>如果采样没有明显的位置规律，则用户为销售等无固定地点工作者</li>
+<li>检测到用户处于上班地点，则认为其处于工作状态</li>
+</ul>
+<p>注意：场景检测不需要逻辑上完全正确</p>
+<blockquote>
+<p>思考：如果检测用户早晨上班前需要吃早点的场景？</p>
+</blockquote>
+<h2 id="打造植入式体验原生广告产品未来"><a class="markdownIt-Anchor" href="#打造植入式体验原生广告产品未来"></a> 打造植入式体验：原生广告产品未来</h2>
+<h3 id="原生广告平台应该是什么样的"><a class="markdownIt-Anchor" href="#原生广告平台应该是什么样的"></a> 原生广告平台应该是什么样的？</h3>
+<p>媒体控制广告展示形式：</p>
+<ul>
+<li>原生广告的最重要的产品原则，是即内容和广告的展示形式要尽可能一致，而没有媒体的参与是不可能的。</li>
+</ul>
+<p>媒体明确提供广告需求：</p>
+<ul>
+<li>搜索广告的效果好，因为其投放是按照内容结果的展示原则进行的。</li>
+</ul>
+<p>广告平台提供结构化付费内容：</p>
+<ul>
+<li>核心的定向条件检索 + eCPM排序功能仍然没变</li>
+</ul>
+<h3 id="植入式原生广告"><a class="markdownIt-Anchor" href="#植入式原生广告"></a> 植入式原生广告</h3>
+<ul>
+<li>拉萨游记 推 拉萨酒店的广告</li>
+<li>创意由媒体决定</li>
+</ul>
+<h3 id="表现原生"><a class="markdownIt-Anchor" href="#表现原生"></a> 表现原生</h3>
+<p>情形一：广告自然地显示在媒体内容中</p>
+<ul>
+<li>例：信息流、瀑布流</li>
+</ul>
+<p>情形二：独立广告位风格与媒体靠近</p>
+<ul>
+<li>例：原生化插屏</li>
+</ul>
+<h3 id="场景原生"><a class="markdownIt-Anchor" href="#场景原生"></a> 场景原生</h3>
+<p>情形一：根据App的需求提供付费内容</p>
+<ul>
+<li>例：电商比价</li>
+</ul>
+<p>情景二：根据数据来判断用户场景，进而提供相应的付费内容</p>
+<h3 id="原生广告方向与挑战"><a class="markdownIt-Anchor" href="#原生广告方向与挑战"></a> 原生广告方向与挑战</h3>
+<p><strong>方向</strong>：</p>
+<ul>
+<li>让媒体深入参与广告交易，而不是像传统广告系统那样只在平台和需求方之间交易。</li>
+<li>将数据驱动的受众定向展示广告，变成以媒体内容为导向的，不触及用户隐私的精准广告</li>
+<li>让高相关的付费内容代替广告成为媒体变现主要形式</li>
+</ul>
+<p><strong>挑战</strong>：</p>
+<ul>
+<li>媒体参与让广告多了个自由度，运营难度增大</li>
+<li>大量分行业、结构化广告信息的建立需要时间</li>
+</ul>
+<blockquote>
+<p>思考：电影植入广告如何利用在线广告模式？</p>
+</blockquote>
+<h3 id="如何对付多变的原生广告位置"><a class="markdownIt-Anchor" href="#如何对付多变的原生广告位置"></a> 如何对付多变的原生广告位置？</h3>
+<h3 id="facebook信息流广告"><a class="markdownIt-Anchor" href="#facebook信息流广告"></a> facebook信息流广告</h3>
+<ul>
+<li>向媒体返回元素进行动态拼装</li>
+<li>大图、图标、标题、描述</li>
+</ul>
+<h3 id="vungle原生激励视频"><a class="markdownIt-Anchor" href="#vungle原生激励视频"></a> Vungle原生激励视频</h3>
+<ul>
+<li>对用户无打扰</li>
+</ul>
+<h3 id="outbrain内容发现平台"><a class="markdownIt-Anchor" href="#outbrain内容发现平台"></a> Outbrain内容发现平台</h3>
+<ul>
+<li>网站将内容以RSS feed方式提供给Outbrain并给出点击单价，OutBrain将这些付费内容在其他网站上推荐给读者</li>
+<li>推荐和广告的边界模糊化</li>
+<li>将内容也按照eCPM最化的方式排序，这一思路也可以被站内的推荐系统，即流量塑形。</li>
+</ul>
+<h2 id="从传播到交互创意的优化与发展"><a class="markdownIt-Anchor" href="#从传播到交互创意的优化与发展"></a> 从传播到交互：创意的优化与发展</h2>
+<h3 id="创意优化"><a class="markdownIt-Anchor" href="#创意优化"></a> 创意优化</h3>
+<ul>
+<li>品牌性创意与效果性创意</li>
+<li>在相近的广告诉求下，通过创意内容优化效果</li>
+</ul>
+<h3 id="创意优化主要思路"><a class="markdownIt-Anchor" href="#创意优化主要思路"></a> 创意优化主要思路</h3>
+<p><strong>程序化创意</strong></p>
+<ul>
+<li>网站重定向广告加入广告主logo</li>
+<li>搜索重定向广告加入搜索框</li>
+<li>地域定向明示地点或本地电话</li>
+</ul>
+<p><strong>充分利用点击热点图</strong></p>
+<ul>
+<li>是否创意中的关键诉求确实吸引了用户的注意？</li>
+</ul>
+<h3 id="交互化的创意发展方向"><a class="markdownIt-Anchor" href="#交互化的创意发展方向"></a> 交互化的创意发展方向</h3>
+<ul>
+<li>越来越动态、越来越多的交互</li>
+</ul>
+<h3 id="applovin"><a class="markdownIt-Anchor" href="#applovin"></a> APPLOVIN</h3>
+<p><strong>核心业务</strong></p>
+<ul>
+<li>移动广告网络，向APP同时提供变现和推广服务</li>
+<li>主要营收来源于游戏内激励视频广告</li>
+<li>程序化业务并不发达</li>
+</ul>
+<p><strong>其他点评</strong></p>
+<ul>
+<li>2016.9以14亿美金价格被中国基金收购</li>
+<li>Casino游戏收入占比很高，原因不详</li>
+</ul>
+<h3 id="crossinstall"><a class="markdownIt-Anchor" href="#crossinstall"></a> CROSSINSTALL</h3>
+<p><strong>核心业务</strong></p>
+<ul>
+<li>H5 Playable Ads + DSP</li>
+<li>以游戏类CPA广告主为主</li>
+<li>关键能力是通过A/B测试调整和H5创意中的参数</li>
+</ul>
+<p><strong>其他点评</strong></p>
+<ul>
+<li>为数不多的成功投放移动CPA广告的DSP</li>
+</ul>
+<blockquote>
+<p>思考：未来创意中哪些环节会被机器代替?</p>
+</blockquote>
+<!-- lincense--><div class="license-wrapper"><p><span>文章作者: </span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接: </span><a href="https://imzhanghao.com/2020/08/12/computing-advertising-8-native-ads/">https://imzhanghao.com/2020/08/12/computing-advertising-8-native-ads/</a></p><p><span>版权声明: </span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>

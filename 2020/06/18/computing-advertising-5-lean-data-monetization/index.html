@@ -1,0 +1,446 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="竞价广告,搜索广告,竞价广告网络,广告检索技术,点击率预测,Trading Desk,SEM"><meta name="description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解竞价广告,主要讲解竞价问题的机制设计，重点介绍了竞价广告两个应用场景：搜索广告和竞价广告网络，讲解了其中核心的技术，包括广告检索技术和点击率预估技术。最后介绍了竞价广告市场中的两种产品：SEM和Trading Desk。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>计算广告|5.竞价广告-精细数据变现 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-166608124-1');
+}</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
+  hm.async = true;
+
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(hm, s);
+})();</script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" data-ad-client="ca-pub-4128258433761966" async=""></script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
+</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|5.竞价广告-精细数据变现</h1><h2 id="市场经济的规则机制设计问题"><a class="markdownIt-Anchor" href="#市场经济的规则机制设计问题"></a> 市场经济的规则：机制设计问题</h2>
+<h3 id="竞价交易问题"><a class="markdownIt-Anchor" href="#竞价交易问题"></a> 竞价交易问题</h3>
+<ul>
+<li>将对象a={1,2,…,A}排放到位置s={1,2,…,S}</li>
+<li>对象a的出价（bid）为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>b</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">b_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,而其对位置s的计价为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>r</mi><mrow><mi>a</mi><mi>s</mi></mrow></msub><mo>=</mo><msub><mi>u</mi><mi>s</mi></msub><msub><mi>v</mi><mi>a</mi></msub><mo stretchy="false">(</mo><msub><mi>u</mi><mn>1</mn></msub><mo>&gt;</mo><msub><mi>u</mi><mn>2</mn></msub><mo>&gt;</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>&gt;</mo><msub><mi>u</mi><mi>S</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r_{as}=u_{s}v_{a}(u_1&gt;u_2&gt;...&gt;u_S)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>v</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">v_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>为点击价值,<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>u</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">u_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>视为点击率</li>
+<li>对称纳什均衡（Symmetric Nash equilibrium）
+<ul>
+<li>(vs-ps)xt &gt;= (vs-pt)xt,其中pt=bs+1</li>
+<li>寻找收入最大化且稳定的纳什均衡状态是竞价系统设计的关键</li>
+</ul>
+</li>
+</ul>
+<h3 id="p2广义第二高价和vcg"><a class="markdownIt-Anchor" href="#p2广义第二高价和vcg"></a> P2.广义第二高价和VCG</h3>
+<p>广义第二高价（Generalized Second Pricing）</p>
+<ul>
+<li>与VCG机制相比，会收取广告主更多的费用</li>
+<li>整体市场不是truth-telling的</li>
+<li>简单易行，为在线广告系统广泛采用</li>
+<li>CPM情形下：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>q</mi><mi>s</mi></msub><mo>=</mo><msub><mi>b</mi><mrow><mi>s</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">q_s = b_{s+1}+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.902771em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+<li>CPC情形下：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>q</mi><mi>s</mi></msub><mo>=</mo><msub><mi>r</mi><mrow><mi>s</mi><mo>+</mo><mn>1</mn></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>u</mi><mo>+</mo></msub><mn>1</mn><mo>=</mo><msub><mi>u</mi><mrow><mi>s</mi><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>b</mi><mrow><mi>s</mi><mo>+</mo><mn>1</mn></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>u</mi><mi>s</mi></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">q_s = r_{s+1}/u_+1=u_{s+1}b_{s+1}/u_s+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.25833100000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">+</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathdefault">u</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></li>
+</ul>
+<p>VCG(Vickrey-Clarke-Groves)机制</p>
+<ul>
+<li>某对象的收费等于给他人带来的价值损害</li>
+<li>整体市场是truth-telling的</li>
+</ul>
+<span id="more"></span>
+<h3 id="p2市场保留价和价格挤压"><a class="markdownIt-Anchor" href="#p2市场保留价和价格挤压"></a> P2.市场保留价和价格挤压</h3>
+<p>市场保留价（Market Reserve Price，MRP）</p>
+<ul>
+<li>即“底价”，出价高于MRP才能参与竞价</li>
+<li>收费如果小于底价，按底价计费</li>
+<li>可以根据不同的竞价标的设置不同的底价</li>
+</ul>
+<p>价格挤压</p>
+<ul>
+<li>r = u * v -&gt; r =u^k * v [r为eCPM，u为点击率，v为单价]</li>
+<li>k为正数：当其充分大时，指根据点击率排序；当其接近0时，指根据点击单价排序</li>
+</ul>
+<h3 id="p2整体计价过程"><a class="markdownIt-Anchor" href="#p2整体计价过程"></a> P2.整体计价过程</h3>
+<ul>
+<li>见《计算广告》书中代码</li>
+</ul>
+<h3 id="p2gsp广告竞价示例货币单位元mrp025"><a class="markdownIt-Anchor" href="#p2gsp广告竞价示例货币单位元mrp025"></a> P2.GSP广告竞价示例（货币单位：元，MRP=0.25）</h3>
+<blockquote>
+<p>思考：如果竞价广告采用明拍，有什么优势。</p>
+</blockquote>
+<h2 id="最赚钱的广告产品搜索广告"><a class="markdownIt-Anchor" href="#最赚钱的广告产品搜索广告"></a> 最赚钱的广告产品：搜索广告</h2>
+<h3 id="搜索广告基本产品形式"><a class="markdownIt-Anchor" href="#搜索广告基本产品形式"></a> 搜索广告基本产品形式</h3>
+<ul>
+<li>分为北（North）、东（East）、南（South）三个区域</li>
+<li>广告一般带有底色</li>
+<li>位置次序：North1，North2，…，East1，East2，East3…</li>
+<li>南区或重复北区、或重复东区</li>
+</ul>
+<h3 id="搜索广告产品新形式"><a class="markdownIt-Anchor" href="#搜索广告产品新形式"></a> 搜索广告产品新形式</h3>
+<ul>
+<li>原生广告探索：1.结构化的搜索结果，搜索结果页直接可以操作。2.将网站频道直接显示</li>
+<li>弱相关广告形式：东区，1.放弱相关的广告。2.相关推荐词</li>
+</ul>
+<h3 id="移动搜索广告"><a class="markdownIt-Anchor" href="#移动搜索广告"></a> 移动搜索广告</h3>
+<ul>
+<li>wap网页，没有东区</li>
+<li>淘宝：搜索结果页直接插入广告</li>
+<li>大众点评：搜索结果中间插入广告</li>
+</ul>
+<h3 id="搜索广告产品策略"><a class="markdownIt-Anchor" href="#搜索广告产品策略"></a> 搜索广告产品策略</h3>
+<p>搜索广告产品策略</p>
+<ul>
+<li>1.查询扩展-&gt;检索-&gt;排序-&gt;放置-&gt;定价</li>
+</ul>
+<p>关键产品策略：</p>
+<ul>
+<li>查询扩展、广告排序、广告放置</li>
+</ul>
+<h3 id="搜索广告计算概貌"><a class="markdownIt-Anchor" href="#搜索广告计算概貌"></a> 搜索广告计算概貌</h3>
+<p>优化目标：max u(a,c)*bid_cpc(a)</p>
+<p>关键特点：</p>
+<ul>
+<li>搜索广告的变现能力，即eCPM高于一般现实广告</li>
+<li>搜索广告的手中定向标签，即是上下文的搜索查询</li>
+<li>搜索广告样式与自然结果的展示形式非常接近，有原生广告的意味。</li>
+<li>从搜索广告展现起来的竞价交易模式，已经逐渐发展成互联网广告最主流的交易模式。</li>
+</ul>
+<h3 id="搜索广告系统架构"><a class="markdownIt-Anchor" href="#搜索广告系统架构"></a> 搜索广告系统架构</h3>
+<h3 id="查询扩展主要模式"><a class="markdownIt-Anchor" href="#查询扩展主要模式"></a> 查询扩展主要模式</h3>
+<p>精确匹配</p>
+<ul>
+<li>英语培训 -&gt; {英语培训，培训英语}</li>
+</ul>
+<p>短语匹配</p>
+<ul>
+<li>英语培训 -&gt; {英语培训暑假班，哪个英语培训机构好，英语的培训，英语相关培训，培训英语，英文培训，…}等</li>
+</ul>
+<p>广泛匹配</p>
+<ul>
+<li>英语培训 -&gt; {外语培训班，四级证书，…}</li>
+</ul>
+<p>否定匹配</p>
+<h3 id="查询扩展主要方法"><a class="markdownIt-Anchor" href="#查询扩展主要方法"></a> 查询扩展主要方法</h3>
+<p>基于推荐的方法</p>
+<ul>
+<li>在{Session,query}矩阵上通过推荐技术来产生相关的关键词</li>
+<li>利用的是搜索的日志数据</li>
+</ul>
+<p>基于主题模型的方法</p>
+<ul>
+<li>根据文档主题模型，对某个查询扩展出主题相似的其他查询</li>
+<li>利用的是一般的文档数据</li>
+</ul>
+<p>基于历史效果的方法</p>
+<ul>
+<li>记录某些对特定广告主eCPM较高的关键词</li>
+<li>利用广告本身的历史eCPM数据。</li>
+</ul>
+<h3 id="广告位智能放置"><a class="markdownIt-Anchor" href="#广告位智能放置"></a> 广告位智能放置</h3>
+<p>广告放置（Ad Placement）问题</p>
+<ul>
+<li>广告候选完成排序以后，需要分别确定北区和东区广告条数</li>
+</ul>
+<p>用户体验指标</p>
+<ul>
+<li>北区广告的平均条数，即North Foot Print（NFP）或Average Serving Number（ASN）</li>
+</ul>
+<p>广告放置策略优化</p>
+<blockquote>
+<p>思考<br />
+1.搜索广告与展示广告最根本的技术区别是什么？<br />
+2.社交信息流的广告放置问题应该如何建模？</p>
+</blockquote>
+<h3 id="google-adwords"><a class="markdownIt-Anchor" href="#google-adwords"></a> Google AdWords</h3>
+<p>产品概况</p>
+<ul>
+<li>Google推出的关键词竞价广告产品</li>
+</ul>
+<p>其他点评：</p>
+<ul>
+<li>最早按CPM售卖，销售不理想</li>
+<li>后来采用Overture的CPC售卖，并创造性的引入点击率概念表达广告相关性，取得了非常高的营收</li>
+<li>2013年营收374亿美元。</li>
+</ul>
+<h3 id="淘宝直通车"><a class="markdownIt-Anchor" href="#淘宝直通车"></a> 淘宝直通车</h3>
+<p>产品概况：</p>
+<ul>
+<li>淘宝专门服务于卖家的广告产品，在搜索结果等页面展示竞价广告</li>
+</ul>
+<p>其他点评：</p>
+<ul>
+<li>按CPC售卖，同样是按照eCPM排名</li>
+<li>广告主集中在电商行业，同时用户意图比通用搜索引擎更强烈</li>
+<li>与广告主是共生关系</li>
+</ul>
+<h2 id="剩余流量变现产品竞价广告网络"><a class="markdownIt-Anchor" href="#剩余流量变现产品竞价广告网络"></a> 剩余流量变现产品：竞价广告网络</h2>
+<h3 id="竞价广告网络产品原理"><a class="markdownIt-Anchor" href="#竞价广告网络产品原理"></a> 竞价广告网络产品原理</h3>
+<h3 id="广告网络产品示例"><a class="markdownIt-Anchor" href="#广告网络产品示例"></a> 广告网络产品示例</h3>
+<p>体验差/跟内容不相关</p>
+<h3 id="广告网络产品策略"><a class="markdownIt-Anchor" href="#广告网络产品策略"></a> 广告网络产品策略</h3>
+<p>广告网络展示决策过程</p>
+<ul>
+<li>检索(根据受众标签)-&gt;排序-&gt;定价</li>
+</ul>
+<p>关键策略：</p>
+<ul>
+<li>广告检索、排序</li>
+</ul>
+<h3 id="广告网络计算概貌"><a class="markdownIt-Anchor" href="#广告网络计算概貌"></a> 广告网络计算概貌</h3>
+<p>优化目标： max u(a,u,c)*bid_cpc(a)</p>
+<p>关键特点：</p>
+<ul>
+<li>竞价方式不向广告主做量的约定，而是根据变现能力，即eCPM，来决定每次展示分配给那个广告主。</li>
+<li>按人群售卖，淡化媒体和广告位的概念</li>
+<li>无需再满足广告主品牌独占的要求</li>
+<li>采用分成结算，运营方和现金流状况大为改善。【预充值】</li>
+</ul>
+<h3 id="广告网络系统架构"><a class="markdownIt-Anchor" href="#广告网络系统架构"></a> 广告网络系统架构</h3>
+<blockquote>
+<p>思考<br />
+1.广告网络适合品牌广告主么？为什么？<br />
+2.广告网络和网盟有什么区别？</p>
+</blockquote>
+<h3 id="facebook-audience-networdk"><a class="markdownIt-Anchor" href="#facebook-audience-networdk"></a> facebook audience networdk</h3>
+<ul>
+<li>移动应用首选的变现方式</li>
+<li>对无FB张浩的用户不出广告oCPM/CPA的售卖方式</li>
+<li>目前供给和需求端都没有程序化接口</li>
+</ul>
+<h2 id="与搜索技术不同广告检索技术"><a class="markdownIt-Anchor" href="#与搜索技术不同广告检索技术"></a> 与搜索技术不同：广告检索技术</h2>
+<h3 id="lucene"><a class="markdownIt-Anchor" href="#lucene"></a> Lucene</h3>
+<p>开源的全文检索引擎</p>
+<ul>
+<li>包括Index和Retrieval模块</li>
+<li>提供了简单易用的API，可以快速实现大量文档的检索</li>
+<li>采用分块索引提升Index响应速度</li>
+<li>实现了布尔查询、模糊查询等</li>
+<li>不支持相关性检索</li>
+</ul>
+<p>其他产品选择：Elastic Search</p>
+<h3 id="s3布尔表达式检索"><a class="markdownIt-Anchor" href="#s3布尔表达式检索"></a> S3.布尔表达式检索</h3>
+<p>广告投放条件的过滤可以视为布尔表达式检索问题</p>
+<p>布尔表达式检索的一些概念</p>
+<ul>
+<li>Doc DNF：{age IN {3} ^ state IN {NY}) V ({state IN {CA} ^ gender NOT_IN {M})</li>
+<li>Conjunction: age IN {3} &amp; state IN {NY}, state IN {CA} ^ gender NOT_IN {M}。同一属性在某Conjunction里只出现一次</li>
+<li>Assignment：age IN {3}, state IN {NY}, state IN {CA}…</li>
+<li>sizeof[Conjuncion]: conjunction包含非的Assignment的个数</li>
+</ul>
+<p>基本思想</p>
+<ul>
+<li>某查询满足conjunction，也就满足包括此conjunction的doc</li>
+<li>维护两层倒排关系：Conjunction-&gt;DocID,Assignment-&gt;ConjuncionID</li>
+<li>如果sizeof（Conjunction）大于sizeof（query），则无需考虑</li>
+</ul>
+<h3 id="s3布尔表达式检索-index示例"><a class="markdownIt-Anchor" href="#s3布尔表达式检索-index示例"></a> S3.布尔表达式检索 - index示例</h3>
+<h3 id="s3相关性检索"><a class="markdownIt-Anchor" href="#s3相关性检索"></a> S3.相关性检索</h3>
+<p>根据（u，c）检索广告时</p>
+<ul>
+<li>query有可能比较长，且子term都是should</li>
+<li>搜索引擎方案：Term之间取或关系，然后计算相关性并找到Top-N，在长Query和大文档集时查询速度被巨大的计算量缩限制。</li>
+</ul>
+<p>相关性检索</p>
+<ul>
+<li>在查找候选过程中做近似的评估，切掉那些理论上不需要再考虑的文档，只对进候选的文档进行相关性计算，比Top-N最小堆最小值大的插入</li>
+<li>当相关性函数为线性时，存在有效的剪枝算法。</li>
+</ul>
+<h3 id="s3weight-andwand检索算法"><a class="markdownIt-Anchor" href="#s3weight-andwand检索算法"></a> S3.Weight-And(WAND)检索算法</h3>
+<p>关键点</p>
+<ul>
+<li>根据term贡献上界u_t，文档相关性上界U_a去掉无法胜出的候选</li>
+</ul>
+<p>算法概要</p>
+<ul>
+<li>step-1：按doclist最前面的DocID对terms排序</li>
+<li>step-2:迭代terms，并累加UB知道大于堆顶，设此时到达第n-1个term，如果terms[0].doc和terms[n-1].doc一样，逼出一个doc至最小堆；如果不一样，再前n个term挑选一个skip到terms[n-1].doc,跳转至step-1.</li>
+</ul>
+<h3 id="s3最近邻检索"><a class="markdownIt-Anchor" href="#s3最近邻检索"></a> S3.最近邻检索</h3>
+<ul>
+<li>当把广告与用户向量化后，检索这个向量空间里最相关的K篇文档等价于计算向量距离并取K近邻的问题</li>
+<li>局部敏感哈希（LSH）</li>
+<li>层次K均值数（HKM）</li>
+</ul>
+<ul>
+<li>数据相关的局部敏感哈希</li>
+</ul>
+<h3 id="s3语义检索-word2vec"><a class="markdownIt-Anchor" href="#s3语义检索-word2vec"></a> S3.语义检索 - word2vec</h3>
+<blockquote>
+<p>思考: 倒排索引再广告系统中是必须的么？</p>
+</blockquote>
+<h2 id="让系统更快的学习短时数据统计与反馈"><a class="markdownIt-Anchor" href="#让系统更快的学习短时数据统计与反馈"></a> 让系统更快的学习：短时数据统计与反馈</h2>
+<h3 id="短时用户行为反馈"><a class="markdownIt-Anchor" href="#短时用户行为反馈"></a> 短时用户行为反馈</h3>
+<p>短时用户行为</p>
+<ul>
+<li>狭义：用户在一个session内的行为</li>
+<li>广义：用户在短时间（一般为一两天）内的行为</li>
+</ul>
+<p>短时用户行为的反馈</p>
+<ul>
+<li>短时受众定向：根据短时用户行为为用户打上标签</li>
+<li>短时点击反馈：根据短时广告交互计算的动态特征</li>
+</ul>
+<p>短时用户行为计算</p>
+<ul>
+<li>需要准实时（分钟级）对用户行为进行加工，不适合在Hadoop上进行</li>
+<li>可以利用流式计算（stream computing）平台，如S4，Storm，Spark Streaming等。</li>
+</ul>
+<h3 id="流式计算平台-storm"><a class="markdownIt-Anchor" href="#流式计算平台-storm"></a> 流式计算平台 - Storm</h3>
+<ul>
+<li>大规模实时数据处理框架，自动完成数据分发和可靠性管理，开发者只需要关注处理逻辑。数据流基本在网络和内存进行。</li>
+<li>计算逻辑类似Map/Reduce，区别在调度数据而非调度计算。</li>
+</ul>
+<h3 id="s6-kafka-by-linkedin"><a class="markdownIt-Anchor" href="#s6-kafka-by-linkedin"></a> S6. kafka by Linkedin</h3>
+<ul>
+<li>分布式消息系统，数据消费方式支持pull模式</li>
+<li>O（1）复杂度的吃酒化和很高的吞吐率</li>
+<li>用Zookeeper来管理brokers</li>
+</ul>
+<h3 id="s6apache-storm-by-twitter"><a class="markdownIt-Anchor" href="#s6apache-storm-by-twitter"></a> S6.Apache Storm By twitter</h3>
+<ul>
+<li>大规模实时处理框架，自动完成数据分发和可靠性管理，开发者只需要关注处理逻辑</li>
+<li>Storm on YARN 可以与Hadoop共享计算资源</li>
+</ul>
+<h2 id="用算法优化收入点击率预测"><a class="markdownIt-Anchor" href="#用算法优化收入点击率预测"></a> 用算法优化收入：点击率预测</h2>
+<h3 id="a2点击率预测问题"><a class="markdownIt-Anchor" href="#a2点击率预测问题"></a> A2.点击率预测问题</h3>
+<p>点击率预测，在（a，u，c）组合与点击间建立关系： u(a,u,c) = p(h=1|a,u,c)</p>
+<p>Regression 比 Ranking合适一些</p>
+<ul>
+<li>广告的实际排序是根据eCPM，因此需要尽可能准确的估计CTR，而不仅仅是各候选的CTR排序正确。</li>
+</ul>
+<p>问题关键</p>
+<ul>
+<li>新广告的cold-start</li>
+<li>捕获点击率的动态特性</li>
+</ul>
+<h3 id="a2逻辑回归logistic-regression"><a class="markdownIt-Anchor" href="#a2逻辑回归logistic-regression"></a> A2.逻辑回归（Logistic Regression）</h3>
+<p>逻辑回归问题</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>h</mi><mi mathvariant="normal">∣</mi><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>s</mi><mi>i</mi><mi>g</mi><mi>m</mi><mi>o</mi><mi>d</mi><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mn>2</mn><mi>h</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><msup><mi>w</mi><mi>T</mi></msup><mi>x</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p(h|a, u, c) = sigmod((2h-1)w^Tx(a,u,c)) 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">h</span><span class="mord">∣</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">m</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mopen">(</span><span class="mopen">(</span><span class="mord">2</span><span class="mord mathdefault">h</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1413309999999999em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913309999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></span></p>
+<p>实际带有正则化的优化问题</p>
+<p>可视为最大熵模型的特例，因此IIS方法适用</p>
+<h3 id="a2动态特征-多层次点击反馈"><a class="markdownIt-Anchor" href="#a2动态特征-多层次点击反馈"></a> A2.动态特征 - 多层次点击反馈</h3>
+<p>在标签组合维度上聚合点击反馈统计作为CTR预测的特征</p>
+<p>优势</p>
+<ul>
+<li>工程架构扩展性强（与在线学习相比）</li>
+<li>对新（a,u,c）组合有将强的back-off能力</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>在线特征存储量大，更新要求高</li>
+</ul>
+<p>组合维度举例</p>
+<ul>
+<li>cookie（u）and creative（a）</li>
+<li>gender（u）and topic（c）</li>
+<li>category（a）and category（u）</li>
+<li>creative（a）and gender（u）</li>
+</ul>
+<h3 id="a2归一化点击率-coec"><a class="markdownIt-Anchor" href="#a2归一化点击率-coec"></a> A2.归一化点击率 - COEC</h3>
+<p>有效展示</p>
+<ul>
+<li>可以通过Eye tracking测算</li>
+<li>工程上可以使用Expected Click（EC）来近似有效展示</li>
+</ul>
+<p>EC的计算</p>
+<ul>
+<li>实测法：实际随机流量测算</li>
+<li>Bias模型法：只使用与广告决策无关的bias特征训练模型的CTR模型：EC=P_{bias}(a,u,c)</li>
+</ul>
+<p>归一化点击率：COEC = sum click / sum EC</p>
+<h3 id="a2在线广告常见bias特征"><a class="markdownIt-Anchor" href="#a2在线广告常见bias特征"></a> A2.在线广告常见bias特征</h3>
+<ul>
+<li>广告位位置
+<ul>
+<li>搜索广告：North1，North2，…，East1,East2,…</li>
+<li>显示广告：相对页面的(x,y)</li>
+</ul>
+</li>
+<li>广告位尺寸</li>
+<li>广告位类型
+<ul>
+<li>门户首页，频道首页，内容页，客户端…</li>
+</ul>
+</li>
+<li>操作系统和浏览器</li>
+<li>广告投放延迟</li>
+<li>日期和时间</li>
+</ul>
+<h3 id="a2消除偏差的点击率模型训练过程"><a class="markdownIt-Anchor" href="#a2消除偏差的点击率模型训练过程"></a> A2.消除偏差的点击率模型训练过程</h3>
+<h3 id="a2点击反馈的平滑"><a class="markdownIt-Anchor" href="#a2点击反馈的平滑"></a> A2.点击反馈的平滑</h3>
+<p>问题： 在数据稀疏的情况下较稳健的估计CTR或者COEC</p>
+<p>经验贝叶斯方案</p>
+<ul>
+<li>点击产生概率模型：p(x|u)=U<sup>{x}(1-u)</sup>{1-x}</li>
+<li>视u为随机变量，采用Beta分布共轭先验进行正则化</li>
+</ul>
+<h3 id="a2点击率模型的校准"><a class="markdownIt-Anchor" href="#a2点击率模型的校准"></a> A2.点击率模型的校准</h3>
+<ul>
+<li>正负样本不均衡带来的估计误差</li>
+<li>误差对一些广义线性模型都存在，包括LR</li>
+<li>可以通过数据计算并校准</li>
+</ul>
+<h3 id="a2fm点击率模型"><a class="markdownIt-Anchor" href="#a2fm点击率模型"></a> A2.FM点击率模型</h3>
+<p>LR:所有组合特征需要用特征工程解决</p>
+<p>因子分解剂（Factorization Machines，FM）</p>
+<ul>
+<li>计算复杂度与LR相同</li>
+<li>优化方法：随级梯度下降、交替最小二乘</li>
+</ul>
+<h3 id="a2深度学习点击模型"><a class="markdownIt-Anchor" href="#a2深度学习点击模型"></a> A2.深度学习点击模型</h3>
+<h3 id="a2评测指标-pr曲线和roc曲线"><a class="markdownIt-Anchor" href="#a2评测指标-pr曲线和roc曲线"></a> A2.评测指标- PR曲线和ROC曲线</h3>
+<blockquote>
+<p>思考：事件中点击率预估最有用的是哪类特征？</p>
+</blockquote>
+<h2 id="未知领域的冷启动探索与利用"><a class="markdownIt-Anchor" href="#未知领域的冷启动探索与利用"></a> 未知领域的冷启动：探索与利用</h2>
+<h3 id="a5-探索与利用ee问题与思路"><a class="markdownIt-Anchor" href="#a5-探索与利用ee问题与思路"></a> A5. 探索与利用（E&amp;E）问题与思路</h3>
+<p>问题</p>
+<ul>
+<li>为长尾的（a，u，c）创造展示机会以积累统计量，从而更准确预估CTR</li>
+<li>提升整体的广告收入，即需要严格控制探索的量和有效性</li>
+</ul>
+<p>方法思路</p>
+<ul>
+<li>通常描述为Multi-arm Bandit（MAB）问题</li>
+<li>有限个arms（或者收益提供者）a，每个有确定有限的期望收益E（r_{i,a}）</li>
+<li>在每个时刻t，我们必须从arms中选择一个，最终目标是优化整体收益</li>
+<li>基本方法为e-greedy；将e比例的小部分流量用于随机探索</li>
+</ul>
+<p>广告问题的主要挑战</p>
+<ul>
+<li>海量的组合空间需要被探索</li>
+<li>各个arm的期望收益是被动变化的</li>
+</ul>
+<h2 id="如何利用竞价市场竞价广告需求方产品"><a class="markdownIt-Anchor" href="#如何利用竞价市场竞价广告需求方产品"></a> 如何利用竞价市场：竞价广告需求方产品</h2>
+<h3 id="搜索引擎营销sem"><a class="markdownIt-Anchor" href="#搜索引擎营销sem"></a> 搜索引擎营销（SEM）</h3>
+<p>产品目标</p>
+<ul>
+<li>帮助搜索广告主管理预算，优化商业目标</li>
+<li>主要商业目标：花费、ROI</li>
+</ul>
+<p>主要功能</p>
+<ul>
+<li>基础功能：管理campaign和关键词，实现便捷操作</li>
+<li>高级功能：拓词、自动价格优化</li>
+</ul>
+<h3 id="广告购买平台trading-desk"><a class="markdownIt-Anchor" href="#广告购买平台trading-desk"></a> 广告购买平台（Trading Desk）</h3>
+<p>产品目标：</p>
+<ul>
+<li>帮助广告主按人群进行跨媒体和广告网络采买</li>
+</ul>
+<p>关键特征：</p>
+<ul>
+<li>连接到不同广告网络和DSP，提供统一市场</li>
+<li>非实时竞价投放的ROI优化能力</li>
+<li>广告代理功能大多有此概念型产品</li>
+</ul>
+<h3 id="非rtb流量的roi优化"><a class="markdownIt-Anchor" href="#非rtb流量的roi优化"></a> 非RTB流量的ROI优化</h3>
+<p>目标</p>
+<ul>
+<li>给定总预算，在多广告网络中采买并优化ROI</li>
+</ul>
+<p>关键问题</p>
+<ul>
+<li>在合适的流量segment上投放广告</li>
+<li>SEM中选词，显示广告网络中的标签组合选择</li>
+<li>在每个投放上合理的出价以优化ROI</li>
+<li>与RTB不同，采买方无法控制每次展示的出价</li>
+<li>u,c的取值未知，需要在流量分割上估计其分布并合理出价</li>
+</ul>
+<blockquote>
+<p>思考：在非RTB流量的ROI优化过程中，最重要的操作原则是什么？</p>
+</blockquote>
+<!-- lincense--><div class="license-wrapper"><p><span>文章作者: </span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接: </span><a href="https://imzhanghao.com/2020/06/18/computing-advertising-5-lean-data-monetization/">https://imzhanghao.com/2020/06/18/computing-advertising-5-lean-data-monetization/</a></p><p><span>版权声明: </span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
