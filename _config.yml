@@ -78,6 +78,7 @@ index2_generator:
     order_by: -date
     include:
       - category 思维精进
+      - category 读书笔记
 
 # Category & Tag
 default_category: 未分类
@@ -145,7 +146,7 @@ hexo_seo_autopush:
     count: 100
   bing:
     enable: true
-    count: 10
+    count: 100
   google:
     enable: false
     count: 10
