@@ -1,20 +1,23 @@
 extends _layout.pug
 
+
 block content
   .inner
     h1= page.title
+    if toc(page.content)
+      div#toc!=toc(page.content,{list_number:true})
     != page.content
     // lincense
     if(theme.copyright.enable === true && page.copyright !== false)
       .license-wrapper
         p
-          span 文章作者: 
+          span 文章作者:
           a(href=config.url)= config.author
         p
-          span 文章链接: 
+          span 文章链接:
           a(href=page.permalink)= page.permalink
         p
-          span 版权声明: 
+          span 版权声明:
           span!= theme.copyright.license
 
     if theme.post.backHome
