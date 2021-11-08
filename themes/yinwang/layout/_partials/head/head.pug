@@ -29,11 +29,17 @@
 
 - var pageKeywords
 - if (page.keywords) pageKeywords = Array.isArray(page.keywords) ? (page.keywords).join(',') :  ([]).join(',') || page.keywords
-- else if (page.tags && page.tags.length) pageKeywords = page.tags.data.map(function(tag) {return tag.name;}).join(',')                                                                                                                       
+- else if (page.tags && page.tags.length) pageKeywords = page.tags.data.map(function(tag) {return tag.name;}).join(',')
+- else if (is_current('technology')) pageKeywords = config.series.technology.keywords
+- else if (is_current('monetization')) pageKeywords = config.series.monetization.keywords
+- else if (is_current('thinking')) pageKeywords = config.series.thinking.keywords
 - else pageKeywords = Array.isArray(config.keywords) ? (config.keywords).join(','):  ([]).join(',') || config.keywords
 
 - var pageDescription
-- if (page.description) pageDescription = Array.isArray(page.description) ? (page.description).join(','):  ([]).join(',') || page.description || '' 
+- if (page.description) pageDescription = Array.isArray(page.description) ? (page.description).join(','):  ([]).join(',') || page.description || ''
+- else if (is_current('technology')) pageDescription = config.series.technology.description
+- else if (is_current('monetization')) pageDescription = config.series.monetization.description
+- else if (is_current('thinking')) pageDescription = config.series.thinking.description
 - else pageDescription = Array.isArray(config.description) ? (config.description).join(','):  ([]).join(',') || config.description
 
 - var pageAuthor = config.author
@@ -43,7 +49,7 @@ meta(http-equiv="X-UA-Compatible" content="IE=edge")
 meta(http-equiv="content-type", content="text/html; charset=utf-8")
 meta(name="keywords" content=pageKeywords)
 meta(name="description" content=pageDescription)
-meta(name="author" content=pageAuthor)                                         
+meta(name="author" content=pageAuthor)
 
 meta(name="viewport", content="width=device-width, initial-scale=0.5")
 meta(name="format-detection" content="telephone=no")

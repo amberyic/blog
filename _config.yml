@@ -90,6 +90,17 @@ category_map:
   机器学习: machinelearning
 tag_map:
 
+series:
+  technology:
+    keywords: 机器学习,并行计算,程序开发
+    description: 技术系列文章,这里分享我关于机器学习、深度学习、并行计算以及前后端开发相关的经验和笔记。
+  monetization:
+    keywords: 联盟营销,计算广告,流量变现
+    description: 变现系列文章,这里分享我关于技术变现，流量变现以及打造赚钱系统的学习和实践经验。
+  thinking:
+    keywords: 思维精进,读书笔记,个人成长
+    description: 思考系列文章，这里分享我关于对于一些问题的思考以及一些读书笔记。
+
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
 meta_generator: true

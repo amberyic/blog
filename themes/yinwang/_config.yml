@@ -29,7 +29,7 @@ list:
 # 脚部
 footer:
   display: true               # 是否显示footer
-  context: © <a target="_blank" href="/about"> Zhanghao </a> | <a target="_blank" href="/tags"> 标签 </a> | <a target="_blank" href="/categories"> 分类 </a> | <a target="_blank" href="https://beian.miit.gov.cn/"> 陕ICP备20008129号</a> # footer内容
+  context: © <a target="_blank" href="/about"> ZhangHao </a> | <a target="_blank" href="/tags"> 标签 </a> | <a target="_blank" href="/categories"> 分类 </a> | <a target="_blank" href="https://beian.miit.gov.cn/"> 陕ICP备20008129号</a> # footer内容
 
 # 文章页
 post:
