@@ -12,10 +12,10 @@
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(hm, s);
 })();</script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" data-ad-client="ca-pub-4128258433761966" async=""></script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|6.多方数据变现-程序化交易</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E8%AF%81%E5%88%B8%E7%B1%BB%E4%BC%BC%E7%9A%84%E4%BA%A4%E6%98%93%E7%A8%8B%E5%BA%8F%E5%8C%96%E4%BA%A4%E6%98%93%E8%8B%A5%E5%B9%B2%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 与证券类似的交易：程序化交易若干模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#p5iab%E6%80%BB%E7%BB%93%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%8C%96%E7%9B%B8%E5%85%B3%E4%BA%A4%E6%98%93%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text"> P5.IAB总结的程序化相关交易方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E5%AE%9E%E6%97%B6%E7%AB%9E%E4%BB%B7%E8%BF%87%E7%A8%8B%E7%A4%BA%E6%84%8F"><span class="toc-number">1.2.</span> <span class="toc-text"> P5.实时竞价过程示意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E5%AE%9E%E6%97%B6%E7%AB%9E%E4%BB%B7%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text"> P5.实时竞价特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E4%BC%98%E9%80%89preferred-deal"><span class="toc-number">1.4.</span> <span class="toc-text"> P5.优选（Preferred Deal）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E7%A7%81%E6%9C%89%E5%B8%82%E5%9C%BApmp"><span class="toc-number">1.5.</span> <span class="toc-text"> P5.私有市场（PMP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E7%A8%8B%E5%BA%8F%E5%8C%96%E7%9B%B4%E6%8A%95pdb"><span class="toc-number">1.6.</span> <span class="toc-text"> P5.程序化直投（PDB）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%81%E5%8A%B5%E4%BA%A4%E6%98%93%E6%89%80%E5%B9%BF%E5%91%8A%E4%BA%A4%E6%98%93%E5%B9%B3%E5%8F%B0"><span class="toc-number">2.</span> <span class="toc-text"> “证劵交易所”：广告交易平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E4%BA%A4%E6%98%93%E5%B9%B3%E5%8F%B0adx"><span class="toc-number">2.1.</span> <span class="toc-text"> 广告交易平台（ADX）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E4%BA%A4%E6%98%93%E5%B9%B3%E5%8F%B0%E7%89%B9%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text"> 广告交易平台特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#adx%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.3.</span> <span class="toc-text"> ADX系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#adx%E4%B8%BB%E8%A6%81%E6%8A%80%E6%9C%AF%E7%82%B9"><span class="toc-number">2.4.</span> <span class="toc-text"> ADX主要技术点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E5%9F%9F%E5%90%8Dcookie-mapping%E4%BE%8B%E5%AA%92%E4%BD%93%E4%B8%8Edmp"><span class="toc-number">2.5.</span> <span class="toc-text"> 两域名Cookie Mapping（例：媒体与DMP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%9F%9F%E5%90%8Dcookie-mapping%E4%BE%8Badx%E4%B8%8Edsp"><span class="toc-number">2.6.</span> <span class="toc-text"> 三域名Cookie Mapping（例：ADX与DSP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A2%E4%BB%B7%E4%BC%98%E5%8C%96call-out-optimization"><span class="toc-number">2.7.</span> <span class="toc-text"> 询价优化（Call Out Optimization）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B8%E5%95%86%E4%B8%8B%E5%8D%95%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%B9%E5%B9%B3%E5%8F%B0"><span class="toc-number">3.</span> <span class="toc-text"> “券商下单系统”：需求方平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E5%88%B6%E5%8C%96%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE"><span class="toc-number">3.1.</span> <span class="toc-text"> 定制化用户标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91retargeting%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text"> 重定向（Retargeting）原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%86%E7%B1%BB"><span class="toc-number">3.3.</span> <span class="toc-text"> 重定向分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%AE%A2%E6%8E%A8%E8%8D%90look-alike"><span class="toc-number">3.4.</span> <span class="toc-text"> 新客推荐（Look-alike）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsp%E4%BA%A7%E5%93%81%E7%AD%96%E7%95%A5"><span class="toc-number">3.5.</span> <span class="toc-text"> DSP产品策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#invitemedia"><span class="toc-number">3.6.</span> <span class="toc-text"> invitemedia</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsp%E4%BA%A7%E5%93%81%E7%89%B9%E7%82%B9"><span class="toc-number">3.7.</span> <span class="toc-text"> DSP产品特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsp%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">3.8.</span> <span class="toc-text"> DSP系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#look-alike%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1"><span class="toc-number">3.9.</span> <span class="toc-text"> Look-alike问题建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E4%BB%B7%E5%80%BC%E4%BC%B0%E8%AE%A1"><span class="toc-number">3.10.</span> <span class="toc-text"> 点击价值估计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%94%B5%E5%95%86%E8%A7%92%E5%BA%A6%E7%9C%8B%E6%8E%A8%E8%8D%90"><span class="toc-number">3.11.</span> <span class="toc-text"> 从电商角度看推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsp%E5%87%BA%E4%BB%B7%E7%AD%96%E7%95%A5"><span class="toc-number">3.12.</span> <span class="toc-text"> DSP出价策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#criteo"><span class="toc-number">3.13.</span> <span class="toc-text"> Criteo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%B8%A0%E9%81%93%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86%E4%BE%9B%E7%BB%99%E6%96%B9%E5%B9%B3%E5%8F%B0"><span class="toc-number">4.</span> <span class="toc-text"> 多渠道库存管理：供给方平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E5%B9%BF%E5%91%8Amediation"><span class="toc-number">4.1.</span> <span class="toc-text"> 移动广告Mediation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ssp%E4%BA%A7%E5%93%81%E7%AD%96%E7%95%A5"><span class="toc-number">4.2.</span> <span class="toc-text"> SSP产品策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5header-bidding"><span class="toc-number">4.3.</span> <span class="toc-text"> P5.Header Bidding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5header-bidding%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B"><span class="toc-number">4.4.</span> <span class="toc-text"> P5.Header Bidding决策过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#admeld"><span class="toc-number">4.5.</span> <span class="toc-text"> Admeld</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mopub"><span class="toc-number">4.6.</span> <span class="toc-text"> mopub</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B5%84%E4%BA%A7%E9%87%91%E8%9E%8D%E5%8C%96%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E4%BA%A7%E5%93%81"><span class="toc-number">5.</span> <span class="toc-text"> 数据资产金融化：数据管理产品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%96%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">5.1.</span> <span class="toc-text"> 三方数据的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9dmp"><span class="toc-number">5.2.</span> <span class="toc-text"> 第三方DMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9dmp%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.3.</span> <span class="toc-text"> 第三方DMP商业模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%96%B9dmp"><span class="toc-number">5.4.</span> <span class="toc-text"> 第一方DMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%96%B9dmp%E7%9A%84%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.5.</span> <span class="toc-text"> 第一方DMP的商业模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#audience-science"><span class="toc-number">5.6.</span> <span class="toc-text"> Audience Science</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%95%B0%E6%8D%AE%E4%B8%8D%E8%83%BD%E5%85%B1%E4%BA%AB"><span class="toc-number">5.7.</span> <span class="toc-text"> 为什么数据不能共享</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%98%93%E8%AF%A5%E6%80%8E%E4%B9%88%E5%81%9A"><span class="toc-number">5.8.</span> <span class="toc-text"> 数据交易该怎么做？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%BB%99%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%BB%B7"><span class="toc-number">5.9.</span> <span class="toc-text"> 如何给数据定价</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%8A%97%E6%95%B0%E6%8D%AE%E7%9A%84%E9%BB%91%E5%AE%A2%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8"><span class="toc-number">6.</span> <span class="toc-text"> 对抗数据的黑客：隐私保护和数据安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81%E7%9A%84%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86"><span class="toc-number">6.1.</span> <span class="toc-text"> 数据隐私的初步认识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E8%A1%8C%E4%B8%BA%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">6.2.</span> <span class="toc-text"> 互联网行为数据隐私问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81differential-privacy"><span class="toc-number">6.3.</span> <span class="toc-text"> 差分隐私（Differential Privacy）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E6%96%B9%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="toc-number">6.4.</span> <span class="toc-text"> 需求方数据安全问题</span></a></li></ol></li></ol></div><h2 id="与证券类似的交易程序化交易若干模式"><a class="markdownIt-Anchor" href="#与证券类似的交易程序化交易若干模式"></a> 与证券类似的交易：程序化交易若干模式</h2>
-<h3 id="p5iab总结的程序化相关交易方式"><a class="markdownIt-Anchor" href="#p5iab总结的程序化相关交易方式"></a> P5.IAB总结的程序化相关交易方式</h3>
-<h3 id="p5实时竞价过程示意"><a class="markdownIt-Anchor" href="#p5实时竞价过程示意"></a> P5.实时竞价过程示意</h3>
-<h3 id="p5实时竞价特点"><a class="markdownIt-Anchor" href="#p5实时竞价特点"></a> P5.实时竞价特点</h3>
+</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|6.多方数据变现-程序化交易</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> 与证券类似的交易：程序化交易若干模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"> P5.IAB总结的程序化相关交易方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text"> P5.实时竞价过程示意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text"> P5.实时竞价特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text"> P5.优选（Preferred Deal）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.5.</span> <span class="toc-text"> P5.私有市场（PMP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.6.</span> <span class="toc-text"> P5.程序化直投（PDB）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"> “证劵交易所”：广告交易平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text"> 广告交易平台（ADX）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text"> 广告交易平台特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text"> ADX系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.</span> <span class="toc-text"> ADX主要技术点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.5.</span> <span class="toc-text"> 两域名Cookie Mapping（例：媒体与DMP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.6.</span> <span class="toc-text"> 三域名Cookie Mapping（例：ADX与DSP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.7.</span> <span class="toc-text"> 询价优化（Call Out Optimization）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> “券商下单系统”：需求方平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text"> 定制化用户标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text"> 重定向（Retargeting）原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text"> 重定向分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text"> 新客推荐（Look-alike）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.5.</span> <span class="toc-text"> DSP产品策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.6.</span> <span class="toc-text"> invitemedia</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.7.</span> <span class="toc-text"> DSP产品特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.8.</span> <span class="toc-text"> DSP系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.9.</span> <span class="toc-text"> Look-alike问题建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.10.</span> <span class="toc-text"> 点击价值估计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.11.</span> <span class="toc-text"> 从电商角度看推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.12.</span> <span class="toc-text"> DSP出价策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.13.</span> <span class="toc-text"> Criteo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text"> 多渠道库存管理：供给方平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text"> 移动广告Mediation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text"> SSP产品策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text"> P5.Header Bidding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.4.</span> <span class="toc-text"> P5.Header Bidding决策过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.5.</span> <span class="toc-text"> Admeld</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.6.</span> <span class="toc-text"> mopub</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text"> 数据资产金融化：数据管理产品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text"> 三方数据的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text"> 第三方DMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text"> 第三方DMP商业模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.4.</span> <span class="toc-text"> 第一方DMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.5.</span> <span class="toc-text"> 第一方DMP的商业模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.6.</span> <span class="toc-text"> Audience Science</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.7.</span> <span class="toc-text"> 为什么数据不能共享</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.8.</span> <span class="toc-text"> 数据交易该怎么做？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.9.</span> <span class="toc-text"> 如何给数据定价</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text"> 对抗数据的黑客：隐私保护和数据安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.1.</span> <span class="toc-text"> 数据隐私的初步认识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text"> 互联网行为数据隐私问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.3.</span> <span class="toc-text"> 差分隐私（Differential Privacy）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.4.</span> <span class="toc-text"> 需求方数据安全问题</span></a></li></ol></li></ol></div><h2><span id="与证券类似的交易程序化交易若干模式"> 与证券类似的交易：程序化交易若干模式</span></h2>
+<h3><span id="p5iab总结的程序化相关交易方式"> P5.IAB总结的程序化相关交易方式</span></h3>
+<h3><span id="p5实时竞价过程示意"> P5.实时竞价过程示意</span></h3>
+<h3><span id="p5实时竞价特点"> P5.实时竞价特点</span></h3>
 <ul>
 <li>每次展示都有Ad Exchange服务器与多个DSP服务器的参与，这时的服务器与带宽成本大大增加。</li>
 <li>在询价过程中，Ad Exchange要等待一个约定的时间片（一般情况为100ms），这使得用户看到的广告延迟增加，对CTR有负面影响。</li>
@@ -26,8 +26,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="p5优选preferred-deal"><a class="markdownIt-Anchor" href="#p5优选preferred-deal"></a> P5.优选（Preferred Deal）</h3>
-<h3 id="p5私有市场pmp"><a class="markdownIt-Anchor" href="#p5私有市场pmp"></a> P5.私有市场（PMP）</h3>
+<h3><span id="p5优选preferred-deal"> P5.优选（Preferred Deal）</span></h3>
+<h3><span id="p5私有市场pmp"> P5.私有市场（PMP）</span></h3>
 <p>媒体位了保证广告主的质量，希望将竞拍限制在一些被邀请需求方的小范围内。这种程序化交易，叫做私有市场。（Private Marketplace，PMP）</p>
 <p>坚固了优选和实时竞价的好处</p>
 <ul>
@@ -35,7 +35,7 @@
 <li>在需求方之间保留了竞价关系，有利于提高媒体的变现能力</li>
 </ul>
 <p>交易接口的形式与一般RTB一致</p>
-<h3 id="p5程序化直投pdb"><a class="markdownIt-Anchor" href="#p5程序化直投pdb"></a> P5.程序化直投（PDB）</h3>
+<h3><span id="p5程序化直投pdb"> P5.程序化直投（PDB）</span></h3>
 <p>DSP可根据广告主需求，进行媒介采买，并且将采买的广告资源二次分配给广告主的不同子品牌或产品，这叫程序化直投（Programmatic Direct Buy，PDB）</p>
 <p>本质上是一种GD或Network的投放方式</p>
 <ul>
@@ -47,8 +47,8 @@
 <p>思考：对媒体和广告主而言，什么情况下需要程序化交易？</p>
 </blockquote>
 <span id="more"></span>
-<h2 id="证劵交易所广告交易平台"><a class="markdownIt-Anchor" href="#证劵交易所广告交易平台"></a> “证劵交易所”：广告交易平台</h2>
-<h3 id="广告交易平台adx"><a class="markdownIt-Anchor" href="#广告交易平台adx"></a> 广告交易平台（ADX）</h3>
+<h2><span id="证劵交易所广告交易平台"> “证劵交易所”：广告交易平台</span></h2>
+<h3><span id="广告交易平台adx"> 广告交易平台（ADX）</span></h3>
 <p>关键特征</p>
 <ul>
 <li>用实时竞价（RTB）方式连接广告和（上下文，用户）</li>
@@ -60,7 +60,7 @@
 <li>广告交易市场 &lt;==&gt; 证券交易所</li>
 <li>需求方平台 &lt;==&gt; 券商</li>
 </ul>
-<h3 id="广告交易平台特点"><a class="markdownIt-Anchor" href="#广告交易平台特点"></a> 广告交易平台特点</h3>
+<h3><span id="广告交易平台特点"> 广告交易平台特点</span></h3>
 <p>优化目标：取出价最高的报价展示</p>
 <p>关键特点</p>
 <ul>
@@ -69,13 +69,13 @@
 <li>无需再满足广告主品牌独立的要求</li>
 <li>采用分成结算，运营方的现金流状况大为改善</li>
 </ul>
-<h3 id="adx系统架构"><a class="markdownIt-Anchor" href="#adx系统架构"></a> ADX系统架构</h3>
-<h3 id="adx主要技术点"><a class="markdownIt-Anchor" href="#adx主要技术点"></a> ADX主要技术点</h3>
+<h3><span id="adx系统架构"> ADX系统架构</span></h3>
+<h3><span id="adx主要技术点"> ADX主要技术点</span></h3>
 <ul>
 <li>由于实时竞价的功能需求，广告交易市场解决供给方和需求方用户身份对应的问题，在web的广告环境下，这需要用到cookie-mapping的技术。</li>
 <li>实践中当考虑到带宽和服务成本带来的约束时，希望用更少的询价请求完成尽可能高效的变现，在这种问题的情况下，公式的优化问题会有所变化，这一问题成为询价优化。</li>
 </ul>
-<h3 id="两域名cookie-mapping例媒体与dmp"><a class="markdownIt-Anchor" href="#两域名cookie-mapping例媒体与dmp"></a> 两域名Cookie Mapping（例：媒体与DMP）</h3>
+<h3><span id="两域名cookie-mapping例媒体与dmp"> 两域名Cookie Mapping（例：媒体与DMP）</span></h3>
 <ul>
 <li>1.用户到达媒体页面</li>
 <li>2.向媒体的服务器请求cookie mapping js代码</li>
@@ -83,7 +83,7 @@
 <li>4.JS代码判断需要mapping的话（最近已经做过则可以不做），向DMP发起cookie mapping请求，并传送媒体的标识（mid）及媒体方的cookie（mck）；</li>
 <li>DMP返回一个1*1的beacon，并记录下媒体方cookie（mck）与己方cookie(dck)的对应关系。</li>
 </ul>
-<h3 id="三域名cookie-mapping例adx与dsp"><a class="markdownIt-Anchor" href="#三域名cookie-mapping例adx与dsp"></a> 三域名Cookie Mapping（例：ADX与DSP）</h3>
+<h3><span id="三域名cookie-mapping例adx与dsp"> 三域名Cookie Mapping（例：ADX与DSP）</span></h3>
 <ul>
 <li>1.用户访问广告主页面</li>
 <li>2.选择性家在一个DSP域名下的iframe</li>
@@ -92,11 +92,11 @@
 <li>5.ADX通过302重定向向DSP返回ADX标识（xid）以及其域名下的cookie（xck）</li>
 <li>6.DSP返回beacon，并记录下ADX cookie（xid）与己方cookie（dck）对应关系</li>
 </ul>
-<h3 id="询价优化call-out-optimization"><a class="markdownIt-Anchor" href="#询价优化call-out-optimization"></a> 询价优化（Call Out Optimization）</h3>
+<h3><span id="询价优化call-out-optimization"> 询价优化（Call Out Optimization）</span></h3>
 <p>问题:在带宽和服务成本的约束下，获得更高的eCPM</p>
 <p>在线分配框架</p>
-<h2 id="券商下单系统需求方平台"><a class="markdownIt-Anchor" href="#券商下单系统需求方平台"></a> “券商下单系统”：需求方平台</h2>
-<h3 id="定制化用户标签"><a class="markdownIt-Anchor" href="#定制化用户标签"></a> 定制化用户标签</h3>
+<h2><span id="券商下单系统需求方平台"> “券商下单系统”：需求方平台</span></h2>
+<h3><span id="定制化用户标签"> 定制化用户标签</span></h3>
 <p>定制化标签</p>
 <ul>
 <li>根据广告主需求加工的标签体系</li>
@@ -108,17 +108,17 @@
 <li>搜索重定向</li>
 <li>新客推荐（Look-alike）</li>
 </ul>
-<h3 id="重定向retargeting原理"><a class="markdownIt-Anchor" href="#重定向retargeting原理"></a> 重定向（Retargeting）原理</h3>
-<h3 id="重定向分类"><a class="markdownIt-Anchor" href="#重定向分类"></a> 重定向分类</h3>
+<h3><span id="重定向retargeting原理"> 重定向（Retargeting）原理</span></h3>
+<h3><span id="重定向分类"> 重定向分类</span></h3>
 <p>网站重定向（Site retargeting）</p>
 <ul>
-<li>根据用户在广告主网站上的行为进行重定向<br />
+<li>根据用户在广告主网站上的行为进行重定向<br>
 搜索重定向（Search retargeting）</li>
-<li>根据用户与广告主相关的搜索行为进行重定向<br />
+<li>根据用户与广告主相关的搜索行为进行重定向<br>
 个性化重定向（Personalizied retargeting）</li>
 <li>根据用户在广告主网站上关注的具体产品和购买阶段，推送商品粒度的广告，可以视为一个站外推荐引擎</li>
 </ul>
-<h3 id="新客推荐look-alike"><a class="markdownIt-Anchor" href="#新客推荐look-alike"></a> 新客推荐（Look-alike）</h3>
+<h3><span id="新客推荐look-alike"> 新客推荐（Look-alike）</span></h3>
 <p>问题：</p>
 <ul>
 <li>对于中小电商，仅对老用户重定向营销远远不够</li>
@@ -130,13 +130,13 @@
 <li>是一种广告商自定义标签，可视为拓展重定向</li>
 <li>在同样reach水平下，效果应好与通用标签</li>
 </ul>
-<h3 id="dsp产品策略"><a class="markdownIt-Anchor" href="#dsp产品策略"></a> DSP产品策略</h3>
+<h3><span id="dsp产品策略"> DSP产品策略</span></h3>
 <p>DSP展示决策过程：</p>
 <p>关键产品策略：</p>
 <ul>
 <li>点击价值预估、出价策略</li>
 </ul>
-<h3 id="invitemedia"><a class="markdownIt-Anchor" href="#invitemedia"></a> invitemedia</h3>
+<h3><span id="invitemedia"> invitemedia</span></h3>
 <p>核心业务：</p>
 <ul>
 <li>传统业务是提供比较透明的Adx采买功能，并收取固定比例的佣金。</li>
@@ -147,7 +147,7 @@
 <li>与DFA，Adx已整合，客减少ck mappiing带来的损失</li>
 <li>改称doubleclick bid manager，并提供更多的优化功能</li>
 </ul>
-<h3 id="dsp产品特点"><a class="markdownIt-Anchor" href="#dsp产品特点"></a> DSP产品特点</h3>
+<h3><span id="dsp产品特点"> DSP产品特点</span></h3>
 <p>优化目标</p>
 <p>关键特点：</p>
 <ul>
@@ -155,8 +155,8 @@
 <li>由于DSP是完全面向广告主的产品，需要在量的约束下投放，着产生了对于出价策略的需求。</li>
 <li>在按CPS等效果结算的DSP中，需要同时估计点击率点击价值。并且由于出价的要求，估计要尽可能准确。</li>
 </ul>
-<h3 id="dsp系统架构"><a class="markdownIt-Anchor" href="#dsp系统架构"></a> DSP系统架构</h3>
-<h3 id="look-alike问题建模"><a class="markdownIt-Anchor" href="#look-alike问题建模"></a> Look-alike问题建模</h3>
+<h3><span id="dsp系统架构"> DSP系统架构</span></h3>
+<h3><span id="look-alike问题建模"> Look-alike问题建模</span></h3>
 <p>问题：p(y=1|x(a,u))</p>
 <ul>
 <li>y不再是点击行为，而是表示用户能否成为广告主用户的二元变量</li>
@@ -167,7 +167,7 @@
 <li>方法一：根据广告主提供的种子用户集，凡是出现在该种子用户集中的u，其对应的y标为1，否则标为0.</li>
 <li>方法二：根据广告投放的记录，将惦记过该广告主广告一定次数（一般设为1）以上的用户，其对应的y标为1，否则标为0.</li>
 </ul>
-<h3 id="点击价值估计"><a class="markdownIt-Anchor" href="#点击价值估计"></a> 点击价值估计</h3>
+<h3><span id="点击价值估计"> 点击价值估计</span></h3>
 <p>点击价值分解：</p>
 <p>到达率：</p>
 <ul>
@@ -177,16 +177,16 @@
 <ul>
 <li>行为稀疏、定义与广告主类型密切相关</li>
 </ul>
-<h3 id="从电商角度看推荐"><a class="markdownIt-Anchor" href="#从电商角度看推荐"></a> 从电商角度看推荐</h3>
+<h3><span id="从电商角度看推荐"> 从电商角度看推荐</span></h3>
 <ul>
 <li>站内推荐、站外推荐、新客推荐</li>
 </ul>
-<h3 id="dsp出价策略"><a class="markdownIt-Anchor" href="#dsp出价策略"></a> DSP出价策略</h3>
+<h3><span id="dsp出价策略"> DSP出价策略</span></h3>
 <ul>
 <li>估计没有预算的限制：只要按照eCPM水平出价，就可以保证在第二高价的情况下每次展示都有利润。</li>
 <li>在有预算约束的情况下，我们需要估计eCPM以及当前展示的市场价格，并在尽可能将出价集中在那些利润率较高的展示上。</li>
 </ul>
-<h3 id="criteo"><a class="markdownIt-Anchor" href="#criteo"></a> Criteo</h3>
+<h3><span id="criteo"> Criteo</span></h3>
 <p>核心功能：</p>
 <ul>
 <li>基于站外推荐的个性化重定向系统</li>
@@ -199,8 +199,8 @@
 <li>在广告主端完全采用CPC结算方式</li>
 <li>不会将cross-site数据用于推荐</li>
 </ul>
-<h2 id="多渠道库存管理供给方平台"><a class="markdownIt-Anchor" href="#多渠道库存管理供给方平台"></a> 多渠道库存管理：供给方平台</h2>
-<p>###网络优化（Network Optimization）与SSP<br />
+<h2><span id="多渠道库存管理供给方平台"> 多渠道库存管理：供给方平台</span></h2>
+<p>###网络优化（Network Optimization）与SSP<br>
 网络优化问题</p>
 <ul>
 <li>接入多个AdNetWork，动态决定某次展示分配给谁</li>
@@ -212,7 +212,7 @@
 <li>也会提供通过RTB对接DSP的接口</li>
 <li>与Ad Exchange的边界越来越模糊</li>
 </ul>
-<h3 id="移动广告mediation"><a class="markdownIt-Anchor" href="#移动广告mediation"></a> 移动广告Mediation</h3>
+<h3><span id="移动广告mediation"> 移动广告Mediation</span></h3>
 <p>网络优化问题</p>
 <ul>
 <li>接入多个Ad Network，动态决定某次展示分配给谁</li>
@@ -224,11 +224,11 @@
 <li>也会提供功过RTB对接DSP的接口</li>
 <li>与Ad Exchange的边界越来越模糊</li>
 </ul>
-<h3 id="ssp产品策略"><a class="markdownIt-Anchor" href="#ssp产品策略"></a> SSP产品策略</h3>
+<h3><span id="ssp产品策略"> SSP产品策略</span></h3>
 <ul>
 <li>SSP展示决策过程–动态分配（Dynamic Allocation）</li>
 </ul>
-<h3 id="p5header-bidding"><a class="markdownIt-Anchor" href="#p5header-bidding"></a> P5.Header Bidding</h3>
+<h3><span id="p5header-bidding"> P5.Header Bidding</span></h3>
 <p>什么是Header Bidding</p>
 <ul>
 <li>媒体绕开Google、Mopub等ADX，通过客户端聚合JS代码或SDK的方式，直接向其他ADN或者ADX发起询价。</li>
@@ -243,8 +243,8 @@
 <li>聚合多家JS或者SDK带来巨大的延时</li>
 <li>不如Server端RTB方式灵活、但避免了cookie mapping的损失。</li>
 </ul>
-<h3 id="p5header-bidding决策过程"><a class="markdownIt-Anchor" href="#p5header-bidding决策过程"></a> P5.Header Bidding决策过程</h3>
-<h3 id="admeld"><a class="markdownIt-Anchor" href="#admeld"></a> Admeld</h3>
+<h3><span id="p5header-bidding决策过程"> P5.Header Bidding决策过程</span></h3>
+<h3><span id="admeld"> Admeld</span></h3>
 <p>核心功能：</p>
 <ul>
 <li>Yield Optimizer，统一优化Premium sales，netwrok和RTB流量</li>
@@ -256,7 +256,7 @@
 <li>会从DMP购买标签数据用于优化广告效果</li>
 <li>主要进行广告位和时间维度上eCPM估计和流量切分</li>
 </ul>
-<h3 id="mopub"><a class="markdownIt-Anchor" href="#mopub"></a> mopub</h3>
+<h3><span id="mopub"> mopub</span></h3>
 <p>核心功能</p>
 <ul>
 <li>领先的移动Mediation平台，通过SDK对接媒体，需求方聚合FAN，Admob等多家的SDK</li>
@@ -268,14 +268,14 @@
 <li>收取30%～40%的费用，成为媒体直接对接其他需求方的动力</li>
 <li>Network Optimization功能不太重要</li>
 </ul>
-<h2 id="数据资产金融化数据管理产品"><a class="markdownIt-Anchor" href="#数据资产金融化数据管理产品"></a> 数据资产金融化：数据管理产品</h2>
-<h3 id="三方数据的概念"><a class="markdownIt-Anchor" href="#三方数据的概念"></a> 三方数据的概念</h3>
+<h2><span id="数据资产金融化数据管理产品"> 数据资产金融化：数据管理产品</span></h2>
+<h3><span id="三方数据的概念"> 三方数据的概念</span></h3>
 <ul>
 <li>第一方数据：广告主的数据</li>
 <li>第二方数据：广告平台数据</li>
 <li>第三方数据：其他来源数据</li>
 </ul>
-<h3 id="第三方dmp"><a class="markdownIt-Anchor" href="#第三方dmp"></a> 第三方DMP</h3>
+<h3><span id="第三方dmp"> 第三方DMP</span></h3>
 <p>目的</p>
 <ul>
 <li>聚合多种原始行为数据，加工成统一标签后，在公开市场上售卖</li>
@@ -286,12 +286,12 @@
 <li>主要负责第三方数据的收集、加工和流转，不一定直接从事广告交易</li>
 <li>对于广告交易平台、SSP等合作进行数据变现</li>
 </ul>
-<h3 id="第三方dmp商业模式"><a class="markdownIt-Anchor" href="#第三方dmp商业模式"></a> 第三方DMP商业模式</h3>
+<h3><span id="第三方dmp商业模式"> 第三方DMP商业模式</span></h3>
 <ul>
 <li>DMP从多个DP那里收集原始数据，按照自己的逻辑加工成用户标签，并向DSP出售标签数据收入。</li>
 <li>DMP获得的收入按照一定的比例分给DP</li>
 </ul>
-<h3 id="第一方dmp"><a class="markdownIt-Anchor" href="#第一方dmp"></a> 第一方DMP</h3>
+<h3><span id="第一方dmp"> 第一方DMP</span></h3>
 <p>目的：</p>
 <ul>
 <li>为网站提供第一方数据加工和应用能力</li>
@@ -302,13 +302,13 @@
 <li>第一方用户定制化标签</li>
 <li>统一的对外数据接口</li>
 </ul>
-<h3 id="第一方dmp的商业模式"><a class="markdownIt-Anchor" href="#第一方dmp的商业模式"></a> 第一方DMP的商业模式</h3>
+<h3><span id="第一方dmp的商业模式"> 第一方DMP的商业模式</span></h3>
 <ul>
 <li>DMP应数据源（Data Provider，DP）的要求，收集第一方数据，并加工成第一方需要的用户标签。</li>
 <li>DP可以根据这些用户标签进行站内的运营，也可以用来指导DSP进行广告投放。</li>
 <li>DMP会向DP收取费用，但是绝对不会把数据二次变现。</li>
 </ul>
-<h3 id="audience-science"><a class="markdownIt-Anchor" href="#audience-science"></a> Audience Science</h3>
+<h3><span id="audience-science"> Audience Science</span></h3>
 <p>核心业务</p>
 <ul>
 <li>主要提供面向publisher的数据加工服务</li>
@@ -320,7 +320,7 @@
 <li>数据标签不像bluekai那样在市场上公开出售</li>
 <li>使用标签创造的营收按照一定比例跟publisher分成</li>
 </ul>
-<h3 id="为什么数据不能共享"><a class="markdownIt-Anchor" href="#为什么数据不能共享"></a> 为什么数据不能共享</h3>
+<h3><span id="为什么数据不能共享"> 为什么数据不能共享</span></h3>
 <p>疑问：数据交换似乎在发生啊？</p>
 <ul>
 <li>那往往是因为有更高层次的交换，即投资关系</li>
@@ -331,13 +331,13 @@
 <li>短时的贴补性共享时可行的</li>
 </ul>
 <p>政府数据时可以共享的，这本质上是转移支付</p>
-<h3 id="数据交易该怎么做"><a class="markdownIt-Anchor" href="#数据交易该怎么做"></a> 数据交易该怎么做？</h3>
+<h3><span id="数据交易该怎么做"> 数据交易该怎么做？</span></h3>
 <ul>
 <li>数据传输附着在实时竞价过程中，无额外开销</li>
 <li>需求方可以自由的选择需要的部分人群数据，并且按照实际的广告展示付费</li>
 </ul>
-<h3 id="如何给数据定价"><a class="markdownIt-Anchor" href="#如何给数据定价"></a> 如何给数据定价</h3>
-<p>市场化的竞价方式是唯一的选择<br />
+<h3><span id="如何给数据定价"> 如何给数据定价</span></h3>
+<p>市场化的竞价方式是唯一的选择<br>
 目前数据的价值是被低估的</p>
 <ul>
 <li>上页的交易方式并未限制数据供给次数</li>
@@ -348,8 +348,8 @@
 <li>不限量供应的商品，是无法竞价的</li>
 <li>数据的限量供应应该怎么做？</li>
 </ul>
-<h2 id="对抗数据的黑客隐私保护和数据安全"><a class="markdownIt-Anchor" href="#对抗数据的黑客隐私保护和数据安全"></a> 对抗数据的黑客：隐私保护和数据安全</h2>
-<h3 id="数据隐私的初步认识"><a class="markdownIt-Anchor" href="#数据隐私的初步认识"></a> 数据隐私的初步认识</h3>
+<h2><span id="对抗数据的黑客隐私保护和数据安全"> 对抗数据的黑客：隐私保护和数据安全</span></h2>
+<h3><span id="数据隐私的初步认识"> 数据隐私的初步认识</span></h3>
 <p>隐私安全基本原则</p>
 <ul>
 <li>A29:欧盟负责隐私保护条例制定的委员会</li>
@@ -367,7 +367,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="互联网行为数据隐私问题"><a class="markdownIt-Anchor" href="#互联网行为数据隐私问题"></a> 互联网行为数据隐私问题</h3>
+<h3><span id="互联网行为数据隐私问题"> 互联网行为数据隐私问题</span></h3>
 <p>细数行为数据的挑战</p>
 <ul>
 <li>从一个人的观影购物记录，能否反推他是谁？</li>
@@ -379,13 +379,13 @@
 <li>相关研究课题是差分隐私（Differential Privacy）</li>
 </ul>
 <p>隐私是大数据头上的达摩克利斯之剑</p>
-<h3 id="差分隐私differential-privacy"><a class="markdownIt-Anchor" href="#差分隐私differential-privacy"></a> 差分隐私（Differential Privacy）</h3>
+<h3><span id="差分隐私differential-privacy"> 差分隐私（Differential Privacy）</span></h3>
 <p>差分隐私的问题</p>
 <ul>
 <li>最大化个性化系统准确率的同时，最小化隐私泄漏风险</li>
 <li>需要对原始数据做一定的随机化处理</li>
 </ul>
 <p>部分成果已经使用在iOS 10当中</p>
-<h3 id="需求方数据安全问题"><a class="markdownIt-Anchor" href="#需求方数据安全问题"></a> 需求方数据安全问题</h3>
+<h3><span id="需求方数据安全问题"> 需求方数据安全问题</span></h3>
 <p>英孚访客和华尔街访客在广告投放中混用受众</p>
 <!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2020/06/22/computing-advertising-6-programmatic-direct-buying/">https://imzhanghao.com/2020/06/22/computing-advertising-6-programmatic-direct-buying/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
