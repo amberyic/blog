@@ -12,8 +12,8 @@
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(hm, s);
 })();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|4.合约广告</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> 广告位和展示量合约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text"> 广告位（CPT）合约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text"> 展示量合约与担保式投送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text"> 广告位合约 vs 展示量合约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text"> S1.如何高效混合静态与动态广告？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"> 多个合约如何满足：在线分配问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text"> A4.展示量合约流量分配模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text"> 流量预测–统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text"> A4.在线分配问题框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.</span> <span class="toc-text"> A4.在线分配典型问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.5.</span> <span class="toc-text"> A4.基于归偶算法的紧凑分配方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.6.</span> <span class="toc-text"> A4.启发式的High Water Mark算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.7.</span> <span class="toc-text"> yahoo！展示广告市场</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> 高并发的广告系统：在线投放引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text"> S2.在线投放引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text"> S2.Nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text"> S2.Zookeeper by Yahoo!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text"> S2.频次控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.5.</span> <span class="toc-text"> S2.实验框架（Experimentation Framework）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.6.</span> <span class="toc-text"> S2.分层实验框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text"> 用户画像及其他：受众定向基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text"> P4.受众定向方法分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text"> P4.常见受众定向方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text"> P4.受众定向标签体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.4.</span> <span class="toc-text"> 标签体系一般设计思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.5.</span> <span class="toc-text"> 受众定向与用户画像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text"> 用内容解读任务：上下文定向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text"> P4.上下文定向原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text"> P4.上下文定向主要方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text"> A1. 半在线（Near-line）抓取系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text"> 将内容变成概念：文本主题模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.1.</span> <span class="toc-text"> 文本主题模型概要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text"> 常用文本主题模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text"> 用数据理解用户：行为定向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.1.</span> <span class="toc-text"> P4.行为定向（Behavioral targeting）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.2.</span> <span class="toc-text"> P4.行为定向数据来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.3.</span> <span class="toc-text"> P4.各类行为的标签化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.4.</span> <span class="toc-text"> A1.行为定向建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.5.</span> <span class="toc-text"> A1.行为定向特征选择过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.6.</span> <span class="toc-text"> A1.行为定向数据组织</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.7.</span> <span class="toc-text"> A1.受众定向评测 - Reach&#x2F;CTR曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.8.</span> <span class="toc-text"> A1.人口属性定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text"> 分布式计算平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.1.</span> <span class="toc-text"> S5.离线大数据平台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.2.</span> <span class="toc-text"> S5.flume by cloudera</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.3.</span> <span class="toc-text"> S5.Redis by wmware</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text"> 如何利用合约市场：合约广告需求方产品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.1.</span> <span class="toc-text"> 合约市场的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.2.</span> <span class="toc-text"> 合约市场的利用与选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.3.</span> <span class="toc-text"> 广告监播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.4.</span> <span class="toc-text"> 广告安全</span></a></li></ol></li></ol></div><h2><span id="广告位和展示量合约"> 广告位和展示量合约</span></h2>
-<h3><span id="广告位cpt合约"> 广告位（CPT）合约</span></h3>
+</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|4.合约广告</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E4%BD%8D%E5%92%8C%E5%B1%95%E7%A4%BA%E9%87%8F%E5%90%88%E7%BA%A6"><span class="toc-number">1.</span> <span class="toc-text"> 广告位和展示量合约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E4%BD%8Dcpt%E5%90%88%E7%BA%A6"><span class="toc-number">1.1.</span> <span class="toc-text"> 广告位（CPT）合约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%95%E7%A4%BA%E9%87%8F%E5%90%88%E7%BA%A6%E4%B8%8E%E6%8B%85%E4%BF%9D%E5%BC%8F%E6%8A%95%E9%80%81"><span class="toc-number">1.2.</span> <span class="toc-text"> 展示量合约与担保式投送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E4%BD%8D%E5%90%88%E7%BA%A6-vs-%E5%B1%95%E7%A4%BA%E9%87%8F%E5%90%88%E7%BA%A6"><span class="toc-number">1.3.</span> <span class="toc-text"> 广告位合约 vs 展示量合约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s1%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E6%B7%B7%E5%90%88%E9%9D%99%E6%80%81%E4%B8%8E%E5%8A%A8%E6%80%81%E5%B9%BF%E5%91%8A"><span class="toc-number">1.4.</span> <span class="toc-text"> S1.如何高效混合静态与动态广告？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E5%90%88%E7%BA%A6%E5%A6%82%E4%BD%95%E6%BB%A1%E8%B6%B3%E5%9C%A8%E7%BA%BF%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text"> 多个合约如何满足：在线分配问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a4%E5%B1%95%E7%A4%BA%E9%87%8F%E5%90%88%E7%BA%A6%E6%B5%81%E9%87%8F%E5%88%86%E9%85%8D%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text"> A4.展示量合约流量分配模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E9%A2%84%E6%B5%8B%E7%BB%9F%E8%AE%A1"><span class="toc-number">2.2.</span> <span class="toc-text"> 流量预测–统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a4%E5%9C%A8%E7%BA%BF%E5%88%86%E9%85%8D%E9%97%AE%E9%A2%98%E6%A1%86%E6%9E%B6"><span class="toc-number">2.3.</span> <span class="toc-text"> A4.在线分配问题框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a4%E5%9C%A8%E7%BA%BF%E5%88%86%E9%85%8D%E5%85%B8%E5%9E%8B%E9%97%AE%E9%A2%98"><span class="toc-number">2.4.</span> <span class="toc-text"> A4.在线分配典型问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a4%E5%9F%BA%E4%BA%8E%E5%BD%92%E5%81%B6%E7%AE%97%E6%B3%95%E7%9A%84%E7%B4%A7%E5%87%91%E5%88%86%E9%85%8D%E6%96%B9%E6%A1%88"><span class="toc-number">2.5.</span> <span class="toc-text"> A4.基于归偶算法的紧凑分配方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a4%E5%90%AF%E5%8F%91%E5%BC%8F%E7%9A%84high-water-mark%E7%AE%97%E6%B3%95"><span class="toc-number">2.6.</span> <span class="toc-text"> A4.启发式的High Water Mark算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yahoo%E5%B1%95%E7%A4%BA%E5%B9%BF%E5%91%8A%E5%B8%82%E5%9C%BA"><span class="toc-number">2.7.</span> <span class="toc-text"> yahoo！展示广告市场</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%B9%BF%E5%91%8A%E7%B3%BB%E7%BB%9F%E5%9C%A8%E7%BA%BF%E6%8A%95%E6%94%BE%E5%BC%95%E6%93%8E"><span class="toc-number">3.</span> <span class="toc-text"> 高并发的广告系统：在线投放引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#s2%E5%9C%A8%E7%BA%BF%E6%8A%95%E6%94%BE%E5%BC%95%E6%93%8E"><span class="toc-number">3.1.</span> <span class="toc-text"> S2.在线投放引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2nginx"><span class="toc-number">3.2.</span> <span class="toc-text"> S2.Nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2zookeeper-by-yahoo"><span class="toc-number">3.3.</span> <span class="toc-text"> S2.Zookeeper by Yahoo!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2%E9%A2%91%E6%AC%A1%E6%8E%A7%E5%88%B6"><span class="toc-number">3.4.</span> <span class="toc-text"> S2.频次控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2%E5%AE%9E%E9%AA%8C%E6%A1%86%E6%9E%B6experimentation-framework"><span class="toc-number">3.5.</span> <span class="toc-text"> S2.实验框架（Experimentation Framework）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s2%E5%88%86%E5%B1%82%E5%AE%9E%E9%AA%8C%E6%A1%86%E6%9E%B6"><span class="toc-number">3.6.</span> <span class="toc-text"> S2.分层实验框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%8F%8A%E5%85%B6%E4%BB%96%E5%8F%97%E4%BC%97%E5%AE%9A%E5%90%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">4.</span> <span class="toc-text"> 用户画像及其他：受众定向基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#p4%E5%8F%97%E4%BC%97%E5%AE%9A%E5%90%91%E6%96%B9%E6%B3%95%E5%88%86%E7%B1%BB"><span class="toc-number">4.1.</span> <span class="toc-text"> P4.受众定向方法分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p4%E5%B8%B8%E8%A7%81%E5%8F%97%E4%BC%97%E5%AE%9A%E5%90%91%E6%96%B9%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text"> P4.常见受众定向方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p4%E5%8F%97%E4%BC%97%E5%AE%9A%E5%90%91%E6%A0%87%E7%AD%BE%E4%BD%93%E7%B3%BB"><span class="toc-number">4.3.</span> <span class="toc-text"> P4.受众定向标签体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E4%BD%93%E7%B3%BB%E4%B8%80%E8%88%AC%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-number">4.4.</span> <span class="toc-text"> 标签体系一般设计思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%97%E4%BC%97%E5%AE%9A%E5%90%91%E4%B8%8E%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F"><span class="toc-number">4.5.</span> <span class="toc-text"> 受众定向与用户画像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E5%86%85%E5%AE%B9%E8%A7%A3%E8%AF%BB%E4%BB%BB%E5%8A%A1%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AE%9A%E5%90%91"><span class="toc-number">5.</span> <span class="toc-text"> 用内容解读任务：上下文定向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#p4%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AE%9A%E5%90%91%E5%8E%9F%E7%90%86"><span class="toc-number">5.1.</span> <span class="toc-text"> P4.上下文定向原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p4%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AE%9A%E5%90%91%E4%B8%BB%E8%A6%81%E6%96%B9%E5%BC%8F"><span class="toc-number">5.2.</span> <span class="toc-text"> P4.上下文定向主要方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a1-%E5%8D%8A%E5%9C%A8%E7%BA%BFnear-line%E6%8A%93%E5%8F%96%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.3.</span> <span class="toc-text"> A1. 半在线（Near-line）抓取系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E5%86%85%E5%AE%B9%E5%8F%98%E6%88%90%E6%A6%82%E5%BF%B5%E6%96%87%E6%9C%AC%E4%B8%BB%E9%A2%98%E6%A8%A1%E5%9E%8B"><span class="toc-number">6.</span> <span class="toc-text"> 将内容变成概念：文本主题模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E4%B8%BB%E9%A2%98%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%A6%81"><span class="toc-number">6.1.</span> <span class="toc-text"> 文本主题模型概要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%87%E6%9C%AC%E4%B8%BB%E9%A2%98%E6%A8%A1%E5%9E%8B"><span class="toc-number">6.2.</span> <span class="toc-text"> 常用文本主题模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%95%B0%E6%8D%AE%E7%90%86%E8%A7%A3%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%AE%9A%E5%90%91"><span class="toc-number">7.</span> <span class="toc-text"> 用数据理解用户：行为定向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#p4%E8%A1%8C%E4%B8%BA%E5%AE%9A%E5%90%91behavioral-targeting"><span class="toc-number">7.1.</span> <span class="toc-text"> P4.行为定向（Behavioral targeting）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p4%E8%A1%8C%E4%B8%BA%E5%AE%9A%E5%90%91%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90"><span class="toc-number">7.2.</span> <span class="toc-text"> P4.行为定向数据来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p4%E5%90%84%E7%B1%BB%E8%A1%8C%E4%B8%BA%E7%9A%84%E6%A0%87%E7%AD%BE%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">7.3.</span> <span class="toc-text"> P4.各类行为的标签化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a1%E8%A1%8C%E4%B8%BA%E5%AE%9A%E5%90%91%E5%BB%BA%E6%A8%A1"><span class="toc-number">7.4.</span> <span class="toc-text"> A1.行为定向建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a1%E8%A1%8C%E4%B8%BA%E5%AE%9A%E5%90%91%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E8%BF%87%E7%A8%8B"><span class="toc-number">7.5.</span> <span class="toc-text"> A1.行为定向特征选择过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a1%E8%A1%8C%E4%B8%BA%E5%AE%9A%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%84%E7%BB%87"><span class="toc-number">7.6.</span> <span class="toc-text"> A1.行为定向数据组织</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a1%E5%8F%97%E4%BC%97%E5%AE%9A%E5%90%91%E8%AF%84%E6%B5%8B-reachctr%E6%9B%B2%E7%BA%BF"><span class="toc-number">7.7.</span> <span class="toc-text"> A1.受众定向评测 - Reach&#x2F;CTR曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#a1%E4%BA%BA%E5%8F%A3%E5%B1%9E%E6%80%A7%E5%AE%9A%E5%90%91"><span class="toc-number">7.8.</span> <span class="toc-text"> A1.人口属性定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E5%B9%B3%E5%8F%B0"><span class="toc-number">8.</span> <span class="toc-text"> 分布式计算平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#s5%E7%A6%BB%E7%BA%BF%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0"><span class="toc-number">8.1.</span> <span class="toc-text"> S5.离线大数据平台</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s5flume-by-cloudera"><span class="toc-number">8.2.</span> <span class="toc-text"> S5.flume by cloudera</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s5redis-by-wmware"><span class="toc-number">8.3.</span> <span class="toc-text"> S5.Redis by wmware</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%90%88%E7%BA%A6%E5%B8%82%E5%9C%BA%E5%90%88%E7%BA%A6%E5%B9%BF%E5%91%8A%E9%9C%80%E6%B1%82%E6%96%B9%E4%BA%A7%E5%93%81"><span class="toc-number">9.</span> <span class="toc-text"> 如何利用合约市场：合约广告需求方产品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E7%BA%A6%E5%B8%82%E5%9C%BA%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">9.1.</span> <span class="toc-text"> 合约市场的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%88%E7%BA%A6%E5%B8%82%E5%9C%BA%E7%9A%84%E5%88%A9%E7%94%A8%E4%B8%8E%E9%80%89%E6%8B%A9"><span class="toc-number">9.2.</span> <span class="toc-text"> 合约市场的利用与选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E7%9B%91%E6%92%AD"><span class="toc-number">9.3.</span> <span class="toc-text"> 广告监播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E5%AE%89%E5%85%A8"><span class="toc-number">9.4.</span> <span class="toc-text"> 广告安全</span></a></li></ol></li></ol></div><h2 id="广告位和展示量合约"><a class="markdownIt-Anchor" href="#广告位和展示量合约"></a> 广告位和展示量合约</h2>
+<h3 id="广告位cpt合约"><a class="markdownIt-Anchor" href="#广告位cpt合约"></a> 广告位（CPT）合约</h3>
 <p>与线下广告交易类似的传统模式</p>
 <p>供给方产品：产品排期系统</p>
 <ul>
@@ -28,7 +28,7 @@
 <ul>
 <li>高曝光广告位，开屏广告，应用市场头部位置，导航网址</li>
 </ul>
-<h3><span id="展示量合约与担保式投送"> 展示量合约与担保式投送</span></h3>
+<h3 id="展示量合约与担保式投送"><a class="markdownIt-Anchor" href="#展示量合约与担保式投送"></a> 展示量合约与担保式投送</h3>
 <p>展示量合约</p>
 <ul>
 <li>基于合约的广告机制，有时未完成约定量要向广告商补偿</li>
@@ -43,7 +43,7 @@
 <ul>
 <li>视频广告、富媒体广告、品牌横幅广告</li>
 </ul>
-<h3><span id="广告位合约-vs-展示量合约"> 广告位合约 vs 展示量合约</span></h3>
+<h3 id="广告位合约-vs-展示量合约"><a class="markdownIt-Anchor" href="#广告位合约-vs-展示量合约"></a> 广告位合约 vs 展示量合约</h3>
 <p>广告位合约</p>
 <ul>
 <li>开辟了多个广告位</li>
@@ -55,7 +55,7 @@
 <li>将用户流量卖给不同的广告主</li>
 </ul>
 <p>展示量合约更先进，前提是需要支持受众定向</p>
-<h3><span id="s1如何高效混合静态与动态广告"> S1.如何高效混合静态与动态广告？</span></h3>
+<h3 id="s1如何高效混合静态与动态广告"><a class="markdownIt-Anchor" href="#s1如何高效混合静态与动态广告"></a> S1.如何高效混合静态与动态广告？</h3>
 <p>前端代码先去CDN上取一个默认广告，然后再去请求广告服务器。</p>
 <ul>
 <li>前段代码先去CDN上获取默认广告。</li>
@@ -66,24 +66,24 @@
 <p>思考：什么样的人群适合于在CPM广告中售卖？</p>
 </blockquote>
 <span id="more"></span>
-<h2><span id="多个合约如何满足在线分配问题"> 多个合约如何满足：在线分配问题</span></h2>
-<h3><span id="a4展示量合约流量分配模型"> A4.展示量合约流量分配模型</span></h3>
-<h3><span id="流量预测统计"> 流量预测–统计</span></h3>
+<h2 id="多个合约如何满足在线分配问题"><a class="markdownIt-Anchor" href="#多个合约如何满足在线分配问题"></a> 多个合约如何满足：在线分配问题</h2>
+<h3 id="a4展示量合约流量分配模型"><a class="markdownIt-Anchor" href="#a4展示量合约流量分配模型"></a> A4.展示量合约流量分配模型</h3>
+<h3 id="流量预测统计"><a class="markdownIt-Anchor" href="#流量预测统计"></a> 流量预测–统计</h3>
 <p>可视为query为a，对流量进行检索的反向查询问题。</p>
 <p>预测过程</p>
 <ul>
 <li>给定a，首先通过u的索引找到所有符合条件的c的集合</li>
 <li>对每个u估计r(a，u)，并根据<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi>u</mi></msub><mo stretchy="false">(</mo><mi>e</mi><mi>C</mi><mi>P</mi><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P_u(eCPM)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mclose">)</span></span></span></span>得到a在u上胜出的百分比<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p(a,u)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mclose">)</span></span></span></span>，并将a的流量累加<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo stretchy="false">)</mo><mo>∗</mo><mi>I</mi><mi>m</mi><mi>p</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>N</mi><mi>u</mi><msub><mi>m</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">p(a,u)*ImpressionNum_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault">m</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord mathdefault">u</span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
 </ul>
-<h3><span id="a4在线分配问题框架"> A4.在线分配问题框架</span></h3>
+<h3 id="a4在线分配问题框架"><a class="markdownIt-Anchor" href="#a4在线分配问题框架"></a> A4.在线分配问题框架</h3>
 <ul>
 <li>r是收益，q是惩罚</li>
 <li>惩罚和奖励是一回事</li>
 </ul>
-<h3><span id="a4在线分配典型问题"> A4.在线分配典型问题</span></h3>
+<h3 id="a4在线分配典型问题"><a class="markdownIt-Anchor" href="#a4在线分配典型问题"></a> A4.在线分配典型问题</h3>
 <p>Adwords～考虑预算，没有提升。</p>
 <p>预算在竞价广告中是一个软约束，投完广告主会继续投。</p>
-<h3><span id="a4基于归偶算法的紧凑分配方案"> A4.基于归偶算法的紧凑分配方案</span></h3>
+<h3 id="a4基于归偶算法的紧凑分配方案"><a class="markdownIt-Anchor" href="#a4基于归偶算法的紧凑分配方案"></a> A4.基于归偶算法的紧凑分配方案</h3>
 <p>紧凑分配方案(Compact Allocation plan)</p>
 <ul>
 <li>变量数正比于|A|，而非|E|或|I|</li>
@@ -91,7 +91,7 @@
 </ul>
 <p>由<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span>恢复<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span>和分配变量x：公式略</p>
 <p>由历史数据求解上述问题规模太大，需要对数据做一些采样以便更高效地得到分配方案。</p>
-<h3><span id="a4启发式的high-water-mark算法"> A4.启发式的High Water Mark算法</span></h3>
+<h3 id="a4启发式的high-water-mark算法"><a class="markdownIt-Anchor" href="#a4启发式的high-water-mark算法"></a> A4.启发式的High Water Mark算法</h3>
 <p>离线规划</p>
 <ul>
 <li>令每个供给节点i的剩余supply等于预留量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>r</mi><mi>i</mi></msub><mo>←</mo><msub><mi>s</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">r_i\leftarrow s_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">←</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
@@ -104,7 +104,7 @@
 <li>对某次展示，{a1,……,aj}为按照分配优先级排序的所有满足要求的广告</li>
 <li>将上面的广告按照投放率随机分配其展示机会</li>
 </ul>
-<h3><span id="yahoo展示广告市场"> yahoo！展示广告市场</span></h3>
+<h3 id="yahoo展示广告市场"><a class="markdownIt-Anchor" href="#yahoo展示广告市场"></a> yahoo！展示广告市场</h3>
 <p>核心业务</p>
 <ul>
 <li>GD，无法分配的流量转接到NGD（non-guaranteed delivery，即Rightmedia exchange）进行变现</li>
@@ -116,9 +116,9 @@
 <li>提供地域、人口属性、行为定向（常用的仅有几十个标签）</li>
 <li>合约式销售中，品牌广告主对曝光有独占要求</li>
 </ul>
-<h2><span id="高并发的广告系统在线投放引擎"> 高并发的广告系统：在线投放引擎</span></h2>
-<h3><span id="s2在线投放引擎"> S2.在线投放引擎</span></h3>
-<h3><span id="s2nginx"> S2.Nginx</span></h3>
+<h2 id="高并发的广告系统在线投放引擎"><a class="markdownIt-Anchor" href="#高并发的广告系统在线投放引擎"></a> 高并发的广告系统：在线投放引擎</h2>
+<h3 id="s2在线投放引擎"><a class="markdownIt-Anchor" href="#s2在线投放引擎"></a> S2.在线投放引擎</h3>
+<h3 id="s2nginx"><a class="markdownIt-Anchor" href="#s2nginx"></a> S2.Nginx</h3>
 <p>轻量级Web服务器/反向代理服务器</p>
 <ul>
 <li>专为性能优化二开发，可支持数万并发</li>
@@ -129,7 +129,7 @@
 <li>将主要业务逻辑在FastCGI中用C语言实现</li>
 </ul>
 <p>其他产品选择:Apache</p>
-<h3><span id="s2zookeeper-by-yahoo"> S2.Zookeeper by Yahoo!</span></h3>
+<h3 id="s2zookeeper-by-yahoo"><a class="markdownIt-Anchor" href="#s2zookeeper-by-yahoo"></a> S2.Zookeeper by Yahoo!</h3>
 <p>解决分布式应用中的一些数据管理问题</p>
 <ul>
 <li>集群管理、分布式应用配置项的管理等</li>
@@ -140,7 +140,7 @@
 <li>将宕机、网络断链、新机器加入等迅速通知每台Server并重新分配流量</li>
 <li>用Zookeeper的Watch机制很容易实现</li>
 </ul>
-<h3><span id="s2频次控制"> S2.频次控制</span></h3>
+<h3 id="s2频次控制"><a class="markdownIt-Anchor" href="#s2频次控制"></a> S2.频次控制</h3>
 <p>问题定义</p>
 <ul>
 <li>限制各（a,u）组合在一定时间周期内的展示量</li>
@@ -151,7 +151,7 @@
 <li>生成用（a,u）对应的key时，不需要处理冲突，因此不需要哈希结构。</li>
 <li>专用的、轻量级的内存表比大多数No-SQL存储方案更加实用。</li>
 </ul>
-<h3><span id="s2实验框架experimentation-framework"> S2.实验框架（Experimentation Framework）</span></h3>
+<h3 id="s2实验框架experimentation-framework"><a class="markdownIt-Anchor" href="#s2实验框架experimentation-framework"></a> S2.实验框架（Experimentation Framework）</h3>
 <p>那些场景需要线上A/B测试？</p>
 <ul>
 <li>广告系统的升级</li>
@@ -163,11 +163,11 @@
 <li>任何一组对比实验，其他的条件应该相同</li>
 <li>线上流量容纳尽可能多的实验</li>
 </ul>
-<h3><span id="s2分层实验框架"> S2.分层实验框架</span></h3>
+<h3 id="s2分层实验框架"><a class="markdownIt-Anchor" href="#s2分层实验框架"></a> S2.分层实验框架</h3>
 <p>发布层： 发布层1，发布层2</p>
 <p>实验层： 非重叠测试区域，UI层、广告检索层、算法排序层。</p>
-<h2><span id="用户画像及其他受众定向基本概念"> 用户画像及其他：受众定向基本概念</span></h2>
-<h3><span id="p4受众定向方法分类"> P4.受众定向方法分类</span></h3>
+<h2 id="用户画像及其他受众定向基本概念"><a class="markdownIt-Anchor" href="#用户画像及其他受众定向基本概念"></a> 用户画像及其他：受众定向基本概念</h2>
+<h3 id="p4受众定向方法分类"><a class="markdownIt-Anchor" href="#p4受众定向方法分类"></a> P4.受众定向方法分类</h3>
 <p>受众定向即为（a，u，c）打标签的过程</p>
 <ul>
 <li>上下文标签可以认为是即时受众标签</li>
@@ -177,7 +177,7 @@
 <li>建立面向广告主的流量售卖体系</li>
 <li>为各估计模块（如CTR预测）提供特征</li>
 </ul>
-<h3><span id="p4常见受众定向方式"> P4.常见受众定向方式</span></h3>
+<h3 id="p4常见受众定向方式"><a class="markdownIt-Anchor" href="#p4常见受众定向方式"></a> P4.常见受众定向方式</h3>
 <ul>
 <li>地域定向（Geo-targeting） 【刚需】</li>
 <li>人口属性定向（Demographical targeting）
@@ -211,7 +211,7 @@
 </ul>
 </li>
 </ul>
-<h3><span id="p4受众定向标签体系"> P4.受众定向标签体系</span></h3>
+<h3 id="p4受众定向标签体系"><a class="markdownIt-Anchor" href="#p4受众定向标签体系"></a> P4.受众定向标签体系</h3>
 <p>结构化标签体系</p>
 <ul>
 <li>按照某分类法（Taxonomy）制定一个层次标签体系，父节点与子节点在人群覆盖上是包含关系</li>
@@ -227,7 +227,7 @@
 <li>按照搜索或浏览内容的关键词划分人群</li>
 <li>非结构化，容易理解，但操作和优化不容易</li>
 </ul>
-<h3><span id="标签体系一般设计思路"> 标签体系一般设计思路</span></h3>
+<h3 id="标签体系一般设计思路"><a class="markdownIt-Anchor" href="#标签体系一般设计思路"></a> 标签体系一般设计思路</h3>
 <p>分行业制定标签体系</p>
 <ul>
 <li>掌握各行业用户决策逻辑，依此制定标签体系</li>
@@ -240,7 +240,7 @@
 <li>游戏行业：对每款游戏扩展竞品</li>
 <li>母婴行业：孩子的年龄</li>
 </ul>
-<h3><span id="受众定向与用户画像"> 受众定向与用户画像</span></h3>
+<h3 id="受众定向与用户画像"><a class="markdownIt-Anchor" href="#受众定向与用户画像"></a> 受众定向与用户画像</h3>
 <p>受众定向</p>
 <ul>
 <li>强调根据需求找到相应的用户</li>
@@ -252,10 +252,10 @@
 <li>强调获得用户固有的可解释属性</li>
 <li>在一定程度上可验证，例如，人口属性、生活方式、职业特征、收入状况</li>
 </ul>
-<h2><span id="用内容解读任务上下文定向"> 用内容解读任务：上下文定向</span></h2>
-<h3><span id="p4上下文定向原理"> P4.上下文定向原理</span></h3>
+<h2 id="用内容解读任务上下文定向"><a class="markdownIt-Anchor" href="#用内容解读任务上下文定向"></a> 用内容解读任务：上下文定向</h2>
+<h3 id="p4上下文定向原理"><a class="markdownIt-Anchor" href="#p4上下文定向原理"></a> P4.上下文定向原理</h3>
 <p>根据用户正在浏览的页面和其他信息投送广告</p>
-<h3><span id="p4上下文定向主要方式"> P4.上下文定向主要方式</span></h3>
+<h3 id="p4上下文定向主要方式"><a class="markdownIt-Anchor" href="#p4上下文定向主要方式"></a> P4.上下文定向主要方式</h3>
 <p>举例</p>
 <ul>
 <li>地域定向、频道/URL定向，页面内容定向</li>
@@ -268,7 +268,7 @@
 <li>提取页面流量来源中的搜索关键词</li>
 <li>用主题模型将页面内容映射到语义空间的一组主题上</li>
 </ul>
-<h3><span id="a1-半在线near-line抓取系统"> A1. 半在线（Near-line）抓取系统</span></h3>
+<h3 id="a1-半在线near-line抓取系统"><a class="markdownIt-Anchor" href="#a1-半在线near-line抓取系统"></a> A1. 半在线（Near-line）抓取系统</h3>
 <ul>
 <li>用在线cache系统存储url -&gt; 特征表以提供实时访问</li>
 <li>不预先加载任何cache内容，对cache中不存在的url，立刻返回空特征，同时触发相应的页面爬虫和特征提取</li>
@@ -277,8 +277,8 @@
 <blockquote>
 <p>思考：上下文定向目前并非主流的定向方式，这反映了什么问题？</p>
 </blockquote>
-<h2><span id="将内容变成概念文本主题模型"> 将内容变成概念：文本主题模型</span></h2>
-<h3><span id="文本主题模型概要"> 文本主题模型概要</span></h3>
+<h2 id="将内容变成概念文本主题模型"><a class="markdownIt-Anchor" href="#将内容变成概念文本主题模型"></a> 将内容变成概念：文本主题模型</h2>
+<h3 id="文本主题模型概要"><a class="markdownIt-Anchor" href="#文本主题模型概要"></a> 文本主题模型概要</h3>
 <p>问题</p>
 <ul>
 <li>发现一组文档中抽象的主题（topics）</li>
@@ -293,7 +293,7 @@
 <ul>
 <li>各文档得T个主题上的强度:<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo fence="true">{</mo><msub><mi>z</mi><mrow><mi>n</mi><mn>1</mn></mrow></msub><mo separator="true">,</mo><msub><mi>z</mi><mrow><mi>n</mi><mn>2</mn></mrow></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>z</mi><mrow><mi>n</mi><mi>T</mi></mrow></msub><mo fence="true">}</mo></mrow><annotation encoding="application/x-tex">\left \{ z_{n1}, z_{n2},...,z_{nT} \right \}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">{</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">}</span></span></span></span></span></li>
 </ul>
-<h3><span id="常用文本主题模型"> 常用文本主题模型</span></h3>
+<h3 id="常用文本主题模型"><a class="markdownIt-Anchor" href="#常用文本主题模型"></a> 常用文本主题模型</h3>
 <p>LSA（Latent Semantic Analysis）</p>
 <ul>
 <li>文档矩阵的奇异值分解</li>
@@ -313,12 +313,12 @@
 <ul>
 <li>考虑了词的先后顺序关系</li>
 </ul>
-<h2><span id="用数据理解用户行为定向"> 用数据理解用户：行为定向</span></h2>
-<h3><span id="p4行为定向behavioral-targeting"> P4.行为定向（Behavioral targeting）</span></h3>
+<h2 id="用数据理解用户行为定向"><a class="markdownIt-Anchor" href="#用数据理解用户行为定向"></a> 用数据理解用户：行为定向</h2>
+<h3 id="p4行为定向behavioral-targeting"><a class="markdownIt-Anchor" href="#p4行为定向behavioral-targeting"></a> P4.行为定向（Behavioral targeting）</h3>
 <ul>
 <li>根据用户历史上网记录和其他数据计算出用户兴趣，根据此投放广告</li>
 </ul>
-<h3><span id="p4行为定向数据来源"> P4.行为定向数据来源</span></h3>
+<h3 id="p4行为定向数据来源"><a class="markdownIt-Anchor" href="#p4行为定向数据来源"></a> P4.行为定向数据来源</h3>
 <p>决策行为</p>
 <ul>
 <li>转化（Conversion），预转化（Pre-conversion）</li>
@@ -348,10 +348,10 @@
 <ul>
 <li>可以用于用户兴趣的平滑：当某个人的行为不足，无法进行精准的行为定向时，可以考虑借鉴其社交网络朋友的行为和兴趣。</li>
 </ul>
-<h3><span id="p4各类行为的标签化方法"> P4.各类行为的标签化方法</span></h3>
-<h3><span id="a1行为定向建模"> A1.行为定向建模</span></h3>
-<h3><span id="a1行为定向特征选择过程"> A1.行为定向特征选择过程</span></h3>
-<h3><span id="a1行为定向数据组织"> A1.行为定向数据组织</span></h3>
+<h3 id="p4各类行为的标签化方法"><a class="markdownIt-Anchor" href="#p4各类行为的标签化方法"></a> P4.各类行为的标签化方法</h3>
+<h3 id="a1行为定向建模"><a class="markdownIt-Anchor" href="#a1行为定向建模"></a> A1.行为定向建模</h3>
+<h3 id="a1行为定向特征选择过程"><a class="markdownIt-Anchor" href="#a1行为定向特征选择过程"></a> A1.行为定向特征选择过程</h3>
+<h3 id="a1行为定向数据组织"><a class="markdownIt-Anchor" href="#a1行为定向数据组织"></a> A1.行为定向数据组织</h3>
 <p>Session log</p>
 <ul>
 <li>将各种行为日志整理成以用户ID为key的形式，作为各数据处理模块的输入源，可以将targeting变成局部计算</li>
@@ -361,13 +361,13 @@
 <li>滑动窗方式</li>
 <li>时间衰减方式</li>
 </ul>
-<h3><span id="a1受众定向评测-reachctr曲线"> A1.受众定向评测 - Reach/CTR曲线</span></h3>
+<h3 id="a1受众定向评测-reachctr曲线"><a class="markdownIt-Anchor" href="#a1受众定向评测-reachctr曲线"></a> A1.受众定向评测 - Reach/CTR曲线</h3>
 <ul>
 <li>Reach - target圈出来的人/总人数</li>
 <li>右下角代表平均值</li>
 <li>左边越高，受众定向效果越好</li>
 </ul>
-<h3><span id="a1人口属性定向"> A1.人口属性定向</span></h3>
+<h3 id="a1人口属性定向"><a class="markdownIt-Anchor" href="#a1人口属性定向"></a> A1.人口属性定向</h3>
 <p>人口属性</p>
 <ul>
 <li>由于监测的原因，实践中主要使用的是性别、年龄</li>
@@ -381,9 +381,9 @@
 <blockquote>
 <p>思考：行为定向为什么没有采用深度学习这类复杂的算法？</p>
 </blockquote>
-<h2><span id="分布式计算平台"> 分布式计算平台</span></h2>
-<h3><span id="s5离线大数据平台"> S5.离线大数据平台</span></h3>
-<h3><span id="s5flume-by-cloudera"> S5.flume by cloudera</span></h3>
+<h2 id="分布式计算平台"><a class="markdownIt-Anchor" href="#分布式计算平台"></a> 分布式计算平台</h2>
+<h3 id="s5离线大数据平台"><a class="markdownIt-Anchor" href="#s5离线大数据平台"></a> S5.离线大数据平台</h3>
+<h3 id="s5flume-by-cloudera"><a class="markdownIt-Anchor" href="#s5flume-by-cloudera"></a> S5.flume by cloudera</h3>
 <p>高可用的，高可靠的，分布式的海量日志采集、聚合和传输的系统</p>
 <ul>
 <li>数据源：console、text、Thrift-RPC、tail、syslog</li>
@@ -394,7 +394,7 @@
 <ul>
 <li>Scribe、Chukwa、KafKa</li>
 </ul>
-<h3><span id="s5redis-by-wmware"> S5.Redis by wmware</span></h3>
+<h3 id="s5redis-by-wmware"><a class="markdownIt-Anchor" href="#s5redis-by-wmware"></a> S5.Redis by wmware</h3>
 <p>一个KV存储系统</p>
 <ul>
 <li>Value可以支持string、list、set、zset、Hash</li>
@@ -407,8 +407,8 @@
 <li>尽量用自更新的方式减少数据输入</li>
 </ul>
 <p>类似产品选择：Memcached</p>
-<h2><span id="如何利用合约市场合约广告需求方产品"> 如何利用合约市场：合约广告需求方产品</span></h2>
-<h3><span id="合约市场的优缺点"> 合约市场的优缺点</span></h3>
+<h2 id="如何利用合约市场合约广告需求方产品"><a class="markdownIt-Anchor" href="#如何利用合约市场合约广告需求方产品"></a> 如何利用合约市场：合约广告需求方产品</h2>
+<h3 id="合约市场的优缺点"><a class="markdownIt-Anchor" href="#合约市场的优缺点"></a> 合约市场的优缺点</h3>
 <p>优点</p>
 <ul>
 <li>有投放量的保证，确保人群触达</li>
@@ -420,7 +420,7 @@
 <li>很难利用精细的用户数据</li>
 <li>溢价相对较高，媒体作弊相对容易</li>
 </ul>
-<h3><span id="合约市场的利用与选择"> 合约市场的利用与选择</span></h3>
+<h3 id="合约市场的利用与选择"><a class="markdownIt-Anchor" href="#合约市场的利用与选择"></a> 合约市场的利用与选择</h3>
 <p>主要的合约广告产品</p>
 <ul>
 <li>综合或垂直门户的首页广告位</li>
@@ -432,7 +432,7 @@
 <li>宣传活动的品牌广告，可以选择高曝光的CPT广告</li>
 <li>日常品牌触达广告，可以结合受众购买CPM广告</li>
 </ul>
-<h3><span id="广告监播"> 广告监播</span></h3>
+<h3 id="广告监播"><a class="markdownIt-Anchor" href="#广告监播"></a> 广告监播</h3>
 <p>产品目的</p>
 <ul>
 <li>广告主委托第三方公司，对实际发生的展示或点击数目进行核对（AdMaster、秒针）</li>
@@ -444,7 +444,7 @@
 <li>人口属性、地域等的监测</li>
 <li>样本和总体之间的校正</li>
 </ul>
-<h3><span id="广告安全"> 广告安全</span></h3>
+<h3 id="广告安全"><a class="markdownIt-Anchor" href="#广告安全"></a> 广告安全</h3>
 <p>广告投放验证（Ad verification）</p>
 <ul>
 <li>确认品牌的安全性，防止广告出现在对品牌有伤害的页面上。（例：优衣库出现在钓鱼岛新闻上）</li>

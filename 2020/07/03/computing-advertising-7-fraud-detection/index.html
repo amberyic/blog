@@ -12,13 +12,13 @@
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(hm, s);
 })();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|7.永无止境的博弈 -- 流量保护和反作弊</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> 作弊的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"> CPM&#x2F;CPC广告监测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> 广告监测代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text"> CPA&#x2F;CPS广告归因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text"> 刷监测代码作弊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text"> iFrame虚假展示作弊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text"> 诱骗用户点击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text"> 点击热力图检查作弊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text"> 作弊中如何处理用户ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text"> 运营商弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">11.</span> <span class="toc-text"> CPS作弊手段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">12.</span> <span class="toc-text"> CPI常见作弊手段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">13.</span> <span class="toc-text"> 常见人工作弊</span></a></li></ol></div><h3><span id="作弊的分类"> 作弊的分类</span></h3>
+</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|7.永无止境的博弈 -- 流量保护和反作弊</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E5%BC%8A%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text"> 作弊的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cpmcpc%E5%B9%BF%E5%91%8A%E7%9B%91%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text"> CPM&#x2F;CPC广告监测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E7%9B%91%E6%B5%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text"> 广告监测代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cpacps%E5%B9%BF%E5%91%8A%E5%BD%92%E5%9B%A0"><span class="toc-number">4.</span> <span class="toc-text"> CPA&#x2F;CPS广告归因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B7%E7%9B%91%E6%B5%8B%E4%BB%A3%E7%A0%81%E4%BD%9C%E5%BC%8A"><span class="toc-number">5.</span> <span class="toc-text"> 刷监测代码作弊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iframe%E8%99%9A%E5%81%87%E5%B1%95%E7%A4%BA%E4%BD%9C%E5%BC%8A"><span class="toc-number">6.</span> <span class="toc-text"> iFrame虚假展示作弊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B1%E9%AA%97%E7%94%A8%E6%88%B7%E7%82%B9%E5%87%BB"><span class="toc-number">7.</span> <span class="toc-text"> 诱骗用户点击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E7%83%AD%E5%8A%9B%E5%9B%BE%E6%A3%80%E6%9F%A5%E4%BD%9C%E5%BC%8A"><span class="toc-number">8.</span> <span class="toc-text"> 点击热力图检查作弊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E5%BC%8A%E4%B8%AD%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E7%94%A8%E6%88%B7id"><span class="toc-number">9.</span> <span class="toc-text"> 作弊中如何处理用户ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%90%A5%E5%95%86%E5%BC%B9%E7%AA%97"><span class="toc-number">10.</span> <span class="toc-text"> 运营商弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cps%E4%BD%9C%E5%BC%8A%E6%89%8B%E6%AE%B5"><span class="toc-number">11.</span> <span class="toc-text"> CPS作弊手段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cpi%E5%B8%B8%E8%A7%81%E4%BD%9C%E5%BC%8A%E6%89%8B%E6%AE%B5"><span class="toc-number">12.</span> <span class="toc-text"> CPI常见作弊手段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E4%BA%BA%E5%B7%A5%E4%BD%9C%E5%BC%8A"><span class="toc-number">13.</span> <span class="toc-text"> 常见人工作弊</span></a></li></ol></div><h3 id="作弊的分类"><a class="markdownIt-Anchor" href="#作弊的分类"></a> 作弊的分类</h3>
 <ul>
 <li>CPM/CPC作弊 【媒体网站】 &lt;–结算方式–&gt; CPA/CPS作弊【客户网站】</li>
 <li>虚假流量（NHT，Non-Human Traffic）【机器刷量】 &lt;–流量属性–&gt; 流量归因 【从别人那边抢过来的流量】</li>
 <li>机器作弊 &lt;–主体–&gt; 人工作弊</li>
 </ul>
-<h3><span id="cpmcpc广告监测"> CPM/CPC广告监测</span></h3>
+<h3 id="cpmcpc广告监测"><a class="markdownIt-Anchor" href="#cpmcpc广告监测"></a> CPM/CPC广告监测</h3>
 <ul>
 <li>1.广告主与媒体签订广告合同，约定结算方式。</li>
 <li>2.第三方监测在广告展示环节添加检测代码/SDK，随着广告一起到达用户端。</li>
@@ -26,7 +26,7 @@
 <li>4.用户产生广告交互行为的被发送到第三方，第三方进行统计。</li>
 <li>5.第三方将统计数据交给广告主，广告主据此与媒体结算。</li>
 </ul>
-<h3><span id="广告监测代码"> 广告监测代码</span></h3>
+<h3 id="广告监测代码"><a class="markdownIt-Anchor" href="#广告监测代码"></a> 广告监测代码</h3>
 <p>参数</p>
 <ul>
 <li>OS：客户端操作系统的种类，0-Android，1-iOS，2-WP，3-Others</li>
@@ -36,31 +36,31 @@
 <li>IDFA：适用于iOS，保留原始值</li>
 <li>openUDID：适用于iOS，保留原始值</li>
 </ul>
-<h3><span id="cpacps广告归因"> CPA/CPS广告归因</span></h3>
+<h3 id="cpacps广告归因"><a class="markdownIt-Anchor" href="#cpacps广告归因"></a> CPA/CPS广告归因</h3>
 <ul>
 <li>1.用户ID碰撞归因</li>
 <li>2.直接访问归因：为每一个渠道分配一个渠道ID，放在落地页URL参数中，当用户在到达落地页以后的统一个session中完成转化行为，就记到该渠道上。（中国的安卓应用下载，采用的也是直接访问归因法，给每个渠道打不通的apk包，分别记录下载量）</li>
 </ul>
-<h3><span id="刷监测代码作弊"> 刷监测代码作弊</span></h3>
+<h3 id="刷监测代码作弊"><a class="markdownIt-Anchor" href="#刷监测代码作弊"></a> 刷监测代码作弊</h3>
 <ul>
 <li>直接刷代码</li>
 <li>服务器刷代码</li>
 <li>客户端刷代码</li>
 </ul>
-<h3><span id="iframe虚假展示作弊"> iFrame虚假展示作弊</span></h3>
+<h3 id="iframe虚假展示作弊"><a class="markdownIt-Anchor" href="#iframe虚假展示作弊"></a> iFrame虚假展示作弊</h3>
 <ul>
 <li>把iframe的尺寸变成1*1的，用户看不见。</li>
 </ul>
-<h3><span id="诱骗用户点击"> 诱骗用户点击</span></h3>
+<h3 id="诱骗用户点击"><a class="markdownIt-Anchor" href="#诱骗用户点击"></a> 诱骗用户点击</h3>
 <ul>
 <li>软件下载网站</li>
 </ul>
-<h3><span id="点击热力图检查作弊"> 点击热力图检查作弊</span></h3>
+<h3 id="点击热力图检查作弊"><a class="markdownIt-Anchor" href="#点击热力图检查作弊"></a> 点击热力图检查作弊</h3>
 <ul>
 <li>正常点击热力图</li>
 <li>作弊点击热力图</li>
 </ul>
-<h3><span id="作弊中如何处理用户id"> 作弊中如何处理用户ID</span></h3>
+<h3 id="作弊中如何处理用户id"><a class="markdownIt-Anchor" href="#作弊中如何处理用户id"></a> 作弊中如何处理用户ID</h3>
 <ul>
 <li>频繁更换用户ID</li>
 <li>Cloaking
@@ -69,8 +69,8 @@
 </ul>
 </li>
 </ul>
-<h3><span id="运营商弹窗"> 运营商弹窗</span></h3>
-<h3><span id="cps作弊手段"> CPS作弊手段</span></h3>
+<h3 id="运营商弹窗"><a class="markdownIt-Anchor" href="#运营商弹窗"></a> 运营商弹窗</h3>
+<h3 id="cps作弊手段"><a class="markdownIt-Anchor" href="#cps作弊手段"></a> CPS作弊手段</h3>
 <p>运营商落地页劫持</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://www.jd.com">http://www.jd.com</a> --&gt; <a target="_blank" rel="noopener" href="http://www.jd.com?utm_source=ABC">http://www.jd.com?utm_source=ABC</a></li>
@@ -80,14 +80,14 @@
 <li>在CPS联盟机制下，只要给用户打上标签标识媒体来源的Cookie，该用户的购买行为就会到该媒体</li>
 <li>基本原理是在浏览器上悄悄对推广链接发器HTTP请求，在用户不点击广告的情况下打上媒体的Cookie。</li>
 </ul>
-<h3><span id="cpi常见作弊手段"> CPI常见作弊手段</span></h3>
+<h3 id="cpi常见作弊手段"><a class="markdownIt-Anchor" href="#cpi常见作弊手段"></a> CPI常见作弊手段</h3>
 <ul>
 <li>Click Spam（帮用户点击，转化率低，后续效果好）</li>
 <li>Click injection（国外 安卓）</li>
 <li>Ad stacking（蕾丝Click Spam）</li>
 <li>刷机（群控，转化率高，后续效果差）</li>
 </ul>
-<h3><span id="常见人工作弊"> 常见人工作弊</span></h3>
+<h3 id="常见人工作弊"><a class="markdownIt-Anchor" href="#常见人工作弊"></a> 常见人工作弊</h3>
 <ul>
 <li>淘宝代销（不寄真实商品）</li>
 <li>羊毛党（P2P理财）</li>

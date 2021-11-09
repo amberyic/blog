@@ -12,33 +12,33 @@
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(hm, s);
 })();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>CPI广告常见作弊方法总结</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"> 广告归因方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"> 作弊的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"> 伪造归因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text"> 点击欺诈(Click Spamming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text"> 点击劫持(Click Injection)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text"> 伪造用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text"> 模拟器(Bots)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text"> 设备农场(Device Farms)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text"> SDK伪造(SDK Spoofing)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text"> 参考资料</span></a></li></ol></div><h2><span id="广告归因方式"> 广告归因方式</span></h2>
-<p>要讨论广告作弊，就需要先了解广告的归因逻辑，作弊手段基本都是围绕广告归因的逻辑来进行的。<br>
-广告归因方案多种多样，我们这里主要讨论<strong>应用类广告、海外移动生态、第三方归因</strong>的方案。<br>
+</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>CPI广告常见作弊方法总结</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E5%BD%92%E5%9B%A0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 广告归因方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E5%BC%8A%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text"> 作弊的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0%E5%BD%92%E5%9B%A0"><span class="toc-number">3.</span> <span class="toc-text"> 伪造归因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E6%AC%BA%E8%AF%88click-spamming"><span class="toc-number">3.1.</span> <span class="toc-text"> 点击欺诈(Click Spamming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E5%8A%AB%E6%8C%81click-injection"><span class="toc-number">3.2.</span> <span class="toc-text"> 点击劫持(Click Injection)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0%E7%94%A8%E6%88%B7"><span class="toc-number">4.</span> <span class="toc-text"> 伪造用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8bots"><span class="toc-number">4.1.</span> <span class="toc-text"> 模拟器(Bots)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BAdevice-farms"><span class="toc-number">4.2.</span> <span class="toc-text"> 设备农场(Device Farms)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk%E4%BC%AA%E9%80%A0sdk-spoofing"><span class="toc-number">4.3.</span> <span class="toc-text"> SDK伪造(SDK Spoofing)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">5.</span> <span class="toc-text"> 参考资料</span></a></li></ol></div><h2 id="广告归因方式"><a class="markdownIt-Anchor" href="#广告归因方式"></a> 广告归因方式</h2>
+<p>要讨论广告作弊，就需要先了解广告的归因逻辑，作弊手段基本都是围绕广告归因的逻辑来进行的。<br />
+广告归因方案多种多样，我们这里主要讨论<strong>应用类广告、海外移动生态、第三方归因</strong>的方案。<br />
 海外移动广告生态，拥有比较成熟可信的第三方归因平台，比如Appflyer，Adjust以及Kochava等等。归因的核心逻辑是最后归因模型，即“Last Click”。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271433410.png" alt="应用广告归因"><br>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271433410.png" alt="应用广告归因" /><br />
 媒体的广告曝光后，若用户对广告进行了点击，媒体会将广告点击的媒体信息、用户设备信息（核心是IDFA/IMEI）、时间戳、网络状态等信息通过302跳转的方式给到第三方归因平台（即广告点击后，会通过302重定向跳转到第三方归因平台的后台，然后再跳到Google Play或者App Store）。此时，第三方归因平台其实是没有广告的曝光相关信息的。</p>
 <p>应用激活后，可以通过接入归因SDK或者通过服务端对接的方式（S2S）的方式将应用相关信息回传给第三方归因平台，归因平台从数据库中找出匹配的媒体点击信息，通过匹配的应用包名、用户ID信息和广告的点击信息，按照最后一次点击的逻辑将应用的激活归因给对应的媒体和广告，完成一次归因的流程。</p>
-<h2><span id="作弊的分类"> 作弊的分类</span></h2>
-<p>在全部广告作弊类型中，作弊者能够伪造在归因中使用的任ㄧ或两类“信号”（Signal）。这两类信号分别为广告交互（例如查看或点击，对应归因方式中2的位置）和应用活动（例如安装、会话或事件，对应归因方式中3的位置）。在此基础上，我们将作弊分为伪造广告交互和伪造用户应用内活动。前者称为<strong>伪造归因（Spoofed Attribution）</strong>，后者被称为<strong>伪造用户（Spoofed Users）</strong>。<br>
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271118560.png" alt="作弊分类"></p>
+<h2 id="作弊的分类"><a class="markdownIt-Anchor" href="#作弊的分类"></a> 作弊的分类</h2>
+<p>在全部广告作弊类型中，作弊者能够伪造在归因中使用的任ㄧ或两类“信号”（Signal）。这两类信号分别为广告交互（例如查看或点击，对应归因方式中2的位置）和应用活动（例如安装、会话或事件，对应归因方式中3的位置）。在此基础上，我们将作弊分为伪造广告交互和伪造用户应用内活动。前者称为<strong>伪造归因（Spoofed Attribution）</strong>，后者被称为<strong>伪造用户（Spoofed Users）</strong>。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271118560.png" alt="作弊分类" /></p>
 <ul>
 <li>类型1中的全部流量均为真实流量，即用户受到广告驱使，与应用所产生的真实互动。</li>
 <li>类型2指伪造归因，即作弊者伪造真实用户的广告交互。其目的是为了窃取用户与应用之间的自然交互或通过真实广告所产生的效果。此类型的伪造也被称为“窃取归因”或“流量盗取”(poaching)。</li>
 <li>类型3和4指伪造用户。此作弊类型专注于模拟用户的应用内活动行为。通过伪造不存在的用户而产生的应用安装和事件，作弊者可以窃取以应用转化为奖励的广告预算。“外挂”、“虚拟机器人”以及任何与“虚假用户”相关的手段都能归纳为此类型的作弊。</li>
 </ul>
-<h2><span id="伪造归因"> 伪造归因</span></h2>
+<h2 id="伪造归因"><a class="markdownIt-Anchor" href="#伪造归因"></a> 伪造归因</h2>
 <p>伪造归因，也称Attribution Fraud、Spoofed Attribution、归因作弊、抢归因，是利用归因逻辑上的一些漏洞进行作弊的手段，通过发布虚假的曝光/点击，劫持真实用户产生的转化。</p>
-<h3><span id="点击欺诈click-spamming"> 点击欺诈(Click Spamming)</span></h3>
+<h3 id="点击欺诈click-spamming"><a class="markdownIt-Anchor" href="#点击欺诈click-spamming"></a> 点击欺诈(Click Spamming)</h3>
 <p>点击欺诈，也叫Click Stuffing或Click Flood，中文名叫点击泛滥、点击填塞、大点击、预点击、撞库，是伪造海量广告的曝光或点击，等到用户真安装之后，在Last Click归因原则下，如点击后N天内安装的都算成带来点击的渠道，将其他渠道或者是自然量归因抢到自己的渠道中来。</p>
 <p>欺诈性应用程序可能会在用户使用它时执行点击，或者在后台活动（例如启动、省电等）时执行点击。该应用程序甚至可以将展示次数报告为点击以呈现虚假的广告交互，而这一切都是在用户无意或不知情的情况下进行的。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271647119.png" alt="大点击"></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271647119.png" alt="大点击" /></p>
 <p><strong>点击欺诈的形式</strong>：</p>
 <ul>
-<li>广告堆叠点击(Ad Stacking Clicks)： 在单个广告展示位置中以层叠的方式放置多个广告，只有顶部广告可见。堆栈中的所有广告都按空间的每次展示或点击计费。欺诈者将多个广告投放到程序化广告活动中，并为未查看的广告创造收入。<br>
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png" alt></li>
+<li>广告堆叠点击(Ad Stacking Clicks)： 在单个广告展示位置中以层叠的方式放置多个广告，只有顶部广告可见。堆栈中的所有广告都按空间的每次展示或点击计费。欺诈者将多个广告投放到程序化广告活动中，并为未查看的广告创造收入。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png" alt="" /></li>
 <li>浏览点击（Views as Clicks）或“预缓存”：以点击方式发送视图，在广告显示之前点击它们。</li>
-<li>服务器到服务器的点击(Server2Server Clicks)：从Adx处获得流量直接给三方发送点击事件。<br>
+<li>服务器到服务器的点击(Server2Server Clicks)：从Adx处获得流量直接给三方发送点击事件。<br />
 这些形式都具有一个相同的特征：用户实际上并没有打算与广告进行互动，也没有兴趣下载显示的应用程序。</li>
 </ul>
 <p><strong>依赖条件</strong></p>
@@ -50,12 +50,12 @@
 <ul>
 <li>long CTIT(Click-to-install-time) distribution rates</li>
 <li>low click-to-install conversion rates</li>
-<li>high multi-touch contributor rates (or)<br>
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271900778.png" alt="CTIT"></li>
+<li>high multi-touch contributor rates (or)<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271900778.png" alt="CTIT" /></li>
 </ul>
-<h3><span id="点击劫持click-injection"> 点击劫持(Click Injection)</span></h3>
-<p>点击劫持也叫Install Hijacking、点击注入、小点击，指的是作弊者通过安装在用户设备上的一个应用程序来“监听”其他应用程序的安装广播消息。当用户设备上安装了新的应用程序时，作弊者就会收到通知，然后在安装完成之前发送虚假点击利用归因模型的漏洞劫取相应的安装。特点是点击到安装时间过短，应用商店记录的下载时间早于点击广告的时间。<br>
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271649228.png" alt="小点击"></p>
+<h3 id="点击劫持click-injection"><a class="markdownIt-Anchor" href="#点击劫持click-injection"></a> 点击劫持(Click Injection)</h3>
+<p>点击劫持也叫Install Hijacking、点击注入、小点击，指的是作弊者通过安装在用户设备上的一个应用程序来“监听”其他应用程序的安装广播消息。当用户设备上安装了新的应用程序时，作弊者就会收到通知，然后在安装完成之前发送虚假点击利用归因模型的漏洞劫取相应的安装。特点是点击到安装时间过短，应用商店记录的下载时间早于点击广告的时间。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271649228.png" alt="小点击" /></p>
 <p>如果我们知道一个应用的下载或者安装时间点，在这个时候将“点击”信息发送给第三方归因平台，由于这个时候离应用的激活更近，按照Last Click原理归因概率就非常高。而Android系统刚好提供了获取应用安装的广播机制。当应用安装的时候，Android系统会将应用安装的消息（android.intent.action.PACKAGE_ADDED）通过系统广播（Broadcast）的方式广播给在已经在系统注册文件上（Manifest.xml）注册了安装广播监听能力的应用。获取到应用的安装信息（核心信息是应用的包名）之后，此时广告联盟SDK就会根据这个包名从广告后台中获取对应的广告信息，并将相关的用户设备信息，媒体信息通过“虚拟点击”的方式传到第三方归因平台。</p>
 <p><strong>依赖条件</strong></p>
 <ul>
@@ -65,26 +65,26 @@
 <p><strong>识别方法</strong></p>
 <ul>
 <li>short CTIT(Click-to-install-time) distribution rates</li>
-<li>high click-to-install conversion rates<br>
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271901841.png" alt="CTIT"></li>
+<li>high click-to-install conversion rates<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271901841.png" alt="CTIT" /></li>
 </ul>
-<h2><span id="伪造用户"> 伪造用户</span></h2>
-<p>伪造用户发生虚假应用内活动，我们能够发现模拟器、设备农场(Device Farms) 和 SDK 伪造。<br>
+<h2 id="伪造用户"><a class="markdownIt-Anchor" href="#伪造用户"></a> 伪造用户</h2>
+<p>伪造用户发生虚假应用内活动，我们能够发现模拟器、设备农场(Device Farms) 和 SDK 伪造。<br />
 在最初发现的伪造用户案例中，我们检测到欺诈者利用模拟器模仿云计算服务上真实用户使用安卓应用的情况。同时，我们还识别出东南亚国家的iOS设备农场，他们通过真实的设备和人员伪造了虚假的应用活动。</p>
-<h3><span id="模拟器bots"> 模拟器(Bots)</span></h3>
-<p>模拟器指的是作弊者通过自动化脚本或计算机程序模拟真实用户的点击、下载、安装甚至是应用内行为，伪装成为真实用户， 从而骗取广告主的CPI/CPA预算。<br>
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271700101.png" alt="模拟器"><br>
+<h3 id="模拟器bots"><a class="markdownIt-Anchor" href="#模拟器bots"></a> 模拟器(Bots)</h3>
+<p>模拟器指的是作弊者通过自动化脚本或计算机程序模拟真实用户的点击、下载、安装甚至是应用内行为，伪装成为真实用户， 从而骗取广告主的CPI/CPA预算。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271700101.png" alt="模拟器" /><br />
 <strong>特点</strong>是IP离散度密集、新设备率过高、用户行为异常、机型/系统/时间等分布异常等。</p>
-<h3><span id="设备农场device-farms"> 设备农场(Device Farms)</span></h3>
-<p>设备农场指的是作弊者购买大量真实设备进行广告点击、下载、安装和应用内行为，并通过修改设备广告跟踪符等方式隐藏设备信息。<br>
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271913495.png" alt="设备农场"></p>
-<p>设备农场主使用各种策略来隐藏他们的活动，包括隐藏在新的IP地址后面，使用各种设备，同时启用限制广告跟踪或隐藏在 DeviceID重置欺诈后面（每次安装时重置他们的 DeviceID）。当大规模实施时，这种欺诈也称为DeviceID重置Marathons。<br>
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271910424.png" alt="设备农场操作流程"><br>
+<h3 id="设备农场device-farms"><a class="markdownIt-Anchor" href="#设备农场device-farms"></a> 设备农场(Device Farms)</h3>
+<p>设备农场指的是作弊者购买大量真实设备进行广告点击、下载、安装和应用内行为，并通过修改设备广告跟踪符等方式隐藏设备信息。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271913495.png" alt="设备农场" /></p>
+<p>设备农场主使用各种策略来隐藏他们的活动，包括隐藏在新的IP地址后面，使用各种设备，同时启用限制广告跟踪或隐藏在 DeviceID重置欺诈后面（每次安装时重置他们的 DeviceID）。当大规模实施时，这种欺诈也称为DeviceID重置Marathons。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271910424.png" alt="设备农场操作流程" /><br />
 <strong>特点</strong>是IP离散度密集、新设备率过高、用户行为异常、机型/系统分布异常等</p>
-<h3><span id="sdk伪造sdk-spoofing"> SDK伪造(SDK Spoofing)</span></h3>
+<h3 id="sdk伪造sdk-spoofing"><a class="markdownIt-Anchor" href="#sdk伪造sdk-spoofing"></a> SDK伪造(SDK Spoofing)</h3>
 <p>SDK伪造是指作弊者通过执行“中间人攻击”破解第三方SDK的通信协议后，在没有任何实际安装的情况下，使用真实设备的数据来发送虚假的点击和安装，以此消耗广告主的预算的作弊行为。作弊者毁坏加密和哈希签名，进而引发了作弊者和研究人员之间的对决。</p>
 <p><strong>特点</strong>是广告主后台数据和第三方数据不符。</p>
-<h2><span id="参考资料"> 参考资料</span></h2>
+<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
 <ul>
 <li>[1]<a target="_blank" rel="noopener" href="https://toutiao.io/posts/63t2w5v/preview">《深入分析广告归因》/ PMCoder</a></li>
 <li>[2]<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/1V8IwO-H9E1I1odxYnk_Ww">《Adjust CTO 深度剖析移动作弊: 打击作弊需从定义开始（一）》 / Paul Müller / CTO of Adjust</a></li>
