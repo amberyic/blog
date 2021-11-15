@@ -5014,7 +5014,7 @@ P E_{(p o s, 2 i+1)} &amp;=\cos \left(p o s / 10000^{2 i / d_{\text {model }}}\r
       </tags>
   </entry>
   <entry>
-    <title>自然语言处理预训练综述</title>
+    <title>自然语言处理预训练技术综述</title>
     <url>/2021/11/15/ptms-pre-trained-models/</url>
     <content><![CDATA[<h2 id="预训练"><a class="markdownIt-Anchor" href="#预训练"></a> 预训练</h2>
 <p>预训练(Pre-trained Models,PTMs)的实施过程跟<strong>迁移学习</strong>是一样的，一般是先在一个基础数据集上进行任务训练，生成一个基础网络，然后将学习到的特征重新进行微调或者迁移到另一个目标网络上，用来训练新目标任务。</p>
