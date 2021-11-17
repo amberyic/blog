@@ -17,10 +17,10 @@ description: 本文基于论文《Attention Is All You Need》对其中提出的
 Google的翻译团队在《Attention Is All You Need》中提出了他们的Transformer架构，Transformer基于经典的机器翻译Seq2Seq框架，突破性的抛弃了传统的循环和卷积神经网络结构，仅仅依赖注意力机制。在WMT 2014的数据集上取得了很好的成绩。
 关于注意力机制，可以翻看我以前的一些文章，对于Attention的原理和变种都有详细的介绍。
 
-**Transformer的两个优势**
+**Transformer的三个优势**
 - **模型并行度高，使得训练时间大幅度降低。** 循环模型通常是对输入和输出序列的符号位置进行因子计算。通过在计算期间将位置与步骤对齐，它们根据前一步的隐藏状态ht-1和输入产生位置t的隐藏状态序列ht。这种固有的顺序特性阻碍样本训练的并行化，这在更长的序列长度上变得至关重要，因为有限的内存限制样本的批次大小。Transformer架构避免使用循环神经网络并完全依赖于attention机制来绘制输入和输出之间的全局依赖关系，允许进行更多的并行化。
 - **可以直接捕获序列中的长距离依赖关系。** 注意力机制允许对依赖关系进行建模，而不考虑它们在输入或输出序列中的距离。对比LSTM，Attention能够更好的解决长距离依赖问题（Long-Term Dependencies Problem）。
-
+- **自注意力可以产生更具可解释性的模型。** 我们可以从模型中检查注意力分布。各个注意头 (attention head) 可以学会执行不同的任务。
 
 ## 模型架构
 ![Transformer的架构](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109290538512.png)
