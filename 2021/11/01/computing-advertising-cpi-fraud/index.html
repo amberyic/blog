@@ -12,7 +12,7 @@
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(hm, s);
 })();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>CPI广告常见作弊方法总结</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E5%BD%92%E5%9B%A0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 广告归因方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E5%BC%8A%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text"> 作弊的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0%E5%BD%92%E5%9B%A0"><span class="toc-number">3.</span> <span class="toc-text"> 伪造归因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E6%AC%BA%E8%AF%88click-spamming"><span class="toc-number">3.1.</span> <span class="toc-text"> 点击欺诈(Click Spamming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E5%8A%AB%E6%8C%81click-injection"><span class="toc-number">3.2.</span> <span class="toc-text"> 点击劫持(Click Injection)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0%E7%94%A8%E6%88%B7"><span class="toc-number">4.</span> <span class="toc-text"> 伪造用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8bots"><span class="toc-number">4.1.</span> <span class="toc-text"> 模拟器(Bots)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BAdevice-farms"><span class="toc-number">4.2.</span> <span class="toc-text"> 设备农场(Device Farms)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk%E4%BC%AA%E9%80%A0sdk-spoofing"><span class="toc-number">4.3.</span> <span class="toc-text"> SDK伪造(SDK Spoofing)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">5.</span> <span class="toc-text"> 参考资料</span></a></li></ol></div><h2 id="广告归因方式"><a class="markdownIt-Anchor" href="#广告归因方式"></a> 广告归因方式</h2>
+</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>CPI广告常见作弊方法总结</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E5%BD%92%E5%9B%A0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 广告归因方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E5%BC%8A%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text"> 作弊的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0%E5%BD%92%E5%9B%A0"><span class="toc-number">3.</span> <span class="toc-text"> 伪造归因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E6%AC%BA%E8%AF%88click-spamming"><span class="toc-number">3.1.</span> <span class="toc-text"> 点击欺诈(Click Spamming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E5%8A%AB%E6%8C%81click-injection"><span class="toc-number">3.2.</span> <span class="toc-text"> 点击劫持(Click Injection)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%AA%E9%80%A0%E7%94%A8%E6%88%B7"><span class="toc-number">4.</span> <span class="toc-text"> 伪造用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8bots"><span class="toc-number">4.1.</span> <span class="toc-text"> 模拟器(Bots)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%86%9C%E5%9C%BAdevice-farms"><span class="toc-number">4.2.</span> <span class="toc-text"> 设备农场(Device Farms)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sdk%E4%BC%AA%E9%80%A0sdk-spoofing"><span class="toc-number">4.3.</span> <span class="toc-text"> SDK伪造(SDK Spoofing)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E4%BD%9C%E5%BC%8A%E6%96%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text"> 反作弊方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8Dip"><span class="toc-number">5.1.</span> <span class="toc-text"> 匿名IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E5%AE%89%E8%A3%85%E6%97%B6%E9%97%B4"><span class="toc-number">5.2.</span> <span class="toc-text"> 点击安装时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E8%AE%BE%E5%A4%87%E7%8E%87"><span class="toc-number">5.3.</span> <span class="toc-text"> 新设备率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E6%84%9F%E5%99%A8"><span class="toc-number">5.4.</span> <span class="toc-text"> 传感器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E5%B9%BF%E5%91%8A%E8%B7%9F%E8%B8%AA"><span class="toc-number">5.5.</span> <span class="toc-text"> 限制广告跟踪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E5%8C%96%E7%8E%87"><span class="toc-number">5.6.</span> <span class="toc-text"> 转化率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD"><span class="toc-number">5.7.</span> <span class="toc-text"> 人工智能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text"> 参考资料</span></a></li></ol></div><h2 id="广告归因方式"><a class="markdownIt-Anchor" href="#广告归因方式"></a> 广告归因方式</h2>
 <p>要讨论广告作弊，就需要先了解广告的归因逻辑，作弊手段基本都是围绕广告归因的逻辑来进行的。<br />
 广告归因方案多种多样，我们这里主要讨论<strong>应用类广告、海外移动生态、第三方归因</strong>的方案。<br />
 海外移动广告生态，拥有比较成熟可信的第三方归因平台，比如Appflyer，Adjust以及Kochava等等。归因的核心逻辑是最后归因模型，即“Last Click”。</p>
@@ -35,11 +35,11 @@
 <p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271647119.png" alt="大点击" /></p>
 <p><strong>点击欺诈的形式</strong>：</p>
 <ul>
-<li>广告堆叠点击(Ad Stacking Clicks)： 在单个广告展示位置中以层叠的方式放置多个广告，只有顶部广告可见。堆栈中的所有广告都按空间的每次展示或点击计费。欺诈者将多个广告投放到程序化广告活动中，并为未查看的广告创造收入。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png" alt="" /></li>
-<li>浏览点击（Views as Clicks）或“预缓存”：以点击方式发送视图，在广告显示之前点击它们。</li>
+<li>广告堆叠点击(Ad Stacking Clicks)： 在单个广告展示位置中以层叠的方式放置多个广告，只有顶部广告可见。堆栈中的所有广告都按空间的每次展示或点击计费。欺诈者将多个广告投放到程序化广告活动中，并为未查看的广告创造收入。应用悄悄在后台加载和点击广告。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png" alt="广告堆叠点击" /></li>
+<li>浏览点击（Views as Clicks）或“预缓存”：以点击方式发送视图，在广告显示之前点击它们。将展示作为点击发送的渠道。</li>
 <li>服务器到服务器的点击(Server2Server Clicks)：从Adx处获得流量直接给三方发送点击事件。<br />
-这些形式都具有一个相同的特征：用户实际上并没有打算与广告进行互动，也没有兴趣下载显示的应用程序。</li>
+这些形式都具有一个相同的特征：用户实际上并没有打算与广告进行互动，也没有兴趣下载显示的应用程序。发送人工点击目录的服务器。</li>
 </ul>
 <p><strong>依赖条件</strong></p>
 <ul>
@@ -68,6 +68,11 @@
 <li>high click-to-install conversion rates<br />
 <img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271901841.png" alt="CTIT" /></li>
 </ul>
+<p>根据安装的不同来源，我们的过滤方法稍有差异。</p>
+<ul>
+<li>Google paly和华为:Google 和华为的 referrer API 会创建时间戳，这些时间戳可以用来甄别是否出现了点击劫持。首先，我们会将点击的时间与 intall_begin_time 做比对；如果点击发生在该时间戳后，基本可以肯定就是点击劫持。SDK还会收集install_finish_time时间戳，进行第二层过滤。</li>
+<li>其他渠道的安装​:发生在 Google Play 应用商店和华为 AppGallery 之外的安装没有 referrer API，无法发送 install_begin 时间戳。因此，要过滤此类安装，我们要依赖于 install_finish_time 时间戳。 install_finish_time 时间戳后接收到的点击将被视为欺诈并被拒绝。</li>
+</ul>
 <h2 id="伪造用户"><a class="markdownIt-Anchor" href="#伪造用户"></a> 伪造用户</h2>
 <p>伪造用户发生虚假应用内活动，我们能够发现模拟器、设备农场(Device Farms) 和 SDK 伪造。<br />
 在最初发现的伪造用户案例中，我们检测到欺诈者利用模拟器模仿云计算服务上真实用户使用安卓应用的情况。同时，我们还识别出东南亚国家的iOS设备农场，他们通过真实的设备和人员伪造了虚假的应用活动。</p>
@@ -84,6 +89,34 @@
 <h3 id="sdk伪造sdk-spoofing"><a class="markdownIt-Anchor" href="#sdk伪造sdk-spoofing"></a> SDK伪造(SDK Spoofing)</h3>
 <p>SDK伪造是指作弊者通过执行“中间人攻击”破解第三方SDK的通信协议后，在没有任何实际安装的情况下，使用真实设备的数据来发送虚假的点击和安装，以此消耗广告主的预算的作弊行为。作弊者毁坏加密和哈希签名，进而引发了作弊者和研究人员之间的对决。</p>
 <p><strong>特点</strong>是广告主后台数据和第三方数据不符。</p>
+<h2 id="反作弊方法"><a class="markdownIt-Anchor" href="#反作弊方法"></a> 反作弊方法</h2>
+<h3 id="匿名ip"><a class="markdownIt-Anchor" href="#匿名ip"></a> 匿名IP</h3>
+<p>匿名IP过滤器可保护应用跟踪数据的真实性，使其免受来自VPN、Tor出口节点或数据中心的欺诈安装活动影响。一些欺诈者使用模拟软件伪造安装，并将欺诈转化放到高价值市场获取利润，匿名IP过滤器针对的就是这些欺诈者。</p>
+<h3 id="点击安装时间"><a class="markdownIt-Anchor" href="#点击安装时间"></a> 点击安装时间</h3>
+<p>点击安装时间(Click to install time,CTIT)衡量用户旅程中时间戳之间的伽玛分布 - 用户的初始广告互动和他们的首次应用启动。</p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201343440.png" alt="CTIT" /></p>
+<p>CTIT 可用于识别基于点击的欺诈的不同案例:</p>
+<ul>
+<li>短 CTIT（低于 10 秒）：可能存在安装劫持欺诈(install hijacking)</li>
+<li>长时间 CTIT（24 小时及之后）：可能的大点击欺诈(click flooding)</li>
+</ul>
+<h3 id="新设备率"><a class="markdownIt-Anchor" href="#新设备率"></a> 新设备率</h3>
+<p>新设备率(New device rate, NDR)将突出显示下载广告商应用的新设备的百分比。</p>
+<p>有新设备当然是正常的，因为会有新用户安装应用程序或者现有用户更换设备。但是，必须密切关注其活动可接受的新设备率，因为该比率由测量的新设备ID决定。因此，它可以被设备ID重置欺诈策略所操纵，这在设备农场中很常见。</p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201721503.png" alt="NDR" /></p>
+<h3 id="传感器"><a class="markdownIt-Anchor" href="#传感器"></a> 传感器</h3>
+<p>设备传感器(Device sensors)可以收集设备电池电量到倾斜角度等上百个指标，可以用来进行生物识别行为分析。</p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201354087.png" alt="传感器" /></p>
+<p>这些指标有助于为每次安装创建配置文件——分析每次安装的设备和用户行为及其与真实用户测量的正常趋势的兼容性。</p>
+<h3 id="限制广告跟踪"><a class="markdownIt-Anchor" href="#限制广告跟踪"></a> 限制广告跟踪</h3>
+<p>限制广告跟踪（Limit ad tracking， LAT）是一项隐私功能，允许用户限制广告商收到的有关其设备生成的活动的数据。当用户启用LAT时，广告商及其测量解决方案会收到一个空白设备ID，而不是特定于设备的ID。</p>
+<p>这个指标仅在Google和iOS广告标识符相关，亚马逊、小米等使用其他标识符。</p>
+<h3 id="转化率"><a class="markdownIt-Anchor" href="#转化率"></a> 转化率</h3>
+<p>转化率（Conversion rates）描述了一种操作到另一种操作的转化，这可能意味着广告展示转化为点击、点击转化为安装或安装给活跃用户。 广告商在用户旅程中的任何一点了解其预期转化率有助于防止欺诈渗透。</p>
+<p>转化率过高可能不是真的，会被怀疑有作弊嫌疑。</p>
+<h3 id="人工智能"><a class="markdownIt-Anchor" href="#人工智能"></a> 人工智能</h3>
+<p>人工智能已成为常见的欺诈指标，因为它允许大规模应用欺诈识别逻辑。人工智能有助于指示人类无法追踪的任何规模的实例。</p>
+<p>机器学习算法（即<strong>贝叶斯网络</strong>）与大型移动归因数据库相结合，将确保提供高效准确的欺诈检测解决方案。</p>
 <h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
 <ul>
 <li>[1]<a target="_blank" rel="noopener" href="https://toutiao.io/posts/63t2w5v/preview">《深入分析广告归因》/ PMCoder</a></li>
@@ -95,6 +128,7 @@
 <li>[7]<a target="_blank" rel="noopener" href="https://www.appsflyer.com/glossary/click-flooding/">《Click flooding》 / appsflyer</a></li>
 <li>[8]<a target="_blank" rel="noopener" href="https://interceptd.com/how-ctit-click-to-install-time-is-used-to-detect-mobile-ad-fraud/">《How CTIT is Used to Detect Mobile Ad Fraud》 / interceptd</a></li>
 <li>[9]<a target="_blank" rel="noopener" href="https://www.appsflyer.com/glossary/sdk-spoofing/">《SDK spoofing》/ appsflyer</a></li>
+<li>[10]<a target="_blank" rel="noopener" href="https://www.appsflyer.com/resources/guides/mobile-ad-fraud-for-marketers/">mobile-ad-fraud-for-marketers/ appsflyer</a></li>
 </ul>
 <!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2021/11/01/computing-advertising-cpi-fraud/">https://imzhanghao.com/2021/11/01/computing-advertising-cpi-fraud/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4128258433761966" data-ad-slot="1528926940" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
 </script><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
