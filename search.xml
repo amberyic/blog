@@ -4019,7 +4019,7 @@ s.t. \textbf{g}(x)\leqslant 0,\textbf{h}(x)=0
       </tags>
   </entry>
   <entry>
-    <title>CPI广告常见作弊方法总结</title>
+    <title>CPI/CPA广告常见作弊方法总结</title>
     <url>/2021/11/01/computing-advertising-cpi-fraud/</url>
     <content><![CDATA[<h2 id="广告归因方式"><a class="markdownIt-Anchor" href="#广告归因方式"></a> 广告归因方式</h2>
 <p>要讨论广告作弊，就需要先了解广告的归因逻辑，作弊手段基本都是围绕广告归因的逻辑来进行的。<br />
