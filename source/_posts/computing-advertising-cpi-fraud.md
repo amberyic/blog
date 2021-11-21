@@ -1,7 +1,7 @@
 ---
 title: CPI广告常见作弊方法总结
 date: 2021-11-01
-updated: 2021-11-01
+updated: 2021-11-21
 categories:
 - 计算广告
 tags:
@@ -40,11 +40,11 @@ description: 介绍了应用类广告第三方归因的方法，详细分析了�
 ![大点击](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271647119.png)
 
 **点击欺诈的形式**：
-- 广告堆叠点击(Ad Stacking Clicks)： 在单个广告展示位置中以层叠的方式放置多个广告，只有顶部广告可见。堆栈中的所有广告都按空间的每次展示或点击计费。欺诈者将多个广告投放到程序化广告活动中，并为未查看的广告创造收入。
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png)
-- 浏览点击（Views as Clicks）或“预缓存”：以点击方式发送视图，在广告显示之前点击它们。
+- 广告堆叠点击(Ad Stacking Clicks)： 在单个广告展示位置中以层叠的方式放置多个广告，只有顶部广告可见。堆栈中的所有广告都按空间的每次展示或点击计费。欺诈者将多个广告投放到程序化广告活动中，并为未查看的广告创造收入。应用悄悄在后台加载和点击广告。
+![广告堆叠点击](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png)
+- 浏览点击（Views as Clicks）或“预缓存”：以点击方式发送视图，在广告显示之前点击它们。将展示作为点击发送的渠道。
 - 服务器到服务器的点击(Server2Server Clicks)：从Adx处获得流量直接给三方发送点击事件。
-这些形式都具有一个相同的特征：用户实际上并没有打算与广告进行互动，也没有兴趣下载显示的应用程序。
+这些形式都具有一个相同的特征：用户实际上并没有打算与广告进行互动，也没有兴趣下载显示的应用程序。发送人工点击目录的服务器。
 
 **依赖条件**
 - 丰富的广告资源，因为点击欺诈主要是盗取自然流量，所以需要一些自然下载量比较大的应用广告资源。
@@ -55,7 +55,6 @@ description: 介绍了应用类广告第三方归因的方法，详细分析了�
 - low click-to-install conversion rates
 - high multi-touch contributor rates (or)
 ![CTIT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271900778.png)
-
 
 ### 点击劫持(Click Injection)
 点击劫持也叫Install Hijacking、点击注入、小点击，指的是作弊者通过安装在用户设备上的一个应用程序来“监听”其他应用程序的安装广播消息。当用户设备上安装了新的应用程序时，作弊者就会收到通知，然后在安装完成之前发送虚假点击利用归因模型的漏洞劫取相应的安装。特点是点击到安装时间过短，应用商店记录的下载时间早于点击广告的时间。
@@ -71,6 +70,10 @@ description: 介绍了应用类广告第三方归因的方法，详细分析了�
 - short CTIT(Click-to-install-time) distribution rates
 - high click-to-install conversion rates
 ![CTIT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271901841.png)
+
+根据安装的不同来源，我们的过滤方法稍有差异。
+- Google paly和华为:Google 和华为的 referrer API 会创建时间戳，这些时间戳可以用来甄别是否出现了点击劫持。首先，我们会将点击的时间与 intall_begin_time 做比对；如果点击发生在该时间戳后，基本可以肯定就是点击劫持。SDK还会收集install_finish_time时间戳，进行第二层过滤。
+- 其他渠道的安装​:发生在 Google Play 应用商店和华为 AppGallery 之外的安装没有 referrer API，无法发送 install_begin 时间戳。因此，要过滤此类安装，我们要依赖于 install_finish_time 时间戳。 install_finish_time 时间戳后接收到的点击将被视为欺诈并被拒绝。
 
 ## 伪造用户
 伪造用户发生虚假应用内活动，我们能够发现模拟器、设备农场(Device Farms) 和 SDK 伪造。
@@ -94,6 +97,50 @@ SDK伪造是指作弊者通过执行“中间人攻击”破解第三方SDK的�
 
 **特点**是广告主后台数据和第三方数据不符。
 
+
+## 反作弊方法
+### 匿名IP
+匿名IP过滤器可保护应用跟踪数据的真实性，使其免受来自VPN、Tor出口节点或数据中心的欺诈安装活动影响。一些欺诈者使用模拟软件伪造安装，并将欺诈转化放到高价值市场获取利润，匿名IP过滤器针对的就是这些欺诈者。
+
+### 点击安装时间
+点击安装时间(Click to install time,CTIT)衡量用户旅程中时间戳之间的伽玛分布 - 用户的初始广告互动和他们的首次应用启动。
+
+![CTIT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201343440.png)
+
+CTIT 可用于识别基于点击的欺诈的不同案例:
+- 短 CTIT（低于 10 秒）：可能存在安装劫持欺诈(install hijacking)
+- 长时间 CTIT（24 小时及之后）：可能的大点击欺诈(click flooding)
+
+### 新设备率
+新设备率(New device rate, NDR)将突出显示下载广告商应用的新设备的百分比。
+
+有新设备当然是正常的，因为会有新用户安装应用程序或者现有用户更换设备。但是，必须密切关注其活动可接受的新设备率，因为该比率由测量的新设备ID决定。因此，它可以被设备ID重置欺诈策略所操纵，这在设备农场中很常见。
+
+![NDR](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201721503.png)
+
+### 传感器
+设备传感器(Device sensors)可以收集设备电池电量到倾斜角度等上百个指标，可以用来进行生物识别行为分析。
+
+![传感器](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201354087.png)
+
+这些指标有助于为每次安装创建配置文件——分析每次安装的设备和用户行为及其与真实用户测量的正常趋势的兼容性。
+
+### 限制广告跟踪
+限制广告跟踪（Limit ad tracking， LAT）是一项隐私功能，允许用户限制广告商收到的有关其设备生成的活动的数据。当用户启用LAT时，广告商及其测量解决方案会收到一个空白设备ID，而不是特定于设备的ID。
+
+这个指标仅在Google和iOS广告标识符相关，亚马逊、小米等使用其他标识符。
+
+### 转化率
+转化率（Conversion rates）描述了一种操作到另一种操作的转化，这可能意味着广告展示转化为点击、点击转化为安装或安装给活跃用户。 广告商在用户旅程中的任何一点了解其预期转化率有助于防止欺诈渗透。
+
+转化率过高可能不是真的，会被怀疑有作弊嫌疑。
+
+### 人工智能
+人工智能已成为常见的欺诈指标，因为它允许大规模应用欺诈识别逻辑。人工智能有助于指示人类无法追踪的任何规模的实例。
+
+机器学习算法（即**贝叶斯网络**）与大型移动归因数据库相结合，将确保提供高效准确的欺诈检测解决方案。
+
+
 ## 参考资料
 - [1][《深入分析广告归因》/ PMCoder](https://toutiao.io/posts/63t2w5v/preview)
 - [2][《Adjust CTO 深度剖析移动作弊: 打击作弊需从定义开始（一）》 / Paul Müller / CTO of Adjust](https://mp.weixin.qq.com/s/1V8IwO-H9E1I1odxYnk_Ww)
@@ -104,3 +151,4 @@ SDK伪造是指作弊者通过执行“中间人攻击”破解第三方SDK的�
 - [7][《Click flooding》 / appsflyer](https://www.appsflyer.com/glossary/click-flooding/)
 - [8][《How CTIT is Used to Detect Mobile Ad Fraud》 / interceptd](https://interceptd.com/how-ctit-click-to-install-time-is-used-to-detect-mobile-ad-fraud/)
 - [9][《SDK spoofing》/ appsflyer](https://www.appsflyer.com/glossary/sdk-spoofing/)
+- [10][mobile-ad-fraud-for-marketers/ appsflyer](https://www.appsflyer.com/resources/guides/mobile-ad-fraud-for-marketers/)
