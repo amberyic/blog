@@ -1,5 +1,5 @@
 ---
-title: CPI广告常见作弊方法总结
+title: CPI/CPA广告常见作弊方法总结
 date: 2021-11-01
 updated: 2021-11-21
 categories:

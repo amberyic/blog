@@ -1,5 +1,5 @@
 ---
-title: 读书笔记 | 小狗钱钱1+2
+title: 读书笔记 | 《小狗钱钱1+2》
 date: 2021-11-17
 updated: 2021-11-21
 categories:
