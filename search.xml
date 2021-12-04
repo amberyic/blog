@@ -5053,6 +5053,7 @@ P E_{(p o s, 2 i+1)} &amp;=\cos \left(p o s / 10000^{2 i / d_{\text {model }}}\r
     <content><![CDATA[<h2 id="预训练"><a class="markdownIt-Anchor" href="#预训练"></a> 预训练</h2>
 <p>预训练(Pre-trained Models,PTMs)的实施过程跟<strong>迁移学习</strong>是一样的，一般是先在一个基础数据集上进行任务训练，生成一个基础网络，然后将学习到的特征重新进行微调或者迁移到另一个目标网络上，用来训练新目标任务。</p>
 <p>预训练是在大量常规数据集上学习数据中的“<strong>共性</strong>”，然后在特定领域的少量标注数据学习“<strong>特性</strong>”，这样子模型只需要从“共性”出发，去学习特定任务的“特性”部分即可。</p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112041107988.png" alt="预训练模型" /></p>
 <p>这和小孩子读书一样，一开始语文、数学、化学都学，读书、网上游戏等，在脑子里积攒了很多。当他学习计算机时，实际上把他以前学到的所有知识都带进去了。如果他以前没上过中学，没上过小学，突然学计算机就不懂这里有什么道理。<strong>预训练模型就意味着把人类的语言知识，先学了一个东西，然后再代入到某个具体任务，就顺手了，就是这么一个简单的道理。</strong></p>
 <h3 id="为什么需要预训练"><a class="markdownIt-Anchor" href="#为什么需要预训练"></a> 为什么需要预训练</h3>
 <ul>
