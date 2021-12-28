@@ -5751,4 +5751,410 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
         <tag>奇点系列</tag>
       </tags>
   </entry>
+  <entry>
+    <title>机器学习管道(Machine Learning Pipeline)</title>
+    <url>/2021/12/28/ml-pipeline/</url>
+    <content><![CDATA[<h2 id="机器学习"><a class="markdownIt-Anchor" href="#机器学习"></a> 机器学习</h2>
+<h3 id="经典编程方法-vs-机器学习方法"><a class="markdownIt-Anchor" href="#经典编程方法-vs-机器学习方法"></a> 经典编程方法 VS 机器学习方法</h3>
+<p>业务需求：购物网站产品推荐，假设您需要创建一款后端应用程序，使其根据客户过去的购买记录向他们推荐产品。</p>
+<p><strong>经典编程</strong>：根据数据（输入）进行预测（输出），需要对数据应用一些规则，在经典编程中，这些规则由人根据业务需求和领域知识等因素制定。</p>
+<p><strong>机器学习</strong>：利用过去收集的各种数据,自动推导出数据中隐藏的模式。然后,利用模式创建模型,应用于新数据,从而提供更明智的自适应预测。</p>
+<h3 id="什么是模型"><a class="markdownIt-Anchor" href="#什么是模型"></a> 什么是模型？</h3>
+<p>机器学习中的模型是指经过训练的算法，用于识别数据中的模式。关键在于，他是通过机器学习过程来训练的，而不像经典编程一样，是由编程人员通过设置规则手动创建的。</p>
+<h3 id="ml管道"><a class="markdownIt-Anchor" href="#ml管道"></a> ML管道</h3>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112220844576.jpg" alt="机器学习管道" /></p>
+<ul>
+<li><strong>业务问题</strong>：需要确定能够从机器学习中受益的业务问题。</li>
+<li><strong>定义问题</strong>：需要理清业务问题并将其转化为机器学习问题。</li>
+<li><strong>数据收集和整合</strong>：确保原始数据位于一个集中且易于访问的地方。</li>
+<li><strong>预处理和可视化数据</strong>：将原始数据转换为易于理解的格式并从数据中提取重要特征。</li>
+<li><strong>模型训练和优化</strong>：这是一个迭代的过程，可以在整个工作流程中多次执行。刚开始模型可能不会产生期望的结果，需要设计更多特征并优化模型超参数，然后重新训练。</li>
+<li><strong>模型评估</strong>：持续的进行模型训练和优化，直到模型的评估结果显示模型的性能符合业务案例的要求。如果模型不符合业务目标，则需要重新评估一些东西，再次审视一下数据和特征，寻找改进模型的方法。</li>
+<li><strong>模型部署</strong>：如果对训练结果感到满意，就可以部署模型来交付最佳预测结果，这通常是一项繁重的体力劳动。</li>
+</ul>
+<h2 id="问题定义"><a class="markdownIt-Anchor" href="#问题定义"></a> 问题定义</h2>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281301865.jpg" alt="问题定义" /><br />
+问题定义是管道中研究性阶段，是对需要解决的问题进行分析和定义的过程。这项工作是所有ML项目的起始点，因为我们需要充分确定某个问题，才能制造确定出相应的解决方案。</p>
+<h3 id="确定问题"><a class="markdownIt-Anchor" href="#确定问题"></a> 确定问题</h3>
+<p>示例：某些产品库存挤压，某些产品库存不足，分别导致开销增加和错过销售机会。</p>
+<ul>
+<li>业务问题：需求预测不准确，让企业蒙受损失。</li>
+<li>业务目标：减少未销售的库存的数量，同时不因库存不足而错过销售机会。</li>
+<li>成功指标：每月月底未销售出的库存不超过15%，同时不存在库存不足的问题。</li>
+</ul>
+<p>确定问题在业务方面的信息后，接下来需要确定使用那种ML模型。<br />
+我们要预测每种产品的具体销量，因此这最有可能是一种回归问题。</p>
+<h3 id="确定成功标准"><a class="markdownIt-Anchor" href="#确定成功标准"></a> 确定成功标准</h3>
+<ul>
+<li><strong>模型效果指标</strong>
+<ul>
+<li>在ML管道的测试和评估环节使用</li>
+<li>一般通过准确性来体现</li>
+</ul>
+</li>
+<li><strong>业务目标指标</strong>
+<ul>
+<li>在<strong>部署</strong>模型后使用</li>
+<li>衡量模型在<strong>真实环境</strong>中的效果</li>
+<li>可以识别出<strong>不当的模型效果指标</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="数据收集和整合"><a class="markdownIt-Anchor" href="#数据收集和整合"></a> 数据收集和整合</h2>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281302881.jpg" alt="数据收集和整合" /></p>
+<h3 id="选择数据"><a class="markdownIt-Anchor" href="#选择数据"></a> 选择数据</h3>
+<ul>
+<li><strong>了解数据</strong>：有多少数据，位于哪里，数据量，数据位置以及可否访问。</li>
+<li><strong>寻找领域专家</strong>：是否拥有解决问题<strong>所需的数据</strong>？数据是否有<strong>代表性</strong>？</li>
+<li><strong>评估数据质量</strong>：好的数据会包含与我们希望预测的现象有关的信号，是否具有足够的特征和标签。</li>
+</ul>
+<h3 id="数据湖"><a class="markdownIt-Anchor" href="#数据湖"></a> 数据湖</h3>
+<p>了解了你需要的数据以后，现实场景中，机器学习项目的数据来自多个数据源，并呈现为不同类型的数据，包括结构化、半结构化和非结构化的数据。例如数据可以来自CSV文件和传统数据库。</p>
+<p>当数据以不同格式存储在各个不同的位置时,组织经常会面临访问和分析其数据的挑战。随着数据不断收集自各种来源,如果不能妥善处理,这一挑战只会随着组织的成熟和发展而变得越来越严峻。无法轻松访问数据会导致工作流程出现瓶颈,因为员工经常需要向IT部门寻求帮助,以访问构建、训练和部署机器学习模型所需的信息。为了应对这些挑战,组织不得不寻求这样一种解决方案:<strong>能够提供单一数据来源,让员工能够随时根据需要轻松访问数据。</strong> 本地解决方案通常很难做到这一点,而且维护成本很高。</p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112230809278.png" alt="数据湖" /><br />
+数据湖架构可以提供一个坚实的基础,用于构建解决方案应对这一挑战。借助数据湖, 可以将大量数据存储在一个集中存储库,以便组织内的各个团队随时对其进行分类、处理、扩充和使用。<br />
+但是,建立数据湖并没有什么灵丹妙药。在大多数情况下,构建数据湖需要使用多种 技术、工具和环境,包括来自第三方的数据。如果操作正确,数据湖将为全新的高级 分析方法打开一扇大门,从而推动数据科学和机器学习。</p>
+<h2 id="数据预处理和可视化"><a class="markdownIt-Anchor" href="#数据预处理和可视化"></a> 数据预处理和可视化</h2>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281303539.jpg" alt="数据预处理和可视化" /></p>
+<h3 id="重新格式化数据"><a class="markdownIt-Anchor" href="#重新格式化数据"></a> 重新格式化数据</h3>
+<ul>
+<li><strong>Pandas</strong>：Pandas 是一个开源 Python 库,可用于重新格式化特定数据。Pandas 将 CSV、JSON、 Excel、Pickle 等各种格式的数据重新格式化为表格形式,以行和列的形式呈现出来。Pandas将数据格式化后得出的表格格式称为DataFrame，可以进行计算统计信息，清理数据，对其进行可视化，甚至将清理或转换后的数据重新以其原始格式存储。</li>
+<li><strong>NumPy</strong>:NumPy是一个Python库,可在与 Python 搭配使用进行科学计算时用作基础 软件包。这是一个通用的数组处理程序包,可提供高性能的多维数组对象以及用于处理这些数组的工具。</li>
+<li><strong>Scikit-learn</strong>:Scikit-learn是一个开源Python库,其中包括用于数据挖掘和数据分析的 各种工具。它基于NumPy、SciPy 和Matplotilb库而构建,可用于机器学习管道的每个阶段,包括数据预处理。我们将在管道的模型训练阶段回过头来学习Scitkit,因为该库包含了线性回归和随机森林等监督算法,以及集群和K-means等非监督算法。</li>
+<li><strong>Matplotlib</strong>:Matplotlib 是 Python 中的可视化库,用于NumPy数组的二维图。借助 Matplotlib,您可以通过多种方式可视化数据,其中包括线形图和条形图、散点图和直方图。您可以直接在 Python 脚本、Jupyter笔记本、iPython Shell 和其他平台中利用该库。</li>
+<li><strong>Seaborn</strong>:Seaborn 是另一个Python数据可视化库。它基于Matplotlib构建,并与Pandas DataFrame紧密集成。它提供了一个高级界面,可绘制有吸引力且内容丰富的统计图形。</li>
+</ul>
+<h3 id="数据预处理"><a class="markdownIt-Anchor" href="#数据预处理"></a> 数据预处理</h3>
+<p>数据会出现多种形式混乱</p>
+<ul>
+<li>算法希望看到使用英语编写的数据，但数据中的有些单词使用了其他语言</li>
+<li>某些单词中包含特殊字符，单词之间有多个空格，大小写混用。</li>
+<li>数据有多个不同的数据单位，比如公里、米、英尺混用。</li>
+<li>因为录入问题，某列中包含其他列中的数据。</li>
+</ul>
+<h4 id="异常值"><a class="markdownIt-Anchor" href="#异常值"></a> 异常值</h4>
+<p>产生异常值的原因：</p>
+<ul>
+<li><strong>自然的异常值</strong> 不是人为的错误结果，而是反应了数据中的一些事实。</li>
+<li><strong>人为错误的异常值</strong> 数据输入错误，以及其他错误类型。</li>
+</ul>
+<p>处理异常值的方法：</p>
+<ul>
+<li><strong>删除异常值</strong>:这种方法特别适合在人为错误导致异常值的情况下使用。</li>
+<li><strong>转变异常值</strong>:您可以通过取一个值的自然对数进行这一操作,这将减少由极端异 常值引起的变化,从而减少异常值对整个数据集的影响。</li>
+<li><strong>为异常值输入新值</strong>:例如,您可以使用特征的平均值,然后输入该值以替换异常值。同样,如果异常值是由人为错误引起的,那么这种方法非常合适。</li>
+</ul>
+<h4 id="缺失值"><a class="markdownIt-Anchor" href="#缺失值"></a> 缺失值</h4>
+<p>由于数据收集错误,数据集中的某些列可能会缺失数据,或者直到进入数据收集过程之前才收集具有特定特征的数据。缺失数据会导致很难准确解读相关特征和目标变量之间的关系,因此,无论数据到底是怎么缺失的,处理这一问题都很重要。</p>
+<p>缺失几个值可能不是问题,但如果一列中缺失的值过多,您可能会发现很难解读该特 征和目标(与模型需要预测的内容对应的该行中的值)之间的关系。</p>
+<p><strong>缺失值统计</strong><br />
+pandas检查确实值或者NULL值</p>
+<ul>
+<li>检查<strong>每一列</strong>有多少缺失值：df.isnull().sum()</li>
+<li>检查<strong>每一行</strong>有多少缺失值：df.isnull().sum(axis=1)</li>
+</ul>
+<p><strong>缺失值处理</strong></p>
+<ul>
+<li><strong>替换缺失值</strong>：如果缺失值在整个数据集中随机分布，可能是由于数据捕获机制出现故障，并不代表其相应行或列的大部分，因为数据在很大程度是随机缺失的。这种情况下，替换是更好的选择。
+<ul>
+<li>离散特征：使用出现最频繁的值来替换</li>
+<li>连续特征：使用平均值或者中位数来替换</li>
+</ul>
+</li>
+<li><strong>删除缺失值</strong>：如果列或者行的缺失占很大比例，则优先考虑删除整个行或列，而不是替换。
+<ul>
+<li>删除行的风险：a.训练数据不足，过拟合。b.可能会偏向样本</li>
+<li>删除列的风险：可能会丢失特征中的信息，欠拟合。</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据可视化"><a class="markdownIt-Anchor" href="#数据可视化"></a> 数据可视化</h3>
+<h4 id="分类数据可视化"><a class="markdownIt-Anchor" href="#分类数据可视化"></a> 分类数据可视化</h4>
+<p>使用条形图可视化分类数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">speed = [<span class="number">0.1</span>, <span class="number">17.5</span>, <span class="number">40</span>, <span class="number">48</span>, <span class="number">52</span>, <span class="number">69</span>, <span class="number">88</span>]</span><br><span class="line">lifespan = [<span class="number">2</span>, <span class="number">8</span>, <span class="number">70</span>, <span class="number">1.5</span>, <span class="number">25</span>, <span class="number">12</span>, <span class="number">28</span>]</span><br><span class="line">index = [<span class="string">&#x27;snail&#x27;</span>, <span class="string">&#x27;pig&#x27;</span>, <span class="string">&#x27;elephant&#x27;</span>,</span><br><span class="line">         <span class="string">&#x27;rabbit&#x27;</span>, <span class="string">&#x27;giraffe&#x27;</span>, <span class="string">&#x27;coyote&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>]</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">&#x27;speed&#x27;</span>: speed,</span><br><span class="line">                   <span class="string">&#x27;lifespan&#x27;</span>: lifespan&#125;, index=index)</span><br><span class="line">ax = df.plot.bar(rot=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252018884.png" alt="条形图" /></p>
+<h4 id="数值数据可视化"><a class="markdownIt-Anchor" href="#数值数据可视化"></a> 数值数据可视化</h4>
+<p><strong>直方图</strong><br />
+使用直方图进行数据可视化时会对值进行分箱，直方图中较高的峰值表示最常见的值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&#x27;length&#x27;</span>: [<span class="number">1.5</span>, <span class="number">0.5</span>, <span class="number">1.2</span>, <span class="number">0.9</span>, <span class="number">3</span>],</span><br><span class="line">    <span class="string">&#x27;width&#x27;</span>: [<span class="number">0.7</span>, <span class="number">0.2</span>, <span class="number">0.15</span>, <span class="number">0.2</span>, <span class="number">1.1</span>]</span><br><span class="line">    &#125;, index=[<span class="string">&#x27;pig&#x27;</span>, <span class="string">&#x27;rabbit&#x27;</span>, <span class="string">&#x27;duck&#x27;</span>, <span class="string">&#x27;chicken&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>])</span><br><span class="line">hist = df.hist(bins=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252017101.png" alt="直方图" /></p>
+<p><strong>密度图</strong><br />
+密度图展示了单个特征的分布，密度图类似于直方图，但它使用核密度函数展示了平滑版的直方图密度。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2.5</span>, <span class="number">3</span>, <span class="number">3.5</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">ax = s.plot.kde()</span><br></pre></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252020274.png" alt="密度图" /></p>
+<p><strong>箱线图</strong><br />
+箱线图使用四分位间距来描绘特征的分布。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = np.random.randn(<span class="number">25</span>, <span class="number">4</span>)</span><br><span class="line">df = pd.DataFrame(data, columns=<span class="built_in">list</span>(<span class="string">&#x27;ABCD&#x27;</span>))</span><br><span class="line">ax = df.plot.box()</span><br></pre></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252028029.png" alt="箱线图" /></p>
+<h4 id="属性之间的关系"><a class="markdownIt-Anchor" href="#属性之间的关系"></a> 属性之间的关系</h4>
+<p>对于具有多个变量或特征的情况,您可能需要查看它们之间的相关性。确定属性之间 的相关性很重要,因为两个属性之间的高相关性有时会导致模型性能较差。如果特征 之间密切相关,并且全都用于同一个模型中以预测响应变量,就可能会出现问题,例 如,模型损失不能收敛到最小状态。因此,请注意数据集中高度相关的特征。</p>
+<p><strong>散点图和散点图矩阵</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df = pd.DataFrame([[<span class="number">5.1</span>, <span class="number">3.5</span>, <span class="number">0</span>], [<span class="number">4.9</span>, <span class="number">3.0</span>, <span class="number">0</span>], [<span class="number">7.0</span>, <span class="number">3.2</span>, <span class="number">1</span>],</span><br><span class="line">                   [<span class="number">6.4</span>, <span class="number">3.2</span>, <span class="number">1</span>], [<span class="number">5.9</span>, <span class="number">3.0</span>, <span class="number">2</span>]],</span><br><span class="line">                  columns=[<span class="string">&#x27;length&#x27;</span>, <span class="string">&#x27;width&#x27;</span>, <span class="string">&#x27;species&#x27;</span>])</span><br><span class="line">ax1 = df.plot.scatter(x=<span class="string">&#x27;length&#x27;</span>,</span><br><span class="line">                      y=<span class="string">&#x27;width&#x27;</span>,</span><br><span class="line">                      c=<span class="string">&#x27;DarkBlue&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252033581.png" alt="散点图" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">df = pd.DataFrame(np.random.randn(<span class="number">1000</span>, <span class="number">4</span>), columns=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>])</span><br><span class="line">pd.plotting.scatter_matrix(df, alpha=<span class="number">0.2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252035865.png" alt="散点图矩阵" /></p>
+<p><strong>相关性矩阵热图</strong><br />
+numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视化。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252041244.png" alt="相关性矩阵热图" /></p>
+<h2 id="模型训练和优化"><a class="markdownIt-Anchor" href="#模型训练和优化"></a> 模型训练和优化</h2>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304798.jpg" alt="模型训练和优化" /><br />
+在训练过程中,机器学习算法会更新一组称为参数或权重的数字。目标是更新模型中 的参数,使计算或预测的输出尽可能接近真实的输出(就像在数据中看到的一样)。</p>
+<p>一次迭代无法完成,因为算法还没有学会;它不知道改变权重会如何使输出更接近期望值。因此,它会观察之前迭代中的权重和输出,使权重降低生成的输出的误差。执 行完定义的迭代次数后或当误差变化低于目标值时,此迭代过程将会停止。</p>
+<p>如果输出误差随着每次连续迭代逐渐减小,则我们可以说该模型已收敛,训练成功。 但如果误差在迭代之间增大或随机变化,则需要重新评估构建模型时的假设。</p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261107474.png" alt="模型训练过程" /></p>
+<h3 id="数据拆分"><a class="markdownIt-Anchor" href="#数据拆分"></a> 数据拆分</h3>
+<p>对数据进行预处理之后，就可以开始训练了。首先需要确定拆分数据的最佳方式，一般而言，机器学习目标是构建一个泛化能力较强的模型。换句话说，模型不仅要能处理一直数据，还要能处理未知数据。因此拆分数据很重要。</p>
+<p>拆分数据有助于确保数据块有资格成为未来的生成数据，还有助于保证模型预测未知数据的准确率和预测已知数据的准确率类似。这有助于提高模型的泛化能力。</p>
+<p>测试和验证方法</p>
+<ul>
+<li><strong>简单留出验证</strong>：将数据拆分为多个数据集，通常为训练集、验证集和测试集。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112260724131.png" alt="简单留出验证" /></li>
+<li><strong>K折交叉验证</strong>：把数据集分成K份，每个子集互不相交且大小相同，依次从K份中选出1份作为验证集，其余K-1份作为训练集，这样进行K次单独的模型训练和验证，最后将K次验证结果取平均值，作为此模型的验证误差。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261104698.png" alt="K折交叉验证" /></li>
+<li><strong>留一交叉验证</strong>：测试集是一个数据点，适用于<strong>非常小</strong>的数据集</li>
+<li><strong>分层K折交叉验证</strong>：训练集和测试集平衡类别分布，适用于<strong>不平衡</strong>的数据。</li>
+<li><strong>打乱数据的迭代K折验证</strong></li>
+</ul>
+<h3 id="损失函数"><a class="markdownIt-Anchor" href="#损失函数"></a> 损失函数</h3>
+<p>模型训练的目标是创建一个准确的模型，让他根据需求正确地解答业务问题。</p>
+<p>损失函数用来评价模型的预测值和真实值不一样的程度，损失函数越好，通常模型的性能越好。不同的模型用的损失函数一般也不一样。</p>
+<p>损失函数分为经验风险损失函数和结构风险损失函数。经验风险损失函数指预测结果和实际结果的差别，结构风险损失函数是指经验风险损失函数加上正则项。</p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261818366.png" alt="损失函数" /></p>
+<h3 id="优化器"><a class="markdownIt-Anchor" href="#优化器"></a> 优化器</h3>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261822292.png" alt="梯度下降" /></p>
+<ul>
+<li><strong>批量梯度下降法（Batch Gradient Descent）</strong>：批量梯度下降法，是梯度下降法最常用的形式，具体做法也就是在更新参数时使用所有的样本来进行更新，</li>
+<li><strong>随机梯度下降法（Stochastic Gradient Descent）</strong>：随机梯度下降法，其实和批量梯度下降法原理类似，区别在与求梯度时没有用所有的m个样本的数据，而是仅仅选取一个样本j来求梯度。</li>
+<li><strong>小批量梯度下降法（Mini-batch Gradient Descent）</strong>：小批量梯度下降法是批量梯度下降法和随机梯度下降法的折衷，也就是对于m个样本，我们采用x个样子来迭代，1&lt;x&lt;m。一般可以取x=10，当然根据样本的数据，可以调整这个x的值。</li>
+</ul>
+<p><strong>步长/学习速率</strong><br />
+步长的大小至关重要,因为步长较大可能会导致模型超过最低点,从而使模型来回摆动,永远不会达到最小值。但是,步长较小可能会导致模型非常缓慢地朝着最小值移动,在给定时间内无法达到最小值。步长大小又称“学习速率”,它是模型的超参数。</p>
+<h2 id="模型评估"><a class="markdownIt-Anchor" href="#模型评估"></a> 模型评估</h2>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304583.jpg" alt="模型评估" /></p>
+<h3 id="过拟合和欠拟合"><a class="markdownIt-Anchor" href="#过拟合和欠拟合"></a> 过拟合和欠拟合</h3>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270848369.png" alt="过拟合和欠拟合" /></p>
+<ul>
+<li><strong>欠拟合</strong>是指模型不能在训练集上获得足够低的误差。换句换说，就是模型复杂度低，模型在训练集上就表现很差，没法学习到数据背后的规律。</li>
+<li><strong>过拟合</strong>是指训练误差和测试误差之间的差距太大。换句换说，就是模型复杂度高于实际问题，模型在训练集上表现很好，但在测试集上却表现很差。模型对训练集&quot;死记硬背&quot;，没有理解数据背后的规律，泛化能力差。</li>
+</ul>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270845483.png" alt="过拟合和欠拟合" /></p>
+<p><strong>解决方案</strong></p>
+<ul>
+<li><strong>欠拟合</strong>
+<ul>
+<li>增加模型复杂度</li>
+<li>增加模型的特征</li>
+</ul>
+</li>
+<li><strong>过拟合</strong>
+<ul>
+<li>正则化（Regularization）（L1和L2）</li>
+<li>数据扩增，即增加训练数据样本</li>
+<li>Dropout</li>
+<li>Early stopping</li>
+</ul>
+</li>
+</ul>
+<h3 id="方差和偏差"><a class="markdownIt-Anchor" href="#方差和偏差"></a> 方差和偏差</h3>
+<ul>
+<li><strong>偏差</strong>：预测值于真实值之间的差距，即学习算法的拟合能力。</li>
+<li><strong>方差</strong>：预测值的分散程度，训练集与验证集的差异造成的模型表现的差异。</li>
+</ul>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270851712.png" alt="方差和偏差" /></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>低偏差</th>
+<th>高偏差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>低方差</strong></td>
+<td>射手很稳，枪的准星也很准。</td>
+<td>射手很稳，但是枪的准星有问题，所有子弹都固定地偏向一侧。</td>
+</tr>
+<tr>
+<td><strong>高方差</strong></td>
+<td>射手不太稳，但枪的准星没问题，虽然弹着点分布很散，但没有整体偏移。</td>
+<td>射手不稳，而且枪的准星也有问题，弹着点分布很散且有规律地偏向一侧。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270900432.png" alt="偏差和方差" /></p>
+<p>我们希望偏差与方差越小越好，但实际并非如此。一般来说，偏差与方差是有冲突的，称为<strong>偏差-方差窘境 (bias-variance dilemma)</strong>。</p>
+<ul>
+<li>给定一个学习任务，在训练初期，由于训练不足，网络的拟合能力不够强，偏差比较大，也是由于拟合能力不强，数据集的特征也无法使网络产生显著变化，也就是欠拟合的情况。</li>
+<li>随着训练程度的加深，网络的拟合能力逐渐增强，训练数据的特征也能够渐渐被网络学到。</li>
+<li>充分训练后，网络的拟合能力已非常强，训练数据的微小特征都会导致网络发生显著变化，当训练数据自身的、非全局的特征被网络学到了，则将发生过拟合。</li>
+</ul>
+<h3 id="评估指标"><a class="markdownIt-Anchor" href="#评估指标"></a> 评估指标</h3>
+<h4 id="分类问题指标"><a class="markdownIt-Anchor" href="#分类问题指标"></a> 分类问题指标</h4>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270937734.png" alt="混淆矩阵" /><br />
+标签解释</p>
+<ul>
+<li><strong>P</strong>：样本数据中的正例数。</li>
+<li><strong>N</strong>：样本数据中的负例数。</li>
+<li><strong>Y</strong>：通过模型预测出来的正例数。</li>
+<li><strong>N</strong>：通过模型预测出来的负例数。</li>
+</ul>
+<p>组合解释</p>
+<ul>
+<li><strong>真阳性</strong>:True Positives，表示实际是正样本预测成正样本的样本数，真实为1，预测也为1。</li>
+<li><strong>假阳性</strong>:False Positives，表示实际是负样本预测成正样本的样本数，真实为0，预测为1。</li>
+<li><strong>假阴性</strong>:False Negatives，表示实际是正样本预测成负样本的样本数，真实为1，预测为0。</li>
+<li><strong>真阴性</strong>:True Negatives，表示实际是负样本预测成负样本的样本数，真实为0，预测也为0。</li>
+</ul>
+<p>计算公式</p>
+<ul>
+<li><strong>准确率Accuracy</strong>:分类模型总体判断的准确率(包括了所有class的总体准确率)。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext> Accuracy </mtext><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi><mo>+</mo><mi>F</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text { Accuracy }=\frac{T P+T N}{T P+T N+F P+F N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord"> Accuracy </span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.275662em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li><strong>精确率Precision</strong>: 预测为1的准确率。 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext> Precision </mtext><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text { Precision }=\frac{T P}{T P+F P}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord text"><span class="mord"> Precision </span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.275662em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li><strong>召回率ReCall</strong>：真实为1的准确率。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext> Recall </mtext><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text { Recall }=\frac{T P}{T P+F N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord text"><span class="mord"> Recall </span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.275662em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.872331em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">F</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li><strong>F1</strong>：对于某个分类，综合了Precision和Recall的一个判断指标，F1-Score的值是从0到1的，1是最好，0是最差。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>F</mi><mn>1</mn></msub><mtext> Score </mtext><mo>=</mo><mfrac><mrow><mn>2</mn><mo>∗</mo><mtext> Precision </mtext><mo>∗</mo><mtext> Recall </mtext></mrow><mrow><mtext> Precision </mtext><mo>+</mo><mtext> Recall </mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">F_{1} \text { Score }=\frac{2 * \text { Precision } * \text { Recall }}{\text { Precision }+\text { Recall }}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord text"><span class="mord"> Score </span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.283439em;vertical-align:-0.403331em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight"> Precision </span></span><span class="mbin mtight">+</span><span class="mord text mtight"><span class="mord mtight"> Recall </span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mbin mtight">∗</span><span class="mord text mtight"><span class="mord mtight"> Precision </span></span><span class="mbin mtight">∗</span><span class="mord text mtight"><span class="mord mtight"> Recall </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.403331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li><strong>AUC-ROC</strong>：反映的是对于任意一对正负例样本,模型将正样本预测为正例的可能性大于将负例预测为正例的可能性的概率。</li>
+</ul>
+<h4 id="回归问题指标"><a class="markdownIt-Anchor" href="#回归问题指标"></a> 回归问题指标</h4>
+<ul>
+<li><strong>均方差</strong><br />
+Mean Squared Error叫做均方误差,用真实值-预测值,然后平方之后求和平均。</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">E</mi></mrow><mo>=</mo><mfrac><mn>1</mn><mi>m</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><msup><mrow><mo fence="true">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathrm{MSE}=\frac{1}{m} \sum_{i=1}^{m}\left(y_{i}-\hat{y}_{i}\right)^{2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">M</span><span class="mord mathrm">S</span><span class="mord mathrm">E</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">m</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">^</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<ul>
+<li><strong>R平方</strong><br />
+Coefficient of Determination，也叫R Squared，翻译为拟合系数。其定义是，对于某个变量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>y</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">y_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>有一系列观测值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>y</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">y_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>（比如某个区域的100套房子价格），和对应的预测值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\hat{y}_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">^</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>（比如根据房型和面积预测出的房子价格</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo fence="true">(</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow><mrow><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo fence="true">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>y</mi><mo>ˉ</mo></mover><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">R^{2}=1-\frac{\sum_{i}\left(\hat{y}_{i}-y_{i}\right)^{2}}{\sum_{i}\left(y_{i}-\bar{y}\right)^{2}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.7874360000000005em;vertical-align:-1.143718em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6437180000000002em;"><span style="top:-2.155992em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16195399999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.56778em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">ˉ</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897100000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16195399999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">^</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.143718em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>其中， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>y</mi><mo>ˉ</mo></mover></mrow><annotation encoding="application/x-tex">\bar{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7622199999999999em;vertical-align:-0.19444em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.56778em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">ˉ</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span></span>是100套房子的平均价格。<br />
+R方的含义是，该预测模型解释了变量的方差的比例。方差衡量的是变量取值的分散程度或者波动范围，方差越小，说明变量值波动越小，换言之，变量的取值越容易被预测和猜中。假设R方=0.8，则说明拟合之后，变量的方差减小了80%，则变量的取值更容易被确定。比如，我们需要对房子进行估价，采用房型和面积对房子价格进行拟合之后，发现房屋价格的方差减小了80%，那么我们更容易得到房子价格的准确估计。</p>
+<h2 id="特征设计和模型优化"><a class="markdownIt-Anchor" href="#特征设计和模型优化"></a> 特征设计和模型优化</h2>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305843.jpg" alt="特征设计和模型优化" /></p>
+<p>特征工程是从现有数据中提取更多信息，以便提高模型的预测能力和学习速度的一门科学。在特征工程中，我们不会添加任何新的数据，而是让已有的数据发挥更大的作用。这一过程往往需要依靠数据领域的知识才能设计更有效的特征。</p>
+<p><strong>特征抽取</strong>和<strong>特征选择</strong>是DimensionalityReduction（降维）的两种方法。</p>
+<p><strong>维数灾难</strong>：当维数增大时，空间数据会变得更稀疏，这将导致bias和variance的增加，最后影响模型的预测效果。<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112280738673.png" alt="维数灾难" /></p>
+<h3 id="特征抽取"><a class="markdownIt-Anchor" href="#特征抽取"></a> 特征抽取</h3>
+<p><strong>特征抽取</strong>:从现有特征中创建新特征来自动降低数据集中维数的过程，特征抽取后的新特征是原来特征的一个映射。<br />
+Feature Extraction: Creatting a subset of new features by combinations of the exsiting features</p>
+<ul>
+<li><strong>目的</strong>：减少特征数据集中的属性(或者称为特征)的数目，DimensionalityReduction（降维）</li>
+<li><strong>手段</strong>：通过属性间的关系，如组合不同的属性得新的属性，这样就改变了原来的特征空间</li>
+</ul>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281042712.png" alt="特征抽取" /></p>
+<h3 id="特征选择"><a class="markdownIt-Anchor" href="#特征选择"></a> 特征选择</h3>
+<p><strong>特征选择</strong>:根据预测的重要性对现有属性进行排序，然后选择最相关的属性。特征选择后的特征是原来特征的一个子集。<br />
+Feature Selection: Choosing a subset of all the features(the ones more informative)</p>
+<ul>
+<li><strong>目的</strong>：减少特征数据集中的属性(或者称为特征)的数目，DimensionalityReduction（降维）</li>
+<li><strong>手段</strong>：从原始特征数据集中选择出子集，是一种包含的关系，没有更改原始的特征空间。</li>
+</ul>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281044198.png" alt="特征选择" /></p>
+<h3 id="特征创建和转换"><a class="markdownIt-Anchor" href="#特征创建和转换"></a> 特征创建和转换</h3>
+<p>于特征提取和特征选择不同，特征创建和转换不是一个减少维数的方法，相反，<strong>特征创建和转换是从现有特征中生成新特征的过程。</strong></p>
+<p>举个例子，加入我们将日期作为一个特征，其格式为两位数日期、两位数月份和两位数年份（日日-月月-年年），我们发现，将日期、月份和年份整合成一项特征对预测并没有太大帮助。相反，我们可以生成三项不同的特征，分别对应着日期，月份和年份，进而可能会发现其中某项特征和目标之间存在着有用的关系。</p>
+<h4 id="数值数据"><a class="markdownIt-Anchor" href="#数值数据"></a> 数值数据</h4>
+<ul>
+<li>对数转换</li>
+<li>平方或立方</li>
+<li>分箱</li>
+<li>缩放
+<ul>
+<li>均值/方差标准化<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>x</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow><mo>∗</mo></msubsup><mo>=</mo><mfrac><mrow><msub><mi>x</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub><mo>−</mo><msub><mi>μ</mi><mi>j</mi></msub></mrow><msub><mi>σ</mi><mi>j</mi></msub></mfrac></mrow><annotation encoding="application/x-tex">x_{i, j}^{*}=\frac{x_{i, j}-\mu_{j}}{\sigma_{j}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0834679999999999em;vertical-align:-0.394772em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-2.441336em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.394772em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.457971em;vertical-align:-0.5423199999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.915651em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.50732em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord mtight"><span class="mord mathdefault mtight">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5423199999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>最大最小缩放 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>x</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow><mo>∗</mo></msubsup><mo>=</mo><mfrac><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mi>min</mi><mo>⁡</mo><msub><mi>x</mi><mi>j</mi></msub></mrow><mrow><mi>max</mi><mo>⁡</mo><msub><mi>x</mi><mi>j</mi></msub><mo>−</mo><mi>min</mi><mo>⁡</mo><msub><mi>x</mi><mi>j</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">x_{i, j}^{*}=\frac{x_{i}-\min x_{j}}{\max x_{j}-\min x_{j}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0834679999999999em;vertical-align:-0.394772em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-2.441336em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.394772em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.517142em;vertical-align:-0.5423199999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9748220000000001em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight">max</span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mop mtight">min</span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.50732em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mop mtight">min</span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5423199999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>最大绝对值缩放 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>x</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow><mo>∗</mo></msubsup><mo>=</mo><mfrac><msub><mi>x</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub><mrow><mi>max</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mrow><mo fence="true">∣</mo><msub><mi>x</mi><mi>j</mi></msub><mo fence="true">∣</mo></mrow><mo fence="true">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">x_{i, j}^{*}=\frac{x_{i, j}}{\max \left(\left|x_{j}\right|\right)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0834679999999999em;vertical-align:-0.394772em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-2.441336em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.394772em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.351032em;vertical-align:-0.5423199999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.808712em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight">max</span><span class="minner mtight"><span class="mopen mtight delimcenter" style="top:0em;"><span class="mtight">(</span></span><span class="minner mtight"><span class="mopen mtight delimcenter" style="top:0em;"><span class="mtight">∣</span></span><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span><span class="mclose mtight delimcenter" style="top:0em;"><span class="mtight">∣</span></span></span><span class="mclose mtight delimcenter" style="top:0em;"><span class="mtight">)</span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.50732em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5423199999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>稳健缩放 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>x</mi><mi>i</mi><mo>∗</mo></msubsup><mo>=</mo><mfrac><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>Q</mi><mn>25</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><msub><mi>Q</mi><mn>75</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><msub><mi>Q</mi><mn>25</mn></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">x_{i}^{*}=\frac{x_{i}-Q_{25}(x)}{Q_{75}(x)-Q_{25}(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.94736em;vertical-align:-0.258664em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-2.441336em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.53em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">7</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span><span class="mbin mtight">−</span><span class="mord mtight"><span class="mord mathdefault mtight">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord mtight"><span class="mord mathdefault mtight">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">5</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>归一化</li>
+</ul>
+</li>
+</ul>
+<h4 id="分类数据"><a class="markdownIt-Anchor" href="#分类数据"></a> 分类数据</h4>
+<ul>
+<li>顺序：分类区分顺序，将定序变量中不同分类定义相对差值。</li>
+<li>名目：分类不区分顺序，采用独热码进行编码。</li>
+</ul>
+<h3 id="模型优化-超参优化"><a class="markdownIt-Anchor" href="#模型优化-超参优化"></a> 模型优化-超参优化</h3>
+<h4 id="超参的三种类型"><a class="markdownIt-Anchor" href="#超参的三种类型"></a> 超参的三种类型</h4>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281109739.png" alt="超参数的类型" /></p>
+<ul>
+<li><strong>模型超参数</strong>：可以帮助定义模型本身。例如,某些基于神经网络的模型需要我们在开始训练前先定义一个架构。这个架构会包含神经网络中特定数量的层,以及在其中使用的激活函数。以处理计算机视觉问题的神经网 络为例,我们需要定义架构的其他属性,例如筛选器大小、池化、步长和填充。</li>
+<li><strong>优化器超参数</strong>：与模型如何根据数据来确定模式相关,用于神经网络模型。这种类型的超参数包含梯度下降和随机梯度下降等优化器。还可以包含Adam等使用动量的优化器,或者使用Xavier初始化或He初始化等方法将参数权重初始化的优化器。</li>
+<li><strong>数据超参数</strong>：与数据本身的属性相关。这些属性包括定义不同的数据扩增方法(例如用于图像相关问题的裁剪或大小调整)的属性。这种参数一般在没有足够数 据或数据中没有足够变量时使用。</li>
+</ul>
+<h4 id="超参的优化类型"><a class="markdownIt-Anchor" href="#超参的优化类型"></a> 超参的优化类型</h4>
+<ul>
+<li>网格搜索（grid search）是超参数优化的传统方法，是对超参数组合的子集进行穷举搜索，找到表现最佳的超参数子集。</li>
+<li>随机搜索（random search），是对超参数组合的子集简单地做固定次数的随机搜索，找到表现最佳的超参数子集。对于规模较大的参数空间，采用随机搜索往往效率更高。</li>
+<li>贝叶斯优化(Bayesian Optimization) 与网格/随机搜索最大的不同，在于考虑了历史调参的信息，使得调参更有效率。（但在高维参数空间下，贝叶斯优化复杂度较高，效果会近似随机搜索。）<br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281118708.png" alt="网格搜索和随机搜索" /><br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281120191.png" alt="贝叶斯优化" /></li>
+</ul>
+<h2 id="模型部署"><a class="markdownIt-Anchor" href="#模型部署"></a> 模型部署</h2>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305005.jpg" alt="" /><br />
+模型部署指的是将模型及其资源集成到一个生产环境中，用于创建预测。</p>
+<h3 id="生产环境基础设置"><a class="markdownIt-Anchor" href="#生产环境基础设置"></a> 生产环境基础设置</h3>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281127053.png" alt="生产环境基础设施" /></p>
+<h3 id="推理类型"><a class="markdownIt-Anchor" href="#推理类型"></a> 推理类型</h3>
+<h4 id="批处理"><a class="markdownIt-Anchor" href="#批处理"></a> 批处理</h4>
+<ul>
+<li>模型在批量预测时可用</li>
+<li>推理分批进行</li>
+<li>数据集有多个行</li>
+<li>作业完成后按计划获取结果</li>
+</ul>
+<h4 id="实时"><a class="markdownIt-Anchor" href="#实时"></a> 实时</h4>
+<ul>
+<li>模型始终可用</li>
+<li>推理实时进行</li>
+<li>对数据进行单次观察</li>
+<li>用户交互时可实时获得结果</li>
+</ul>
+<h3 id="推理vs训练"><a class="markdownIt-Anchor" href="#推理vs训练"></a> 推理VS训练</h3>
+<p>推理是使用经训练的模型进行推断或预测测试样本的阶段,它与训练一样,包括用于预测值的前向传递。与训练不同的是,它不包括用于计算误差和更新权重的反向传递。</p>
+<table>
+<thead>
+<tr>
+<th>推理</th>
+<th>训练</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通常在单个输入上实时进行</td>
+<td>需要高并行度和大规模批处理能力，以提高吞吐量</td>
+</tr>
+<tr>
+<td>非计算/内存密集型</td>
+<td>计算/内存密集型</td>
+</tr>
+<tr>
+<td>集成到应用程序推展工作流程</td>
+<td>独立，未集成到应用程序堆栈</td>
+</tr>
+<tr>
+<td>在边缘和云中的不同设备上运行</td>
+<td>在云中运行</td>
+</tr>
+<tr>
+<td>持续运行</td>
+<td>运行频率通常较低（只训练一次，不经常训练）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="监控"><a class="markdownIt-Anchor" href="#监控"></a> 监控</h3>
+<p>监控预测的性能并触发告警从而采取进一步的行动，它对模型的进化至关重要。<br />
+监控关键的特征变化也很重要。</p>
+<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
+<ul>
+<li><a href="https://www.aws.training/Details/InstructorLedTraining?id=89189">The Machine Learning Pipeline on AWS (Simplified Chinese)</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>pipeline</tag>
+      </tags>
+  </entry>
 </search>
