@@ -5933,12 +5933,12 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 <h2 id="模型评估"><a class="markdownIt-Anchor" href="#模型评估"></a> 模型评估</h2>
 <p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304583.jpg" alt="模型评估" /></p>
 <h3 id="过拟合和欠拟合"><a class="markdownIt-Anchor" href="#过拟合和欠拟合"></a> 过拟合和欠拟合</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270848369.png" alt="过拟合和欠拟合" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270845483.png" alt="过拟合和欠拟合" /></p>
 <ul>
 <li><strong>欠拟合</strong>是指模型不能在训练集上获得足够低的误差。换句换说，就是模型复杂度低，模型在训练集上就表现很差，没法学习到数据背后的规律。</li>
 <li><strong>过拟合</strong>是指训练误差和测试误差之间的差距太大。换句换说，就是模型复杂度高于实际问题，模型在训练集上表现很好，但在测试集上却表现很差。模型对训练集&quot;死记硬背&quot;，没有理解数据背后的规律，泛化能力差。</li>
 </ul>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270845483.png" alt="过拟合和欠拟合" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270848369.png" alt="过拟合和欠拟合" /></p>
 <p><strong>解决方案</strong></p>
 <ul>
 <li><strong>欠拟合</strong>
