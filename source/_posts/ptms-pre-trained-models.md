@@ -133,7 +133,7 @@ Elmo模型的**本质思想**是先用语言模型学习一个单词的 Word Emb
 ### GPT
 GPT（Generative Pre-Training）模型用单向Transformer代替ELMo的LSTM来完成预训练任务，其将12个Transformer叠加起来。训练的过程较简单，将句子的n个词向量加上位置编码(positional encoding)后输入到 Transformer中 ，n个输出分别预测该位置的下一个词。
 
- GPT的单向Transformer结构和GPT的模型结构，如图所示：
+ GPT的单项Transformer结构和GPT的模型结构，如图所示：
 ![GPT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150547484.png)
 
 **评价**
