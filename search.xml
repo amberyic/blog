@@ -5752,7 +5752,7 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
       </tags>
   </entry>
   <entry>
-    <title>机器学习的基本流程和Pipeline搭建</title>
+    <title>机器学习的建模流程和Pipeline搭建</title>
     <url>/2021/12/28/ml-pipeline/</url>
     <content><![CDATA[<h2 id="机器学习"><a class="markdownIt-Anchor" href="#机器学习"></a> 机器学习</h2>
 <h3 id="经典编程方法-vs-机器学习方法"><a class="markdownIt-Anchor" href="#经典编程方法-vs-机器学习方法"></a> 经典编程方法 VS 机器学习方法</h3>
