@@ -405,7 +405,7 @@ footer:
   # 页脚第一行文字的 HTML，建议保留 Fluid 的链接，用于向更多人推广本主题
   # HTML of the first line of the footer, it is recommended to keep the Fluid link to promote this theme to more people
   content: ''
-  
+
   # 展示网站的 PV、UV 统计数
   # Display website PV and UV statistics
   statistics:
@@ -448,7 +448,7 @@ index:
   # Height ratio of banner image
   # Available: 0 - 100
   # banner_img_height: 100
-  banner_img_height: 40
+  banner_img_height: 45
 
   # 头图黑色蒙版的不透明度，available: 0 - 1.0， 1 是完全不透明
   # Opacity of the banner mask, 1.0 is completely opaque
@@ -517,7 +517,7 @@ index:
 post:
   banner_img: /img/default.png
   # banner_img_height: 70
-  banner_img_height: 40
+  banner_img_height: 45
   banner_mask_alpha: 0.3
 
   # 文章在首页的默认封面图，当没有指定 index_img 时会使用该图片，若两者都为空则不显示任何图片
@@ -812,7 +812,7 @@ cusdis:
 archive:
   banner_img: /img/default.png
   # banner_img_height: 60
-  banner_img_height: 40
+  banner_img_height: 45
   banner_mask_alpha: 0.3
   subtitle:
 
@@ -825,7 +825,7 @@ category:
   enable: true
   banner_img: /img/default.png
   # banner_img_height: 60
-  banner_img_height: 40
+  banner_img_height: 45
   banner_mask_alpha: 0.3
   subtitle: 分类
 
@@ -856,7 +856,7 @@ tag:
   enable: true
   banner_img: /img/default.png
   # banner_img_height: 80
-  banner_img_height: 40
+  banner_img_height: 45
   banner_mask_alpha: 0.3
   subtitle:
   tagcloud:
@@ -875,7 +875,7 @@ about:
   enable: true
   banner_img: /img/default.png
   # banner_img_height: 60
-  banner_img_height: 40
+  banner_img_height: 45
   banner_mask_alpha: 0.3
   subtitle: 关于我
   avatar: /img/avatar.png
@@ -899,7 +899,7 @@ about:
 page:
   banner_img: /img/default.png
   # banner_img_height: 60
-  banner_img_height: 40
+  banner_img_height: 45
   banner_mask_alpha: 0.3
 
 
@@ -911,7 +911,7 @@ page404:
   enable: true
   banner_img: /img/default.png
   # banner_img_height: 85
-  banner_img_height: 40
+  banner_img_height: 45
   banner_mask_alpha: 0.3
   subtitle: "Page not found"
 
