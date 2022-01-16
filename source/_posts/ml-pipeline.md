@@ -1,5 +1,5 @@
 ---
-title: 机器学习的基本流程和Pipeline搭建
+title: 机器学习的建模流程和Pipeline搭建
 date: 2021-12-28
 updated: 2021-12-28
 categories:
