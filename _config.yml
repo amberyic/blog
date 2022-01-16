@@ -5,16 +5,15 @@
 # Site
 title: 张浩在路上
 subtitle: 张浩在路上
-description: 张浩的个人博客，关注机器学习、计算广告和推荐系统。这里分享自己平时的学习笔记和日常思考。
+description: 算法工程师，关注机器学习和商业化变现，这里分享自己平时的学习笔记和日常思考。
 keywords: 算法工程师, 机器学习, 深度学习, 推荐系统, 计算广告, 技术变现, 个人成长
 author: ZhangHao
-language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
-## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://imzhanghao.com
-root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -29,7 +28,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: [README.md]
+skip_render:
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -51,6 +50,21 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
 
 # whether the hexo-generator-index2 include the offical hexo-generator-index, default is true
 index2_include_index: true # defult is true
@@ -80,6 +94,21 @@ index2_generator:
       - category 思维精进
       - category 读书笔记
 
+series:
+  technology:
+    keywords: 机器学习,并行计算,程序开发
+    slogan: 技术系列文章：机器学习，工程系统。
+    description: 技术系列文章,这里分享我关于机器学习、深度学习、并行计算以及前后端开发相关的经验和笔记。
+  monetization:
+    keywords: 联盟营销,计算广告,流量变现
+    slogan: 变现系列文章：商业化变现，打造赚钱系统。
+    description: 变现系列文章,这里分享我关于技术变现，流量变现以及打造赚钱系统的学习和实践经验。
+  thinking:
+    keywords: 思维精进,读书笔记,个人成长
+    slogan: 思考系列文章：读书，思考，个人成长。
+    description: 思考系列文章，这里分享我关于对于一些问题的思考以及一些读书笔记。
+
+
 # Category & Tag
 default_category: 未分类
 category_map:
@@ -89,17 +118,6 @@ category_map:
   并行计算: bigdata
   机器学习: machinelearning
 tag_map:
-
-series:
-  technology:
-    keywords: 机器学习,并行计算,程序开发
-    description: 技术系列文章,这里分享我关于机器学习、深度学习、并行计算以及前后端开发相关的经验和笔记。
-  monetization:
-    keywords: 联盟营销,计算广告,流量变现
-    description: 变现系列文章,这里分享我关于技术变现，流量变现以及打造赚钱系统的学习和实践经验。
-  thinking:
-    keywords: 思维精进,读书笔记,个人成长
-    description: 思考系列文章，这里分享我关于对于一些问题的思考以及一些读书笔记。
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
@@ -111,20 +129,13 @@ meta_generator: true
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## Use post's date for updated date unless set in front-matter
-updated_option: 'date'
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
 per_page: 10
 pagination_dir: page
-
-# Search
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
@@ -135,8 +146,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-plugins: hexo-generate-feed
-theme: yinwang
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
