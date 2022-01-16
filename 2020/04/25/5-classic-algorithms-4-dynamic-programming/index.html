@@ -1,18 +1,275 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="动态规划, 最长公共子串LCS, 最长递增子序列LIS, 最大连续子序列之和, 01背包问题, 青蛙跳台阶问题, 收集苹果, 数塔取数问题, 免费馅饼问题"><meta name="description" content="动态规划是面试中最经常考到的问题，它是功过拆解问题，定义问题状态和状态之间的关系，是的问题能够用递推的方式来解决。本文讲解动态规划的概念、基本思路，以及在经典问题中的实际应用，配合代码，直观明了。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>五大经典算法|4.动态规划 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>五大经典算法|4.动态规划</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text"> 概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text"> 思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E4%BE%8B%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text"> 经典例题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2lcs"><span class="toc-number">3.1.</span> <span class="toc-text"> 最长公共子串(LCS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97lis"><span class="toc-number">3.2.</span> <span class="toc-text"> 最长递增子序列(LIS)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97%E4%B9%8B%E5%92%8C"><span class="toc-number">3.3.</span> <span class="toc-text"> 最大连续子序列之和</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-number">3.4.</span> <span class="toc-text"> 01背包问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98"><span class="toc-number">3.5.</span> <span class="toc-text"> 青蛙跳台阶问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B6%E9%9B%86%E8%8B%B9%E6%9E%9C"><span class="toc-number">3.6.</span> <span class="toc-text"> 收集苹果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%A1%94%E5%8F%96%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-number">3.7.</span> <span class="toc-text"> 数塔取数问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8D%E8%B4%B9%E9%A6%85%E9%A5%BC%E9%97%AE%E9%A2%98"><span class="toc-number">3.8.</span> <span class="toc-text"> 免费馅饼问题</span></a></li></ol></li></ol></div><p>动态规划是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推(或者说分治)的方式去解决。</p>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="动态规划, 最长公共子串LCS, 最长递增子序列LIS, 最大连续子序列之和, 01背包问题, 青蛙跳台阶问题, 收集苹果, 数塔取数问题, 免费馅饼问题">
+  
+    <meta name="description" content="动态规划是面试中最经常考到的问题，它是功过拆解问题，定义问题状态和状态之间的关系，是的问题能够用递推的方式来解决。本文讲解动态规划的概念、基本思路，以及在经典问题中的实际应用，配合代码，直观明了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="五大经典算法|4.动态规划">
+<meta property="og:url" content="https://imzhanghao.com/2020/04/25/5-classic-algorithms-4-dynamic-programming/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="动态规划是面试中最经常考到的问题，它是功过拆解问题，定义问题状态和状态之间的关系，是的问题能够用递推的方式来解决。本文讲解动态规划的概念、基本思路，以及在经典问题中的实际应用，配合代码，直观明了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-16T14:27:03.868Z">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="五大经典算法">
+<meta property="article:tag" content="动态规划">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>五大经典算法|4.动态规划 - 张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="五大经典算法|4.动态规划">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-25 00:00" pubdate>
+        2020年4月25日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      72 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">五大经典算法|4.动态规划</h1>
+            
+            <div class="markdown-body">
+              <p>动态规划是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推(或者说分治)的方式去解决。</p>
 <p>经典例题: 最长公共子串LCS, 最长递增子序列LIS, 最大连续子序列之和, 01背包问题, 青蛙跳台阶问题, 收集苹果, 数塔取数问题, 免费馅饼问题</p>
 <h2 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h2>
 <p>dynamic programming is a method for solving a complex problem by breaking it down into a collection of simpler subproblems.</p>
@@ -40,35 +297,35 @@
 <p>dp[i,j] = max(dp[i-1][j],dp[i][j-1])      IF:   i&gt;0,j&gt;0, a[i] != b[j]</p>
 <details>
   <summary>动态规划解决最长公共子串问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdio.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 6</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printLSC</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j,<span class="keyword">char</span> *a, <span class="keyword">int</span> status[][N])</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (i == <span class="number">0</span> || j== <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span> (status[i][j] == <span class="number">0</span>)&#123;</span><br><span class="line">    printLSC(i<span class="number">-1</span>,j<span class="number">-1</span>,a,status);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,a[i]);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (status[i][j] == <span class="number">1</span>)</span><br><span class="line">      printLSC(i<span class="number">-1</span>,j,a,status);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      printLSC(i,j<span class="number">-1</span>,a,status);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main()&#123;</span><br><span class="line">  <span class="keyword">int</span> i,j;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">char</span> a[] = &#123;<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>&#125;;</span><br><span class="line">  <span class="keyword">char</span> b[] = &#123;<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;A&#x27;</span>&#125;;</span><br><span class="line">  <span class="keyword">int</span> status[M][N]; <span class="comment">//保存状态</span></span><br><span class="line">  <span class="keyword">int</span> dp[M][N];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; M; i++)</span><br><span class="line">    <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">      dp[i][j] = <span class="number">0</span>;</span><br><span class="line">      status[i][j] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; M; i++)</span><br><span class="line">    <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt; N; j++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(a[i] == b[j])&#123;</span><br><span class="line">        dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">        status[i][j] = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(dp[i][j<span class="number">-1</span>] &gt;= dp[i<span class="number">-1</span>][j])&#123;</span><br><span class="line">        dp[i][j] = dp[i][j<span class="number">-1</span>];</span><br><span class="line">        status[i][j] = <span class="number">2</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">        dp[i][j] = dp[i<span class="number">-1</span>][j];</span><br><span class="line">        status[i][j] = <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;最大长度：%d&quot;</span>,dp[M<span class="number">-1</span>][N<span class="number">-1</span>]);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">  printLSC(M<span class="number">-1</span>,N<span class="number">-1</span>,a,status);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;stdio.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> M 8</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 6</span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printLSC</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j,<span class="hljs-keyword">char</span> *a, <span class="hljs-keyword">int</span> status[][N])</span></span>&#123;<br>  <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || j== <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span>;<br>  <span class="hljs-keyword">if</span> (status[i][j] == <span class="hljs-number">0</span>)&#123;<br>    printLSC(i<span class="hljs-number">-1</span>,j<span class="hljs-number">-1</span>,a,status);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,a[i]);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">if</span> (status[i][j] == <span class="hljs-number">1</span>)<br>      printLSC(i<span class="hljs-number">-1</span>,j,a,status);<br>    <span class="hljs-keyword">else</span><br>      printLSC(i,j<span class="hljs-number">-1</span>,a,status);<br>  &#125;<br>&#125;<br><br>main()&#123;<br>  <span class="hljs-keyword">int</span> i,j;<br><br>  <span class="hljs-keyword">char</span> a[] = &#123;<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-string">&#x27;C&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>&#125;;<br>  <span class="hljs-keyword">char</span> b[] = &#123;<span class="hljs-string">&#x27; &#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-string">&#x27;C&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-string">&#x27;A&#x27;</span>&#125;;<br>  <span class="hljs-keyword">int</span> status[M][N]; <span class="hljs-comment">//保存状态</span><br>  <span class="hljs-keyword">int</span> dp[M][N];<br><br>  <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; M; i++)<br>    <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>; j &lt; N; j++) &#123;<br>      dp[i][j] = <span class="hljs-number">0</span>;<br>      status[i][j] = <span class="hljs-number">0</span>;<br>    &#125;<br><br>  <span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt; M; i++)<br>    <span class="hljs-keyword">for</span>(j = <span class="hljs-number">1</span>; j &lt; N; j++)&#123;<br>      <span class="hljs-keyword">if</span>(a[i] == b[j])&#123;<br>        dp[i][j] = dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] + <span class="hljs-number">1</span>;<br>        status[i][j] = <span class="hljs-number">0</span>;<br>      &#125;<br>      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(dp[i][j<span class="hljs-number">-1</span>] &gt;= dp[i<span class="hljs-number">-1</span>][j])&#123;<br>        dp[i][j] = dp[i][j<span class="hljs-number">-1</span>];<br>        status[i][j] = <span class="hljs-number">2</span>;<br>      &#125;<br>      <span class="hljs-keyword">else</span>&#123;<br>        dp[i][j] = dp[i<span class="hljs-number">-1</span>][j];<br>        status[i][j] = <span class="hljs-number">1</span>;<br>      &#125;<br>    &#125;<br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;最大长度：%d&quot;</span>,dp[M<span class="hljs-number">-1</span>][N<span class="hljs-number">-1</span>]);<br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>  printLSC(M<span class="hljs-number">-1</span>,N<span class="hljs-number">-1</span>,a,status);<br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
 </details>
 <h3 id="最长递增子序列lis"><a class="markdownIt-Anchor" href="#最长递增子序列lis"></a> 最长递增子序列(LIS)</h3>
 <p>给定一个序列 An = a1 ,a2 ,  … , an,找出最长的子序列使得对所有 i &lt; j,ai &lt; aj 。</p>
 <p>转移方程：b[k]=max(max(b[j]|a[j]&lt;a[k],j&lt;k)+1,1);</p>
 <details>
   <summary>动态规划解决最长递增子序列问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdio.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">main()&#123;</span><br><span class="line">  <span class="keyword">int</span> i,j,length,max=<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> a[] = &#123;</span><br><span class="line">    <span class="number">1</span>,<span class="number">-1</span>,<span class="number">2</span>,<span class="number">-3</span>,<span class="number">4</span>,<span class="number">-5</span>,<span class="number">6</span>,<span class="number">-7</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">int</span> *b;</span><br><span class="line">  b = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(a));</span><br><span class="line">  length = <span class="keyword">sizeof</span>(a)/<span class="keyword">sizeof</span>(a[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; length; i++)&#123;</span><br><span class="line">    b[i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(a[i] &gt; a[j] &amp;&amp; b[i] &lt;= b[j])&#123;</span><br><span class="line">        b[i] = b[j] + <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">    <span class="keyword">if</span>(b[i] &gt; max)</span><br><span class="line">      max = b[i];</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,max);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;stdio.h&quot;</span></span><br><br>main()&#123;<br>  <span class="hljs-keyword">int</span> i,j,length,max=<span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">int</span> a[] = &#123;<br>    <span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">-3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">-5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">-7</span><br>  &#125;;<br>  <span class="hljs-keyword">int</span> *b;<br>  b = (<span class="hljs-keyword">int</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(a));<br>  length = <span class="hljs-keyword">sizeof</span>(a)/<span class="hljs-keyword">sizeof</span>(a[<span class="hljs-number">0</span>]);<br><br>  <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; length; i++)&#123;<br>    b[i] = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>; j &lt; i; j++)&#123;<br>      <span class="hljs-keyword">if</span>(a[i] &gt; a[j] &amp;&amp; b[i] &lt;= b[j])&#123;<br>        b[i] = b[j] + <span class="hljs-number">1</span>;<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; length; i++)<br>    <span class="hljs-keyword">if</span>(b[i] &gt; max)<br>      max = b[i];<br><br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,max);<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 </details>
 <h3 id="最大连续子序列之和"><a class="markdownIt-Anchor" href="#最大连续子序列之和"></a> 最大连续子序列之和</h3>
 <p>给定K个整数的序列{ N1, N2, …, NK }，其任意连续子序列可表示为{ Ni, Ni+1, …, Nj }，其中 1 &lt;= i &lt;= j &lt;= K。最大连续子序列是所有连续子序中元素和最大的一个， 例如给定序列{ -2, 11, -4, 13, -5, -2 }，其最大连续子序列为{ 11, -4, 13 }，最大和为20。</p>
 <p>状态转移方程： sum[i]=max(sum[i-1]+a[i],a[i])</p>
 <details>
   <summary>动态规划解决最大连续子序列问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdio.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">main()&#123;</span><br><span class="line">  <span class="keyword">int</span> i,sum = <span class="number">0</span>, max = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> data[] = &#123;</span><br><span class="line">    <span class="number">1</span>,<span class="number">-2</span>,<span class="number">3</span>,<span class="number">-1</span>,<span class="number">7</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(data)/<span class="keyword">sizeof</span>(data[<span class="number">0</span>]); i++)&#123;</span><br><span class="line">    sum += data[i];</span><br><span class="line">    <span class="keyword">if</span>(sum &gt; max)</span><br><span class="line">      max = sum;</span><br><span class="line">    <span class="keyword">if</span>(sum &lt; <span class="number">0</span>)</span><br><span class="line">      sum = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,max);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;stdio.h&quot;</span></span><br><br>main()&#123;<br>  <span class="hljs-keyword">int</span> i,sum = <span class="hljs-number">0</span>, max = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">int</span> data[] = &#123;<br>    <span class="hljs-number">1</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">7</span><br>  &#125;;<br>  <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">sizeof</span>(data)/<span class="hljs-keyword">sizeof</span>(data[<span class="hljs-number">0</span>]); i++)&#123;<br>    sum += data[i];<br>    <span class="hljs-keyword">if</span>(sum &gt; max)<br>      max = sum;<br>    <span class="hljs-keyword">if</span>(sum &lt; <span class="hljs-number">0</span>)<br>      sum = <span class="hljs-number">0</span>;<br>  &#125;<br>  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,max);<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 </details>
 <h3 id="01背包问题"><a class="markdownIt-Anchor" href="#01背包问题"></a> 01背包问题</h3>
 <p>有N件物品和一个容量为V的背包。第i件物品的费用是c[i]，价值是w[i]。求解将哪些物品装入背包可使价值总和最大。</p>
 <p>转移方程：dp[i][j] = max(dp[i-1][j],dp[i-1][j-weight[i]] + value[i]</p>
 <details>
   <summary>动态规划解决01背包问题的C语言实现代码</summary>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;stdio.h&quot;</span><br><span class="line">#define max(a,b) ((a)&gt;(b)?(a):(b))</span><br><span class="line"></span><br><span class="line">main() &#123;</span><br><span class="line">  int v = 10 ;</span><br><span class="line">  int n = 5 ;</span><br><span class="line"></span><br><span class="line">  int value[] = &#123;0, 8 , 10 , 4 , 5 , 5&#125;;</span><br><span class="line">  int weight[] = &#123;0, 6 , 4 , 2 , 4 , 3&#125;;</span><br><span class="line">  int i,j;</span><br><span class="line">  int dp[n+1][v+1];</span><br><span class="line">  for(i = 0; i &lt; n+1; i++)</span><br><span class="line">    for(j = 0; j &lt; v+1; j++)</span><br><span class="line">      dp[i][j] = 0;</span><br><span class="line"></span><br><span class="line">  for (i = 1; i &lt;= n; i++)&#123;</span><br><span class="line">    for (j = 1; j &lt;= v; j++)&#123;</span><br><span class="line">      if (j &gt;= weight[i])</span><br><span class="line">        dp[i][j] = max(dp[i-1][j],dp[i-1][j-weight[i]] + value[i]);</span><br><span class="line">      else</span><br><span class="line">        dp[i][j] = dp[i-1][j];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  printf(&quot;%d&quot;,dp[n][v]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight prolog"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs prolog">#include <span class="hljs-string">&quot;stdio.h&quot;</span><br>#define max(a,b) ((a)&gt;(b)?(a):(b))<br><br>main() &#123;<br>  int v = <span class="hljs-number">10</span> ;<br>  int n = <span class="hljs-number">5</span> ;<br><br>  int value[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">8</span> , <span class="hljs-number">10</span> , <span class="hljs-number">4</span> , <span class="hljs-number">5</span> , <span class="hljs-number">5</span>&#125;;<br>  int weight[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">6</span> , <span class="hljs-number">4</span> , <span class="hljs-number">2</span> , <span class="hljs-number">4</span> , <span class="hljs-number">3</span>&#125;;<br>  int i,j;<br>  int dp[n+<span class="hljs-number">1</span>][v+<span class="hljs-number">1</span>];<br>  for(i = <span class="hljs-number">0</span>; i &lt; n+<span class="hljs-number">1</span>; i++)<br>    for(j = <span class="hljs-number">0</span>; j &lt; v+<span class="hljs-number">1</span>; j++)<br>      dp[i][j] = <span class="hljs-number">0</span>;<br><br>  for (i = <span class="hljs-number">1</span>; i &lt;= n; i++)&#123;<br>    for (j = <span class="hljs-number">1</span>; j &lt;= v; j++)&#123;<br>      if (j &gt;= weight[i])<br>        dp[i][j] = max(dp[i<span class="hljs-number">-1</span>][j],dp[i<span class="hljs-number">-1</span>][j-weight[i]] + value[i]);<br>      else<br>        dp[i][j] = dp[i<span class="hljs-number">-1</span>][j];<br>    &#125;<br>  &#125;<br><br>  printf(<span class="hljs-string">&quot;%d&quot;</span>,dp[n][v]);<br>&#125;<br></code></pre></div></td></tr></table></figure>
 </details>
 <h3 id="青蛙跳台阶问题"><a class="markdownIt-Anchor" href="#青蛙跳台阶问题"></a> 青蛙跳台阶问题</h3>
 <p>一只青蛙可以一次跳一级台阶，也可以一次跳两级台阶，如果青蛙要跳上n级台阶，共有多少钟跳法？</p>
 <p>当青蛙即将跳上n级台阶时，共有两种可能性，一种是从n-1级台阶跳一步到n级，另外一种是从n-2级台阶跳两步到n级，所以求到n级台阶的所有可能性f(n)就转变为了求到n-2级台阶的所有可能性f(n-2)和到n-1级台阶的所有可能性f(n-1)之和，以此类推至最后f(2)=f(0)+f(1)=1+1。递推公式就是f(n) = f(n - 1) + f(n - 2)</p>
 <details>
   <summary>动态规划解决青蛙跳台阶问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fibonacci</span> &#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] dp = &#123; <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span> &#125;;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="comment">//递推公式f(n) = f(n - 1) + f(n -2)</span></span><br><span class="line">      dp[<span class="number">2</span>] = dp[<span class="number">0</span>] + dp[<span class="number">1</span>];</span><br><span class="line">      dp[<span class="number">0</span>] = dp[<span class="number">1</span>];</span><br><span class="line">      dp[<span class="number">1</span>] = dp[<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">2</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Fibonacci fb = <span class="keyword">new</span> Fibonacci();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      System.out.print(fb.fibonacci(i));</span><br><span class="line">      System.out.print(<span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fibonacci</span> &#123;</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">fibonacci</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span>[] dp = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span> &#125;;<br>    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">2</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++) &#123;<br>      <span class="hljs-comment">//递推公式f(n) = f(n - 1) + f(n -2)</span><br>      dp[<span class="hljs-number">2</span>] = dp[<span class="hljs-number">0</span>] + dp[<span class="hljs-number">1</span>];<br>      dp[<span class="hljs-number">0</span>] = dp[<span class="hljs-number">1</span>];<br>      dp[<span class="hljs-number">1</span>] = dp[<span class="hljs-number">2</span>];<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[<span class="hljs-number">2</span>];<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Fibonacci fb = <span class="hljs-keyword">new</span> Fibonacci();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>      System.out.print(fb.fibonacci(i));<br>      System.out.print(<span class="hljs-string">&quot; &quot;</span>);<br>    &#125;<br><br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 </details>
 <blockquote>
 <p>相关题目 – 青蛙变态跳台阶问题<br />
@@ -96,7 +353,7 @@ dp[x][y] = max( if(x&gt;0) dp[x-1][y] , if(y&gt;0) dp[x][y-1])</p>
 </ul>
 <details>
   <summary>动态规划解决收集苹果问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100</span>][<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">100</span>][<span class="number">100</span>];</span><br><span class="line"><span class="keyword">int</span> m,n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp_fun</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">  dp[x][y] = a[x][y];</span><br><span class="line">  <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span>(x &gt; <span class="number">0</span> &amp;&amp; max &lt; dp[x<span class="number">-1</span>][y]) &#123;</span><br><span class="line">    max = dp[x<span class="number">-1</span>][y];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(y &gt; <span class="number">0</span> &amp;&amp; max &lt; dp[x][y<span class="number">-1</span>]) &#123;</span><br><span class="line">    max = dp[x][y<span class="number">-1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  dp[x][y] += max;</span><br><span class="line">  <span class="keyword">if</span>(x&lt;m<span class="number">-1</span>) &#123;</span><br><span class="line">    dp_fun(x+<span class="number">1</span>,y);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(y&lt;n<span class="number">-1</span>) &#123;</span><br><span class="line">    dp_fun(x,y+<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++) &#123;</span><br><span class="line">      <span class="built_in">cin</span>&gt;&gt;a[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  dp_fun(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++) &#123;</span><br><span class="line">      <span class="built_in">cout</span>&lt;&lt;dp[i][j]&lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-keyword">int</span> a[<span class="hljs-number">100</span>][<span class="hljs-number">100</span>];<br><span class="hljs-keyword">int</span> dp[<span class="hljs-number">100</span>][<span class="hljs-number">100</span>];<br><span class="hljs-keyword">int</span> m,n;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dp_fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span> </span>&#123;<br>  dp[x][y] = a[x][y];<br>  <span class="hljs-keyword">int</span> max = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">if</span>(x &gt; <span class="hljs-number">0</span> &amp;&amp; max &lt; dp[x<span class="hljs-number">-1</span>][y]) &#123;<br>    max = dp[x<span class="hljs-number">-1</span>][y];<br>  &#125;<br>  <span class="hljs-keyword">if</span>(y &gt; <span class="hljs-number">0</span> &amp;&amp; max &lt; dp[x][y<span class="hljs-number">-1</span>]) &#123;<br>    max = dp[x][y<span class="hljs-number">-1</span>];<br>  &#125;<br>  dp[x][y] += max;<br>  <span class="hljs-keyword">if</span>(x&lt;m<span class="hljs-number">-1</span>) &#123;<br>    dp_fun(x+<span class="hljs-number">1</span>,y);<br>  &#125;<br>  <span class="hljs-keyword">if</span>(y&lt;n<span class="hljs-number">-1</span>) &#123;<br>    dp_fun(x,y+<span class="hljs-number">1</span>);<br>  &#125;<br>  <span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(dp));<br>  <span class="hljs-built_in">cin</span>&gt;&gt;m&gt;&gt;n;<br>  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;m;i++) &#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;n;j++) &#123;<br>      <span class="hljs-built_in">cin</span>&gt;&gt;a[i][j];<br>    &#125;<br>  &#125;<br>  dp_fun(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;m;i++) &#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;n;j++) &#123;<br>      <span class="hljs-built_in">cout</span>&lt;&lt;dp[i][j]&lt;&lt;<span class="hljs-string">&quot;\t&quot;</span>;<br>    &#125;<br>    <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 </details>
 <h3 id="数塔取数问题"><a class="markdownIt-Anchor" href="#数塔取数问题"></a> 数塔取数问题</h3>
 <p>一个高度为N的由正整数组成的三角形，从上走到下，求经过的数字和的最大值。每次只能走到下一层相邻的数上，例如从第3层的6向下走，只能走到第4层的2或9上。<br />
@@ -111,7 +368,7 @@ dp[x][y] = max( if(x&gt;0) dp[x-1][y] , if(y&gt;0) dp[x][y-1])</p>
 <p>这类问题的思考方法：假设后续步骤的结果已知，比如这里假设已经知道沿12方向的最大值x和沿15方向的最大值y。</p>
 <details>
   <summary>动态规划解决数塔取数问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span>    <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>        N    10000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>        Max(a,b)    ((a) &gt; (b) ? (a) : (b))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>     a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>        n , m , i , k , j;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;m);</span><br><span class="line">    <span class="keyword">while</span>(m-- &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">        k = (<span class="number">1</span> + n) * n / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">1</span> ; i &lt;= k; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,a+i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        k = k - n;</span><br><span class="line">        <span class="keyword">for</span>(i = k , j = <span class="number">0</span> ; i &gt;= <span class="number">1</span> ; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            a[i] = a[i] + Max(a[i+n],a[i+n<span class="number">-1</span>]);</span><br><span class="line">            <span class="keyword">if</span>(++j == n <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                n--;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,a[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>    <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span>    <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>        N    10000</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span>        Max(a,b)    ((a) &gt; (b) ? (a) : (b))</span><br><br><span class="hljs-keyword">int</span>     a[N];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span>        n , m , i , k , j;<br><br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;m);<br>    <span class="hljs-keyword">while</span>(m-- &gt; <span class="hljs-number">0</span>)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>        k = (<span class="hljs-number">1</span> + n) * n / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span> ; i &lt;= k; i++)<br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,a+i);<br>        &#125;<br><br>        k = k - n;<br>        <span class="hljs-keyword">for</span>(i = k , j = <span class="hljs-number">0</span> ; i &gt;= <span class="hljs-number">1</span> ; i--)<br>        &#123;<br>            a[i] = a[i] + Max(a[i+n],a[i+n<span class="hljs-number">-1</span>]);<br>            <span class="hljs-keyword">if</span>(++j == n <span class="hljs-number">-1</span>)<br>            &#123;<br>                n--;<br>                j = <span class="hljs-number">0</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,a[<span class="hljs-number">1</span>]);<br>    &#125;<br><br>    <span class="hljs-keyword">return</span>    <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 </details>
 <h3 id="免费馅饼问题"><a class="markdownIt-Anchor" href="#免费馅饼问题"></a> 免费馅饼问题</h3>
 <p>都说天上不会掉馅饼，但有一天gameboy正走在回家的小径上，忽然天上掉下大把大把的馅饼。说来gameboy的人品实在是太好了，这馅饼别处都不掉，就掉落在他身旁的10米范围内。馅饼如果掉在了地上当然就不能吃了，所以gameboy马上卸下身上的背包去接。但由于小径两侧都不能站人，所以他只能在小径上接。由于gameboy平时老呆在房间里玩游戏，虽然在游戏中是个身手敏捷的高手，但在现实中运动神经特别迟钝，每秒种只有在移动不超过一米的范围内接住坠落的馅饼。现在给这条小径如图标上坐标：</p>
@@ -134,6 +391,285 @@ dp[x][y] = max( if(x&gt;0) dp[x-1][y] , if(y&gt;0) dp[x][y-1])</p>
 <p>类似于DP中的数塔，不过要倒过来算，从下往上算，最后输出初始位置的数即可， 为了便于判断边界，可以将数组宽度开大一些，让它从1~11计数，这样就不用单独计算边界了， 如果数塔不懂，可以看我之前发的经典数塔题。</p>
 <details>
   <summary>动态规划解决免费馅饼问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_ARRAY_SIZE 100000</span></span><br><span class="line"><span class="keyword">int</span> data[MAX_ARRAY_SIZE][<span class="number">11</span>];<span class="comment">//存放最初的数据</span></span><br><span class="line"><span class="keyword">int</span> cost[MAX_ARRAY_SIZE][<span class="number">11</span>];<span class="comment">//存放各个子问题的最优解</span></span><br><span class="line"><span class="keyword">int</span> mark[MAX_ARRAY_SIZE][<span class="number">11</span>];<span class="comment">//存放输出最优解方案标志</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n;</span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n),n!=<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">memset</span>(data,<span class="number">0</span>,<span class="keyword">sizeof</span>(data));</span><br><span class="line">    <span class="keyword">int</span> i,x,T,max_T=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">//初始化data</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">      <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x,&amp;T);</span><br><span class="line">      <span class="keyword">if</span>(T&gt;max_T)</span><br><span class="line">        max_T=T;</span><br><span class="line">      data[T][x]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//dp初始化</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">11</span>;i++)&#123;</span><br><span class="line">      cost[max_T][i]=data[max_T][i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//dp过程</span></span><br><span class="line">    <span class="keyword">for</span>(i=max_T<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">      <span class="keyword">int</span> j;</span><br><span class="line">      <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">11</span>;j++)&#123;</span><br><span class="line">        <span class="keyword">int</span> lvalue,mvalue,rvalue,maxvalue;</span><br><span class="line">        <span class="keyword">if</span>(j==<span class="number">0</span>)&#123;</span><br><span class="line">          lvalue=<span class="number">-1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          lvalue=cost[i+<span class="number">1</span>][j<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        mvalue=data[i+<span class="number">1</span>][j];</span><br><span class="line">        <span class="keyword">if</span>(j==<span class="number">10</span>)&#123;</span><br><span class="line">          rvalue=<span class="number">-1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          rvalue=cost[i+<span class="number">1</span>][j+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(lvalue&gt;mvalue)&#123;</span><br><span class="line">          maxvalue=lvalue;</span><br><span class="line">          mark[i][j]=<span class="number">-1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(mvalue&gt;rvalue)&#123;</span><br><span class="line">            maxvalue=mvalue;</span><br><span class="line">            mark[i][j]=<span class="number">0</span>;</span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            maxvalue=rvalue;</span><br><span class="line">            mark[i][j]=<span class="number">1</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cost[i][j]=data[i][j]+maxvalue;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,cost[<span class="number">0</span>][<span class="number">5</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</details><!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2020/04/25/5-classic-algorithms-4-dynamic-programming/">https://imzhanghao.com/2020/04/25/5-classic-algorithms-4-dynamic-programming/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4128258433761966" data-ad-slot="1528926940" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_ARRAY_SIZE 100000</span><br><span class="hljs-keyword">int</span> data[MAX_ARRAY_SIZE][<span class="hljs-number">11</span>];<span class="hljs-comment">//存放最初的数据</span><br><span class="hljs-keyword">int</span> cost[MAX_ARRAY_SIZE][<span class="hljs-number">11</span>];<span class="hljs-comment">//存放各个子问题的最优解</span><br><span class="hljs-keyword">int</span> mark[MAX_ARRAY_SIZE][<span class="hljs-number">11</span>];<span class="hljs-comment">//存放输出最优解方案标志</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc,<span class="hljs-keyword">char</span> *argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-keyword">int</span> n;<br>  <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n),n!=<span class="hljs-number">0</span>)&#123;<br>    <span class="hljs-built_in">memset</span>(data,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span>(data));<br>    <span class="hljs-keyword">int</span> i,x,T,max_T=<span class="hljs-number">0</span>;<br>    <span class="hljs-comment">//初始化data</span><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>      <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;x,&amp;T);<br>      <span class="hljs-keyword">if</span>(T&gt;max_T)<br>        max_T=T;<br>      data[T][x]++;<br>    &#125;<br>    <span class="hljs-comment">//dp初始化</span><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">11</span>;i++)&#123;<br>      cost[max_T][i]=data[max_T][i];<br>    &#125;<br>    <span class="hljs-comment">//dp过程</span><br>    <span class="hljs-keyword">for</span>(i=max_T<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>      <span class="hljs-keyword">int</span> j;<br>      <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">11</span>;j++)&#123;<br>        <span class="hljs-keyword">int</span> lvalue,mvalue,rvalue,maxvalue;<br>        <span class="hljs-keyword">if</span>(j==<span class="hljs-number">0</span>)&#123;<br>          lvalue=<span class="hljs-number">-1</span>;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>          lvalue=cost[i+<span class="hljs-number">1</span>][j<span class="hljs-number">-1</span>];<br>        &#125;<br>        mvalue=data[i+<span class="hljs-number">1</span>][j];<br>        <span class="hljs-keyword">if</span>(j==<span class="hljs-number">10</span>)&#123;<br>          rvalue=<span class="hljs-number">-1</span>;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>          rvalue=cost[i+<span class="hljs-number">1</span>][j+<span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-keyword">if</span>(lvalue&gt;mvalue)&#123;<br>          maxvalue=lvalue;<br>          mark[i][j]=<span class="hljs-number">-1</span>;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>          <span class="hljs-keyword">if</span>(mvalue&gt;rvalue)&#123;<br>            maxvalue=mvalue;<br>            mark[i][j]=<span class="hljs-number">0</span>;<br>          &#125;<span class="hljs-keyword">else</span>&#123;<br>            maxvalue=rvalue;<br>            mark[i][j]=<span class="hljs-number">1</span>;<br>          &#125;<br>        &#125;<br>        cost[i][j]=data[i][j]+maxvalue;<br>      &#125;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,cost[<span class="hljs-number">0</span>][<span class="hljs-number">5</span>]);<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</details>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/programming/">程序开发</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%94%E5%A4%A7%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/">五大经典算法</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
+                  crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-4128258433761966"
+                  data-ad-slot="1528926940"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/10/5-classic-algorithms-5-backtracking-branch-and-bound/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">五大经典算法|5.回溯法&分支界定法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/20/5-classic-algorithms-3-divide-and-conquer/">
+                        <span class="hidden-mobile">五大经典算法|3.分治法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

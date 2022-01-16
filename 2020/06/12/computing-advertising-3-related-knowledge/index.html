@@ -1,24 +1,280 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="最优化方法,信息检索,统计机器学习,深度学习,用户增长,A/B测试,多维度报表,转化漏斗"><meta name="description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解计算广告相关的技术和方法，包括最优化方法，信息检索技术，统计机器学习和深度学习，以及如何实现用户增长的一些方法论"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>计算广告|3.相关方法 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|3.相关方法</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E4%BC%98%E5%8C%96optimization"><span class="toc-number">1.</span> <span class="toc-text"> 最优化Optimization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%80%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text"> 什么是最优化问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%80%E8%88%AC%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text"> 无约束优化问题一般思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E5%A4%84%E7%90%86%E6%A2%AF%E5%BA%A6%E6%B3%95%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text"> 批处理梯度法的问题与拟牛顿法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bfgs%E5%92%8Cl-bfgs%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text"> BFGS和L-BFGS方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trust-region%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text"> Trust-Region方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%B3%95"><span class="toc-number">1.6.</span> <span class="toc-text"> 带约束优化：拉格朗日法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2information-retrieval"><span class="toc-number">2.</span> <span class="toc-text"> 信息检索Information Retrieval</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%B8%8E%E7%9B%B8%E4%BC%BC%E5%BA%A6%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text"> 文档的表示与相似度量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.</span> <span class="toc-text"> 倒排索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0statistical-machine-learning"><span class="toc-number">3.</span> <span class="toc-text"> 统计机器学习Statistical Machine Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AD%A6%E4%B9%A0"><span class="toc-number">3.1.</span> <span class="toc-text"> 贝叶斯学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E6%97%8F%E5%88%86%E5%B8%83"><span class="toc-number">3.2.</span> <span class="toc-text"> 指数族分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E6%97%8F%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AD%A6%E4%B9%A0"><span class="toc-number">3.3.</span> <span class="toc-text"> 指数族贝叶斯学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E6%97%8F%E5%88%86%E5%B8%83%E4%BA%8C"><span class="toc-number">3.4.</span> <span class="toc-text"> 指数族分布（二）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0deep-learning"><span class="toc-number">4.</span> <span class="toc-text"> 深度学习Deep Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">4.1.</span> <span class="toc-text"> 深度学习是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BAmulti-layer-perceptron-mlp"><span class="toc-number">4.2.</span> <span class="toc-text"> 全连接多层感知机（Multi-layer Perceptron, MLP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%9C%AC%E8%B4%A8"><span class="toc-number">4.3.</span> <span class="toc-text"> 深度学习的工程本质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E9%87%8D%E8%A6%81%E7%9A%84%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">4.4.</span> <span class="toc-text"> 几种重要的神经网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BC%98%E5%8C%96%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD"><span class="toc-number">4.5.</span> <span class="toc-text"> 深度学习优化基础设施</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%BF%90%E8%90%A5%E4%B8%89%E6%9D%BF%E6%96%A7-%E7%94%A8%E6%88%B7%E5%A2%9E%E9%95%BF"><span class="toc-number">5.</span> <span class="toc-text"> 数据运营三板斧 – 用户增长</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%A2%9E%E9%95%BF%E7%9A%84%E5%9F%BA%E7%A1%80%E7%94%A8%E6%88%B7%E8%BD%AC%E5%8C%96%E6%BC%8F%E6%96%97"><span class="toc-number">5.1.</span> <span class="toc-text"> 用户增长的基础：用户转化漏斗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E5%A2%9E%E9%95%BF%E7%9A%84%E9%9A%9C%E7%A2%8D%E5%A4%9A%E7%BB%B4%E5%BA%A6%E6%8A%A5%E8%A1%A8%E5%88%86%E6%9E%90"><span class="toc-number">5.2.</span> <span class="toc-text"> 找到增长的障碍：多维度报表分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E6%96%B0%E4%BA%A7%E5%93%81%E7%89%B9%E5%BE%81%E5%88%A9%E7%94%A8ab%E6%B5%8B%E8%AF%95"><span class="toc-number">5.3.</span> <span class="toc-text"> 驱动新产品特征：利用A&#x2F;B测试</span></a></li></ol></li></ol></div><h2 id="最优化optimization"><a class="markdownIt-Anchor" href="#最优化optimization"></a> 最优化Optimization</h2>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="最优化方法,信息检索,统计机器学习,深度学习,用户增长,A/B测试,多维度报表,转化漏斗">
+  
+    <meta name="description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解计算广告相关的技术和方法，包括最优化方法，信息检索技术，统计机器学习和深度学习，以及如何实现用户增长的一些方法论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算广告|3.相关方法">
+<meta property="og:url" content="https://imzhanghao.com/2020/06/12/computing-advertising-3-related-knowledge/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解计算广告相关的技术和方法，包括最优化方法，信息检索技术，统计机器学习和深度学习，以及如何实现用户增长的一些方法论">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-16T14:27:03.872Z">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="计算广告">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>计算广告|3.相关方法 - 张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算广告|3.相关方法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-12 00:00" pubdate>
+        2020年6月12日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算广告|3.相关方法</h1>
+            
+            <div class="markdown-body">
+              <h2 id="最优化optimization"><a class="markdownIt-Anchor" href="#最优化optimization"></a> 最优化Optimization</h2>
 <h3 id="什么是最优化问题"><a class="markdownIt-Anchor" href="#什么是最优化问题"></a> 什么是最优化问题</h3>
 <p>无约束最优化问题：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">minf(x) 
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">minf(x) 
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span></p>
 <p>带约束最优化问题：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>s</mi><mi mathvariant="normal">.</mi><mi>t</mi><mi mathvariant="normal">.</mi><mtext mathvariant="bold">g</mtext><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>⩽</mo><mn>0</mn><mo separator="true">,</mo><mtext mathvariant="bold">h</mtext><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>s</mi><mi mathvariant="normal">.</mi><mi>t</mi><mi mathvariant="normal">.</mi><mtext mathvariant="bold">g</mtext><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>⩽</mo><mn>0</mn><mo separator="true">,</mo><mtext mathvariant="bold">h</mtext><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
 min f(x)  \\
 s.t. \textbf{g}(x)\leqslant 0,\textbf{h}(x)=0
 \end{aligned}
@@ -102,7 +358,7 @@ s.t. \textbf{g}(x)\leqslant 0,\textbf{h}(x)=0
 </ul>
 <h2 id="统计机器学习statistical-machine-learning"><a class="markdownIt-Anchor" href="#统计机器学习statistical-machine-learning"></a> 统计机器学习Statistical Machine Learning</h2>
 <h3 id="贝叶斯学习"><a class="markdownIt-Anchor" href="#贝叶斯学习"></a> 贝叶斯学习</h3>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mi mathvariant="normal">∣</mi><mi>X</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo><mi>P</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo></mrow><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">P(\Theta | X ) = \frac{P(X | \Theta)P(\Theta)}{P(X)}
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mi mathvariant="normal">∣</mi><mi>X</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo><mi>P</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo></mrow><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">P(\Theta | X ) = \frac{P(X | \Theta)P(\Theta)}{P(X)}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord">Θ</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mord">∣</span><span class="mord">Θ</span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord">Θ</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>贝叶斯公式</p>
 <ul>
@@ -121,13 +377,13 @@ s.t. \textbf{g}(x)\leqslant 0,\textbf{h}(x)=0
 <h3 id="指数族贝叶斯学习"><a class="markdownIt-Anchor" href="#指数族贝叶斯学习"></a> 指数族贝叶斯学习</h3>
 <p>共轭先验：使先验分布与后验分布形式一致的先验分布</p>
 <p>指数族分布共轭先验，一般形式：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mi mathvariant="normal">∣</mi><mi>η</mi><mo stretchy="false">)</mo><mo>=</mo><mi>e</mi><mi>x</mi><mi>p</mi><mrow><mo fence="true">{</mo><msup><mi>χ</mi><mi>T</mi></msup><mi mathvariant="normal">Θ</mi><mo>−</mo><mi>v</mi><mi>g</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo><mo>−</mo><mi>b</mi><mo stretchy="false">(</mo><mi>χ</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo fence="true">}</mo></mrow></mrow><annotation encoding="application/x-tex">p(\Theta|\eta)=exp\left \{ \chi ^{T} \Theta-vg(\Theta)-b(\chi ,v))) \right \}
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mi mathvariant="normal">∣</mi><mi>η</mi><mo stretchy="false">)</mo><mo>=</mo><mi>e</mi><mi>x</mi><mi>p</mi><mrow><mo fence="true">{</mo><msup><mi>χ</mi><mi>T</mi></msup><mi mathvariant="normal">Θ</mi><mo>−</mo><mi>v</mi><mi>g</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false">)</mo><mo>−</mo><mi>b</mi><mo stretchy="false">(</mo><mi>χ</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo fence="true">}</mo></mrow></mrow><annotation encoding="application/x-tex">p(\Theta|\eta)=exp\left \{ \chi ^{T} \Theta-vg(\Theta)-b(\chi ,v))) \right \}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord">Θ</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2413409999999998em;vertical-align:-0.35001em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">x</span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">{</span></span><span class="mord"><span class="mord mathdefault">χ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913309999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span><span class="mord">Θ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord">Θ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">b</span><span class="mopen">(</span><span class="mord mathdefault">χ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">}</span></span></span></span></span></span></span></p>
 <p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>η</mi><mo>=</mo><mrow><mo fence="true">{</mo><mi>χ</mi><mo separator="true">,</mo><mi>v</mi><mo fence="true">}</mo></mrow></mrow><annotation encoding="application/x-tex">\eta=\left \{ \chi, v \right \}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">{</span><span class="mord mathdefault">χ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mclose delimcenter" style="top:0em;">}</span></span></span></span></span>为超参数（hyperperameter）</p>
 <p>指数族后验部分的超参数：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>χ</mi><mo>~</mo></mover><mo>=</mo><mi>χ</mi><mo>+</mo><munderover><mo>∑</mo><mi>N</mi><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow></munderover><mi>u</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tilde{\chi} = \chi + \sum_{N}^{i=1}u(x_i)
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>χ</mi><mo>~</mo></mover><mo>=</mo><mi>χ</mi><mo>+</mo><munderover><mo>∑</mo><mi>N</mi><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow></munderover><mi>u</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\tilde{\chi} = \chi + \sum_{N}^{i=1}u(x_i)
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8622999999999998em;vertical-align:-0.19444em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6678599999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">χ</span></span></span><span style="top:-3.35em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">~</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">χ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:3.106005em;vertical-align:-1.294336em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8116690000000002em;"><span style="top:-1.855664em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.294336em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>v</mi><mo>~</mo></mover><mo>=</mo><mi>v</mi><mo>+</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\tilde{v} = v + N
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>v</mi><mo>~</mo></mover><mo>=</mo><mi>v</mi><mo>+</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\tilde{v} = v + N
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6678599999999999em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6678599999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span><span style="top:-3.35em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.22222em;">~</span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span></span></p>
 <h3 id="指数族分布二"><a class="markdownIt-Anchor" href="#指数族分布二"></a> 指数族分布（二）</h3>
 <p>最大似然估计：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mi mathvariant="normal">▽</mi><mi>l</mi><mi>n</mi><mtext mathvariant="bold">g</mtext><mo stretchy="false">(</mo><msub><mi>θ</mi><mrow><mi>M</mi><mi>L</mi></mrow></msub><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mi>N</mi></mfrac><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup><mi>u</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\triangledown ln \textbf{g}(\theta_{ML} )=\frac{1}{N}\sum_{i=1}^{N}u(x_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mord amsrm">▽</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">n</span><span class="mord text"><span class="mord textbf">g</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span><span class="mord mathdefault mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.326231em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.981231em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
@@ -245,5 +501,282 @@ s.t. \textbf{g}(x)\leqslant 0,\textbf{h}(x)=0
 <li>博弈性场景无法通过A/B测试获得可靠性结论</li>
 <li>A/B测试最适合的场景：理性产品、被动反应场景</li>
 </ul>
-<!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2020/06/12/computing-advertising-3-related-knowledge/">https://imzhanghao.com/2020/06/12/computing-advertising-3-related-knowledge/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4128258433761966" data-ad-slot="1528926940" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
+                  crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-4128258433761966"
+                  data-ad-slot="1528926940"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/15/computing-advertising-4-agreement-based-advertising/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算广告|4.合约广告</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/11/computing-advertising-2-business-system/">
+                        <span class="hidden-mobile">计算广告|2.认识商业体系</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

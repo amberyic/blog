@@ -1,18 +1,275 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="程序化交易,优选,PMP,PDB,广告交易平台ADX,需求方平台DSP,供给方平台SSP,数据管理产品DMP,RTB"><meta name="description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解程序化广告，介绍了程序化交易的三种类型：优选PD、私有市场PMP、程序化直投PDB。介绍了程序化广告中多个产品角色，包括：广告交易平台ADX、需求方平台DSP、供给方平台SSP和数据管理产品DMP。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>计算广告|6.多方数据变现-程序化交易 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|6.多方数据变现-程序化交易</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E8%AF%81%E5%88%B8%E7%B1%BB%E4%BC%BC%E7%9A%84%E4%BA%A4%E6%98%93%E7%A8%8B%E5%BA%8F%E5%8C%96%E4%BA%A4%E6%98%93%E8%8B%A5%E5%B9%B2%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 与证券类似的交易：程序化交易若干模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#p5iab%E6%80%BB%E7%BB%93%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%8C%96%E7%9B%B8%E5%85%B3%E4%BA%A4%E6%98%93%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text"> P5.IAB总结的程序化相关交易方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E5%AE%9E%E6%97%B6%E7%AB%9E%E4%BB%B7%E8%BF%87%E7%A8%8B%E7%A4%BA%E6%84%8F"><span class="toc-number">1.2.</span> <span class="toc-text"> P5.实时竞价过程示意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E5%AE%9E%E6%97%B6%E7%AB%9E%E4%BB%B7%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text"> P5.实时竞价特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E4%BC%98%E9%80%89preferred-deal"><span class="toc-number">1.4.</span> <span class="toc-text"> P5.优选（Preferred Deal）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E7%A7%81%E6%9C%89%E5%B8%82%E5%9C%BApmp"><span class="toc-number">1.5.</span> <span class="toc-text"> P5.私有市场（PMP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5%E7%A8%8B%E5%BA%8F%E5%8C%96%E7%9B%B4%E6%8A%95pdb"><span class="toc-number">1.6.</span> <span class="toc-text"> P5.程序化直投（PDB）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%81%E5%8A%B5%E4%BA%A4%E6%98%93%E6%89%80%E5%B9%BF%E5%91%8A%E4%BA%A4%E6%98%93%E5%B9%B3%E5%8F%B0"><span class="toc-number">2.</span> <span class="toc-text"> “证劵交易所”：广告交易平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E4%BA%A4%E6%98%93%E5%B9%B3%E5%8F%B0adx"><span class="toc-number">2.1.</span> <span class="toc-text"> 广告交易平台（ADX）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E4%BA%A4%E6%98%93%E5%B9%B3%E5%8F%B0%E7%89%B9%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text"> 广告交易平台特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#adx%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.3.</span> <span class="toc-text"> ADX系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#adx%E4%B8%BB%E8%A6%81%E6%8A%80%E6%9C%AF%E7%82%B9"><span class="toc-number">2.4.</span> <span class="toc-text"> ADX主要技术点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E5%9F%9F%E5%90%8Dcookie-mapping%E4%BE%8B%E5%AA%92%E4%BD%93%E4%B8%8Edmp"><span class="toc-number">2.5.</span> <span class="toc-text"> 两域名Cookie Mapping（例：媒体与DMP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%9F%9F%E5%90%8Dcookie-mapping%E4%BE%8Badx%E4%B8%8Edsp"><span class="toc-number">2.6.</span> <span class="toc-text"> 三域名Cookie Mapping（例：ADX与DSP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A2%E4%BB%B7%E4%BC%98%E5%8C%96call-out-optimization"><span class="toc-number">2.7.</span> <span class="toc-text"> 询价优化（Call Out Optimization）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B8%E5%95%86%E4%B8%8B%E5%8D%95%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E6%96%B9%E5%B9%B3%E5%8F%B0"><span class="toc-number">3.</span> <span class="toc-text"> “券商下单系统”：需求方平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E5%88%B6%E5%8C%96%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE"><span class="toc-number">3.1.</span> <span class="toc-text"> 定制化用户标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91retargeting%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text"> 重定向（Retargeting）原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%86%E7%B1%BB"><span class="toc-number">3.3.</span> <span class="toc-text"> 重定向分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%AE%A2%E6%8E%A8%E8%8D%90look-alike"><span class="toc-number">3.4.</span> <span class="toc-text"> 新客推荐（Look-alike）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsp%E4%BA%A7%E5%93%81%E7%AD%96%E7%95%A5"><span class="toc-number">3.5.</span> <span class="toc-text"> DSP产品策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#invitemedia"><span class="toc-number">3.6.</span> <span class="toc-text"> invitemedia</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsp%E4%BA%A7%E5%93%81%E7%89%B9%E7%82%B9"><span class="toc-number">3.7.</span> <span class="toc-text"> DSP产品特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsp%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">3.8.</span> <span class="toc-text"> DSP系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#look-alike%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1"><span class="toc-number">3.9.</span> <span class="toc-text"> Look-alike问题建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E4%BB%B7%E5%80%BC%E4%BC%B0%E8%AE%A1"><span class="toc-number">3.10.</span> <span class="toc-text"> 点击价值估计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%94%B5%E5%95%86%E8%A7%92%E5%BA%A6%E7%9C%8B%E6%8E%A8%E8%8D%90"><span class="toc-number">3.11.</span> <span class="toc-text"> 从电商角度看推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dsp%E5%87%BA%E4%BB%B7%E7%AD%96%E7%95%A5"><span class="toc-number">3.12.</span> <span class="toc-text"> DSP出价策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#criteo"><span class="toc-number">3.13.</span> <span class="toc-text"> Criteo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%B8%A0%E9%81%93%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86%E4%BE%9B%E7%BB%99%E6%96%B9%E5%B9%B3%E5%8F%B0"><span class="toc-number">4.</span> <span class="toc-text"> 多渠道库存管理：供给方平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E5%B9%BF%E5%91%8Amediation"><span class="toc-number">4.1.</span> <span class="toc-text"> 移动广告Mediation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ssp%E4%BA%A7%E5%93%81%E7%AD%96%E7%95%A5"><span class="toc-number">4.2.</span> <span class="toc-text"> SSP产品策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5header-bidding"><span class="toc-number">4.3.</span> <span class="toc-text"> P5.Header Bidding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p5header-bidding%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B"><span class="toc-number">4.4.</span> <span class="toc-text"> P5.Header Bidding决策过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#admeld"><span class="toc-number">4.5.</span> <span class="toc-text"> Admeld</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mopub"><span class="toc-number">4.6.</span> <span class="toc-text"> mopub</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%B5%84%E4%BA%A7%E9%87%91%E8%9E%8D%E5%8C%96%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E4%BA%A7%E5%93%81"><span class="toc-number">5.</span> <span class="toc-text"> 数据资产金融化：数据管理产品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%96%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">5.1.</span> <span class="toc-text"> 三方数据的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9dmp"><span class="toc-number">5.2.</span> <span class="toc-text"> 第三方DMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9dmp%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.3.</span> <span class="toc-text"> 第三方DMP商业模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%96%B9dmp"><span class="toc-number">5.4.</span> <span class="toc-text"> 第一方DMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%96%B9dmp%E7%9A%84%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.5.</span> <span class="toc-text"> 第一方DMP的商业模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#audience-science"><span class="toc-number">5.6.</span> <span class="toc-text"> Audience Science</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%95%B0%E6%8D%AE%E4%B8%8D%E8%83%BD%E5%85%B1%E4%BA%AB"><span class="toc-number">5.7.</span> <span class="toc-text"> 为什么数据不能共享</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%98%93%E8%AF%A5%E6%80%8E%E4%B9%88%E5%81%9A"><span class="toc-number">5.8.</span> <span class="toc-text"> 数据交易该怎么做？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%BB%99%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%BB%B7"><span class="toc-number">5.9.</span> <span class="toc-text"> 如何给数据定价</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%8A%97%E6%95%B0%E6%8D%AE%E7%9A%84%E9%BB%91%E5%AE%A2%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8"><span class="toc-number">6.</span> <span class="toc-text"> 对抗数据的黑客：隐私保护和数据安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81%E7%9A%84%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86"><span class="toc-number">6.1.</span> <span class="toc-text"> 数据隐私的初步认识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E8%A1%8C%E4%B8%BA%E6%95%B0%E6%8D%AE%E9%9A%90%E7%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">6.2.</span> <span class="toc-text"> 互联网行为数据隐私问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81differential-privacy"><span class="toc-number">6.3.</span> <span class="toc-text"> 差分隐私（Differential Privacy）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%E6%96%B9%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="toc-number">6.4.</span> <span class="toc-text"> 需求方数据安全问题</span></a></li></ol></li></ol></div><h2 id="与证券类似的交易程序化交易若干模式"><a class="markdownIt-Anchor" href="#与证券类似的交易程序化交易若干模式"></a> 与证券类似的交易：程序化交易若干模式</h2>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="程序化交易,优选,PMP,PDB,广告交易平台ADX,需求方平台DSP,供给方平台SSP,数据管理产品DMP,RTB">
+  
+    <meta name="description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解程序化广告，介绍了程序化交易的三种类型：优选PD、私有市场PMP、程序化直投PDB。介绍了程序化广告中多个产品角色，包括：广告交易平台ADX、需求方平台DSP、供给方平台SSP和数据管理产品DMP。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算广告|6.多方数据变现-程序化交易">
+<meta property="og:url" content="https://imzhanghao.com/2020/06/22/computing-advertising-6-programmatic-direct-buying/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解程序化广告，介绍了程序化交易的三种类型：优选PD、私有市场PMP、程序化直投PDB。介绍了程序化广告中多个产品角色，包括：广告交易平台ADX、需求方平台DSP、供给方平台SSP和数据管理产品DMP。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-16T14:27:03.871Z">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="计算广告">
+<meta property="article:tag" content="程序化交易">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>计算广告|6.多方数据变现-程序化交易 - 张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算广告|6.多方数据变现-程序化交易">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-22 00:00" pubdate>
+        2020年6月22日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算广告|6.多方数据变现-程序化交易</h1>
+            
+            <div class="markdown-body">
+              <h2 id="与证券类似的交易程序化交易若干模式"><a class="markdownIt-Anchor" href="#与证券类似的交易程序化交易若干模式"></a> 与证券类似的交易：程序化交易若干模式</h2>
 <h3 id="p5iab总结的程序化相关交易方式"><a class="markdownIt-Anchor" href="#p5iab总结的程序化相关交易方式"></a> P5.IAB总结的程序化相关交易方式</h3>
 <h3 id="p5实时竞价过程示意"><a class="markdownIt-Anchor" href="#p5实时竞价过程示意"></a> P5.实时竞价过程示意</h3>
 <h3 id="p5实时竞价特点"><a class="markdownIt-Anchor" href="#p5实时竞价特点"></a> P5.实时竞价特点</h3>
@@ -388,5 +645,284 @@
 <p>部分成果已经使用在iOS 10当中</p>
 <h3 id="需求方数据安全问题"><a class="markdownIt-Anchor" href="#需求方数据安全问题"></a> 需求方数据安全问题</h3>
 <p>英孚访客和华尔街访客在广告投放中混用受众</p>
-<!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2020/06/22/computing-advertising-6-programmatic-direct-buying/">https://imzhanghao.com/2020/06/22/computing-advertising-6-programmatic-direct-buying/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4128258433761966" data-ad-slot="1528926940" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%A8%8B%E5%BA%8F%E5%8C%96%E4%BA%A4%E6%98%93/">程序化交易</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
+                  crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-4128258433761966"
+                  data-ad-slot="1528926940"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/03/computing-advertising-7-fraud-detection/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算广告|7.永无止境的博弈 -- 流量保护和反作弊</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/18/computing-advertising-5-lean-data-monetization/">
+                        <span class="hidden-mobile">计算广告|5.竞价广告-精细数据变现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,27 +1,318 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="机器学习流程,机器学习,管道,Pipeline,定义问题,数据收集和整合,预处理和可视化数据,模型训练和优化,模型评估,模型部署"><meta name="description" content="本文梳理机器学习管道，从一个业务问题开始，分别讲解定义问题、数据收集和整合、预处理和可视化数据、模型训练和优化、模型评估和模型部署环节的主要工作和关键技术。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>机器学习的建模流程和Pipeline搭建 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>机器学习的建模流程和Pipeline搭建</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text"> 机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E7%BC%96%E7%A8%8B%E6%96%B9%E6%B3%95-vs-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text"> 经典编程方法 VS 机器学习方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text"> 什么是模型？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ml%E7%AE%A1%E9%81%93"><span class="toc-number">1.3.</span> <span class="toc-text"> ML管道</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text"> 问题定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E9%97%AE%E9%A2%98"><span class="toc-number">2.1.</span> <span class="toc-text"> 确定问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E6%88%90%E5%8A%9F%E6%A0%87%E5%87%86"><span class="toc-number">2.2.</span> <span class="toc-text"> 确定成功标准</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E5%92%8C%E6%95%B4%E5%90%88"><span class="toc-number">3.</span> <span class="toc-text"> 数据收集和整合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.</span> <span class="toc-text"> 选择数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B9%96"><span class="toc-number">3.2.</span> <span class="toc-text"> 数据湖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text"> 数据预处理和可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="toc-number">4.1.</span> <span class="toc-text"> 重新格式化数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">4.2.</span> <span class="toc-text"> 数据预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%80%BC"><span class="toc-number">4.2.1.</span> <span class="toc-text"> 异常值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="toc-number">4.2.2.</span> <span class="toc-text"> 缺失值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">4.3.</span> <span class="toc-text"> 数据可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">4.3.1.</span> <span class="toc-text"> 分类数据可视化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">4.3.2.</span> <span class="toc-text"> 数值数据可视化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.3.3.</span> <span class="toc-text"> 属性之间的关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%92%8C%E4%BC%98%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text"> 模型训练和优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8B%86%E5%88%86"><span class="toc-number">5.1.</span> <span class="toc-text"> 数据拆分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text"> 损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">5.3.</span> <span class="toc-text"> 优化器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="toc-number">6.</span> <span class="toc-text"> 模型评估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88"><span class="toc-number">6.1.</span> <span class="toc-text"> 过拟合和欠拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%B7%AE%E5%92%8C%E5%81%8F%E5%B7%AE"><span class="toc-number">6.2.</span> <span class="toc-text"> 方差和偏差</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">6.3.</span> <span class="toc-text"> 评估指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E6%8C%87%E6%A0%87"><span class="toc-number">6.3.1.</span> <span class="toc-text"> 分类问题指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E9%97%AE%E9%A2%98%E6%8C%87%E6%A0%87"><span class="toc-number">6.3.2.</span> <span class="toc-text"> 回归问题指标</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text"> 特征设计和模型优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E6%8A%BD%E5%8F%96"><span class="toc-number">7.1.</span> <span class="toc-text"> 特征抽取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="toc-number">7.2.</span> <span class="toc-text"> 特征选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%88%9B%E5%BB%BA%E5%92%8C%E8%BD%AC%E6%8D%A2"><span class="toc-number">7.3.</span> <span class="toc-text"> 特征创建和转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE"><span class="toc-number">7.3.1.</span> <span class="toc-text"> 数值数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E6%95%B0%E6%8D%AE"><span class="toc-number">7.3.2.</span> <span class="toc-text"> 分类数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96-%E8%B6%85%E5%8F%82%E4%BC%98%E5%8C%96"><span class="toc-number">7.4.</span> <span class="toc-text"> 模型优化-超参优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E7%9A%84%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="toc-number">7.4.1.</span> <span class="toc-text"> 超参的三种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E7%9A%84%E4%BC%98%E5%8C%96%E7%B1%BB%E5%9E%8B"><span class="toc-number">7.4.2.</span> <span class="toc-text"> 超参的优化类型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2"><span class="toc-number">8.</span> <span class="toc-text"> 模型部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE"><span class="toc-number">8.1.</span> <span class="toc-text"> 生产环境基础设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="toc-number">8.2.</span> <span class="toc-text"> 推理类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%B9%E5%A4%84%E7%90%86"><span class="toc-number">8.2.1.</span> <span class="toc-text"> 批处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6"><span class="toc-number">8.2.2.</span> <span class="toc-text"> 实时</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86vs%E8%AE%AD%E7%BB%83"><span class="toc-number">8.3.</span> <span class="toc-text"> 推理VS训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7"><span class="toc-number">8.4.</span> <span class="toc-text"> 监控</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">9.</span> <span class="toc-text"> 参考资料</span></a></li></ol></div><h2 id="机器学习"><a class="markdownIt-Anchor" href="#机器学习"></a> 机器学习</h2>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="机器学习流程,机器学习,管道,Pipeline,定义问题,数据收集和整合,预处理和可视化数据,模型训练和优化,模型评估,模型部署">
+  
+    <meta name="description" content="本文梳理机器学习管道，从一个业务问题开始，分别讲解定义问题、数据收集和整合、预处理和可视化数据、模型训练和优化、模型评估和模型部署环节的主要工作和关键技术。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习的建模流程和Pipeline搭建">
+<meta property="og:url" content="https://imzhanghao.com/2021/12/28/ml-pipeline/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="本文梳理机器学习管道，从一个业务问题开始，分别讲解定义问题、数据收集和整合、预处理和可视化数据、模型训练和优化、模型评估和模型部署环节的主要工作和关键技术。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281403309.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112220844576.jpg">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281301865.jpg">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281302881.jpg">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112230809278.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281303539.jpg">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252018884.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252017101.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252020274.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252028029.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252033581.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252035865.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252041244.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304798.jpg">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261107474.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112260724131.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261104698.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261818366.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261822292.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304583.jpg">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270845483.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270848369.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270851712.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270900432.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270937734.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305843.jpg">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112280738673.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281042712.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281044198.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281109739.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281118708.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281120191.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305005.jpg">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281127053.png">
+<meta property="article:published_time" content="2021-12-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-27T16:00:00.000Z">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="pipeline">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281403309.png">
+  
+  
+  <title>机器学习的建模流程和Pipeline搭建 - 张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="机器学习的建模流程和Pipeline搭建">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-28 00:00" pubdate>
+        2021年12月28日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      10k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      88 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">机器学习的建模流程和Pipeline搭建</h1>
+            
+            <div class="markdown-body">
+              <h2 id="机器学习"><a class="markdownIt-Anchor" href="#机器学习"></a> 机器学习</h2>
 <h3 id="经典编程方法-vs-机器学习方法"><a class="markdownIt-Anchor" href="#经典编程方法-vs-机器学习方法"></a> 经典编程方法 VS 机器学习方法</h3>
 <p>业务需求：购物网站产品推荐，假设您需要创建一款后端应用程序，使其根据客户过去的购买记录向他们推荐产品。</p>
 <p><strong>经典编程</strong>：根据数据（输入）进行预测（输出），需要对数据应用一些规则，在经典编程中，这些规则由人根据业务需求和领域知识等因素制定。</p>
 <p><strong>机器学习</strong>：利用过去收集的各种数据,自动推导出数据中隐藏的模式。然后,利用模式创建模型,应用于新数据,从而提供更明智的自适应预测。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281403309.png" alt="机器学习VS经典编程" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281403309.png" srcset="/img/loading.gif" lazyload alt="机器学习VS经典编程" /></p>
 <h3 id="什么是模型"><a class="markdownIt-Anchor" href="#什么是模型"></a> 什么是模型？</h3>
 <p>机器学习中的模型是指经过训练的算法，用于识别数据中的模式。关键在于，他是通过机器学习过程来训练的，而不像经典编程一样，是由编程人员通过设置规则手动创建的。</p>
 <h3 id="ml管道"><a class="markdownIt-Anchor" href="#ml管道"></a> ML管道</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112220844576.jpg" alt="机器学习管道" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112220844576.jpg" srcset="/img/loading.gif" lazyload alt="机器学习管道" /></p>
 <ul>
 <li><strong>业务问题</strong>：需要确定能够从机器学习中受益的业务问题。</li>
 <li><strong>定义问题</strong>：需要理清业务问题并将其转化为机器学习问题。</li>
@@ -32,7 +323,7 @@
 <li><strong>模型部署</strong>：如果对训练结果感到满意，就可以部署模型来交付最佳预测结果，这通常是一项繁重的体力劳动。</li>
 </ul>
 <h2 id="问题定义"><a class="markdownIt-Anchor" href="#问题定义"></a> 问题定义</h2>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281301865.jpg" alt="问题定义" /><br />
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281301865.jpg" srcset="/img/loading.gif" lazyload alt="问题定义" /><br />
 问题定义是管道中研究性阶段，是对需要解决的问题进行分析和定义的过程。这项工作是所有ML项目的起始点，因为我们需要充分确定某个问题，才能制造确定出相应的解决方案。</p>
 <h3 id="确定问题"><a class="markdownIt-Anchor" href="#确定问题"></a> 确定问题</h3>
 <p>示例：某些产品库存挤压，某些产品库存不足，分别导致开销增加和错过销售机会。</p>
@@ -60,7 +351,7 @@
 </li>
 </ul>
 <h2 id="数据收集和整合"><a class="markdownIt-Anchor" href="#数据收集和整合"></a> 数据收集和整合</h2>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281302881.jpg" alt="数据收集和整合" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281302881.jpg" srcset="/img/loading.gif" lazyload alt="数据收集和整合" /></p>
 <h3 id="选择数据"><a class="markdownIt-Anchor" href="#选择数据"></a> 选择数据</h3>
 <ul>
 <li><strong>了解数据</strong>：有多少数据，位于哪里，数据量，数据位置以及可否访问。</li>
@@ -70,11 +361,11 @@
 <h3 id="数据湖"><a class="markdownIt-Anchor" href="#数据湖"></a> 数据湖</h3>
 <p>了解了你需要的数据以后，现实场景中，机器学习项目的数据来自多个数据源，并呈现为不同类型的数据，包括结构化、半结构化和非结构化的数据。例如数据可以来自CSV文件和传统数据库。</p>
 <p>当数据以不同格式存储在各个不同的位置时,组织经常会面临访问和分析其数据的挑战。随着数据不断收集自各种来源,如果不能妥善处理,这一挑战只会随着组织的成熟和发展而变得越来越严峻。无法轻松访问数据会导致工作流程出现瓶颈,因为员工经常需要向IT部门寻求帮助,以访问构建、训练和部署机器学习模型所需的信息。为了应对这些挑战,组织不得不寻求这样一种解决方案:<strong>能够提供单一数据来源,让员工能够随时根据需要轻松访问数据。</strong> 本地解决方案通常很难做到这一点,而且维护成本很高。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112230809278.png" alt="数据湖" /><br />
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112230809278.png" srcset="/img/loading.gif" lazyload alt="数据湖" /><br />
 数据湖架构可以提供一个坚实的基础,用于构建解决方案应对这一挑战。借助数据湖, 可以将大量数据存储在一个集中存储库,以便组织内的各个团队随时对其进行分类、处理、扩充和使用。<br />
 但是,建立数据湖并没有什么灵丹妙药。在大多数情况下,构建数据湖需要使用多种 技术、工具和环境,包括来自第三方的数据。如果操作正确,数据湖将为全新的高级 分析方法打开一扇大门,从而推动数据科学和机器学习。</p>
 <h2 id="数据预处理和可视化"><a class="markdownIt-Anchor" href="#数据预处理和可视化"></a> 数据预处理和可视化</h2>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281303539.jpg" alt="数据预处理和可视化" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281303539.jpg" srcset="/img/loading.gif" lazyload alt="数据预处理和可视化" /></p>
 <h3 id="重新格式化数据"><a class="markdownIt-Anchor" href="#重新格式化数据"></a> 重新格式化数据</h3>
 <ul>
 <li><strong>Pandas</strong>：Pandas 是一个开源 Python 库,可用于重新格式化特定数据。Pandas 将 CSV、JSON、 Excel、Pickle 等各种格式的数据重新格式化为表格形式,以行和列的形式呈现出来。Pandas将数据格式化后得出的表格格式称为DataFrame，可以进行计算统计信息，清理数据，对其进行可视化，甚至将清理或转换后的数据重新以其原始格式存储。</li>
@@ -130,46 +421,46 @@ pandas检查确实值或者NULL值</p>
 <h3 id="数据可视化"><a class="markdownIt-Anchor" href="#数据可视化"></a> 数据可视化</h3>
 <h4 id="分类数据可视化"><a class="markdownIt-Anchor" href="#分类数据可视化"></a> 分类数据可视化</h4>
 <p>使用条形图可视化分类数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">speed = [<span class="number">0.1</span>, <span class="number">17.5</span>, <span class="number">40</span>, <span class="number">48</span>, <span class="number">52</span>, <span class="number">69</span>, <span class="number">88</span>]</span><br><span class="line">lifespan = [<span class="number">2</span>, <span class="number">8</span>, <span class="number">70</span>, <span class="number">1.5</span>, <span class="number">25</span>, <span class="number">12</span>, <span class="number">28</span>]</span><br><span class="line">index = [<span class="string">&#x27;snail&#x27;</span>, <span class="string">&#x27;pig&#x27;</span>, <span class="string">&#x27;elephant&#x27;</span>,</span><br><span class="line">         <span class="string">&#x27;rabbit&#x27;</span>, <span class="string">&#x27;giraffe&#x27;</span>, <span class="string">&#x27;coyote&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>]</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">&#x27;speed&#x27;</span>: speed,</span><br><span class="line">                   <span class="string">&#x27;lifespan&#x27;</span>: lifespan&#125;, index=index)</span><br><span class="line">ax = df.plot.bar(rot=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252018884.png" alt="条形图" /></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">speed = [<span class="hljs-number">0.1</span>, <span class="hljs-number">17.5</span>, <span class="hljs-number">40</span>, <span class="hljs-number">48</span>, <span class="hljs-number">52</span>, <span class="hljs-number">69</span>, <span class="hljs-number">88</span>]<br>lifespan = [<span class="hljs-number">2</span>, <span class="hljs-number">8</span>, <span class="hljs-number">70</span>, <span class="hljs-number">1.5</span>, <span class="hljs-number">25</span>, <span class="hljs-number">12</span>, <span class="hljs-number">28</span>]<br>index = [<span class="hljs-string">&#x27;snail&#x27;</span>, <span class="hljs-string">&#x27;pig&#x27;</span>, <span class="hljs-string">&#x27;elephant&#x27;</span>,<br>         <span class="hljs-string">&#x27;rabbit&#x27;</span>, <span class="hljs-string">&#x27;giraffe&#x27;</span>, <span class="hljs-string">&#x27;coyote&#x27;</span>, <span class="hljs-string">&#x27;horse&#x27;</span>]<br>df = pd.DataFrame(&#123;<span class="hljs-string">&#x27;speed&#x27;</span>: speed,<br>                   <span class="hljs-string">&#x27;lifespan&#x27;</span>: lifespan&#125;, index=index)<br>ax = df.plot.bar(rot=<span class="hljs-number">0</span>)<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252018884.png" srcset="/img/loading.gif" lazyload alt="条形图" /></p>
 <h4 id="数值数据可视化"><a class="markdownIt-Anchor" href="#数值数据可视化"></a> 数值数据可视化</h4>
 <p><strong>直方图</strong><br />
 使用直方图进行数据可视化时会对值进行分箱，直方图中较高的峰值表示最常见的值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&#x27;length&#x27;</span>: [<span class="number">1.5</span>, <span class="number">0.5</span>, <span class="number">1.2</span>, <span class="number">0.9</span>, <span class="number">3</span>],</span><br><span class="line">    <span class="string">&#x27;width&#x27;</span>: [<span class="number">0.7</span>, <span class="number">0.2</span>, <span class="number">0.15</span>, <span class="number">0.2</span>, <span class="number">1.1</span>]</span><br><span class="line">    &#125;, index=[<span class="string">&#x27;pig&#x27;</span>, <span class="string">&#x27;rabbit&#x27;</span>, <span class="string">&#x27;duck&#x27;</span>, <span class="string">&#x27;chicken&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>])</span><br><span class="line">hist = df.hist(bins=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252017101.png" alt="直方图" /></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">df = pd.DataFrame(&#123;<br>    <span class="hljs-string">&#x27;length&#x27;</span>: [<span class="hljs-number">1.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">1.2</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">3</span>],<br>    <span class="hljs-string">&#x27;width&#x27;</span>: [<span class="hljs-number">0.7</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.15</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">1.1</span>]<br>    &#125;, index=[<span class="hljs-string">&#x27;pig&#x27;</span>, <span class="hljs-string">&#x27;rabbit&#x27;</span>, <span class="hljs-string">&#x27;duck&#x27;</span>, <span class="hljs-string">&#x27;chicken&#x27;</span>, <span class="hljs-string">&#x27;horse&#x27;</span>])<br>hist = df.hist(bins=<span class="hljs-number">3</span>)<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252017101.png" srcset="/img/loading.gif" lazyload alt="直方图" /></p>
 <p><strong>密度图</strong><br />
 密度图展示了单个特征的分布，密度图类似于直方图，但它使用核密度函数展示了平滑版的直方图密度。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2.5</span>, <span class="number">3</span>, <span class="number">3.5</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">ax = s.plot.kde()</span><br></pre></td></tr></table></figure>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252020274.png" alt="密度图" /></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python">s = pd.Series([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2.5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3.5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])<br>ax = s.plot.kde()<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252020274.png" srcset="/img/loading.gif" lazyload alt="密度图" /></p>
 <p><strong>箱线图</strong><br />
 箱线图使用四分位间距来描绘特征的分布。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = np.random.randn(<span class="number">25</span>, <span class="number">4</span>)</span><br><span class="line">df = pd.DataFrame(data, columns=<span class="built_in">list</span>(<span class="string">&#x27;ABCD&#x27;</span>))</span><br><span class="line">ax = df.plot.box()</span><br></pre></td></tr></table></figure>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252028029.png" alt="箱线图" /></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python">data = np.random.randn(<span class="hljs-number">25</span>, <span class="hljs-number">4</span>)<br>df = pd.DataFrame(data, columns=<span class="hljs-built_in">list</span>(<span class="hljs-string">&#x27;ABCD&#x27;</span>))<br>ax = df.plot.box()<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252028029.png" srcset="/img/loading.gif" lazyload alt="箱线图" /></p>
 <h4 id="属性之间的关系"><a class="markdownIt-Anchor" href="#属性之间的关系"></a> 属性之间的关系</h4>
 <p>对于具有多个变量或特征的情况,您可能需要查看它们之间的相关性。确定属性之间 的相关性很重要,因为两个属性之间的高相关性有时会导致模型性能较差。如果特征 之间密切相关,并且全都用于同一个模型中以预测响应变量,就可能会出现问题,例 如,模型损失不能收敛到最小状态。因此,请注意数据集中高度相关的特征。</p>
 <p><strong>散点图和散点图矩阵</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame([[<span class="number">5.1</span>, <span class="number">3.5</span>, <span class="number">0</span>], [<span class="number">4.9</span>, <span class="number">3.0</span>, <span class="number">0</span>], [<span class="number">7.0</span>, <span class="number">3.2</span>, <span class="number">1</span>],</span><br><span class="line">                   [<span class="number">6.4</span>, <span class="number">3.2</span>, <span class="number">1</span>], [<span class="number">5.9</span>, <span class="number">3.0</span>, <span class="number">2</span>]],</span><br><span class="line">                  columns=[<span class="string">&#x27;length&#x27;</span>, <span class="string">&#x27;width&#x27;</span>, <span class="string">&#x27;species&#x27;</span>])</span><br><span class="line">ax1 = df.plot.scatter(x=<span class="string">&#x27;length&#x27;</span>,</span><br><span class="line">                      y=<span class="string">&#x27;width&#x27;</span>,</span><br><span class="line">                      c=<span class="string">&#x27;DarkBlue&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252033581.png" alt="散点图" /></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(np.random.randn(<span class="number">1000</span>, <span class="number">4</span>), columns=[<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>])</span><br><span class="line">pd.plotting.scatter_matrix(df, alpha=<span class="number">0.2</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252035865.png" alt="散点图矩阵" /></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python">df = pd.DataFrame([[<span class="hljs-number">5.1</span>, <span class="hljs-number">3.5</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">4.9</span>, <span class="hljs-number">3.0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">7.0</span>, <span class="hljs-number">3.2</span>, <span class="hljs-number">1</span>],<br>                   [<span class="hljs-number">6.4</span>, <span class="hljs-number">3.2</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">5.9</span>, <span class="hljs-number">3.0</span>, <span class="hljs-number">2</span>]],<br>                  columns=[<span class="hljs-string">&#x27;length&#x27;</span>, <span class="hljs-string">&#x27;width&#x27;</span>, <span class="hljs-string">&#x27;species&#x27;</span>])<br>ax1 = df.plot.scatter(x=<span class="hljs-string">&#x27;length&#x27;</span>,<br>                      y=<span class="hljs-string">&#x27;width&#x27;</span>,<br>                      c=<span class="hljs-string">&#x27;DarkBlue&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252033581.png" srcset="/img/loading.gif" lazyload alt="散点图" /></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs Python">df = pd.DataFrame(np.random.randn(<span class="hljs-number">1000</span>, <span class="hljs-number">4</span>), columns=[<span class="hljs-string">&#x27;A&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-string">&#x27;C&#x27;</span>,<span class="hljs-string">&#x27;D&#x27;</span>])<br>pd.plotting.scatter_matrix(df, alpha=<span class="hljs-number">0.2</span>)<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252035865.png" srcset="/img/loading.gif" lazyload alt="散点图矩阵" /></p>
 <p><strong>相关性矩阵热图</strong><br />
 numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视化。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252041244.png" alt="相关性矩阵热图" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252041244.png" srcset="/img/loading.gif" lazyload alt="相关性矩阵热图" /></p>
 <h2 id="模型训练和优化"><a class="markdownIt-Anchor" href="#模型训练和优化"></a> 模型训练和优化</h2>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304798.jpg" alt="模型训练和优化" /><br />
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304798.jpg" srcset="/img/loading.gif" lazyload alt="模型训练和优化" /><br />
 在训练过程中,机器学习算法会更新一组称为参数或权重的数字。目标是更新模型中 的参数,使计算或预测的输出尽可能接近真实的输出(就像在数据中看到的一样)。</p>
 <p>一次迭代无法完成,因为算法还没有学会;它不知道改变权重会如何使输出更接近期望值。因此,它会观察之前迭代中的权重和输出,使权重降低生成的输出的误差。执 行完定义的迭代次数后或当误差变化低于目标值时,此迭代过程将会停止。</p>
 <p>如果输出误差随着每次连续迭代逐渐减小,则我们可以说该模型已收敛,训练成功。 但如果误差在迭代之间增大或随机变化,则需要重新评估构建模型时的假设。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261107474.png" alt="模型训练过程" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261107474.png" srcset="/img/loading.gif" lazyload alt="模型训练过程" /></p>
 <h3 id="数据拆分"><a class="markdownIt-Anchor" href="#数据拆分"></a> 数据拆分</h3>
 <p>对数据进行预处理之后，就可以开始训练了。首先需要确定拆分数据的最佳方式，一般而言，机器学习目标是构建一个泛化能力较强的模型。换句话说，模型不仅要能处理已知数据，还要能处理未知数据。因此拆分数据很重要。</p>
 <p>拆分数据有助于确保数据块有资格成为未来的生成数据，还有助于保证模型预测未知数据的准确率和预测已知数据的准确率类似。这有助于提高模型的泛化能力。</p>
 <p>测试和验证方法</p>
 <ul>
 <li><strong>简单留出验证</strong>：将数据拆分为多个数据集，通常为训练集、验证集和测试集。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112260724131.png" alt="简单留出验证" /></li>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112260724131.png" srcset="/img/loading.gif" lazyload alt="简单留出验证" /></li>
 <li><strong>K折交叉验证</strong>：把数据集分成K份，每个子集互不相交且大小相同，依次从K份中选出1份作为验证集，其余K-1份作为训练集，这样进行K次单独的模型训练和验证，最后将K次验证结果取平均值，作为此模型的验证误差。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261104698.png" alt="K折交叉验证" /></li>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261104698.png" srcset="/img/loading.gif" lazyload alt="K折交叉验证" /></li>
 <li><strong>留一交叉验证</strong>：测试集是一个数据点，适用于<strong>非常小</strong>的数据集</li>
 <li><strong>分层K折交叉验证</strong>：训练集和测试集平衡类别分布，适用于<strong>不平衡</strong>的数据。</li>
 <li><strong>打乱数据的迭代K折验证</strong></li>
@@ -178,9 +469,9 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 <p>模型训练的目标是创建一个准确的模型，让他根据需求正确地解答业务问题。</p>
 <p>损失函数用来评价模型的预测值和真实值不一样的程度，损失函数越好，通常模型的性能越好。不同的模型用的损失函数一般也不一样。</p>
 <p>损失函数分为经验风险损失函数和结构风险损失函数。经验风险损失函数指预测结果和实际结果的差别，结构风险损失函数是指经验风险损失函数加上正则项。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261818366.png" alt="损失函数" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261818366.png" srcset="/img/loading.gif" lazyload alt="损失函数" /></p>
 <h3 id="优化器"><a class="markdownIt-Anchor" href="#优化器"></a> 优化器</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261822292.png" alt="梯度下降" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261822292.png" srcset="/img/loading.gif" lazyload alt="梯度下降" /></p>
 <ul>
 <li><strong>批量梯度下降法（Batch Gradient Descent）</strong>：批量梯度下降法，是梯度下降法最常用的形式，具体做法也就是在更新参数时使用所有的样本来进行更新，</li>
 <li><strong>随机梯度下降法（Stochastic Gradient Descent）</strong>：随机梯度下降法，其实和批量梯度下降法原理类似，区别在与求梯度时没有用所有的m个样本的数据，而是仅仅选取一个样本j来求梯度。</li>
@@ -189,14 +480,14 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 <p><strong>步长/学习速率</strong><br />
 步长的大小至关重要,因为步长较大可能会导致模型超过最低点,从而使模型来回摆动,永远不会达到最小值。但是,步长较小可能会导致模型非常缓慢地朝着最小值移动,在给定时间内无法达到最小值。步长大小又称“学习速率”,它是模型的超参数。</p>
 <h2 id="模型评估"><a class="markdownIt-Anchor" href="#模型评估"></a> 模型评估</h2>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304583.jpg" alt="模型评估" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304583.jpg" srcset="/img/loading.gif" lazyload alt="模型评估" /></p>
 <h3 id="过拟合和欠拟合"><a class="markdownIt-Anchor" href="#过拟合和欠拟合"></a> 过拟合和欠拟合</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270845483.png" alt="过拟合和欠拟合" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270845483.png" srcset="/img/loading.gif" lazyload alt="过拟合和欠拟合" /></p>
 <ul>
 <li><strong>欠拟合</strong>是指模型不能在训练集上获得足够低的误差。换句换说，就是模型复杂度低，模型在训练集上就表现很差，没法学习到数据背后的规律。</li>
 <li><strong>过拟合</strong>是指训练误差和测试误差之间的差距太大。换句换说，就是模型复杂度高于实际问题，模型在训练集上表现很好，但在测试集上却表现很差。模型对训练集&quot;死记硬背&quot;，没有理解数据背后的规律，泛化能力差。</li>
 </ul>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270848369.png" alt="过拟合和欠拟合" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270848369.png" srcset="/img/loading.gif" lazyload alt="过拟合和欠拟合" /></p>
 <p><strong>解决方案</strong></p>
 <ul>
 <li><strong>欠拟合</strong>
@@ -219,7 +510,7 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 <li><strong>偏差</strong>：预测值于真实值之间的差距，即学习算法的拟合能力。</li>
 <li><strong>方差</strong>：预测值的分散程度，训练集与验证集的差异造成的模型表现的差异。</li>
 </ul>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270851712.png" alt="方差和偏差" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270851712.png" srcset="/img/loading.gif" lazyload alt="方差和偏差" /></p>
 <table>
 <thead>
 <tr>
@@ -241,7 +532,7 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 </tr>
 </tbody>
 </table>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270900432.png" alt="偏差和方差" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270900432.png" srcset="/img/loading.gif" lazyload alt="偏差和方差" /></p>
 <p>我们希望偏差与方差越小越好，但实际并非如此。一般来说，偏差与方差是有冲突的，称为<strong>偏差-方差窘境 (bias-variance dilemma)</strong>。</p>
 <ul>
 <li>给定一个学习任务，在训练初期，由于训练不足，网络的拟合能力不够强，偏差比较大，也是由于拟合能力不强，数据集的特征也无法使网络产生显著变化，也就是欠拟合的情况。</li>
@@ -250,7 +541,7 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 </ul>
 <h3 id="评估指标"><a class="markdownIt-Anchor" href="#评估指标"></a> 评估指标</h3>
 <h4 id="分类问题指标"><a class="markdownIt-Anchor" href="#分类问题指标"></a> 分类问题指标</h4>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270937734.png" alt="混淆矩阵" /><br />
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270937734.png" srcset="/img/loading.gif" lazyload alt="混淆矩阵" /><br />
 标签解释</p>
 <ul>
 <li><strong>P</strong>：样本数据中的正例数。</li>
@@ -278,22 +569,22 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 <li><strong>均方差</strong><br />
 Mean Squared Error叫做均方误差,用真实值-预测值,然后平方之后求和平均。</li>
 </ul>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">E</mi></mrow><mo>=</mo><mfrac><mn>1</mn><mi>m</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><msup><mrow><mo fence="true">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathrm{MSE}=\frac{1}{m} \sum_{i=1}^{m}\left(y_{i}-\hat{y}_{i}\right)^{2}
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="normal">M</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">E</mi></mrow><mo>=</mo><mfrac><mn>1</mn><mi>m</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><msup><mrow><mo fence="true">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathrm{MSE}=\frac{1}{m} \sum_{i=1}^{m}\left(y_{i}-\hat{y}_{i}\right)^{2}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">M</span><span class="mord mathrm">S</span><span class="mord mathrm">E</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">m</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">^</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
 <ul>
 <li><strong>R平方</strong><br />
 Coefficient of Determination，也叫R Squared，翻译为拟合系数。其定义是，对于某个变量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>y</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">y_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>有一系列观测值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>y</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">y_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>（比如某个区域的100套房子价格），和对应的预测值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\hat{y}_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">^</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>（比如根据房型和面积预测出的房子价格</li>
 </ul>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo fence="true">(</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow><mrow><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo fence="true">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>y</mi><mo>ˉ</mo></mover><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">R^{2}=1-\frac{\sum_{i}\left(\hat{y}_{i}-y_{i}\right)^{2}}{\sum_{i}\left(y_{i}-\bar{y}\right)^{2}}
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>R</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo fence="true">(</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow><mrow><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo fence="true">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover accent="true"><mi>y</mi><mo>ˉ</mo></mover><mo fence="true">)</mo></mrow><mn>2</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">R^{2}=1-\frac{\sum_{i}\left(\hat{y}_{i}-y_{i}\right)^{2}}{\sum_{i}\left(y_{i}-\bar{y}\right)^{2}}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.7874360000000005em;vertical-align:-1.143718em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6437180000000002em;"><span style="top:-2.155992em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16195399999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.56778em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">ˉ</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897100000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16195399999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">^</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.143718em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>其中， <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>y</mi><mo>ˉ</mo></mover></mrow><annotation encoding="application/x-tex">\bar{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7622199999999999em;vertical-align:-0.19444em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.56778em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">ˉ</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span></span>是100套房子的平均价格。<br />
 R方的含义是，该预测模型解释了变量的方差的比例。方差衡量的是变量取值的分散程度或者波动范围，方差越小，说明变量值波动越小，换言之，变量的取值越容易被预测和猜中。假设R方=0.8，则说明拟合之后，变量的方差减小了80%，则变量的取值更容易被确定。比如，我们需要对房子进行估价，采用房型和面积对房子价格进行拟合之后，发现房屋价格的方差减小了80%，那么我们更容易得到房子价格的准确估计。</p>
 <h2 id="特征设计和模型优化"><a class="markdownIt-Anchor" href="#特征设计和模型优化"></a> 特征设计和模型优化</h2>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305843.jpg" alt="特征设计和模型优化" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305843.jpg" srcset="/img/loading.gif" lazyload alt="特征设计和模型优化" /></p>
 <p>特征工程是从现有数据中提取更多信息，以便提高模型的预测能力和学习速度的一门科学。在特征工程中，我们不会添加任何新的数据，而是让已有的数据发挥更大的作用。这一过程往往需要依靠数据领域的知识才能设计更有效的特征。</p>
 <p><strong>特征抽取</strong>和<strong>特征选择</strong>是DimensionalityReduction（降维）的两种方法。</p>
 <p><strong>维数灾难</strong>：当维数增大时，空间数据会变得更稀疏，这将导致bias和variance的增加，最后影响模型的预测效果。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112280738673.png" alt="维数灾难" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112280738673.png" srcset="/img/loading.gif" lazyload alt="维数灾难" /></p>
 <h3 id="特征抽取"><a class="markdownIt-Anchor" href="#特征抽取"></a> 特征抽取</h3>
 <p><strong>特征抽取</strong>:从现有特征中创建新特征来自动降低数据集中维数的过程，特征抽取后的新特征是原来特征的一个映射。<br />
 Feature Extraction: Creatting a subset of new features by combinations of the exsiting features</p>
@@ -301,7 +592,7 @@ Feature Extraction: Creatting a subset of new features by combinations of the ex
 <li><strong>目的</strong>：减少特征数据集中的属性(或者称为特征)的数目，DimensionalityReduction（降维）</li>
 <li><strong>手段</strong>：通过属性间的关系，如组合不同的属性得新的属性，这样就改变了原来的特征空间</li>
 </ul>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281042712.png" alt="特征抽取" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281042712.png" srcset="/img/loading.gif" lazyload alt="特征抽取" /></p>
 <h3 id="特征选择"><a class="markdownIt-Anchor" href="#特征选择"></a> 特征选择</h3>
 <p><strong>特征选择</strong>:根据预测的重要性对现有属性进行排序，然后选择最相关的属性。特征选择后的特征是原来特征的一个子集。<br />
 Feature Selection: Choosing a subset of all the features(the ones more informative)</p>
@@ -309,7 +600,7 @@ Feature Selection: Choosing a subset of all the features(the ones more informati
 <li><strong>目的</strong>：减少特征数据集中的属性(或者称为特征)的数目，DimensionalityReduction（降维）</li>
 <li><strong>手段</strong>：从原始特征数据集中选择出子集，是一种包含的关系，没有更改原始的特征空间。</li>
 </ul>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281044198.png" alt="特征选择" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281044198.png" srcset="/img/loading.gif" lazyload alt="特征选择" /></p>
 <h3 id="特征创建和转换"><a class="markdownIt-Anchor" href="#特征创建和转换"></a> 特征创建和转换</h3>
 <p>于特征提取和特征选择不同，特征创建和转换不是一个减少维数的方法，相反，<strong>特征创建和转换是从现有特征中生成新特征的过程。</strong></p>
 <p>举个例子，加入我们将日期作为一个特征，其格式为两位数日期、两位数月份和两位数年份（日日-月月-年年），我们发现，将日期、月份和年份整合成一项特征对预测并没有太大帮助。相反，我们可以生成三项不同的特征，分别对应着日期，月份和年份，进而可能会发现其中某项特征和目标之间存在着有用的关系。</p>
@@ -335,7 +626,7 @@ Feature Selection: Choosing a subset of all the features(the ones more informati
 </ul>
 <h3 id="模型优化-超参优化"><a class="markdownIt-Anchor" href="#模型优化-超参优化"></a> 模型优化-超参优化</h3>
 <h4 id="超参的三种类型"><a class="markdownIt-Anchor" href="#超参的三种类型"></a> 超参的三种类型</h4>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281109739.png" alt="超参数的类型" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281109739.png" srcset="/img/loading.gif" lazyload alt="超参数的类型" /></p>
 <ul>
 <li><strong>模型超参数</strong>：可以帮助定义模型本身。例如,某些基于神经网络的模型需要我们在开始训练前先定义一个架构。这个架构会包含神经网络中特定数量的层,以及在其中使用的激活函数。以处理计算机视觉问题的神经网 络为例,我们需要定义架构的其他属性,例如筛选器大小、池化、步长和填充。</li>
 <li><strong>优化器超参数</strong>：与模型如何根据数据来确定模式相关,用于神经网络模型。这种类型的超参数包含梯度下降和随机梯度下降等优化器。还可以包含Adam等使用动量的优化器,或者使用Xavier初始化或He初始化等方法将参数权重初始化的优化器。</li>
@@ -346,14 +637,14 @@ Feature Selection: Choosing a subset of all the features(the ones more informati
 <li>网格搜索（grid search）是超参数优化的传统方法，是对超参数组合的子集进行穷举搜索，找到表现最佳的超参数子集。</li>
 <li>随机搜索（random search），是对超参数组合的子集简单地做固定次数的随机搜索，找到表现最佳的超参数子集。对于规模较大的参数空间，采用随机搜索往往效率更高。</li>
 <li>贝叶斯优化(Bayesian Optimization) 与网格/随机搜索最大的不同，在于考虑了历史调参的信息，使得调参更有效率。（但在高维参数空间下，贝叶斯优化复杂度较高，效果会近似随机搜索。）<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281118708.png" alt="网格搜索和随机搜索" /><br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281120191.png" alt="贝叶斯优化" /></li>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281118708.png" srcset="/img/loading.gif" lazyload alt="网格搜索和随机搜索" /><br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281120191.png" srcset="/img/loading.gif" lazyload alt="贝叶斯优化" /></li>
 </ul>
 <h2 id="模型部署"><a class="markdownIt-Anchor" href="#模型部署"></a> 模型部署</h2>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305005.jpg" alt="" /><br />
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305005.jpg" srcset="/img/loading.gif" lazyload alt="" /><br />
 模型部署指的是将模型及其资源集成到一个生产环境中，用于创建预测。</p>
 <h3 id="生产环境基础设置"><a class="markdownIt-Anchor" href="#生产环境基础设置"></a> 生产环境基础设置</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281127053.png" alt="生产环境基础设施" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281127053.png" srcset="/img/loading.gif" lazyload alt="生产环境基础设施" /></p>
 <h3 id="推理类型"><a class="markdownIt-Anchor" href="#推理类型"></a> 推理类型</h3>
 <h4 id="批处理"><a class="markdownIt-Anchor" href="#批处理"></a> 批处理</h4>
 <ul>
@@ -408,5 +699,282 @@ Feature Selection: Choosing a subset of all the features(the ones more informati
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.aws.training/Details/InstructorLedTraining?id=89189">The Machine Learning Pipeline on AWS (Simplified Chinese)</a></li>
 </ul>
-<!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2021/12/28/ml-pipeline/">https://imzhanghao.com/2021/12/28/ml-pipeline/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4128258433761966" data-ad-slot="1528926940" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/machinelearning/">机器学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/pipeline/">pipeline</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
+                  crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-4128258433761966"
+                  data-ad-slot="1528926940"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/05/summary-2021/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">我的2021年年终总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/21/reading-the-hard-thing-about-hard-things/">
+                        <span class="hidden-mobile">《创业维艰》读书笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

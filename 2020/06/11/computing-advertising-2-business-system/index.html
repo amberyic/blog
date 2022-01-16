@@ -1,25 +1,283 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="商业化体系,商业化产品,核心挑战,转化漏斗,六大系统技术,六大产品问题,六大算法问题"><meta name="description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解计算广告的核心挑战，广告业务的转化漏斗和目标。从宏观层面总结了商业化变现产品的六大系统技术、六大产品问题和六大算法问题。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>计算广告|2.认识商业体系 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>计算广告|2.认识商业体系</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E9%80%BB%E8%BE%91%E4%B8%8E%E6%8C%91%E6%88%98%E5%85%AD%E5%A4%A7%E7%AE%97%E6%B3%95%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text"> 计算广告逻辑与挑战：六大算法问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%95%86%E4%B8%9A%E5%8C%96%E4%BD%93%E7%B3%BB%E5%A4%A7%E9%97%AD%E7%8E%AF"><span class="toc-number">1.1.</span> <span class="toc-text"> 商业化体系大闭环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E7%9A%84%E6%A0%B8%E5%BF%83%E6%8C%91%E6%88%98"><span class="toc-number">1.2.</span> <span class="toc-text"> 计算广告的核心挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%91%8A%E4%B8%9A%E5%8A%A1%E7%9A%84%E8%BD%AC%E5%8C%96%E6%BC%8F%E6%96%97%E5%92%8C%E7%9B%AE%E6%A0%87"><span class="toc-number">1.3.</span> <span class="toc-text"> 广告业务的转化漏斗和目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E5%B9%BF%E5%91%8A%E4%B8%BB%E8%A6%81%E7%BB%93%E7%AE%97%E6%96%B9%E5%BC%8F%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.4.</span> <span class="toc-text"> 在线广告主要结算方式详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cpacps%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E5%90%88%E7%90%86%E5%9C%BA%E6%99%AF"><span class="toc-number">1.5.</span> <span class="toc-text"> CPA&#x2F;CPS的问题与合理场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%95%86%E4%B8%9A%E5%8C%96%E4%BA%A7%E5%93%81%E4%BD%93%E7%B3%BB%E6%A6%82%E8%A7%88%E5%85%AD%E5%A4%A7%E4%BA%A7%E5%93%81%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text"> 商业化产品体系概览：六大产品问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%95%86%E4%B8%9A%E5%8C%96%E4%BA%A7%E5%93%81%E7%B3%BB%E7%BB%9F%E6%A1%86%E6%9E%B6%E5%85%AD%E5%A4%A7%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF"><span class="toc-number">3.</span> <span class="toc-text"> 商业化产品系统框架：六大系统技术</span></a></li></ol></div><h2 id="计算广告逻辑与挑战六大算法问题"><a class="markdownIt-Anchor" href="#计算广告逻辑与挑战六大算法问题"></a> 计算广告逻辑与挑战：六大算法问题</h2>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="商业化体系,商业化产品,核心挑战,转化漏斗,六大系统技术,六大产品问题,六大算法问题">
+  
+    <meta name="description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解计算广告的核心挑战，广告业务的转化漏斗和目标。从宏观层面总结了商业化变现产品的六大系统技术、六大产品问题和六大算法问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算广告|2.认识商业体系">
+<meta property="og:url" content="https://imzhanghao.com/2020/06/11/computing-advertising-2-business-system/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="这是刘鹏老师计算广告课程的笔记，这部分主要讲解计算广告的核心挑战，广告业务的转化漏斗和目标。从宏观层面总结了商业化变现产品的六大系统技术、六大产品问题和六大算法问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/%E5%95%86%E4%B8%9A%E5%8C%96%E4%BD%93%E7%B3%BB%E5%A4%A7%E9%97%AD%E7%8E%AF.png">
+<meta property="article:published_time" content="2020-06-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-16T14:27:03.884Z">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="计算广告">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/%E5%95%86%E4%B8%9A%E5%8C%96%E4%BD%93%E7%B3%BB%E5%A4%A7%E9%97%AD%E7%8E%AF.png">
+  
+  
+  <title>计算广告|2.认识商业体系 - 张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算广告|2.认识商业体系">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-11 00:00" pubdate>
+        2020年6月11日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算广告|2.认识商业体系</h1>
+            
+            <div class="markdown-body">
+              <h2 id="计算广告逻辑与挑战六大算法问题"><a class="markdownIt-Anchor" href="#计算广告逻辑与挑战六大算法问题"></a> 计算广告逻辑与挑战：六大算法问题</h2>
 <h3 id="商业化体系大闭环"><a class="markdownIt-Anchor" href="#商业化体系大闭环"></a> 商业化体系大闭环</h3>
 <p>广告点击以后，就从媒体网站到了广告主的网站上。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/%E5%95%86%E4%B8%9A%E5%8C%96%E4%BD%93%E7%B3%BB%E5%A4%A7%E9%97%AD%E7%8E%AF.png" alt="商业化体系大闭环" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/%E5%95%86%E4%B8%9A%E5%8C%96%E4%BD%93%E7%B3%BB%E5%A4%A7%E9%97%AD%E7%8E%AF.png" srcset="/img/loading.gif" lazyload alt="商业化体系大闭环" /></p>
 <h3 id="计算广告的核心挑战"><a class="markdownIt-Anchor" href="#计算广告的核心挑战"></a> 计算广告的核心挑战</h3>
 <p>计算广告的核心问题，是为一系列用户与环境的组合，找到最合适的广告投放策略以优化整体广告活动的利润。</p>
 <p>优化问题描述：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><munder><mo><mi>max</mi><mo>⁡</mo></mo><mrow><msub><mi>a</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mi>T</mi></mrow></munder><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>T</mi></munderover><mrow><mi>r</mi><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>−</mo><mi>q</mi><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>s</mi><mi mathvariant="normal">.</mi><mi>t</mi><mi mathvariant="normal">.</mi><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>T</mi></munderover><mi>d</mi><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>c</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>k</mi><mo stretchy="false">)</mo><mo>⩽</mo><msub><mi>D</mi><mi>k</mi></msub><mo separator="true">,</mo><mi mathvariant="normal">∀</mi><mi>k</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><munder><mo><mi>max</mi><mo>⁡</mo></mo><mrow><msub><mi>a</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mi>T</mi></mrow></munder><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>T</mi></munderover><mrow><mi>r</mi><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>−</mo><mi>q</mi><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>s</mi><mi mathvariant="normal">.</mi><mi>t</mi><mi mathvariant="normal">.</mi><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>T</mi></munderover><mi>d</mi><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>u</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>c</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>k</mi><mo stretchy="false">)</mo><mo>⩽</mo><msub><mi>D</mi><mi>k</mi></msub><mo separator="true">,</mo><mi mathvariant="normal">∀</mi><mi>k</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
 \max \limits_{a_{1},...,T}\sum_{i=1}^{T}{r(a_{i},u_{i},c_{i}) - q(a_{i},u_{i},c_{i})} \\
 s.t.\sum_{i=1}^{T}d(a_{i},u_{i},c_{i},k) \leqslant D_{k},\forall k
 \end{aligned}
@@ -35,7 +293,7 @@ s.t.\sum_{i=1}^{T}d(a_{i},u_{i},c_{i},k) \leqslant D_{k},\forall k
 <li>从媒体网站到广告主网站</li>
 <li>广告排序的唯一指标：u代表点击率，v代表转化率</li>
 </ul>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mi>C</mi><mi>P</mi><mi>M</mi><mo>=</mo><mi>r</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>u</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>∗</mo><mi>v</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">eCPM=r(a,u,c)=u(a,u,c)*v(a,u)
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mi>C</mi><mi>P</mi><mi>M</mi><mo>=</mo><mi>r</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>u</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo separator="true">,</mo><mi>c</mi><mo stretchy="false">)</mo><mo>∗</mo><mi>v</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>u</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">eCPM=r(a,u,c)=u(a,u,c)*v(a,u)
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">u</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">u</span><span class="mclose">)</span></span></span></span></span></p>
 <p>如果标识一个用户？</p>
 <ul>
@@ -184,5 +442,282 @@ s.t.\sum_{i=1}^{T}d(a_{i},u_{i},c_{i},k) \leqslant D_{k},\forall k
 <li>S5.离线学习：分布式计算</li>
 <li>S6.在线学习：流式计算</li>
 </ul>
-<!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2020/06/11/computing-advertising-2-business-system/">https://imzhanghao.com/2020/06/11/computing-advertising-2-business-system/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4128258433761966" data-ad-slot="1528926940" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
+                  crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-4128258433761966"
+                  data-ad-slot="1528926940"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/12/computing-advertising-3-related-knowledge/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算广告|3.相关方法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/10/computing-advertising-1-curriculum-structure/">
+                        <span class="hidden-mobile">计算广告|1.课程体系</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

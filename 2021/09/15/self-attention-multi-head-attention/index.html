@@ -1,18 +1,287 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="注意力机制,Self-Attention, Multi-Head Attention, 自注意力机制, 多头注意力机制"><meta name="description" content="介绍Self-Attention和Multi-Head Attention，这两个的深入理解是理解transformer的前提。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>详解Self-Attention和Multi-Head Attention - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>详解Self-Attention和Multi-Head Attention</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text"> 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6self-attention"><span class="toc-number">2.</span> <span class="toc-text"> 自注意力机制(Self-Attention)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#self-attention%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text"> Self-Attention的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self-attention%E7%9A%84%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text"> Self-Attention的计算过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#self-attention%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B%E5%8A%A8%E5%9B%BE"><span class="toc-number">2.3.</span> <span class="toc-text"> Self-Attention计算过程动图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6multi-head-attention"><span class="toc-number">3.</span> <span class="toc-text"> 多头注意力机制(Multi-Head Attention)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#single-head-attention-vs-multi-head-attention"><span class="toc-number">3.1.</span> <span class="toc-text"> Single-Head Attention VS Multi-Head Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#multi-head-attention%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text"> Multi-Head Attention的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">4.</span> <span class="toc-text"> 参考文献</span></a></li></ol></div><h2 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h2>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="注意力机制,Self-Attention, Multi-Head Attention, 自注意力机制, 多头注意力机制">
+  
+    <meta name="description" content="介绍Self-Attention和Multi-Head Attention，这两个的深入理解是理解transformer的前提。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解Self-Attention和Multi-Head Attention">
+<meta property="og:url" content="https://imzhanghao.com/2021/09/15/self-attention-multi-head-attention/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="介绍Self-Attention和Multi-Head Attention，这两个的深入理解是理解transformer的前提。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151007413.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151007208.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109030902038.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151102923.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151123929.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151127016.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151133617.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151144419.gif">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151148991.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151146086.png">
+<meta property="article:published_time" content="2021-09-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-09-14T16:00:00.000Z">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="注意力机制">
+<meta property="article:tag" content="Self-Attention">
+<meta property="article:tag" content="Multi-Head Attention">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151007413.png">
+  
+  
+  <title>详解Self-Attention和Multi-Head Attention - 张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="详解Self-Attention和Multi-Head Attention">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-15 00:00" pubdate>
+        2021年9月15日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">详解Self-Attention和Multi-Head Attention</h1>
+            
+            <div class="markdown-body">
+              <h2 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h2>
 <p>Self Attention就是Q、K、V均为同一个输入向量映射而来的Encoder-Decoder Attention，它可以无视词之间的距离直接计算依赖关系，能够学习一个句子的内部结构，实现也较为简单并且可以并行计算。</p>
 <p>Multi-Head Attention同时计算多个Attention，并最终得到合并结果，通过计算多次来捕获不同子空间上的相关信息。</p>
 <h2 id="自注意力机制self-attention"><a class="markdownIt-Anchor" href="#自注意力机制self-attention"></a> 自注意力机制(Self-Attention)</h2>
@@ -21,21 +290,21 @@
 <p>Self Attention是在2017年Google机器翻译团队发表的《Attention is All You Need》中被提出来的，它完全抛弃了RNN和CNN等网络结构，而仅仅采用Attention机制来进行机器翻译任务，并且取得了很好的效果，Google最新的机器翻译模型内部大量采用了Self-Attention机制。</p>
 <h3 id="self-attention的作用"><a class="markdownIt-Anchor" href="#self-attention的作用"></a> Self-Attention的作用</h3>
 <p>Self Attention可以捕获同一个句子中单词之间的一些句法特征（比如图展示的有一定距离的短语结构）<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151007413.png" alt="可视化Self Attention机制" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151007413.png" srcset="/img/loading.gif" lazyload alt="可视化Self Attention机制" /></p>
 <p>Self Attention可以捕获同一个句子中单词之间的一些语义特征（比如图展示的its的指代对象Law）。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151007208.png" alt="可视化Self Attention机制" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151007208.png" srcset="/img/loading.gif" lazyload alt="可视化Self Attention机制" /></p>
 <p>很明显，引入Self Attention后会更容易捕获句子中长距离的相互依赖的特征，因为如果是RNN或者LSTM，需要依次序序列计算，对于远距离的相互依赖的特征，要经过若干时间步步骤的信息累积才能将两者联系起来，而距离越远，有效捕获的可能性越小。</p>
 <p>但是Self Attention在计算过程中会直接将句子中任意两个单词的联系通过一个计算步骤直接联系起来，所以远距离依赖特征之间的距离被极大缩短，有利于有效地利用这些特征。除此外，Self Attention对于增加计算的并行性也有直接帮助作用。这是为何Self Attention逐渐被广泛使用的主要原因。</p>
 <h3 id="self-attention的计算过程"><a class="markdownIt-Anchor" href="#self-attention的计算过程"></a> Self-Attention的计算过程</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109030902038.png" alt="Attention机制的本质思想" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109030902038.png" srcset="/img/loading.gif" lazyload alt="Attention机制的本质思想" /></p>
 <p><strong>第一步：初始化Q，K，V</strong><br />
 从每个编码器的输入向量（在本例中是每个单词的Embedding向量）创建三个向量。对于每个单词，我们创建一个Query向量、一个Key向量和一个Value向量。这些向量是通过将Embedding乘以我们在训练过程中训练的三个矩阵来创建的。</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>Q</mi><mo>=</mo><msub><mi>W</mi><mi>q</mi></msub><mi>X</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>K</mi><mo>=</mo><msub><mi>W</mi><mi>k</mi></msub><mi>X</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>V</mi><mo>=</mo><msub><mi>W</mi><mi>v</mi></msub><mi>X</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex"> \begin{array}{l}
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.15999999999999992em" columnalign="left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>Q</mi><mo>=</mo><msub><mi>W</mi><mi>q</mi></msub><mi>X</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>K</mi><mo>=</mo><msub><mi>W</mi><mi>k</mi></msub><mi>X</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>V</mi><mo>=</mo><msub><mi>W</mi><mi>v</mi></msub><mi>X</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex"> \begin{array}{l}
 Q=W_{q} X \\
 K=W_{k} X \\
 V=W_{v} X
 \end{array}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.6000000000000005em;vertical-align:-1.5500000000000007em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">Q</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">q</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></span></p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151102923.png" alt="初始化Q，K，V" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151102923.png" srcset="/img/loading.gif" lazyload alt="初始化Q，K，V" /></p>
 <blockquote>
 <p>这里Thinking这个单词的Embedding向量是X1，我们用X1乘以WQ的权重矩阵，就可以得到Thinking这个词的Query，即q1。其他的q2、k1、k2等都使用相同的计算方式，这样我们就计算为每个单词都计算了一个Query，一个Key，和一个Value。</p>
 </blockquote>
@@ -45,13 +314,13 @@ V=W_{v} X
 <p><strong>第二步：计算Self-Attention Score</strong><br />
 假设我们正在计算本例中第一个单词“Thinking”的自注意力。我们需要根据这个词对输入句子的每个词进行评分。当我们在某个位置对单词进行编码时，分数决定了将多少注意力放在输入句子的其他部分上。</p>
 <p>得分是通过将查询向量与我们正在评分的各个单词的键向量进行点积来计算的。 因此，如果我们正在处理位置 #1 中单词的自注意力，第一个分数将是q1和k1的点积。第二个分数是q1和k2的点积。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151123929.png" alt="计算Self-Attention Score" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151123929.png" srcset="/img/loading.gif" lazyload alt="计算Self-Attention Score" /></p>
 <p><strong>第三步：对Self-Attention Socre进行缩放和归一化,得到Softmax Socre</strong><br />
 对 Step 2 中计算的分数进行缩放，这里通过除以8( 论文中维度是64，这可以让模型有更稳定的梯度，默认值是64，也可以是其它值)，将结果进行softmax归一化。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151127016.png" alt="" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151127016.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <p><strong>第四步：Softmax Socre乘以Value向量，求和得到Attention Value</strong><br />
 每个Value向量乘以softmax Score得到加权的v1和v2，对加权的v1和v2进行求和得到z1。这样，我们就计算出了第一个词Thinking的注意力值。其他的词用相同的方法进行计算。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151133617.png" alt="Socre乘以Value向量" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151133617.png" srcset="/img/loading.gif" lazyload alt="Socre乘以Value向量" /></p>
 <h3 id="self-attention计算过程动图"><a class="markdownIt-Anchor" href="#self-attention计算过程动图"></a> Self-Attention计算过程动图</h3>
 <p>对于Self Attention机制计算过程还有不清楚的地方的同学，推荐看这篇文章[《<a target="_blank" rel="noopener" href="https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a#570c">Illustrated: Self-Attention》</a>，里面将计算过程动态的绘制出来，分八个步骤进行讲解。</p>
 <ul>
@@ -64,10 +333,10 @@ V=W_{v} X
 <li>Sum weighted values to get Output 1</li>
 <li>Repeat steps 4–7 for Input 2 &amp; Input 3</li>
 </ul>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151144419.gif" alt="Self-Attention计算过程动图" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151144419.gif" srcset="/img/loading.gif" lazyload alt="Self-Attention计算过程动图" /></p>
 <h2 id="多头注意力机制multi-head-attention"><a class="markdownIt-Anchor" href="#多头注意力机制multi-head-attention"></a> 多头注意力机制(Multi-Head Attention)</h2>
 <p>Multi-Head Attention是利用多个查询，来平行地计算从输入信息中选取多个信息。每个注意力关注输入信息的不同部分，然后再进行拼接。</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mtext> MultiHead </mtext><mo stretchy="false">(</mo><mi>Q</mi><mo separator="true">,</mo><mi>K</mi><mo separator="true">,</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mtext> Concat </mtext><mrow><mo fence="true">(</mo><msub><mi mathvariant="normal">head</mi><mo>⁡</mo><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mtext> head </mtext><mi mathvariant="normal">h</mi></msub><mo fence="true">)</mo></mrow><msup><mi>W</mi><mi>O</mi></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msub><mtext> where head </mtext><mi mathvariant="normal">i</mi></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mtext> Attention </mtext><mrow><mo fence="true">(</mo><mi>Q</mi><msubsup><mi>W</mi><mi>i</mi><mi>Q</mi></msubsup><mo separator="true">,</mo><mi>K</mi><msubsup><mi>W</mi><mi>i</mi><mi>K</mi></msubsup><mo separator="true">,</mo><mi>V</mi><msubsup><mi>W</mi><mi>i</mi><mi>V</mi></msubsup><mo fence="true">)</mo></mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mtext> MultiHead </mtext><mo stretchy="false">(</mo><mi>Q</mi><mo separator="true">,</mo><mi>K</mi><mo separator="true">,</mo><mi>V</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mtext> Concat </mtext><mrow><mo fence="true">(</mo><msub><mi mathvariant="normal">head</mi><mo>⁡</mo><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mtext> head </mtext><mi mathvariant="normal">h</mi></msub><mo fence="true">)</mo></mrow><msup><mi>W</mi><mi>O</mi></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msub><mtext> where head </mtext><mi mathvariant="normal">i</mi></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mtext> Attention </mtext><mrow><mo fence="true">(</mo><mi>Q</mi><msubsup><mi>W</mi><mi>i</mi><mi>Q</mi></msubsup><mo separator="true">,</mo><mi>K</mi><msubsup><mi>W</mi><mi>i</mi><mi>K</mi></msubsup><mo separator="true">,</mo><mi>V</mi><msubsup><mi>W</mi><mi>i</mi><mi>V</mi></msubsup><mo fence="true">)</mo></mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
 \text { MultiHead }(Q, K, V) &amp;=\text { Concat }\left(\operatorname{head}_{1}, \ldots, \text { head }_{\mathrm{h}}\right) W^{O} \\
 \text { where head }_{\mathrm{i}} &amp;=\text { Attention }\left(Q W_{i}^{Q}, K W_{i}^{K}, V W_{i}^{V}\right)
 \end{aligned}
@@ -76,14 +345,14 @@ V=W_{v} X
 <p>其中：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>W</mi><mi>i</mi><mi>Q</mi></msubsup><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><msub><mi>d</mi><mtext>model </mtext></msub><mo>×</mo><msub><mi>d</mi><mi>k</mi></msub></mrow></msup></mrow><annotation encoding="application/x-tex">W_{i}^{Q} \in \mathbb{R}^{d_{\text {model }} \times d_{k}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.236103em;vertical-align:-0.276864em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.959239em;"><span style="top:-2.4231360000000004em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span style="top:-3.1809080000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">Q</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.276864em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">model </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mbin mtight">×</span><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>W</mi><mi>i</mi><mi>K</mi></msubsup><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><msub><mi>d</mi><mtext>model </mtext></msub><mo>×</mo><msub><mi>d</mi><mi>k</mi></msub></mrow></msup></mrow><annotation encoding="application/x-tex">W_{i}^{K} \in \mathbb{R}^{d_{\text {model }} \times d_{k}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0999949999999998em;vertical-align:-0.258664em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-2.441336em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">model </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mbin mtight">×</span><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>W</mi><mi>i</mi><mi>V</mi></msubsup><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><msub><mi>d</mi><mtext>model </mtext></msub><mo>×</mo><msub><mi>d</mi><mi>v</mi></msub></mrow></msup></mrow><annotation encoding="application/x-tex">W_{i}^{V} \in \mathbb{R}^{d_{\text {model }} \times d_{v}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0999949999999998em;vertical-align:-0.258664em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-2.441336em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.22222em;">V</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">model </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mbin mtight">×</span><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>W</mi><mi>O</mi></msup><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mi>h</mi><msub><mi>d</mi><mi>v</mi></msub><mo>×</mo><msub><mi>d</mi><mtext>model </mtext></msub></mrow></msup></mrow><annotation encoding="application/x-tex">W^{O} \in \mathbb{R}^{h d_{v} \times d_{\text {model }}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.880431em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">O</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">h</span><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mbin mtight">×</span><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">model </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p>
 </blockquote>
 <h3 id="single-head-attention-vs-multi-head-attention"><a class="markdownIt-Anchor" href="#single-head-attention-vs-multi-head-attention"></a> Single-Head Attention VS Multi-Head Attention</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151148991.png" alt="Scaled Dot-Product Attention VS Multi-Head Attention" /><br />
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151148991.png" srcset="/img/loading.gif" lazyload alt="Scaled Dot-Product Attention VS Multi-Head Attention" /><br />
 上图对比了多头注意力机制的计算过程和多头注意力机制的计算过程。</p>
 <h3 id="multi-head-attention的作用"><a class="markdownIt-Anchor" href="#multi-head-attention的作用"></a> Multi-Head Attention的作用</h3>
 <p>多头注意力的机制进一步细化了注意力层，通过以下两种方式提高了注意力层的性能：</p>
 <ul>
 <li>扩展了模型专注于不同位置的能力。当多头注意力模型和自注意力机制集合的时候，比如我们翻译“动物没有过马路，因为它太累了”这样的句子的时候，我们想知道“它”指的是哪个词，如果能分析出来代表动物，就很有用。</li>
 <li>为注意力层提供了多个“表示子空间”。对于多头注意力，我们不仅有一个，而且还有多组Query/Key/Value权重矩阵，这些权重矩阵集合中的每一个都是随机初始化的。然后，在训练之后，每组用于将输入Embedding投影到不同的表示子空间中。多个head学习到的Attention侧重点可能略有不同，这样给了模型更大的容量。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151146086.png" alt="两个head学到的Attention效果" /></li>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151146086.png" srcset="/img/loading.gif" lazyload alt="两个head学到的Attention效果" /></li>
 </ul>
 <h2 id="参考文献"><a class="markdownIt-Anchor" href="#参考文献"></a> 参考文献</h2>
 <p>[1]<a href="https://imzhanghao.com/2021/09/01/attention-mechanism/">Attention机制的基本思想与实现原理</a><br />
@@ -91,5 +360,286 @@ V=W_{v} X
 [3]<a target="_blank" rel="noopener" href="https://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer / Jay Alammar</a><br />
 [4]<a target="_blank" rel="noopener" href="https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a#570c">Illustrated: Self-Attention / Raimi Karim</a><br />
 [5]<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1706.03762.pdf">《Attention Is All You Need》/ Ashish Vaswani / 2017</a></p>
-<!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2021/09/15/self-attention-multi-head-attention/">https://imzhanghao.com/2021/09/15/self-attention-multi-head-attention/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4128258433761966" data-ad-slot="1528926940" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/machinelearning/">机器学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">注意力机制</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Self-Attention/">Self-Attention</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Multi-Head-Attention/">Multi-Head Attention</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
+                  crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-4128258433761966"
+                  data-ad-slot="1528926940"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/18/transformer/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Attention Is All You Need -- Transformer</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/06/attention-mechanism-variants/">
+                        <span class="hidden-mobile">Attention机制变体的介绍与对比</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

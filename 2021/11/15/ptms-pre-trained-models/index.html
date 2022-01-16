@@ -1,21 +1,293 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="预训练,PTM,Pre-Trained,Fine-tuning,NNLM,word2vec,Glove,ELMo,GPT,Bert"><meta name="description" content="本文梳理预训练技术的原理和发展脉络，着重讲解了几个具有代表性的模型，第一代的预训练模型：NNLM,word2vec,Glove，和第二代的预训练模型：ELMo,GPT,Bert。这是一个正在井喷的研究方向，简单描述了目前预训练技术的几个延伸方向以及应用到下游任务的方案。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>自然语言处理预训练技术综述 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="/css/header.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="inner"><h1>自然语言处理预训练技术综述</h1><div id="toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-number">1.</span> <span class="toc-text"> 预训练</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-number">1.1.</span> <span class="toc-text"> 为什么需要预训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E4%B8%8A%E7%9A%84%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-number">1.2.</span> <span class="toc-text"> 计算机视觉上的预训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E4%B8%8A%E7%9A%84%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-number">1.3.</span> <span class="toc-text"> 自然语言处理上的预训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="toc-number">1.4.</span> <span class="toc-text"> 发展历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84%E9%A2%84%E8%AE%AD%E7%BB%83%E6%8A%80%E6%9C%AF-vs-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%A2%84%E8%AE%AD%E7%BB%83%E6%8A%80%E6%9C%AF"><span class="toc-number">1.5.</span> <span class="toc-text"> 传统的预训练技术 VS 神经网络预训练技术</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF"><span class="toc-number">2.</span> <span class="toc-text"> 关键技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#transfromer"><span class="toc-number">2.1.</span> <span class="toc-text"> Transfromer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.2.</span> <span class="toc-text"> 自监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E8%B0%83"><span class="toc-number">2.3.</span> <span class="toc-text"> 微调</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%BB%A3%E6%8A%80%E6%9C%AF%E9%A2%84%E8%AE%AD%E7%BB%83%E6%8A%80%E6%9C%AFword-embeddings"><span class="toc-number">3.</span> <span class="toc-text"> 第一代技术预训练技术：Word Embeddings</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nnlm"><span class="toc-number">3.1.</span> <span class="toc-text"> NNLM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#word2vec"><span class="toc-number">3.2.</span> <span class="toc-text"> Word2Vec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glove"><span class="toc-number">3.3.</span> <span class="toc-text"> GloVe</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E4%BB%A3%E6%8A%80%E6%9C%AF%E9%A2%84%E8%AE%AD%E7%BB%83%E6%8A%80%E6%9C%AF-contextual-embeddings"><span class="toc-number">4.</span> <span class="toc-text"> 第二代技术预训练技术: Contextual Embeddings</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#elmo"><span class="toc-number">4.1.</span> <span class="toc-text"> ELMo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gpt"><span class="toc-number">4.2.</span> <span class="toc-text"> GPT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bert"><span class="toc-number">4.3.</span> <span class="toc-text"> BERT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E4%BC%B8%E6%96%B9%E5%90%91"><span class="toc-number">5.</span> <span class="toc-text"> 延伸方向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91"><span class="toc-number">5.1.</span> <span class="toc-text"> 研究方向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%A1%8D%E7%94%9F"><span class="toc-number">5.2.</span> <span class="toc-text"> 模型衍生</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E4%BA%8E%E4%B8%8B%E6%B8%B8%E4%BB%BB%E5%8A%A1"><span class="toc-number">6.</span> <span class="toc-text"> 应用于下游任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="toc-number">6.1.</span> <span class="toc-text"> 迁移学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E8%B0%83%E7%AD%96%E7%95%A5"><span class="toc-number">6.2.</span> <span class="toc-text"> 微调策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text"> 参考资料</span></a></li></ol></div><h2 id="预训练"><a class="markdownIt-Anchor" href="#预训练"></a> 预训练</h2>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="预训练,PTM,Pre-Trained,Fine-tuning,NNLM,word2vec,Glove,ELMo,GPT,Bert">
+  
+    <meta name="description" content="本文梳理预训练技术的原理和发展脉络，着重讲解了几个具有代表性的模型，第一代的预训练模型：NNLM,word2vec,Glove，和第二代的预训练模型：ELMo,GPT,Bert。这是一个正在井喷的研究方向，简单描述了目前预训练技术的几个延伸方向以及应用到下游任务的方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自然语言处理预训练技术综述">
+<meta property="og:url" content="https://imzhanghao.com/2021/11/15/ptms-pre-trained-models/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="本文梳理预训练技术的原理和发展脉络，着重讲解了几个具有代表性的模型，第一代的预训练模型：NNLM,word2vec,Glove，和第二代的预训练模型：ELMo,GPT,Bert。这是一个正在井喷的研究方向，简单描述了目前预训练技术的几个延伸方向以及应用到下游任务的方案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112041107988.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111041801550.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111120845409.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111140618731.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111101654276.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111101903380.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111111038802.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111110902602.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150545462.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150547484.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150548149.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150915051.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111160553063.png">
+<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150901877.png">
+<meta property="article:published_time" content="2021-11-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-14T16:00:00.000Z">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="预训练">
+<meta property="article:tag" content="自然语言处理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112041107988.png">
+  
+  
+  <title>自然语言处理预训练技术综述 - 张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="自然语言处理预训练技术综述">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-15 00:00" pubdate>
+        2021年11月15日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      60 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">自然语言处理预训练技术综述</h1>
+            
+            <div class="markdown-body">
+              <h2 id="预训练"><a class="markdownIt-Anchor" href="#预训练"></a> 预训练</h2>
 <p>预训练(Pre-trained Models,PTMs)的实施过程跟<strong>迁移学习</strong>是一样的，一般是先在一个基础数据集上进行任务训练，生成一个基础网络，然后将学习到的特征重新进行微调或者迁移到另一个目标网络上，用来训练新目标任务。</p>
 <p>预训练是在大量常规数据集上学习数据中的“<strong>共性</strong>”，然后在特定领域的少量标注数据学习“<strong>特性</strong>”，这样子模型只需要从“共性”出发，去学习特定任务的“特性”部分即可。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112041107988.png" alt="预训练模型" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112041107988.png" srcset="/img/loading.gif" lazyload alt="预训练模型" /></p>
 <p>这和小孩子读书一样，一开始语文、数学、化学都学，读书、网上游戏等，在脑子里积攒了很多。当他学习计算机时，实际上把他以前学到的所有知识都带进去了。如果他以前没上过中学，没上过小学，突然学计算机就不懂这里有什么道理。<strong>预训练模型就意味着把人类的语言知识，先学了一个东西，然后再代入到某个具体任务，就顺手了，就是这么一个简单的道理。</strong></p>
 <h3 id="为什么需要预训练"><a class="markdownIt-Anchor" href="#为什么需要预训练"></a> 为什么需要预训练</h3>
 <ul>
@@ -25,7 +297,7 @@
 <h3 id="计算机视觉上的预训练"><a class="markdownIt-Anchor" href="#计算机视觉上的预训练"></a> 计算机视觉上的预训练</h3>
 <p>预训练首先是在计算机视觉方向取得较好效果并实现大规模应用的，我们会在庞大的ImageNet语料库上预训练模型，然后针对不同的任务在较小的数据上进一步微调。这比随机初始化要好得多，因为模型学习了一般的图像特征，然后可以将其用于各种视觉任务。<br />
 ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领域，具有很好的通用型，使用范式一般如下图所示：<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111041801550.png" alt="ImageNet预训练" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111041801550.png" srcset="/img/loading.gif" lazyload alt="ImageNet预训练" /></p>
 <h3 id="自然语言处理上的预训练"><a class="markdownIt-Anchor" href="#自然语言处理上的预训练"></a> 自然语言处理上的预训练</h3>
 <p>借鉴视觉领域的做法,自然语言处理领域开始尝试使用预训练技术实现迁移学习，但是预训练在自然语言处理领域大爆发会缓慢很多，主要是因为自然语言处理任务(除机器翻译)没有计算机视觉方面那么多的标注好的数据集，而且没有很好的特征提取器，直到最近几年几个关键技术的成熟，神经网络才开始全面引入到了自然语言理解。从大规模的语言数据到强有力的算力，加上深度学习，把整个自然语言带到一个新的阶段。</p>
 <p>自然语言处理预训练在不同时期有不同的称谓，但是，<strong>本质是使用大量语料预测相应单词或词组，生成一个半成品用以训练后续任务</strong>。</p>
@@ -42,7 +314,7 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 <h3 id="传统的预训练技术-vs-神经网络预训练技术"><a class="markdownIt-Anchor" href="#传统的预训练技术-vs-神经网络预训练技术"></a> 传统的预训练技术 VS 神经网络预训练技术</h3>
 <p><strong>传统的预训练技术</strong><br />
 传统预训练技术与模型耦合较为紧密，该技术与模型之间并没有明确的区分界限，为了方便阐述，将语料送入模型到生成词向量的这一过程称为传统预训练技术。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111120845409.png" alt="传统的预训练技术" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111120845409.png" srcset="/img/loading.gif" lazyload alt="传统的预训练技术" /></p>
 <p><strong>神经网络预训练技术</strong><br />
 神经网络预训练技术是在预训练阶段采用神经网络模型进行预训练的技术统称，由于预训练与后续任务耦合性不强，能单独成为一个模型，因此也称为预训练语言模型，这一称谓是区别于传统预训练技术的叫法。</p>
 <p>神经网络自然语言处理的预训练发展经历从浅层的词嵌入到深层编码两个阶段，按照这两个主要的发展阶段，我们归纳出预训练的两大范式：「浅层词嵌入」和「上下文的词嵌入」。</p>
@@ -66,11 +338,11 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 <p>在预训练模型中，最常用的自监督学习方法是自回归语言模型（AutoRegressive LM，AR）和自编码语言模型（AutoEncoder LM，AE）。 <strong>自回归语言模型</strong>根据上文内容预测下一个可能跟随的单词，就是常说的自左向右的语言模型任务，或者反过来也行，就是根据下文预测前面的单词。 <strong>自编码语言模型</strong>根据上下文内容预测随机Mask掉的一些单词。</p>
 <h3 id="微调"><a class="markdownIt-Anchor" href="#微调"></a> 微调</h3>
 <p>微调旨在利用其标注样本对预训练网络的参数进行调整，可以将预训练的模型结果在新的任务上利用起来。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111140618731.png" alt="微调" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111140618731.png" srcset="/img/loading.gif" lazyload alt="微调" /></p>
 <h2 id="第一代技术预训练技术word-embeddings"><a class="markdownIt-Anchor" href="#第一代技术预训练技术word-embeddings"></a> 第一代技术预训练技术：Word Embeddings</h2>
 <h3 id="nnlm"><a class="markdownIt-Anchor" href="#nnlm"></a> NNLM</h3>
 <p>神经网络语言模型(Neural Network Language Model，NNLM)是2003年蒙特利尔大学的Yoshua Bengio教授在《A Neural Probabilistic Language Model》中提出来的模型，这个模型第一次用神经网络来解决语言模型的问题，虽然在当时并没有得到太多的重视，却为后来深度学习在解决语言模型问题甚至很多别的nlp问题时奠定了坚实的基础，后人站在Yoshua Bengio的肩膀上，做出了更多的成就。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111101654276.png" alt="NNLM" /><br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111101654276.png" srcset="/img/loading.gif" lazyload alt="NNLM" /><br />
 模型一共三层，第一层是<strong>映射层</strong>，将n个单词映射为对应word embeddings的拼接，其实这一层就是MLP的输入层；第二层是<strong>隐藏层</strong>，激活函数用tanh；第三层是<strong>输出层</strong>，因为是语言模型，需要根据前n个单词预测下一个单词，所以是一个多分类器，用softmax。整个模型最大的计算量集中在最后一层上，因为一般来说词汇表都很大，需要计算每个单词的条件概率，是整个模型的计算瓶颈。</p>
 <p><strong>评价</strong></p>
 <ul>
@@ -81,7 +353,7 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 <h3 id="word2vec"><a class="markdownIt-Anchor" href="#word2vec"></a> Word2Vec</h3>
 <p>Word2Vec是从大量文本语料中以无监督的方式学习<strong>语义知识</strong>的一种模型，将单词从原先所属的空间<strong>映射</strong>到新的多维空间中，即把原先词所在空间嵌入(Embedding)到一个新的空间中去，用词向量的方式表征词的语义信息，通过一个嵌入空间使得语义上相似的单词在该空间内距离很近。</p>
 <p>Word2Vec模型中，主要有Skip-Gram和CBOW两种模型，从直观上理解，Skip-Gram是给定input word来预测上下文。而CBOW是给定上下文，来预测input word。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111101903380.png" alt="CBOW&amp;Skip-Gram" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111101903380.png" srcset="/img/loading.gif" lazyload alt="CBOW&amp;Skip-Gram" /></p>
 <p><strong>评价</strong></p>
 <ul>
 <li>优化了计算效率，特别是google同时开源了工具包，使得其在工业界能够大规模使用。</li>
@@ -90,9 +362,9 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 <h3 id="glove"><a class="markdownIt-Anchor" href="#glove"></a> GloVe</h3>
 <p>Glove(Global Vectors for Word Representation)是一种无监督的词嵌入方法，该模型用到了语料库的全局特征，即单词的共现频次矩阵，来学习词表征（word representation）。</p>
 <p><strong>第一步统计共现矩阵</strong>：下面给出了三句话，假设这就是我们全部的语料。我们使用一个size=1的窗口，对每句话依次进行滑动，相当于只统计紧邻的词。这样就可以得到一个共现矩阵。共现矩阵的每一列，自然可以当做这个词的一个向量表示。这样的表示明显优于one-hot表示，因为它的每一维都有含义——共现次数，因此这样的向量表示可以求词语之间的相似度。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111111038802.png" alt="共现矩阵" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111111038802.png" srcset="/img/loading.gif" lazyload alt="共现矩阵" /></p>
 <p><strong>第二步训练词向量</strong>：共现矩阵维度是词汇量的大小，维度是很大的，并且也存在过于稀疏的问题，这里我们使用<strong>SVD矩阵分解</strong>来进降维。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111110902602.png" alt="SVD求解" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111110902602.png" srcset="/img/loading.gif" lazyload alt="SVD求解" /></p>
 <p><strong>评价</strong></p>
 <ul>
 <li>利用词共现矩阵，词向量能够充分考虑到语料库的全局特征，直观上来说比Word2Vec更合理。</li>
@@ -102,7 +374,7 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 <p>通过预训练得到高质量的词向量一直是具有挑战性的问题，主要有两方面的难点，一个是词本身具有的<strong>语法语义复杂</strong>属性，另一个是这些语法语义的复杂属性如何随着上下文语境产生变化，也就是<strong>一词多义性</strong>问题。传统的词向量方法例如word2vec、GloVe等都是训练完之后，每个词向量就固定下来，这样就无法解决一词多义的问题。接下来的模型就是基于解决这个问题展开的。</p>
 <h3 id="elmo"><a class="markdownIt-Anchor" href="#elmo"></a> ELMo</h3>
 <p>ELMo（Embeddings from Language Models）是有AI2提出，该模型不仅去学习<strong>单词特征</strong>，还有<strong>句法特征</strong>与<strong>语义特征</strong>。其通过在大型语料上预训练一个深度BiLSTM语言模型网络来获取词向量，也就是每次输入一句话，可以根据这句话的上下文语境获得每个词的向量，这样子就可以解决一词多义问题。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150545462.png" alt="ELMo" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150545462.png" srcset="/img/loading.gif" lazyload alt="ELMo" /></p>
 <p>Elmo模型的<strong>本质思想</strong>是先用语言模型学习一个单词的 Word Embedding，此时无法区分一词多义问题。在实际使用Word Embedding的时候，单词已经具备特定的上下文，这时可以根据上下文单词的语义调整单词的 Word Embedding 表示，这样经过调整后的 Word Embedding 更能表达上下文信息，自然就解决了多义词问题。</p>
 <p><strong>评价</strong></p>
 <ul>
@@ -113,7 +385,7 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 <h3 id="gpt"><a class="markdownIt-Anchor" href="#gpt"></a> GPT</h3>
 <p>GPT（Generative Pre-Training）模型用单向Transformer代替ELMo的LSTM来完成预训练任务，其将12个Transformer叠加起来。训练的过程较简单，将句子的n个词向量加上位置编码(positional encoding)后输入到 Transformer中 ，n个输出分别预测该位置的下一个词。</p>
 <p>GPT的单项Transformer结构和GPT的模型结构，如图所示：<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150547484.png" alt="GPT" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150547484.png" srcset="/img/loading.gif" lazyload alt="GPT" /></p>
 <p><strong>评价</strong></p>
 <ul>
 <li>第一个结合 Transformer 架构（Decoder）和自监督预训练目标的模型</li>
@@ -121,7 +393,7 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 </ul>
 <h3 id="bert"><a class="markdownIt-Anchor" href="#bert"></a> BERT</h3>
 <p>BERT采用和GPT完全相同的两阶段模型，首先是语言模型预训练，其次是后续任务的拟合训练。和GPT最主要不同在于预训练阶段采了类似ELMo的双向语言模型技术、MLM(mask language model)技术以及 NSP(next sentence prediction) 机制。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150548149.png" alt="BERT" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150548149.png" srcset="/img/loading.gif" lazyload alt="BERT" /></p>
 <p><strong>评价</strong></p>
 <ul>
 <li>采用了Transformer结构能够更好的捕捉全局信息。</li>
@@ -137,15 +409,15 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 <li>多模态预训练模型，multi-modal PTMs</li>
 <li>领域特定的预训练模型，domain-specific PTMs</li>
 <li>压缩预训练模型，compressed PTMs<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150915051.png" alt="预训练的延伸方向" /><br />
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150915051.png" srcset="/img/loading.gif" lazyload alt="预训练的延伸方向" /><br />
 摘自《Pre-trained models for natural language processing: A survey》</li>
 </ul>
 <h3 id="模型衍生"><a class="markdownIt-Anchor" href="#模型衍生"></a> 模型衍生</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111160553063.png" alt="模型衍生" /><br />
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111160553063.png" srcset="/img/loading.gif" lazyload alt="模型衍生" /><br />
 摘自《Pre-Trained Models: Past, Present and Future》</p>
 <h2 id="应用于下游任务"><a class="markdownIt-Anchor" href="#应用于下游任务"></a> 应用于下游任务</h2>
 <h3 id="迁移学习"><a class="markdownIt-Anchor" href="#迁移学习"></a> 迁移学习</h3>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150901877.png" alt="迁移学习" /></p>
+<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150901877.png" srcset="/img/loading.gif" lazyload alt="迁移学习" /></p>
 <ul>
 <li>不同的PTMs在相同的下游任务上有着不同的效果，这是因为PTMs有着不同的预训练任务，模型架构和语料。针对不同的下游任务需要<strong>选择合适的预训练任务、模型架构和语料库</strong>。</li>
 <li>给定一个预训练的模型，不同的网络层捕获了不同的信息，基础的句法信息出现在浅层的网络中，高级的语义信息出现在更高的层级中。针对不通的任务需要<strong>选择合适的网络层</strong>。</li>
@@ -175,5 +447,284 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2003.08271.pdf">Pre-trained models for natural language processing: A survey</a></li>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2106.07139.pdf">Pre-Trained Models: Past, Present and Future</a></li>
 </ul>
-<!-- lincense--><div class="license-wrapper"><p><span>文章作者:</span><a href="https://imzhanghao.com">ZhangHao</a></p><p><span>文章链接:</span><a href="https://imzhanghao.com/2021/11/15/ptms-pre-trained-models/">https://imzhanghao.com/2021/11/15/ptms-pre-trained-models/</a></p><p><span>版权声明:</span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4128258433761966" data-ad-slot="1528926940" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});
-</script><hr><p><span>↶ </span><a href="/">返回首页</a><span></span></p></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/machinelearning/">机器学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%A2%84%E8%AE%AD%E7%BB%83/">预训练</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/">自然语言处理</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
+                  crossorigin="anonymous"></script>
+              <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-4128258433761966"
+                  data-ad-slot="1528926940"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/17/reading-puppy-money/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《小狗钱钱1+2》读书笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/03/reading-the-7-habits-of-highly-effective-people/">
+                        <span class="hidden-mobile">《高效能人士的七个习惯》读书笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

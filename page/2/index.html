@@ -1,15 +1,909 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="算法工程师, 机器学习, 深度学习, 推荐系统, 计算广告, 技术变现, 个人成长"><meta name="description" content="张浩的个人博客，关注机器学习、计算广告和推荐系统。这里分享自己平时的学习笔记和日常思考。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/bootstrap-theme.min.css"><link rel="stylesheet" href="/css/home.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="outer"><ul class="list-group"><li class="list-group-item title"><div class="date">2021年9月18日</div><br><a href="/2021/09/18/transformer/" target="_self">Attention Is All You Need -- Transformer</a></li><li class="list-group-item title"><div class="date">2021年9月15日</div><br><a href="/2021/09/15/self-attention-multi-head-attention/" target="_self">详解Self-Attention和Multi-Head Attention</a></li><li class="list-group-item title"><div class="date">2021年9月6日</div><br><a href="/2021/09/06/attention-mechanism-variants/" target="_self">Attention机制变体的介绍与对比</a></li><li class="list-group-item title"><div class="date">2021年9月1日</div><br><a href="/2021/09/01/attention-mechanism/" target="_self">Attention机制的基本思想与实现原理</a></li><li class="list-group-item title"><div class="date">2021年8月26日</div><br><a href="/2021/08/26/encoder-decoder/" target="_self">基于Encoder-Decoder框架实现Seq2Seq模型</a></li><li class="list-group-item title"><div class="date">2021年3月11日</div><br><a href="/2021/03/11/generative-adversarial-nets/" target="_self">GAN的开山之作：Generative Adversarial Nets</a></li><li class="list-group-item title"><div class="date">2020年11月11日</div><br><a href="/2020/11/11/google-mtl-mmoe/" target="_self">Google多任务学习模型MMoE</a></li><li class="list-group-item title"><div class="date">2020年11月6日</div><br><a href="/2020/11/06/alimama-cvr-esmm/" target="_self">阿里CVR预估模型ESMM</a></li><li class="list-group-item title"><div class="date">2020年10月25日</div><br><a href="/2020/10/25/multi-task-learning/" target="_self">多任务学习(Multi-Task Learning)</a></li><li class="list-group-item title"><div class="date">2020年8月12日</div><br><a href="/2020/08/12/computing-advertising-8-native-ads/" target="_self">计算广告|8.场景数据利用 -- 原生广告</a></li></ul></div><div class="paginator"><a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">下一页</a></div><div class="footer">© <a target="_blank" href="/about"> ZhangHao </a> | <a target="_blank" href="/tags"> 标签 </a> | <a target="_blank" href="/categories"> 分类 </a> | <a target="_blank" href="https://beian.miit.gov.cn/"> 陕ICP备20008129号</a></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="算法工程师, 机器学习, 深度学习, 推荐系统, 计算广告, 技术变现, 个人成长">
+  
+    <meta name="description" content="算法工程师，关注机器学习和商业化变现，这里分享自己平时的学习笔记和日常思考。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="张浩在路上">
+<meta property="og:url" content="https://imzhanghao.com/page/2/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="算法工程师，关注机器学习和商业化变现，这里分享自己平时的学习笔记和日常思考。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="算法工程师, 机器学习, 深度学习, 推荐系统, 计算广告, 技术变现, 个人成长">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="行则将至，在路上...">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/18/transformer/" target="_self">
+          Attention Is All You Need -- Transformer
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/18/transformer/" target="_self">
+          
+          本文基于论文《Attention Is All You Need》对其中提出的Transformer模型架构进行了拆解，分析了其设计思路和优势。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-18 00:00" pubdate>
+              2021-09-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">注意力机制</a>
+            
+              <a href="/tags/Self-Attention/">Self-Attention</a>
+            
+              <a href="/tags/Multi-Head-Attention/">Multi-Head Attention</a>
+            
+              <a href="/tags/Transformer/">Transformer</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/15/self-attention-multi-head-attention/" target="_self">
+          详解Self-Attention和Multi-Head Attention
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/15/self-attention-multi-head-attention/" target="_self">
+          
+          介绍Self-Attention和Multi-Head Attention，这两个的深入理解是理解transformer的前提。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-15 00:00" pubdate>
+              2021-09-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">注意力机制</a>
+            
+              <a href="/tags/Self-Attention/">Self-Attention</a>
+            
+              <a href="/tags/Multi-Head-Attention/">Multi-Head Attention</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/06/attention-mechanism-variants/" target="_self">
+          Attention机制变体的介绍与对比
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/06/attention-mechanism-variants/" target="_self">
+          
+          介绍Attention机制多种变体，对进行对比。包括hard attention和soft attention的对比，global attention 和 local attention的对比，bahdanau attention 和 luong attention的对比。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-06 00:00" pubdate>
+              2021-09-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">注意力机制</a>
+            
+              <a href="/tags/Hard-Attention/">Hard Attention</a>
+            
+              <a href="/tags/Soft-Attention/">Soft Attention</a>
+            
+              <a href="/tags/Global-Attention/">Global Attention</a>
+            
+              <a href="/tags/Local-Attention/">Local Attention</a>
+            
+              <a href="/tags/Bahdanau-Attention/">Bahdanau Attention</a>
+            
+              <a href="/tags/Luong-Attention/">Luong Attention</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/01/attention-mechanism/" target="_self">
+          Attention机制的基本思想与实现原理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/01/attention-mechanism/" target="_self">
+          
+          从人类注意力机制，到编码器-解码器框架的缺陷，引入注意力机制的必要性。详细介绍了Attention的基本思想，Attention Value的计算方法。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-01 00:00" pubdate>
+              2021-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">注意力机制</a>
+            
+              <a href="/tags/%E7%BC%96%E7%A0%81%E5%99%A8-%E8%A7%A3%E7%A0%81%E5%99%A8/">编码器-解码器</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/26/encoder-decoder/" target="_self">
+          基于Encoder-Decoder框架实现Seq2Seq模型
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/26/encoder-decoder/" target="_self">
+          
+          分别介绍了Encoder-Decoder框架和Seq2Seq模型的结构，完成的工作，以及两者之间的关系。最后给予Encoder-Decoder的框架实现了Seq2Seq的模型，方便大家理解。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-26 00:00" pubdate>
+              2021-08-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%BC%96%E7%A0%81%E5%99%A8-%E8%A7%A3%E7%A0%81%E5%99%A8/">编码器-解码器</a>
+            
+              <a href="/tags/Seq2Seq/">Seq2Seq</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/11/generative-adversarial-nets/" target="_self">
+          GAN的开山之作：Generative Adversarial Nets
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/11/generative-adversarial-nets/" target="_self">
+          
+          GAN是最近几年最火热的研究方向之一，本文讲解生成对抗网络第一次被提出的论文《Generative Adversarial Nets》
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-11 00:00" pubdate>
+              2021-03-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GAN/">GAN</a>
+            
+              <a href="/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/">生成对抗网络</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/11/11/google-mtl-mmoe/" target="_self">
+          Google多任务学习模型MMoE
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/11/google-mtl-mmoe/" target="_self">
+          
+          MMoE是Google实践多目标学习的一个实验成果，本文对《Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts》论文进行了讲解，是一片结合自己理解的论文笔记。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-11 00:00" pubdate>
+              2020-11-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Multi-Task-Learning/">Multi-Task Learning</a>
+            
+              <a href="/tags/MTL/">MTL</a>
+            
+              <a href="/tags/MMoE/">MMoE</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/11/06/alimama-cvr-esmm/" target="_self">
+          阿里CVR预估模型ESMM
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/11/06/alimama-cvr-esmm/" target="_self">
+          
+          ESMM是阿里巴巴践行多目标任务优化模型的一个实践成果，算法紧密结合阿里的电商场景，是一个非常巧妙的模式。本文通过介绍CVR预估过程中存在的问题和挑战，讲解了阿里ESMM算法的模型结构、损失函数以及创新算法。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-11-06 00:00" pubdate>
+              2020-11-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ESMM/">ESMM</a>
+            
+              <a href="/tags/Multi-Task-Learning/">Multi-Task Learning</a>
+            
+              <a href="/tags/MTL/">MTL</a>
+            
+              <a href="/tags/CVR/">CVR</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/10/25/multi-task-learning/" target="_self">
+          多任务学习(Multi-Task Learning)
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/10/25/multi-task-learning/" target="_self">
+          
+          本文介绍为了满足业务上的多目标学习，实践多任务学习的多种方法的介绍和优缺点对比，讨论了多任务学习的实现机制以及多任务学习的有效性。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-10-25 00:00" pubdate>
+              2020-10-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/machinelearning/">机器学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Multi-Task-Learning/">Multi-Task Learning</a>
+            
+              <a href="/tags/MTL/">MTL</a>
+            
+              <a href="/tags/%E5%A4%9A%E7%9B%AE%E6%A0%87%E5%AD%A6%E4%B9%A0/">多目标学习</a>
+            
+              <a href="/tags/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/">多任务学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/08/12/computing-advertising-8-native-ads/" target="_self">
+          计算广告|8.场景数据利用 -- 原生广告
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/08/12/computing-advertising-8-native-ads/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要讲解原生广告，这是对场景数据的深入挖掘和利用。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-12 00:00" pubdate>
+              2020-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+              <a href="/tags/%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8A/">原生广告</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,15 +1,879 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta name="keywords" content="联盟营销,计算广告,流量变现"><meta name="description" content="变现系列文章,这里分享我关于技术变现，流量变现以及打造赚钱系统的学习和实践经验。"><meta name="author" content="ZhangHao"><meta name="viewport" content="width=device-width, initial-scale=0.5"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><title>变现 - 张浩在路上</title><link rel="icon" href="/img/favicon.ico"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="dns-prefetch" href="https://hm.baidu.com"><script src="https://www.googletagmanager.com/gtag/js?id=UA-166608124-1" async=""></script><script>if (window.location.hostname !== 'localhost') {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-166608124-1');
-}</script><script>var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement('script');
-  hm.src = 'https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4';
-  hm.async = true;
 
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/bootstrap-theme.min.css"><link rel="stylesheet" href="/css/home.css"><link rel="icon" href="/img/favicon.png"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
-</head><body>　　<nav class="navbar navbar-default navbar-fixed-top" style="opacity:.9;" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/" _blank>张浩在路上</a></div><div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height:1px;"><ul class="nav navbar-nav navbar-right"><li><a href="/" target="_self">首页</a></li><li><a href="/technology" target="_self">技术</a></li><li><a href="/monetization" target="_self">变现</a></li><li><a href="/thinking" target="_self">思考</a></li><li><a href="/about" target="_self">关于</a></li></ul></div></div></nav><div class="outer"><ul class="list-group"><li class="list-group-item title"><div class="date">2021年11月1日</div><br><a href="/2021/11/01/computing-advertising-cpi-fraud/" target="_self">CPI/CPA广告常见作弊方法总结</a></li><li class="list-group-item title"><div class="date">2020年8月12日</div><br><a href="/2020/08/12/computing-advertising-8-native-ads/" target="_self">计算广告|8.场景数据利用 -- 原生广告</a></li><li class="list-group-item title"><div class="date">2020年7月3日</div><br><a href="/2020/07/03/computing-advertising-7-fraud-detection/" target="_self">计算广告|7.永无止境的博弈 -- 流量保护和反作弊</a></li><li class="list-group-item title"><div class="date">2020年6月22日</div><br><a href="/2020/06/22/computing-advertising-6-programmatic-direct-buying/" target="_self">计算广告|6.多方数据变现-程序化交易</a></li><li class="list-group-item title"><div class="date">2020年6月18日</div><br><a href="/2020/06/18/computing-advertising-5-lean-data-monetization/" target="_self">计算广告|5.竞价广告-精细数据变现</a></li><li class="list-group-item title"><div class="date">2020年6月15日</div><br><a href="/2020/06/15/computing-advertising-4-agreement-based-advertising/" target="_self">计算广告|4.合约广告</a></li><li class="list-group-item title"><div class="date">2020年6月12日</div><br><a href="/2020/06/12/computing-advertising-3-related-knowledge/" target="_self">计算广告|3.相关方法</a></li><li class="list-group-item title"><div class="date">2020年6月11日</div><br><a href="/2020/06/11/computing-advertising-2-business-system/" target="_self">计算广告|2.认识商业体系</a></li><li class="list-group-item title"><div class="date">2020年6月10日</div><br><a href="/2020/06/10/computing-advertising-1-curriculum-structure/" target="_self">计算广告|1.课程体系</a></li><li class="list-group-item title"><div class="date">2020年5月25日</div><br><a href="/2020/05/25/affiliate-marketing-8-zero-to-one/" target="_self">联盟营销|8.从0到1实战联盟营销</a></li></ul></div><div class="paginator"><span class="page-number current">1</span><a class="page-number" href="/monetization/page/2/">2</a><a class="extend next" rel="next" href="/monetization/page/2/">下一页</a></div><div class="footer">© <a target="_blank" href="/about"> ZhangHao </a> | <a target="_blank" href="/tags"> 标签 </a> | <a target="_blank" href="/categories"> 分类 </a> | <a target="_blank" href="https://beian.miit.gov.cn/"> 陕ICP备20008129号</a></div><script src="/js/jquery.min.js"></script><script src="/js/main.js"></script><script src="/js/bootstrap.min.js"></script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZhangHao">
+  <meta name="keywords" content="联盟营销,计算广告,流量变现">
+  
+    <meta name="description" content="算法工程师，关注机器学习和商业化变现，这里分享自己平时的学习笔记和日常思考。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="monetization">
+<meta property="og:url" content="https://imzhanghao.com/monetization/index.html">
+<meta property="og:site_name" content="张浩在路上">
+<meta property="og:description" content="算法工程师，关注机器学习和商业化变现，这里分享自己平时的学习笔记和日常思考。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ZhangHao">
+<meta property="article:tag" content="算法工程师, 机器学习, 深度学习, 推荐系统, 计算广告, 技术变现, 个人成长">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>变现系列文章 - 张浩在路上</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>张浩在路上</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                系列
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/technology/">
+                    <i class="iconfont icon-bug"></i>
+                    技术
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/monetization/">
+                    <i class="iconfont icon-briefcase"></i>
+                    变现
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/thinking/">
+                    <i class="iconfont icon-books"></i>
+                    思考
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="变现系列文章：商业化变现，打造赚钱系统。">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/11/01/computing-advertising-cpi-fraud/" target="_self">
+          CPI/CPA广告常见作弊方法总结
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/11/01/computing-advertising-cpi-fraud/" target="_self">
+          
+          介绍了应用类广告第三方归因的方法，详细分析了其中的作弊类型以及各种类型的具体作弊方法。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-11-01 00:00" pubdate>
+              2021-11-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+              <a href="/tags/%E5%8F%8D%E4%BD%9C%E5%BC%8A/">反作弊</a>
+            
+              <a href="/tags/%E5%B9%BF%E5%91%8A%E5%BD%92%E5%9B%A0/">广告归因</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/08/12/computing-advertising-8-native-ads/" target="_self">
+          计算广告|8.场景数据利用 -- 原生广告
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/08/12/computing-advertising-8-native-ads/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要讲解原生广告，这是对场景数据的深入挖掘和利用。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-12 00:00" pubdate>
+              2020-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+              <a href="/tags/%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8A/">原生广告</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/07/03/computing-advertising-7-fraud-detection/" target="_self">
+          计算广告|7.永无止境的博弈 -- 流量保护和反作弊
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/07/03/computing-advertising-7-fraud-detection/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要讲解广告行业的主要作弊手段和监管方案。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-07-03 00:00" pubdate>
+              2020-07-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+              <a href="/tags/%E6%B5%81%E9%87%8F%E4%BF%9D%E6%8A%A4/">流量保护</a>
+            
+              <a href="/tags/%E5%8F%8D%E4%BD%9C%E5%BC%8A/">反作弊</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/22/computing-advertising-6-programmatic-direct-buying/" target="_self">
+          计算广告|6.多方数据变现-程序化交易
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/22/computing-advertising-6-programmatic-direct-buying/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要讲解程序化广告，介绍了程序化交易的三种类型：优选PD、私有市场PMP、程序化直投PDB。介绍了程序化广告中多个产品角色，包括：广告交易平台ADX、需求方平台DSP、供给方平台SSP和数据管理产品DMP。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-22 00:00" pubdate>
+              2020-06-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+              <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%8C%96%E4%BA%A4%E6%98%93/">程序化交易</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/18/computing-advertising-5-lean-data-monetization/" target="_self">
+          计算广告|5.竞价广告-精细数据变现
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/18/computing-advertising-5-lean-data-monetization/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要讲解竞价广告,主要讲解竞价问题的机制设计，重点介绍了竞价广告两个应用场景：搜索广告和竞价广告网络，讲解了其中核心的技术，包括广告检索技术和点击率预估技术。最后介绍了竞价广告市场中的两种产品：SEM和Trading Desk。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-18 00:00" pubdate>
+              2020-06-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+              <a href="/tags/%E7%AB%9E%E4%BB%B7%E5%B9%BF%E5%91%8A/">竞价广告</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/15/computing-advertising-4-agreement-based-advertising/" target="_self">
+          计算广告|4.合约广告
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/15/computing-advertising-4-agreement-based-advertising/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要讲解合约广告的相关内容，包括合约广告的历史，技术挑战以及定向中使用的受众定向和上下文定向。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-15 00:00" pubdate>
+              2020-06-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+              <a href="/tags/%E5%90%88%E7%BA%A6%E5%B9%BF%E5%91%8A/">合约广告</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/12/computing-advertising-3-related-knowledge/" target="_self">
+          计算广告|3.相关方法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/12/computing-advertising-3-related-knowledge/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要讲解计算广告相关的技术和方法，包括最优化方法，信息检索技术，统计机器学习和深度学习，以及如何实现用户增长的一些方法论
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-12 00:00" pubdate>
+              2020-06-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/11/computing-advertising-2-business-system/" target="_self">
+          计算广告|2.认识商业体系
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/11/computing-advertising-2-business-system/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要讲解计算广告的核心挑战，广告业务的转化漏斗和目标。从宏观层面总结了商业化变现产品的六大系统技术、六大产品问题和六大算法问题。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-11 00:00" pubdate>
+              2020-06-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/10/computing-advertising-1-curriculum-structure/" target="_self">
+          计算广告|1.课程体系
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/10/computing-advertising-1-curriculum-structure/" target="_self">
+          
+          这是刘鹏老师计算广告课程的笔记，这部分主要从宏观角度讲解互联网的商业模式，数据的价值，以及在线广告的目的和形式。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-10 00:00" pubdate>
+              2020-06-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/05/25/affiliate-marketing-8-zero-to-one/" target="_self">
+          联盟营销|8.从0到1实战联盟营销
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/05/25/affiliate-marketing-8-zero-to-one/" target="_self">
+          
+          网站如何推广 网站的流量和收益情况 Amz520网站的基本情况
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-25 00:00" pubdate>
+              2020-05-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/affiliate/">联盟营销</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%81%94%E7%9B%9F%E8%90%A5%E9%94%80/">联盟营销</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/monetization/page/2/#board">2</a><a class="extend next" rel="next" href="/monetization/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陕ICP备20008129号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'UA-166608124-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
