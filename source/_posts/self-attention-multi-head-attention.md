@@ -60,7 +60,7 @@ V=W_{v} X
 
 **第三步：对Self-Attention Socre进行缩放和归一化,得到Softmax Socre**
 对 Step 2 中计算的分数进行缩放，这里通过除以8( 论文中维度是64，这可以让模型有更稳定的梯度，默认值是64，也可以是其它值)，将结果进行softmax归一化。
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151127016.png)
+![计算Softmax Socre](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151127016.png)
 
 
 **第四步：Softmax Socre乘以Value向量，求和得到Attention Value**

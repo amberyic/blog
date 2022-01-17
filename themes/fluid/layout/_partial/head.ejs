@@ -12,24 +12,24 @@ if (is_current('technology')) {
 
 var keywords = page.keywords || config.keywords
 if (is_current('technology')) {
-  keywords = config.series.technology.keywords 
+  keywords = config.series.technology.keywords
 } else if (is_current('monetization')) {
   keywords = config.series.monetization.keywords
 } else if (is_current('thinking')) {
   keywords = config.series.thinking.keywords
-} 
+}
 if (keywords instanceof Array) {
   keywords = keywords.join(',')
 }
 
 var description = page.description || page.excerpt || (is_post() && page.content) || config.description
 if (is_current('technology')) {
-  description = config.series.technology.description 
+  description = config.series.technology.description
 } else if (is_current('monetization')) {
   description = config.series.monetization.description
 } else if (is_current('thinking')) {
   description = config.series.thinking.description
-} 
+}
 if (description) {
   description = escape_html(strip_html(description).substring(0, 200).trim()).replace(/\n/g, ' ')
 }

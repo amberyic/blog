@@ -364,7 +364,7 @@ Feature Selection: Choosing a subset of all the features(the ones more informati
 ![贝叶斯优化](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281120191.png)
 
 ## 模型部署
-![](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305005.jpg)
+![模型部署](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305005.jpg)
 模型部署指的是将模型及其资源集成到一个生产环境中，用于创建预测。
 
 ### 生产环境基础设置
