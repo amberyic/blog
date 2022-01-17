@@ -317,7 +317,7 @@ V=W_{v} X
 <p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151123929.png" srcset="/img/loading.gif" lazyload alt="计算Self-Attention Score" /></p>
 <p><strong>第三步：对Self-Attention Socre进行缩放和归一化,得到Softmax Socre</strong><br />
 对 Step 2 中计算的分数进行缩放，这里通过除以8( 论文中维度是64，这可以让模型有更稳定的梯度，默认值是64，也可以是其它值)，将结果进行softmax归一化。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151127016.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151127016.png" srcset="/img/loading.gif" lazyload alt="计算Softmax Socre" /></p>
 <p><strong>第四步：Softmax Socre乘以Value向量，求和得到Attention Value</strong><br />
 每个Value向量乘以softmax Score得到加权的v1和v2，对加权的v1和v2进行求和得到z1。这样，我们就计算出了第一个词Thinking的注意力值。其他的词用相同的方法进行计算。<br />
 <img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109151133617.png" srcset="/img/loading.gif" lazyload alt="Socre乘以Value向量" /></p>
