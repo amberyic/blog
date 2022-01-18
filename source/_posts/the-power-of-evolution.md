@@ -1,5 +1,5 @@
 ---
-title: 思维导图｜刘润《进化的力量》
+title: 《进化的力量》观后感
 date: 2022-01-09
 updated: 2022-01-09
 categories:
@@ -7,7 +7,7 @@ categories:
 tags:
 - 跨年演讲
 keywords: 刘润,跨年演讲,进化的力量
-description: 刘润老师年度分享《进化的力量》，讨论了老龄化、数字化、新消费、Z0时代、流量、跨境以及疯狂生长的主题。
+description: 看完刘润老师的年度分享《进化的力量》，记录了讲到的老龄化、数字化、新消费、Z0时代、流量、跨境以及疯狂生长的主题的核心内容。
 ---
 
 ![进化的力量思维导图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202201091237196.png)
