@@ -1,3 +1,4 @@
+https://imzhanghao.com/2022/01/09/the-power-of-evolution/
 https://imzhanghao.com/2022/01/18/how-to-get-rich-without-getting-lucky/
 https://imzhanghao.com/2020/04/10/5-classic-algorithms-1-exhaustive-method/
 https://imzhanghao.com/2020/04/15/5-classic-algorithms-2-greedy-algorithm/
@@ -28,7 +29,6 @@ https://imzhanghao.com/2020/03/21/hexo-github-deploy/
 https://imzhanghao.com/2020/03/21/hadoop-spark-deploy/
 https://imzhanghao.com/2020/10/25/multi-task-learning/
 https://imzhanghao.com/2021/12/21/reading-the-hard-thing-about-hard-things/
-https://imzhanghao.com/2022/01/09/the-power-of-evolution/
 https://imzhanghao.com/2021/11/03/reading-the-7-habits-of-highly-effective-people/
 https://imzhanghao.com/2022/01/05/summary-2021/
 https://imzhanghao.com/2021/12/28/ml-pipeline/
