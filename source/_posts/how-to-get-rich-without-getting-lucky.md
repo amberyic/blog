@@ -6,12 +6,12 @@ categories:
 tags:
 - 读书笔记
 keywords: Naval,如何变得富有,财富认知,终身学习,个人选择
-description: 阅读了Naval的《如何不靠运气变得富有(How to Get Rich Without Getting Lucky)》以后很受启发，我从财富认知、终身学习和个人选择的角度总结了从中学到的东西。
+description: 阅读了Naval的《如何不靠运气变得富有(How to Get Rich Without Getting Lucky)》以后很受启发，我从财富认知、个人成长和个人选择的角度总结了从中学到的东西。
 ---
 
 Naval Ravikant为大家所熟知是他成功创立了帮助初创公司融资的平台AngelList，同时他是优步和Twitter的早期投资人。他有一个很有名的长推特，叫做[《如何致富，不靠运气》](https://twitter.com/naval/status/1002103360646823936)，谈了他的商业观，在网上引起了很多共鸣，被翻译成多国语言。
 
-我读完以后，从**财富认知、终身学习和个人选择**总结了我从中学到的东西。
+我读完以后，从**财富认知、个人成长和个人选择**总结了我从中学到的东西。
 
 ![如何不靠运气变得富有](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202201181418987.png)
 
@@ -50,7 +50,7 @@ Naval Ravikant为大家所熟知是他成功创立了帮助初创公司融资的
 - 学会如何销售，学会如何创建。如果你同时能做到这两件事，你的成功将无可阻挡。硅谷模式：建造者+销售者=最佳拍档
 
 ![Naval Ravikant](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202201181519859.png)
-## 终身学习
+## 个人成长
 > **Arm yourself with specific knowledge, accountability, and leverage.**
 
 用独到知识，责任感和杠杆武装自己。
