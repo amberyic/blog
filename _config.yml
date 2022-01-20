@@ -143,9 +143,19 @@ include:
 exclude:
 ignore:
 
+
+
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+plugins:
+  hexo-generator-feed
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
 theme: fluid
 
 # Deployment
