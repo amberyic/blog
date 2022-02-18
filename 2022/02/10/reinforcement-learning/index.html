@@ -443,16 +443,16 @@ Deep Reinforcement Learning for Online Advertising in Recommender Systems.<br />
 <p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202202071919418.png" srcset="/img/loading.gif" lazyload alt="强化学习算法的分类" /><br />
 <strong>按照环境是否已知划分：免模型学习（Model-Free） vs 有模型学习（Model-Based）</strong></p>
 <ul>
-<li>Model-free就是不去学习和理解环境，环境给出什么信息就是什么信息，常见的方法有policy optimization和Q-learning。</li>
-<li>Model-Based是去学习和理解环境，学会用一个模型来模拟环境，通过模拟的环境来得到反馈。Model-Based相当于比Model-Free多了模拟环境这个环节，通过模拟环境预判接下来会发生的所有情况，然后选择最佳的情况。</li>
+<li><strong>Model-free</strong>就是不去学习和理解环境，环境给出什么信息就是什么信息，常见的方法有policy optimization和Q-learning。</li>
+<li><strong>Model-Based</strong>是去学习和理解环境，学会用一个模型来模拟环境，通过模拟的环境来得到反馈。Model-Based相当于比Model-Free多了模拟环境这个环节，通过模拟环境预判接下来会发生的所有情况，然后选择最佳的情况。</li>
 </ul>
 <blockquote>
 <p>一般情况下，环境都是不可知的，所以这里主要研究无模型问题。</p>
 </blockquote>
 <p><strong>按照学习方式划分：在线策略（On-Policy） vs 离线策略（Off-Policy）</strong></p>
 <ul>
-<li>On-Policy是指agent必须本人在场， 并且一定是本人边玩边学习。典型的算法为Sarsa。</li>
-<li>Off-Policy是指agent可以选择自己玩， 也可以选择看着别人玩， 通过看别人玩来学习别人的行为准则， 离线学习同样是从过往的经验中学习， 但是这些过往的经历没必要是自己的经历， 任何人的经历都能被学习，也没有必要是边玩边学习，玩和学习的时间可以不同步。典型的方法是Q-learning，以及Deep-Q-Network。</li>
+<li><strong>On-Policy</strong>是指agent必须本人在场， 并且一定是本人边玩边学习。典型的算法为Sarsa。</li>
+<li><strong>Off-Policy</strong>是指agent可以选择自己玩， 也可以选择看着别人玩， 通过看别人玩来学习别人的行为准则， 离线学习同样是从过往的经验中学习， 但是这些过往的经历没必要是自己的经历， 任何人的经历都能被学习，也没有必要是边玩边学习，玩和学习的时间可以不同步。典型的方法是Q-learning，以及Deep-Q-Network。</li>
 </ul>
 <p><strong>按照学习目标划分：基于策略（Policy-Based）和基于价值（Value-Based）。</strong><br />
 <img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202202081103918.png" srcset="/img/loading.gif" lazyload alt="基于策略VS基于价值" /></p>
@@ -667,6 +667,12 @@ Deep Reinforcement Learning for Online Advertising in Recommender Systems.<br />
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/02/18/reading-okr/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《这就是OKR》和《ORK工作法》读书笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
