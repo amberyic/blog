@@ -104,13 +104,13 @@ $$U_{t}=R_{t}+\gamma R_{t+1}+\gamma^{2} R_{t+2}+\gamma^{3} R_{t+3}+\cdots$$
 ### 算法分类
 ![强化学习算法的分类](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202202071919418.png)
 **按照环境是否已知划分：免模型学习（Model-Free） vs 有模型学习（Model-Based）**
-- Model-free就是不去学习和理解环境，环境给出什么信息就是什么信息，常见的方法有policy optimization和Q-learning。
-- Model-Based是去学习和理解环境，学会用一个模型来模拟环境，通过模拟的环境来得到反馈。Model-Based相当于比Model-Free多了模拟环境这个环节，通过模拟环境预判接下来会发生的所有情况，然后选择最佳的情况。
+- **Model-free**就是不去学习和理解环境，环境给出什么信息就是什么信息，常见的方法有policy optimization和Q-learning。
+- **Model-Based**是去学习和理解环境，学会用一个模型来模拟环境，通过模拟的环境来得到反馈。Model-Based相当于比Model-Free多了模拟环境这个环节，通过模拟环境预判接下来会发生的所有情况，然后选择最佳的情况。
 > 一般情况下，环境都是不可知的，所以这里主要研究无模型问题。
 
 **按照学习方式划分：在线策略（On-Policy） vs 离线策略（Off-Policy）**
-- On-Policy是指agent必须本人在场， 并且一定是本人边玩边学习。典型的算法为Sarsa。
-- Off-Policy是指agent可以选择自己玩， 也可以选择看着别人玩， 通过看别人玩来学习别人的行为准则， 离线学习同样是从过往的经验中学习， 但是这些过往的经历没必要是自己的经历， 任何人的经历都能被学习，也没有必要是边玩边学习，玩和学习的时间可以不同步。典型的方法是Q-learning，以及Deep-Q-Network。
+- **On-Policy**是指agent必须本人在场， 并且一定是本人边玩边学习。典型的算法为Sarsa。
+- **Off-Policy**是指agent可以选择自己玩， 也可以选择看着别人玩， 通过看别人玩来学习别人的行为准则， 离线学习同样是从过往的经验中学习， 但是这些过往的经历没必要是自己的经历， 任何人的经历都能被学习，也没有必要是边玩边学习，玩和学习的时间可以不同步。典型的方法是Q-learning，以及Deep-Q-Network。
 
 **按照学习目标划分：基于策略（Policy-Based）和基于价值（Value-Based）。**
 ![基于策略VS基于价值](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202202081103918.png)
