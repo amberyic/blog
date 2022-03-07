@@ -86,6 +86,7 @@ index2_generator:
     include:
       - category 联盟营销
       - category 计算广告
+      - category 变现模式
   - layout: 'index'
     path: 'thinking'
     per_page: 10
