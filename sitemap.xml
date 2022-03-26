@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://imzhanghao.com/2022/03/26/metaverse/</loc>
+    
+    <lastmod>2022-03-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://imzhanghao.com/2022/03/07/black-market/</loc>
     
     <lastmod>2022-03-06</lastmod>
@@ -110,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://imzhanghao.com/2020/04/15/5-classic-algorithms-2-greedy-algorithm/</loc>
+    <loc>https://imzhanghao.com/2020/05/17/affiliate-marketing-1-process-and-working-principle/</loc>
     
     <lastmod>2022-01-16</lastmod>
     
@@ -119,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://imzhanghao.com/2020/05/17/affiliate-marketing-1-process-and-working-principle/</loc>
+    <loc>https://imzhanghao.com/2020/04/15/5-classic-algorithms-2-greedy-algorithm/</loc>
     
     <lastmod>2022-01-16</lastmod>
     
@@ -427,7 +436,7 @@
 
   <url>
     <loc>https://imzhanghao.com/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -435,399 +444,406 @@
   
   <url>
     <loc>https://imzhanghao.com/tags/%E7%A9%B7%E4%B8%BE%E6%B3%95/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E4%BA%94%E5%A4%A7%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/%E5%88%86%E6%94%AF%E7%95%8C%E5%AE%9A%E6%B3%95/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E8%81%94%E7%9B%9F%E8%90%A5%E9%94%80/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/Niche/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/%E5%88%86%E6%94%AF%E7%95%8C%E5%AE%9A%E6%B3%95/</loc>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/ShareAsale/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/Clickbank/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/Commission-Junction-CJ/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/Hard-Attention/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/Soft-Attention/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/Global-Attention/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/Local-Attention/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/Bahdanau-Attention/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/Luong-Attention/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/ESMM/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/Multi-Task-Learning/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/MTL/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/CVR/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/Hard-Attention/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/Soft-Attention/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/Global-Attention/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/Local-Attention/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/Bahdanau-Attention/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/Luong-Attention/</loc>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E7%BC%96%E7%A0%81%E5%99%A8-%E8%A7%A3%E7%A0%81%E5%99%A8/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E9%BB%91%E7%81%B0%E4%BA%A7/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%8F%8D%E4%BD%9C%E5%BC%8A/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%90%88%E7%BA%A6%E5%B9%BF%E5%91%8A/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E7%AB%9E%E4%BB%B7%E5%B9%BF%E5%91%8A/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E7%A8%8B%E5%BA%8F%E5%8C%96%E4%BA%A4%E6%98%93/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E6%B5%81%E9%87%8F%E4%BF%9D%E6%8A%A4/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%8E%9F%E7%94%9F%E5%B9%BF%E5%91%8A/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%B9%BF%E5%91%8A%E5%BD%92%E5%9B%A0/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/Seq2Seq/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E7%86%B5%E5%A2%9E%E5%AE%9A%E5%BE%8B/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/GAN/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/MMoE/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/hadoop/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/spark/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/%E5%85%83%E5%AE%87%E5%AE%99/</loc>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/pipeline/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%A4%9A%E7%9B%AE%E6%A0%87%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E9%A2%84%E8%AE%AD%E7%BB%83/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/OKR/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E7%90%86%E8%B4%A2/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%88%9B%E4%B8%9A%E7%BB%B4%E8%89%B0/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%A5%87%E7%82%B9%E7%B3%BB%E5%88%97/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/Self-Attention/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/Multi-Head-Attention/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2022-03-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://imzhanghao.com/tags/%E5%B9%B4%E5%BA%A6%E6%BC%94%E8%AE%B2/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/tags/Transformer/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/tags/%E5%B9%B4%E5%BA%A6%E6%BC%94%E8%AE%B2/</loc>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -836,56 +852,70 @@
   
   <url>
     <loc>https://imzhanghao.com/categories/programming/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/categories/affiliate/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/categories/machinelearning/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://imzhanghao.com/categories/%E5%8F%98%E7%8E%B0%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <loc>https://imzhanghao.com/categories/business-insight/</loc>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/categories/thinking/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/categories/bigdata/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/categories/technical-insight/</loc>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://imzhanghao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2022-03-17</lastmod>
+    <lastmod>2022-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://imzhanghao.com/categories/technical-insight/business-insight/</loc>
+    <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
