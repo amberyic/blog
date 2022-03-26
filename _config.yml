@@ -79,6 +79,7 @@ index2_generator:
       - category 机器学习
       - category 并行计算
       - category 程序开发
+      - category 技术洞察
   - layout: 'index'
     path: 'monetization'
     per_page: 10
@@ -86,7 +87,7 @@ index2_generator:
     include:
       - category 联盟营销
       - category 计算广告
-      - category 变现模式
+      - category 商业洞察
   - layout: 'index'
     path: 'thinking'
     per_page: 10
@@ -118,6 +119,8 @@ category_map:
   程序开发: programming
   并行计算: bigdata
   机器学习: machinelearning
+  商业洞察: business-insight
+  技术洞察: technical-insight
 tag_map:
 
 # Metadata elements
