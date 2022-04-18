@@ -155,12 +155,12 @@ Web3的基础设施基于区块链技术，Web 3.0 Foundation将Web3的技术栈
 
 我们所认为的核心栈主要组件有：**去中心化应用浏览器（Dapp Browser）、应用托管（Application Hosting）、查询图层（Query Layer）、状态转换机（State Transition Machine）、共识（Consensus）、对等网络层（P2P Layer）。**
 
-- 去中心化应用浏览器（Dapp Browser）：代表项目：Mist、MetaMask、Coinbase Wallet、Trust Wallet、imToken
-- 应用托管（Application Hosting）：代表项目：IPFS, Swarm
-- 查询层（Query Layer）：代表项目：Chainlink，Band Protocol
-- 状态转换机（State Transition ）：以太坊虚拟机（EVM） - 以太坊1.0，Ethermint，Hashgraph，WANchain等 网络装配虚拟机 (WASM) – Dfinity, EOS, Polkadot, 以太坊 2.0 Direct LLVM exposure – Cardano, Solana 自定义状态转换机（Custom state transition machines）：Kadena，Tezos，Rchain，Coda
-- 共识层（Consensus Layer）：代表项目：POW, POS, DPOS
-- 对等网络层（P2P Layer）：代表项目：Libp2p, Devp2p
+- **去中心化应用浏览器（Dapp Browser）**：代表项目：Mist、MetaMask、Coinbase Wallet、Trust Wallet、imToken
+- **应用托管（Application Hosting）**：代表项目：IPFS, Swarm
+- **查询层（Query Layer）**：代表项目：Chainlink，Band Protocol
+- **状态转换机（State Transition ）**：以太坊虚拟机（EVM） - 以太坊1.0，Ethermint，Hashgraph，WANchain等 网络装配虚拟机 (WASM) – Dfinity, EOS, Polkadot, 以太坊 2.0 Direct LLVM exposure – Cardano, Solana 自定义状态转换机（Custom state transition machines）：Kadena，Tezos，Rchain，Coda
+- **共识层（Consensus Layer）**：代表项目：POW, POS, DPOS
+- **对等网络层（P2P Layer）**：代表项目：Libp2p, Devp2p
 
 **潜在的核心栈——扩展核心栈（Extended Core Stack）**
 这些技术组件虽然不是底层链的一部分，也不是对DApp的开发必不可少的组件，但它们将很有可能成为未来开发堆栈的核心组件，这意味它们是非常值得投资机构关注的领域。
@@ -275,6 +275,6 @@ Sergey在演讲中说道：“Web3在速度、效率和成本上将逐渐赶上W
 [Web3 foundation / Dr. Gavin Wood](https://Web3.foundation/about/)
 [Welcome to the Web3 Technology Stack](https://Web3-technology-stack.readthedocs.io/en/latest/)
 [拥抱Web 3.0：技术堆栈下的范式转变与投资展望 / IOSG VC](https://mirror.xyz/0x5Eba828AB4999825D8416D7EAd9563b64FD90276/zjuD39dwYf2y7dEGTFcCDi_BuFRt1KUT0m5VUMzdI2o)
-[The Web3 Landscape / a16z](https://a16z.com/wp-content/uploads/2021/10/The-Web3-Readlng-List.pdf)
+[The Web3 Landscape / a16z](https://a16z.com/wp-content/uploads/2021/10/The-web3-Readlng-List.pdf)
 [一文读懂Web3 / Chainlink](https://blog.chain.link/Web3-zh/)
 [Web3.0概念下的场景生态简析/ 甲子光年](http://www.199it.com/archives/1420537.html)
