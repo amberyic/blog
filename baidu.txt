@@ -1,3 +1,4 @@
+https://imzhanghao.com/2020/11/11/google-mtl-mmoe/
 https://imzhanghao.com/2022/04/24/reading-xin-li-fu-yang/
 https://imzhanghao.com/2022/04/16/web3/
 https://imzhanghao.com/2022/03/26/metaverse/
@@ -30,7 +31,6 @@ https://imzhanghao.com/2020/07/03/computing-advertising-7-fraud-detection/
 https://imzhanghao.com/2020/08/12/computing-advertising-8-native-ads/
 https://imzhanghao.com/2021/12/14/entropy-growing/
 https://imzhanghao.com/2021/03/11/generative-adversarial-nets/
-https://imzhanghao.com/2020/11/11/google-mtl-mmoe/
 https://imzhanghao.com/2020/03/21/hadoop-spark-deploy/
 https://imzhanghao.com/2020/03/21/hexo-github-deploy/
 https://imzhanghao.com/2020/10/25/multi-task-learning/
