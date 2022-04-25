@@ -317,16 +317,10 @@ navbar:
   # 导航栏菜单，可自行增减，key 用来关联 languages/*.yml，如不存在关联则显示 key 本身的值；icon 是 css class，可以省略；增加 name 可以强制显示指定名称
   # Navigation bar menu. `key` is used to associate languages/*.yml. If there is no association, the value of `key` itself will be displayed; if `icon` is a css class, it can be omitted; adding `name` can force the display of the specified name
   menu:
-    - { key: "首页", link: "/", icon: "iconfont icon-home-fill" }
-    - {
-        key: '系列',
-        icon: 'iconfont icon-books',
-        submenu: [
-          { key: "技术", link: "/technology/", icon: "iconfont icon-bug" },
-          { key: "变现", link: "/monetization/", icon: "iconfont icon-briefcase" },
-          { key: "思考", link: "/thinking/", icon: "iconfont icon-books" }
-        ]
-      }
+    #- { key: "首页", link: "/", icon: "iconfont icon-home-fill" }
+    - { key: "技术", link: "/technology/", icon: "iconfont icon-bug" }
+    - { key: "变现", link: "/monetization/", icon: "iconfont icon-briefcase" }
+    - { key: "思考", link: "/thinking/", icon: "iconfont icon-books" }
     - { key: "分类", link: "/categories/", icon: "iconfont icon-category-fill" }
     - { key: "标签", link: "/tags/", icon: "iconfont icon-tags-fill" }
     - { key: "关于", link: "/about/", icon: "iconfont icon-user-fill" }
