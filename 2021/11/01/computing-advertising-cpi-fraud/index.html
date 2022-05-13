@@ -25,19 +25,19 @@
 <meta property="og:site_name" content="张浩在路上">
 <meta property="og:description" content="介绍了应用类广告第三方归因的方法，详细分析了其中的作弊类型以及各种类型的具体作弊方法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271433410.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271118560.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271647119.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271900778.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271649228.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271901841.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271700101.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271913495.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271910424.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201343440.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201721503.png">
-<meta property="og:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201354087.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271433410.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271118560.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271647119.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271546938.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271900778.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271649228.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271901841.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271700101.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271913495.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202110271910424.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202111201343440.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202111201721503.png">
+<meta property="og:image" content="https://oss.imzhanghao.com/img/202111201354087.png">
 <meta property="article:published_time" content="2021-10-31T16:00:00.000Z">
 <meta property="article:modified_time" content="2021-11-20T16:00:00.000Z">
 <meta property="article:author" content="ZhangHao">
@@ -45,7 +45,7 @@
 <meta property="article:tag" content="计算广告">
 <meta property="article:tag" content="广告归因">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271433410.png">
+<meta name="twitter:image" content="https://oss.imzhanghao.com/img/202110271433410.png">
   
   
   <title>CPI/CPA广告常见作弊方法总结 - 张浩在路上</title>
@@ -273,12 +273,12 @@
 <p>要讨论广告作弊，就需要先了解广告的归因逻辑，作弊手段基本都是围绕广告归因的逻辑来进行的。<br />
 广告归因方案多种多样，我们这里主要讨论<strong>应用类广告、海外移动生态、第三方归因</strong>的方案。<br />
 海外移动广告生态，拥有比较成熟可信的第三方归因平台，比如Appflyer，Adjust以及Kochava等等。归因的核心逻辑是最后归因模型，即“Last Click”。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271433410.png" srcset="/img/loading.gif" lazyload alt="应用广告归因" /><br />
+<p><img src="https://oss.imzhanghao.com/img/202110271433410.png" srcset="/img/loading.gif" lazyload alt="应用广告归因" /><br />
 媒体的广告曝光后，若用户对广告进行了点击，媒体会将广告点击的媒体信息、用户设备信息（核心是IDFA/IMEI）、时间戳、网络状态等信息通过302跳转的方式给到第三方归因平台（即广告点击后，会通过302重定向跳转到第三方归因平台的后台，然后再跳到Google Play或者App Store）。此时，第三方归因平台其实是没有广告的曝光相关信息的。</p>
 <p>应用激活后，可以通过接入归因SDK或者通过服务端对接的方式（S2S）的方式将应用相关信息回传给第三方归因平台，归因平台从数据库中找出匹配的媒体点击信息，通过匹配的应用包名、用户ID信息和广告的点击信息，按照最后一次点击的逻辑将应用的激活归因给对应的媒体和广告，完成一次归因的流程。</p>
 <h2 id="作弊的分类"><a class="markdownIt-Anchor" href="#作弊的分类"></a> 作弊的分类</h2>
 <p>在全部广告作弊类型中，作弊者能够伪造在归因中使用的任ㄧ或两类“信号”（Signal）。这两类信号分别为广告交互（例如查看或点击，对应归因方式中2的位置）和应用活动（例如安装、会话或事件，对应归因方式中3的位置）。在此基础上，我们将作弊分为伪造广告交互和伪造用户应用内活动。前者称为<strong>伪造归因（Spoofed Attribution）</strong>，后者被称为<strong>伪造用户（Spoofed Users）</strong>。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271118560.png" srcset="/img/loading.gif" lazyload alt="作弊分类" /></p>
+<img src="https://oss.imzhanghao.com/img/202110271118560.png" srcset="/img/loading.gif" lazyload alt="作弊分类" /></p>
 <ul>
 <li>类型1中的全部流量均为真实流量，即用户受到广告驱使，与应用所产生的真实互动。</li>
 <li>类型2指伪造归因，即作弊者伪造真实用户的广告交互。其目的是为了窃取用户与应用之间的自然交互或通过真实广告所产生的效果。此类型的伪造也被称为“窃取归因”或“流量盗取”(poaching)。</li>
@@ -289,11 +289,11 @@
 <h3 id="点击欺诈click-spamming"><a class="markdownIt-Anchor" href="#点击欺诈click-spamming"></a> 点击欺诈(Click Spamming)</h3>
 <p>点击欺诈，也叫Click Stuffing或Click Flood，中文名叫点击泛滥、点击填塞、大点击、预点击、撞库，是伪造海量广告的曝光或点击，等到用户真安装之后，在Last Click归因原则下，如点击后N天内安装的都算成带来点击的渠道，将其他渠道或者是自然量归因抢到自己的渠道中来。</p>
 <p>欺诈性应用程序可能会在用户使用它时执行点击，或者在后台活动（例如启动、省电等）时执行点击。该应用程序甚至可以将展示次数报告为点击以呈现虚假的广告交互，而这一切都是在用户无意或不知情的情况下进行的。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271647119.png" srcset="/img/loading.gif" lazyload alt="大点击" /></p>
+<p><img src="https://oss.imzhanghao.com/img/202110271647119.png" srcset="/img/loading.gif" lazyload alt="大点击" /></p>
 <p><strong>点击欺诈的形式</strong>：</p>
 <ul>
 <li>广告堆叠点击(Ad Stacking Clicks)： 在单个广告展示位置中以层叠的方式放置多个广告，只有顶部广告可见。堆栈中的所有广告都按空间的每次展示或点击计费。欺诈者将多个广告投放到程序化广告活动中，并为未查看的广告创造收入。应用悄悄在后台加载和点击广告。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png" srcset="/img/loading.gif" lazyload alt="广告堆叠点击" /></li>
+<img src="https://oss.imzhanghao.com/img/202110271546938.png" srcset="/img/loading.gif" lazyload alt="广告堆叠点击" /></li>
 <li>浏览点击（Views as Clicks）或“预缓存”：以点击方式发送视图，在广告显示之前点击它们。将展示作为点击发送的渠道。</li>
 <li>服务器到服务器的点击(Server2Server Clicks)：从Adx处获得流量直接给三方发送点击事件。<br />
 这些形式都具有一个相同的特征：用户实际上并没有打算与广告进行互动，也没有兴趣下载显示的应用程序。发送人工点击目录的服务器。</li>
@@ -308,11 +308,11 @@
 <li>long CTIT(Click-to-install-time) distribution rates</li>
 <li>low click-to-install conversion rates</li>
 <li>high multi-touch contributor rates (or)<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271900778.png" srcset="/img/loading.gif" lazyload alt="CTIT" /></li>
+<img src="https://oss.imzhanghao.com/img/202110271900778.png" srcset="/img/loading.gif" lazyload alt="CTIT" /></li>
 </ul>
 <h3 id="点击劫持click-injection"><a class="markdownIt-Anchor" href="#点击劫持click-injection"></a> 点击劫持(Click Injection)</h3>
 <p>点击劫持也叫Install Hijacking、点击注入、小点击，指的是作弊者通过安装在用户设备上的一个应用程序来“监听”其他应用程序的安装广播消息。当用户设备上安装了新的应用程序时，作弊者就会收到通知，然后在安装完成之前发送虚假点击利用归因模型的漏洞劫取相应的安装。特点是点击到安装时间过短，应用商店记录的下载时间早于点击广告的时间。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271649228.png" srcset="/img/loading.gif" lazyload alt="小点击" /></p>
+<img src="https://oss.imzhanghao.com/img/202110271649228.png" srcset="/img/loading.gif" lazyload alt="小点击" /></p>
 <p>如果我们知道一个应用的下载或者安装时间点，在这个时候将“点击”信息发送给第三方归因平台，由于这个时候离应用的激活更近，按照Last Click原理归因概率就非常高。而Android系统刚好提供了获取应用安装的广播机制。当应用安装的时候，Android系统会将应用安装的消息（android.intent.action.PACKAGE_ADDED）通过系统广播（Broadcast）的方式广播给在已经在系统注册文件上（Manifest.xml）注册了安装广播监听能力的应用。获取到应用的安装信息（核心信息是应用的包名）之后，此时广告联盟SDK就会根据这个包名从广告后台中获取对应的广告信息，并将相关的用户设备信息，媒体信息通过“虚拟点击”的方式传到第三方归因平台。</p>
 <p><strong>依赖条件</strong></p>
 <ul>
@@ -323,7 +323,7 @@
 <ul>
 <li>short CTIT(Click-to-install-time) distribution rates</li>
 <li>high click-to-install conversion rates<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271901841.png" srcset="/img/loading.gif" lazyload alt="CTIT" /></li>
+<img src="https://oss.imzhanghao.com/img/202110271901841.png" srcset="/img/loading.gif" lazyload alt="CTIT" /></li>
 </ul>
 <p>根据安装的不同来源，我们的过滤方法稍有差异。</p>
 <ul>
@@ -335,13 +335,13 @@
 在最初发现的伪造用户案例中，我们检测到欺诈者利用模拟器模仿云计算服务上真实用户使用安卓应用的情况。同时，我们还识别出东南亚国家的iOS设备农场，他们通过真实的设备和人员伪造了虚假的应用活动。</p>
 <h3 id="模拟器bots"><a class="markdownIt-Anchor" href="#模拟器bots"></a> 模拟器(Bots)</h3>
 <p>模拟器指的是作弊者通过自动化脚本或计算机程序模拟真实用户的点击、下载、安装甚至是应用内行为，伪装成为真实用户， 从而骗取广告主的CPI/CPA预算。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271700101.png" srcset="/img/loading.gif" lazyload alt="模拟器" /><br />
+<img src="https://oss.imzhanghao.com/img/202110271700101.png" srcset="/img/loading.gif" lazyload alt="模拟器" /><br />
 <strong>特点</strong>是IP离散度密集、新设备率过高、用户行为异常、机型/系统/时间等分布异常等。</p>
 <h3 id="设备农场device-farms"><a class="markdownIt-Anchor" href="#设备农场device-farms"></a> 设备农场(Device Farms)</h3>
 <p>设备农场指的是作弊者购买大量真实设备进行广告点击、下载、安装和应用内行为，并通过修改设备广告跟踪符等方式隐藏设备信息。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271913495.png" srcset="/img/loading.gif" lazyload alt="设备农场" /></p>
+<img src="https://oss.imzhanghao.com/img/202110271913495.png" srcset="/img/loading.gif" lazyload alt="设备农场" /></p>
 <p>设备农场主使用各种策略来隐藏他们的活动，包括隐藏在新的IP地址后面，使用各种设备，同时启用限制广告跟踪或隐藏在 DeviceID重置欺诈后面（每次安装时重置他们的 DeviceID）。当大规模实施时，这种欺诈也称为DeviceID重置Marathons。<br />
-<img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271910424.png" srcset="/img/loading.gif" lazyload alt="设备农场操作流程" /><br />
+<img src="https://oss.imzhanghao.com/img/202110271910424.png" srcset="/img/loading.gif" lazyload alt="设备农场操作流程" /><br />
 <strong>特点</strong>是IP离散度密集、新设备率过高、用户行为异常、机型/系统分布异常等</p>
 <h3 id="sdk伪造sdk-spoofing"><a class="markdownIt-Anchor" href="#sdk伪造sdk-spoofing"></a> SDK伪造(SDK Spoofing)</h3>
 <p>SDK伪造是指作弊者通过执行“中间人攻击”破解第三方SDK的通信协议后，在没有任何实际安装的情况下，使用真实设备的数据来发送虚假的点击和安装，以此消耗广告主的预算的作弊行为。作弊者毁坏加密和哈希签名，进而引发了作弊者和研究人员之间的对决。</p>
@@ -351,7 +351,7 @@
 <p>匿名IP过滤器可保护应用跟踪数据的真实性，使其免受来自VPN、Tor出口节点或数据中心的欺诈安装活动影响。一些欺诈者使用模拟软件伪造安装，并将欺诈转化放到高价值市场获取利润，匿名IP过滤器针对的就是这些欺诈者。</p>
 <h3 id="点击安装时间"><a class="markdownIt-Anchor" href="#点击安装时间"></a> 点击安装时间</h3>
 <p>点击安装时间(Click to install time,CTIT)衡量用户旅程中时间戳之间的伽玛分布 - 用户的初始广告互动和他们的首次应用启动。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201343440.png" srcset="/img/loading.gif" lazyload alt="CTIT" /></p>
+<p><img src="https://oss.imzhanghao.com/img/202111201343440.png" srcset="/img/loading.gif" lazyload alt="CTIT" /></p>
 <p>CTIT 可用于识别基于点击的欺诈的不同案例:</p>
 <ul>
 <li>短 CTIT（低于 10 秒）：可能存在安装劫持欺诈(install hijacking)</li>
@@ -360,10 +360,10 @@
 <h3 id="新设备率"><a class="markdownIt-Anchor" href="#新设备率"></a> 新设备率</h3>
 <p>新设备率(New device rate, NDR)将突出显示下载广告商应用的新设备的百分比。</p>
 <p>有新设备当然是正常的，因为会有新用户安装应用程序或者现有用户更换设备。但是，必须密切关注其活动可接受的新设备率，因为该比率由测量的新设备ID决定。因此，它可以被设备ID重置欺诈策略所操纵，这在设备农场中很常见。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201721503.png" srcset="/img/loading.gif" lazyload alt="NDR" /></p>
+<p><img src="https://oss.imzhanghao.com/img/202111201721503.png" srcset="/img/loading.gif" lazyload alt="NDR" /></p>
 <h3 id="传感器"><a class="markdownIt-Anchor" href="#传感器"></a> 传感器</h3>
 <p>设备传感器(Device sensors)可以收集设备电池电量到倾斜角度等上百个指标，可以用来进行生物识别行为分析。</p>
-<p><img src="https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201354087.png" srcset="/img/loading.gif" lazyload alt="传感器" /></p>
+<p><img src="https://oss.imzhanghao.com/img/202111201354087.png" srcset="/img/loading.gif" lazyload alt="传感器" /></p>
 <p>这些指标有助于为每次安装创建配置文件——分析每次安装的设备和用户行为及其与真实用户测量的正常趋势的兼容性。</p>
 <h3 id="限制广告跟踪"><a class="markdownIt-Anchor" href="#限制广告跟踪"></a> 限制广告跟踪</h3>
 <p>限制广告跟踪（Limit ad tracking， LAT）是一项隐私功能，允许用户限制广告商收到的有关其设备生成的活动的数据。当用户启用LAT时，广告商及其测量解决方案会收到一个空白设备ID，而不是特定于设备的ID。</p>

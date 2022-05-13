@@ -1,8 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://imzhanghao.com/2021/03/11/generative-adversarial-nets/</loc>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2020/06/11/computing-advertising-2-business-system/</loc>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2020/04/10/5-classic-algorithms-1-exhaustive-method/</loc>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2020/04/15/5-classic-algorithms-2-greedy-algorithm/</loc>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2021/12/14/entropy-growing/</loc>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2022/01/18/how-to-get-rich-without-getting-lucky/</loc>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
     <loc>https://imzhanghao.com/2020/11/11/google-mtl-mmoe/</loc>
-    <lastmod>2022-04-25</lastmod>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2020/04/20/5-classic-algorithms-3-divide-and-conquer/</loc>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2020/11/06/alimama-cvr-esmm/</loc>
+    <lastmod>2022-05-13</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2020/10/25/multi-task-learning/</loc>
+    <lastmod>2022-05-13</lastmod>
   </url>
   <url>
     <loc>https://imzhanghao.com/2022/04/24/reading-xin-li-fu-yang/</loc>
@@ -29,23 +65,11 @@
     <lastmod>2022-02-10</lastmod>
   </url>
   <url>
-    <loc>https://imzhanghao.com/2022/01/18/how-to-get-rich-without-getting-lucky/</loc>
-    <lastmod>2022-01-22</lastmod>
-  </url>
-  <url>
     <loc>https://imzhanghao.com/2022/01/09/the-power-of-evolution/</loc>
     <lastmod>2022-01-18</lastmod>
   </url>
   <url>
     <loc>https://imzhanghao.com/2020/05/21/affiliate-marketing-5-how-to-promote-products/</loc>
-    <lastmod>2022-01-16</lastmod>
-  </url>
-  <url>
-    <loc>https://imzhanghao.com/2021/03/11/generative-adversarial-nets/</loc>
-    <lastmod>2022-01-16</lastmod>
-  </url>
-  <url>
-    <loc>https://imzhanghao.com/2020/06/11/computing-advertising-2-business-system/</loc>
     <lastmod>2022-01-16</lastmod>
   </url>
   <url>
@@ -57,19 +81,7 @@
     <lastmod>2022-01-16</lastmod>
   </url>
   <url>
-    <loc>https://imzhanghao.com/2020/04/10/5-classic-algorithms-1-exhaustive-method/</loc>
-    <lastmod>2022-01-16</lastmod>
-  </url>
-  <url>
     <loc>https://imzhanghao.com/2020/05/17/affiliate-marketing-1-process-and-working-principle/</loc>
-    <lastmod>2022-01-16</lastmod>
-  </url>
-  <url>
-    <loc>https://imzhanghao.com/2020/04/15/5-classic-algorithms-2-greedy-algorithm/</loc>
-    <lastmod>2022-01-16</lastmod>
-  </url>
-  <url>
-    <loc>https://imzhanghao.com/2021/12/14/entropy-growing/</loc>
     <lastmod>2022-01-16</lastmod>
   </url>
   <url>
@@ -90,10 +102,6 @@
   </url>
   <url>
     <loc>https://imzhanghao.com/2020/05/25/affiliate-marketing-8-zero-to-one/</loc>
-    <lastmod>2022-01-16</lastmod>
-  </url>
-  <url>
-    <loc>https://imzhanghao.com/2020/04/20/5-classic-algorithms-3-divide-and-conquer/</loc>
     <lastmod>2022-01-16</lastmod>
   </url>
   <url>
@@ -125,10 +133,6 @@
     <lastmod>2022-01-16</lastmod>
   </url>
   <url>
-    <loc>https://imzhanghao.com/2020/11/06/alimama-cvr-esmm/</loc>
-    <lastmod>2022-01-16</lastmod>
-  </url>
-  <url>
     <loc>https://imzhanghao.com/2020/06/18/computing-advertising-5-lean-data-monetization/</loc>
     <lastmod>2022-01-16</lastmod>
   </url>
@@ -138,10 +142,6 @@
   </url>
   <url>
     <loc>https://imzhanghao.com/2020/06/15/computing-advertising-4-agreement-based-advertising/</loc>
-    <lastmod>2022-01-16</lastmod>
-  </url>
-  <url>
-    <loc>https://imzhanghao.com/2020/10/25/multi-task-learning/</loc>
     <lastmod>2022-01-16</lastmod>
   </url>
   <url>
