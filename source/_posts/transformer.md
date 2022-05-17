@@ -23,7 +23,7 @@ Google的翻译团队在《Attention Is All You Need》中提出了他们的Tran
 - **自注意力可以产生更具可解释性的模型。** 我们可以从模型中检查注意力分布。各个注意头 (attention head) 可以学会执行不同的任务。
 
 ## 模型架构
-![Transformer的架构](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109290538512.png)
+![Transformer的架构](https://oss.imzhanghao.com/img/202109290538512.png)
 
 ### Encoder and Decoder Stacks
 
@@ -35,10 +35,10 @@ Google的翻译团队在《Attention Is All You Need》中提出了他们的Tran
 
 ### 注意力
 attention函数可以被描述为将query和一组key-value对映射到输出，其中query，key，value和输出都是向量。输出被计算为值的加权求和，其中分配给每个值的权重由query与对应key的兼容性函数计算。这里重点讲解Transformer中用到的几个Attention机制的变种。
-![Attention机制的本质思想](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109030902038.png)
+![Attention机制的本质思想](https://oss.imzhanghao.com/img/202109030902038.png)
 
 #### Scaled Dot-Product Attention
-![Scaled Dot-Product Attention](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109290848281.png)
+![Scaled Dot-Product Attention](https://oss.imzhanghao.com/img/202109290848281.png)
 我们将这个Attention称为缩放点积Attention，输入由维度为$d_k$的query和key以及维度为$d_v$的value组成。我们用所有key计算query的点积，然后将每个点积结果除以$\sqrt {d_k}$，并应用softmax函数来获得value的权重。
 在实践中，我们同时在一组query上计算attention函数，将它们打包在一起形成矩阵Q，key和value也一起打包成矩阵K和V。我们计算输出矩阵为：
 $$\operatorname{Attention}(Q, K, V)=\operatorname{softmax}\left(\frac{Q K^{T}}{\sqrt{d_{k}}}\right) V$$
@@ -46,7 +46,7 @@ $$\operatorname{Attention}(Q, K, V)=\operatorname{softmax}\left(\frac{Q K^{T}}{\
 Dot-Product Attention和Additive Attention是最常用的两个Attention函数，Dot-Product Attention只是比Scaled Dot-Product Attention少了一个缩放因子，其他都是一样的。Additive Attention使用具有单个隐藏层的前馈网络来计算兼容性函数。虽然两者在理论上的复杂性相似，但在实践中，Dot-Product Attention更快，更节省空间，因为它可以使用高度优化的矩阵乘法来实现。
 
 #### Multi-Head Attention
-![Multi-Head Attention](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202109290951436.png)
+![Multi-Head Attention](https://oss.imzhanghao.com/img/202109290951436.png)
 
 Multi-Head Attention是利用多个查询，来平行地计算从输入信息中选取多个信息。每个注意力关注输入信息的不同部分，然后再进行拼接。
 

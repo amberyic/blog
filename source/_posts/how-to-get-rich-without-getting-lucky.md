@@ -13,7 +13,7 @@ Naval Ravikant为大家所熟知是他成功创立了帮助初创公司融资的
 
 我读完以后，从**财富认知、个人成长和个人选择**总结了我从中学到的东西。
 
-![如何不靠运气变得富有](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202201181418987.png)
+![如何不靠运气变得富有](https://oss.imzhanghao.com/img/202201181418987.png)
 
 ## 财富认知
 ### 追求财富
@@ -49,7 +49,7 @@ Naval Ravikant为大家所熟知是他成功创立了帮助初创公司融资的
 - 致富与运气无关，要掌握致富的技能，而且每个人都可以拥有这种技能。
 - 学会如何销售，学会如何创建。如果你同时能做到这两件事，你的成功将无可阻挡。硅谷模式：建造者+销售者=最佳拍档
 
-![Naval Ravikant](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202201181519859.png)
+![Naval Ravikant](https://oss.imzhanghao.com/img/202201181519859.png)
 ## 个人成长
 > **Arm yourself with specific knowledge, accountability, and leverage.**
 
@@ -98,7 +98,7 @@ Naval Ravikant为大家所熟知是他成功创立了帮助初创公司融资的
 - 学习讲故事和编程。
 
 
-![Naval](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202201182108416.png)
+![Naval](https://oss.imzhanghao.com/img/202201182108416.png)
 ## 个人选择
 > Pick an industry where you can play long term games with long term people.
 

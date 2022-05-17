@@ -14,7 +14,7 @@ description: 分别介绍了Encoder-Decoder框架和Seq2Seq模型的结构，完
 ## Encoder-Decoder简介
 Encoder-Decoder框架是一种文本处理领域的研究模式，他并不是特指某种具体的算法，而是一类算法统称。Encoder和Decoder部分可以是任意的文字，语音，图像，视频数据，模型可以采用CNN，RNN，BiRNN、LSTM、GRU等等。所以基于Encoder-Decoder，我们可以设计出各种各样的应用算法。
 
-![Encoder-Decoder框架](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210526143504.png)
+![Encoder-Decoder框架](https://oss.imzhanghao.com/img/20210526143504.png)
 
 **应用场景**
 - 文字-文字：机器翻译，对话机器人，文章摘要，代码补全
@@ -23,7 +23,7 @@ Encoder-Decoder框架是一种文本处理领域的研究模式，他并不是�
 
 ## Encoder-Decoder结构
 Cho在2014年提出了[Encoder–Decoder结构](https://arxiv.org/pdf/1406.1078.pdf)，它由两个RNN组成，另外本文还提出了GRU的门结构，相比LSTM更加简洁，而且效果不输LSTM。
-![RNN Encoder–Decoder](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210827085803.png)
+![RNN Encoder–Decoder](https://oss.imzhanghao.com/img/20210827085803.png)
 
 Encoder-Decoder将可变长度序列编码为固定长度向量，然后将定长度向量表示解码回可变长度序列。可以形式化为：$p\left(y_{1}, \ldots, y_{T^{\prime}} \mid x_{1}, \ldots, x_{T}\right)$，这里$T$和$T^{\prime}$可以不一样，即输入的长度跟输出的长度可以不一致。
 
@@ -46,7 +46,7 @@ $$\max _{\boldsymbol{\theta}} \frac{1}{N} \sum_{n=1}^{N} \log p_{\boldsymbol{\th
 Seq2Seq（是 Sequence-to-sequence 的缩写），他输入一个序列，输出另一个序列。这种结构最重要的地方在于输入序列和输出序列的长度是可变的。
 
 2014年Google的Sutskever提出了[Seq2Seq](https://arxiv.org/pdf/1409.3215.pdf)，只不过比Cho晚了一点。论文中的模型结构更简单，Decoder在t时刻yt是由ht，yt−1决定，而没有c，Encoder 和 Decoder都用的LSTM结构。
-![Seq2Seq](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210827093601.png)
+![Seq2Seq](https://oss.imzhanghao.com/img/20210827093601.png)
 
 ## Encoder-Decoder和Seq2Seq的关系
 这两种叫法基本都是前后脚被提出来的，其实是技术发展到一定阶段自然的一次演进，基本上可以划上等号，如果非要讲他们的差别，那么就只能说下面着两条了。
@@ -56,7 +56,7 @@ Seq2Seq（是 Sequence-to-sequence 的缩写），他输入一个序列，输出
 
 ## 代码实现
 下面是一个Seq2Seq模型在机器翻译中使用的示意图。编码器位于左侧，仅需要源语言的序列作为输入。解码器位于右边，需要两种版本的目标语言序列，一种用于输入，一种用于目标（Loss计算）
-![Seq2Seq模型在机器翻译中使用的示意图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202108280938271.png)
+![Seq2Seq模型在机器翻译中使用的示意图](https://oss.imzhanghao.com/img/202108280938271.png)
 
 网上找到了一个比较好的[实现](https://github.com/ChunML/NLP/blob/master/machine_translation/train_simple_tf2.py)，基于Tensorflow2.x的KerasAPI实现，可读性很高。
 

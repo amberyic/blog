@@ -26,13 +26,13 @@ MMoE的核心思想是集成学习，整个思想范畴在随机森林里面，�
 多任务模型通过学习不同任务的联系和差异，可提高每个任务的学习效率和质量。多任务学习的的框架广泛采用shared-bottom的结构，不同任务间共用底部的隐层。但是在实际应用中，多任务学习模型并不总是能在所有任务上都胜过相应的单任务模型，许多基于DNN的多任务学习模型对数据分布差异和任务之间的关系之类的因素都很敏感，任务差异带来的内在冲突实际上会损害至少一部分任务的预测，尤其是在所有任务之间广泛共享模型参数的时候。
 
 我们来看下面这个例子，假设有这样两个相似的任务：猫分类和狗分类。他们通常会有比较接近的底层特征，比如皮毛、颜色等等。如下图所示：
-![猫分类和狗分类](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201110221237.png)
+![猫分类和狗分类](https://oss.imzhanghao.com/img/20201110221237.png)
 多任务的学习的本质在于共享表示层，并使得任务之间相互影响：
-![相似任务互相影响](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201110221700.png)
+![相似任务互相影响](https://oss.imzhanghao.com/img/20201110221700.png)
 如果我们现在有一个与猫分类和狗分类相关性不是太高的任务，如汽车分类：
-![增加不相关任务](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201110222659.png)
+![增加不相关任务](https://oss.imzhanghao.com/img/20201110222659.png)
 那么我们在用多任务学习时，由于底层表示差异很大，所以共享表示层的效果也就没有那么明显，而且更有可能会出现冲突或者噪声
-![任务相差过大](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201110221811.png)
+![任务相差过大](https://oss.imzhanghao.com/img/20201110221811.png)
 
 
 **现有的解决方案**
@@ -40,10 +40,10 @@ MMoE的核心思想是集成学习，整个思想范畴在随机森林里面，�
 * 有一些方案可以不依赖任务差异度量的情况下处理多任务学习过程中的差异，但是这些方法通常会为每个模型增加更多模型参数，导致计算开销变大。
 
 下图给出了相关性不同的数据集上多任务的表现，可以看出相关性越低，多任务学习的效果越差
-![任务相关性和多任务学习效果](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201110222953.png)
+![任务相关性和多任务学习效果](https://oss.imzhanghao.com/img/20201110222953.png)
 
 在实际的推荐系统中，点赞、评论或者没有反馈，度量这几个任务之间的相关性也是非常难的。
-![度量任务之间的差异很困难](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201110221916.png)
+![度量任务之间的差异很困难](https://oss.imzhanghao.com/img/20201110221916.png)
 
 
 因此，论文中提出了一个Multi-gate Mixture-of-Experts(MMoE)的多任务学习结构。MMoE模型刻画了任务相关性，基于共享表示来学习特定任务的函数，避免了明显增加参数的缺点。
@@ -58,15 +58,15 @@ $$y=\sum_{i=1}^{n} g(x)_{i} f_{i}(x)$$
 - $\sum_{i=1}^{n} g(x)_{i}=1$，其中$g(x)_{i}$表示专家$f_i$的权重，是做过归一化的。g代表一个汇总所有专家结果的门控网络。
 - $f_{i}, i=1, \ldots, n$，表示n个expert networks
 - 门控网络根据输入生成n位专家的分布，最终输出为所有专家输出的加权总和。
-![MoE](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111110029.png)
+![MoE](https://oss.imzhanghao.com/img/20201111110029.png)
 
 **MoE Layer**
 - MoE Layer具有与MoE Model相同的结构，但接受前一层的输出作为输入，并输出到连续的层。然后以端到端的方式训练整个模型。
 - MoE Layer结构的主要目标是实现条件计算，其中每个实例仅激活部分网络。 对于每个输入示例，模型都可以通过以输入为条件的门控网络来选择专家的子集。
-![MoE Layer](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111111843.png)
+![MoE Layer](https://oss.imzhanghao.com/img/20201111111843.png)
 
 ### MMoE
-![MoE和MTL结合](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/实现范式.png)
+![MoE和MTL结合](https://oss.imzhanghao.com/img/实现范式.png)
 
 **图(a)Shared-Bottom model**
 共享底层网络在许多多任务学习应用程序中被广泛采用，Shared-Bottom网络位于底部，多个任务共用这一层。往上，每个子任务分别对应一个Tower Network，函数表达式为：
@@ -98,12 +98,12 @@ y_{k} &=h^{k}\left(f^{k}(x)\right) \\
 - 对于所有模型，具有较高相关性的数据的效果要优于具有较低相关性的数据的效果；
 - 在两个任务相关性搞的情况下，MMoE模型和OMoE模型之间的效果几乎没有区别；但是，当任务之间的相关性降低时，OMoE模型的效果就会明显下降，而对MMoE模型的影响却很小。因此，在低关联性情况下，具有特定于任务的门来建模任务差异至关重要；
 - OMoE和MMoE的效果在不同相关度任务的数据中都好于Shared-Bottom。
-![OMoE和MMoE实验结果](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111174615.png)
+![OMoE和MMoE实验结果](https://oss.imzhanghao.com/img/20201111174615.png)
 
 **模型的可训练性（Trainability）对比**
 模型的可训练性，就是指模型在超参数设置和模型初始化范围内的鲁棒性。
 针对数据和模型初始化中的随机性研究模型的鲁棒性，并在每种设置下重复进行多次实验，每次从相同的分布生成数据，但随机种子不同，并且模型也分别初始化，绘制了重复运行的最终损失值的直方图：
-![模型的可训练性对比结果](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20201111175123.png)
+![模型的可训练性对比结果](https://oss.imzhanghao.com/img/20201111175123.png)
 
 结论：
 - 首先，在所有任务相关性设置中，Shared-Bottom模型的性能差异远大于基于MoE的模型的性能差异。这意味着，与基于MoE的模型相比，Shared-Bottom模型通常具有质量较差的局部最小值。

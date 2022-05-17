@@ -197,7 +197,7 @@ int main() {
 
 用火柴棍拼数字0-9的拼法如图所示：
 
-![火柴棍等式](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/火柴棍等式.png)
+![火柴棍等式](https://oss.imzhanghao.com/img/火柴棍等式.png)
 
 **注意**
 

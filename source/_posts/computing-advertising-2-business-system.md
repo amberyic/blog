@@ -12,7 +12,7 @@ description: 这是刘鹏老师计算广告课程的笔记，这部分主要讲�
 
 ### 商业化体系大闭环
 广告点击以后，就从媒体网站到了广告主的网站上。
-![商业化体系大闭环](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/商业化体系大闭环.png)
+![商业化体系大闭环](https://oss.imzhanghao.com/img/商业化体系大闭环.png)
 
 
 ### 计算广告的核心挑战

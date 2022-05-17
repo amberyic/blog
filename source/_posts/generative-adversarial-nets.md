@@ -24,7 +24,7 @@ description: GAN是最近几年最火热的研究方向之一，本文讲解生�
 
 adversarial nets是通过对抗过程估计生成模型的框架，同时训练两个模型，一个**生成模型G**捕获数据分布，一个**判别模型D**估计样本来自训练数据而不是G的概率。
 
-![GAN](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210317165621.png)
+![GAN](https://oss.imzhanghao.com/img/20210317165621.png)
 
 ## Adversarial nets
 Adversarial nets框架最直接的应用就是将生成模型$G$和判别模型$D$都配置成多层感知器。为了在数据$x$上学习生成模型G的分布$p_g$，我们定义了一个先验的输入噪声变量$p_z(z)$，然后将噪声变量到数据空间的映射表示为$G(z;θg)$，其中$G$是由多层感知器表示的微分函数。我们还定义了输出单个标量的多层感知器$D(x;θd)$。$D(x)$代表$x$来自训练数据而不是由$p_g$生成的概率。我们训练判别模型$D$来最大化区分生成模型$G$产生的样本和训练样本，同时训练生成模型$G$来最小化$log(1-D(G(z)))$:
@@ -40,7 +40,7 @@ $$\min _{G} \max _{D} V(D, G)=\mathbb{E}_{\boldsymbol{x} \sim p_{\text {data }}(
 
 在实际应用中，上面的公式可能无法为$G$提供足够的梯度来学习。在学习的早期，$G$比较弱，$D$可以很有信心地拒绝样本，因为它们与训练数据明显不同。在这种情况下，$log(1 - D(G(z)))$饱和，与其训练$G$去最小化$log(1 - D(G(z))$不如训练$G$去最大化$logD(G(z))$，这一目标函数的结果与动态函数相同，但在学习中提供了更强的学习效果。
 
-![简易解释](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210317165651.png)
+![简易解释](https://oss.imzhanghao.com/img/20210317165651.png)
 
 图中的黑色虚线表示真实的样本的分布情况，蓝色虚线表示判别器判别概率的分布情况，绿色实线表示生成样本的分布。Z表示噪声，Z到x表示通过生成器之后的分布的映射情况。
 
@@ -52,7 +52,7 @@ GAN算法流程
 - 第二步训练$G$时，$V(G, D)$越小越好，所以是减去梯度(descending)。
 - 整个训练过程交替进行。
 
-![GAN算法流程](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210317180048.png)
+![GAN算法流程](https://oss.imzhanghao.com/img/20210317180048.png)
 
 
 - 命题 1：对于固定的G，最优鉴别器D为$D_{G}^{*}(\boldsymbol{x})=\frac{p_{\text {data }}(\boldsymbol{x})}{p_{\text {data }}(\boldsymbol{x})+p_{g}(\boldsymbol{x})}$
@@ -64,7 +64,7 @@ $$\mathbb{E}_{\boldsymbol{x} \sim p_{\text {data }}}\left[\log D_{G}^{*}(\boldsy
 
 
 ## 对比其他建模方案
-![GAN对比其他方案](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/20210318112054.png)
+![GAN对比其他方案](https://oss.imzhanghao.com/img/20210318112054.png)
 
 ## 优缺点
 优点

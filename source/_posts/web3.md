@@ -12,7 +12,7 @@ description: Web 3.0代表互联网的下一个时代，目前并没有明确定
 
 目前和元宇宙一起，Web 3.0也是近段时间人们对下一代互联网讨论的热词，在宏观意义上，Web 3.0将是当前热议的**元宇宙的底层网络架构**，其核心思想是**将生产和所有权交还给参与生态、使用平台的用户**，而不是由互联网平台或者说控制互联网平台公司的少数人拥有。Web 3.0由分布式技术技术（区块链）支持得以展望和实践，不过目前仍处于早期萌芽阶段。
 
-![Web3](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160715152.png)
+![Web3](https://oss.imzhanghao.com/img/202204160715152.png)
 ## 什么是Web 3.0
 Web 3.0，翻译为第三代互联网，目前并没有明确定义，我们将它描述为基于区块链技术的去中心化的互联网技术的合集，有新的技术、新的范式、新的组织形式以及对应的价值观世界观。
 
@@ -25,7 +25,7 @@ Gavin Wood这篇文章的重点并不是加密资产，而是共识引擎和密�
 Web 3.0代表互联网的下一个时代，互联网形态向着更民主的范式转变，Web3源于人们对当今互联网价值的态度的转变: 互联网巨头控制着互联网和所有人的数据，Web3代表着，很多人出现了想创造一个真正“**集体所有**”互联网的想法。
 
 > 去中心化就是指去中心化服务器的点对点网络，在去中心化服务器网络中，没有服务器，没有中心，或者反之，到处都是服务器，到处都是中心节点。
-![去中心化](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204162110845.png)
+![去中心化](https://oss.imzhanghao.com/img/202204162110845.png)
 
 ### 基本特性
 Web 3.0 目前为止仍未有标准定义，却有一些基本的特性，包括：**去中心化（Decentralization）、去信任化与无权限化（Trustless and Permissionless）、人工智能与机器学习（Artificial Intelligence and Machine Learning）、连通性与无边界网络（Connectivity and Ubiquity）**。
@@ -46,10 +46,10 @@ Web 3.0 目前为止仍未有标准定义，却有一些基本的特性，包括
 ### 进化简史
 在以区块链为代表的分布式技术推动下，从去中心化点对点账本实验到去中心化智能合约平台，催生了无数的新型应用(Dapp)，慢慢 DeFi 形成了数字世界里的“金融服务”， 而 NFT 加速了资产上链。我们看到，传统世界(线上和线下)之外，用户越来越接近一个相融相生的数字世界。至此，人们呼唤一个全新的网络世界——元宇宙，即可信地承载个人的社交身份和资产，社区将拥有更强大的主导权。
 
-![Web 3.0 的进化简史](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204140632999.png)
+![Web 3.0 的进化简史](https://oss.imzhanghao.com/img/202204140632999.png)
 
 ## 范式迭代
-![the evoluation of the web](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204102208729.png)
+![the evoluation of the web](https://oss.imzhanghao.com/img/202204102208729.png)
 
 在谈论什么是Web 3.0 之前，我们需要简单回溯一下Web 1.0和Web 2.0的概念和内涵，才能更好地理解Web 3.0 为什么会诞生以及它所想要解决的问题。
 
@@ -72,7 +72,7 @@ Web这个概念最早诞生于1989年欧洲粒子物理研究所的一项研究�
 ### Web 2.0：可读写互联网
 > 用户创造、平台所有、平台控制、平台分配
 
-![Web1.0->Web2.0](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160723706.png)
+![Web1.0->Web2.0](https://oss.imzhanghao.com/img/202204160723706.png)
 
 Web 2.0最早由信息架构咨询师Darcy DiNucci在1999年撰写的文章《Fragmented Future》中首次创造，在这篇文章中她提出：“**我们现在所知道的 Web 基本上是以静态形式被加载到浏览器窗口中，但这只是未来 Web 的雏形。未来的网络不再只是满屏的文本，而是一种会产生实时交互的传输机制。**”
 
@@ -83,7 +83,7 @@ Web 2.0最早由信息架构咨询师Darcy DiNucci在1999年撰写的文章《Fr
 ### Web 3.0：价值互联网
 > 用户创造、用户所有、用户控制、协议分配
 
-![Web2.0->Web3.0](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160724961.png)
+![Web2.0->Web3.0](https://oss.imzhanghao.com/img/202204160724961.png)
 
 在Web 2.0时代，互联网的发展已经偏离了最初的设计轨道。随着用户从信息的接收者变成了参与者，用户在网络上的数字行为也被一一记录了下来，并且以数据形式由各个公司掌握。比如谷歌记录你的搜索痕迹，Facebook、Twitter记录你的人际关系和互动，亚马逊记录你的购买记录等等。这些**科技型巨头通过大量的数据来获取利益，算法掌控了你的世界**。
 
@@ -93,14 +93,14 @@ Web 2.0最早由信息架构咨询师Darcy DiNucci在1999年撰写的文章《Fr
 
 Web 3.0的体验可能和Web 2.0分别不算太大，而差异在于使用者或创作者能对自己贡献的内容保有所有权，还能获得一定程度的回报。私隐方面，用户能清楚知道这些数据的用途，并且具有决策权。
 
-![Web1.0-Web 3.0的变迁](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204102216104.png)
+![Web1.0-Web 3.0的变迁](https://oss.imzhanghao.com/img/202204102216104.png)
 
 ## 技术栈
 区块链脱胎于比特币系统，从本质上讲，它是一个共享数据库，存储于其中的数据或信息，具有“不可伪造”、“公开透明”、“集体维护”等特征，基于这些特征，区块链奠定了坚实的“信任”基础，创造了可靠的“合作”机制。
 
 Web3的基础设施基于区块链技术，Web 3.0 Foundation将Web3的技术栈定义为由L0~L4组成的5层架构系统，如下图所示：
 
-![Web3技术栈](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204141351015.png)
+![Web3技术栈](https://oss.imzhanghao.com/img/202204141351015.png)
 
 ### Layer 0
 > 基础设施和网络层，提供了数据分发和互动能力
@@ -143,10 +143,10 @@ Web3的基础设施基于区块链技术，Web 3.0 Foundation将Web3的技术栈
 
 协议可扩展的用户界面（"像浏览器一样"），用户用来直接与区块链互动的程序，而不需要知道如何让编程和实现细节：案例有Status、MetaMask、Parity、EtherWallet或MyCrypto。
 
-![Dapp架构图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204150914276.png)
+![Dapp架构图](https://oss.imzhanghao.com/img/202204150914276.png)
 
 ### 代表项目
-![Web3技术栈代表项目](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204150641778.png)
+![Web3技术栈代表项目](https://oss.imzhanghao.com/img/202204150641778.png)
 
 **核心栈（Core Stack）**
 核心栈可以说是整个区块链生态运转必不可少的技术支撑，它们一类属于区块链的底层技术（基础设施），另一类是去中心化应用开发不可或缺的技术组件。
@@ -184,7 +184,7 @@ Web3的去中心化网络，为割裂的数字时代现状提供了替代方案�
 - 去中心化系统可以避免单点故障，中和中心化平台所施加的单边控制。
 
 ### 去中心化自治组织DAO
-![DAO](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160645989.png)
+![DAO](https://oss.imzhanghao.com/img/202204160645989.png)
 
 **DAO是什么？**
 在线成员共有的社区，由成员共识来管理（非集中领导）
@@ -194,7 +194,7 @@ Web3的去中心化网络，为割裂的数字时代现状提供了替代方案�
 
 **DAO代表了 "链上治理"的运用**。例如，在传统的公司治理中，公司会规定某些政策的章程，如何选举董事会。DAO可以将类似的政策和章程用代码写成智能合约，将这一概念继续延伸到数字世界。**智能合约**是一个稳定的计算机程序，在区块链网络上运行，它就像法律上的合同一样，智能合同是一种承诺，只是它们被写入计算机代码，可以自动和自主执行。
 
-![主要的DAO类别](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204180934194.png)
+![主要的DAO类别](https://oss.imzhanghao.com/img/202204180934194.png)
 
 **DAO为何重要？**
 DAO是一种新兴的组织治理模式：**它是用于围绕透明度和包容性建立的新型组织。这些原则可以适用于各式组织，包括非营利组织、集体、合作社和投资基金等。**
@@ -202,14 +202,14 @@ DAO是一种新兴的组织治理模式：**它是用于围绕透明度和包容
 治理结构决定一个组织如何做出符合参与者利益的决策，当前组织形式的挑战是：决策不透明+普通参与者参与治理门槛高。
 
 ### 去中心化金融DeFi
-![去中心化金融DeFi](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160650387.png)
+![去中心化金融DeFi](https://oss.imzhanghao.com/img/202204160650387.png)
 **DeFi是什么？**
 金融领域（储蓄、贷款和外汇兑换）的去中心化应用
 - 去中心化应用（dApps）是指代码编写建立在相关领域的智能合约，只要托管相关协议的区块链存在，dApp就会存在，无法被恶意改变or操纵。dApps是开放的，任何计算机都可以参与
 - 区块链支付实现了点对点数字交易，之前数字支付必须依赖集中式记录管理方。
 - 加密货币就是系统中的计价单位、交换媒介、价值储藏手段，无中心化第三方，也能以数字方式进行实际价值转移。
 
-![DeFi和传统金融差异](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204180934254.png)
+![DeFi和传统金融差异](https://oss.imzhanghao.com/img/202204180934254.png)
 
 **DeFi为什么重要？**
 加密货币**低成本、实时、无边界、点对点价值转移，不受主流金融机构营业时间的限制。** 准入门槛低，为世界金融服务不足的地区，提供了机会。
@@ -220,7 +220,7 @@ DAO是一种新兴的组织治理模式：**它是用于围绕透明度和包容
 - 拥抱互联网核心价值：开放给任何人、承诺开源、第三方开发者无需许可即可改编、费用低、加密技术的安全隐私保护、透明管理
 
 ### 稳定币和中央银行数字货币（CBDCs）
-![稳定币和中央银行数字货币](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160652005.png)
+![稳定币和中央银行数字货币](https://oss.imzhanghao.com/img/202204160652005.png)
 **稳定币&CBDCs是什么？**
 稳定币是私人发行的加密货币，一段时间内保持稳定价值；中央银行数字货币是由政府发行的数字货币，象征国家主权和义务。
 
@@ -230,7 +230,7 @@ DAO是一种新兴的组织治理模式：**它是用于围绕透明度和包容
 - CBDCs有稳定币优点，两者共存，竞争创新
 
 ### 隐私和数字基础设施
-![Nym隐私保护流程](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160656539.png)
+![Nym隐私保护流程](https://oss.imzhanghao.com/img/202204160656539.png)
 **隐私和数字基础设施是什么？**
 区块链网络局限性是设计透明，现在可以从数学上证明信息有效性而无需提供信息本身，这样用户证明自己知道自己的密码，但是网站不用存储，兼顾隐私和可扩展性。
 
@@ -247,23 +247,23 @@ DAO是一种新兴的组织治理模式：**它是用于围绕透明度和包容
 - NFT可以利用区块链技术来跟踪，创作者可以从二次销售中获益。
 
 ### 链游GameFi
-![链游（Gamefi）](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160657880.png)
+![链游（Gamefi）](https://oss.imzhanghao.com/img/202204160657880.png)
 **链游是什么？**
 基于区块链的游戏，是指构建在区块链技术上的游戏链游与堡垒之夜、Roblox或Minecraft等流行游戏的一个关键区别是：**游戏里的东西可以全部交易成通货然后去兑换其他游戏里的资源**。
 
-![去中心化治理将游戏规则交予玩家](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204180935976.png)
+![去中心化治理将游戏规则交予玩家](https://oss.imzhanghao.com/img/202204180935976.png)
 
 **链游为什么重要？**
 - 游戏中的物品，就是玩家拥有的NFT，可以和现实的金钱交易，在游戏间传递。
 - 促进了边玩边赚，通过axie infinity这样的游戏，人们的可以赚取真实世界的货币。
 
  ## 展望
-![Web3展望](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204162106519.png)
+![Web3展望](https://oss.imzhanghao.com/img/202204162106519.png)
 
 Web3这个词实际上指代了基于去中心化技术的新型互联网体验。而Web3已经开始颠覆我们在投资、交易、游戏和艺术等各个领域的交互方式。全球各地有越来越多的用户和机构已经开始意识到无须信任的交互和基于加密技术保障的协议是多么重要。虽然Web3仍处于发展初期，但它有潜力将互联网恢复成当初设计者所希望的那样：完全透明、可靠且易于使用。
 
 **目前所有的Web2.0的Apps都值得在Web 3.0中重做一遍，升级为DApps**
-![web2到Web3](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202204160719974.png)
+![web2到Web3](https://oss.imzhanghao.com/img/202204160719974.png)
 
 Sergey在演讲中说道：“Web3在速度、效率和成本上将逐渐赶上Web 2.0系统，并且它还具有Web 2.0没有的优势，那就是信任最小化的加密保障。”
 

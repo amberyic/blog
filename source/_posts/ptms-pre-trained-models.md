@@ -15,7 +15,7 @@ description: 本文梳理预训练技术的原理和发展脉络，着重讲解�
 
 预训练是在大量常规数据集上学习数据中的“**共性**”，然后在特定领域的少量标注数据学习“**特性**”，这样子模型只需要从“共性”出发，去学习特定任务的“特性”部分即可。
 
-![预训练模型](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112041107988.png)
+![预训练模型](https://oss.imzhanghao.com/img/202112041107988.png)
 
 这和小孩子读书一样，一开始语文、数学、化学都学，读书、网上游戏等，在脑子里积攒了很多。当他学习计算机时，实际上把他以前学到的所有知识都带进去了。如果他以前没上过中学，没上过小学，突然学计算机就不懂这里有什么道理。**预训练模型就意味着把人类的语言知识，先学了一个东西，然后再代入到某个具体任务，就顺手了，就是这么一个简单的道理。**
 
@@ -26,7 +26,7 @@ description: 本文梳理预训练技术的原理和发展脉络，着重讲解�
 ### 计算机视觉上的预训练
 预训练首先是在计算机视觉方向取得较好效果并实现大规模应用的，我们会在庞大的ImageNet语料库上预训练模型，然后针对不同的任务在较小的数据上进一步微调。这比随机初始化要好得多，因为模型学习了一般的图像特征，然后可以将其用于各种视觉任务。
 ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领域，具有很好的通用型，使用范式一般如下图所示：
-![ImageNet预训练](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111041801550.png)
+![ImageNet预训练](https://oss.imzhanghao.com/img/202111041801550.png)
 
 ### 自然语言处理上的预训练
 借鉴视觉领域的做法,自然语言处理领域开始尝试使用预训练技术实现迁移学习，但是预训练在自然语言处理领域大爆发会缓慢很多，主要是因为自然语言处理任务(除机器翻译)没有计算机视觉方面那么多的标注好的数据集，而且没有很好的特征提取器，直到最近几年几个关键技术的成熟，神经网络才开始全面引入到了自然语言理解。从大规模的语言数据到强有力的算力，加上深度学习，把整个自然语言带到一个新的阶段。
@@ -47,7 +47,7 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 ### 传统的预训练技术 VS 神经网络预训练技术
 **传统的预训练技术**
 传统预训练技术与模型耦合较为紧密，该技术与模型之间并没有明确的区分界限，为了方便阐述，将语料送入模型到生成词向量的这一过程称为传统预训练技术。
-![传统的预训练技术](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111120845409.png)
+![传统的预训练技术](https://oss.imzhanghao.com/img/202111120845409.png)
 
 **神经网络预训练技术**
 神经网络预训练技术是在预训练阶段采用神经网络模型进行预训练的技术统称，由于预训练与后续任务耦合性不强，能单独成为一个模型，因此也称为预训练语言模型，这一称谓是区别于传统预训练技术的叫法。
@@ -77,14 +77,14 @@ Transformer之所以表现优异有以下几点原因：
 
 ### 微调
 微调旨在利用其标注样本对预训练网络的参数进行调整，可以将预训练的模型结果在新的任务上利用起来。
-![微调](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111140618731.png)
+![微调](https://oss.imzhanghao.com/img/202111140618731.png)
 
 
 ## 第一代技术预训练技术：Word Embeddings
 
 ### NNLM
 神经网络语言模型(Neural Network Language Model，NNLM)是2003年蒙特利尔大学的Yoshua Bengio教授在《A Neural Probabilistic Language Model》中提出来的模型，这个模型第一次用神经网络来解决语言模型的问题，虽然在当时并没有得到太多的重视，却为后来深度学习在解决语言模型问题甚至很多别的nlp问题时奠定了坚实的基础，后人站在Yoshua Bengio的肩膀上，做出了更多的成就。
-![NNLM](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111101654276.png)
+![NNLM](https://oss.imzhanghao.com/img/202111101654276.png)
 模型一共三层，第一层是**映射层**，将n个单词映射为对应word embeddings的拼接，其实这一层就是MLP的输入层；第二层是**隐藏层**，激活函数用tanh；第三层是**输出层**，因为是语言模型，需要根据前n个单词预测下一个单词，所以是一个多分类器，用softmax。整个模型最大的计算量集中在最后一层上，因为一般来说词汇表都很大，需要计算每个单词的条件概率，是整个模型的计算瓶颈。
 
 **评价**
@@ -96,7 +96,7 @@ Transformer之所以表现优异有以下几点原因：
 Word2Vec是从大量文本语料中以无监督的方式学习**语义知识**的一种模型，将单词从原先所属的空间**映射**到新的多维空间中，即把原先词所在空间嵌入(Embedding)到一个新的空间中去，用词向量的方式表征词的语义信息，通过一个嵌入空间使得语义上相似的单词在该空间内距离很近。
 
 Word2Vec模型中，主要有Skip-Gram和CBOW两种模型，从直观上理解，Skip-Gram是给定input word来预测上下文。而CBOW是给定上下文，来预测input word。
-![CBOW&Skip-Gram](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111101903380.png)
+![CBOW&Skip-Gram](https://oss.imzhanghao.com/img/202111101903380.png)
 
 **评价**
 - 优化了计算效率，特别是google同时开源了工具包，使得其在工业界能够大规模使用。
@@ -106,10 +106,10 @@ Word2Vec模型中，主要有Skip-Gram和CBOW两种模型，从直观上理解�
 Glove(Global Vectors for Word Representation)是一种无监督的词嵌入方法，该模型用到了语料库的全局特征，即单词的共现频次矩阵，来学习词表征（word representation）。
 
 **第一步统计共现矩阵**：下面给出了三句话，假设这就是我们全部的语料。我们使用一个size=1的窗口，对每句话依次进行滑动，相当于只统计紧邻的词。这样就可以得到一个共现矩阵。共现矩阵的每一列，自然可以当做这个词的一个向量表示。这样的表示明显优于one-hot表示，因为它的每一维都有含义——共现次数，因此这样的向量表示可以求词语之间的相似度。
-![共现矩阵](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111111038802.png)
+![共现矩阵](https://oss.imzhanghao.com/img/202111111038802.png)
 
 **第二步训练词向量**：共现矩阵维度是词汇量的大小，维度是很大的，并且也存在过于稀疏的问题，这里我们使用**SVD矩阵分解**来进降维。
-![SVD求解](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111110902602.png)
+![SVD求解](https://oss.imzhanghao.com/img/202111110902602.png)
 
 **评价**
 - 利用词共现矩阵，词向量能够充分考虑到语料库的全局特征，直观上来说比Word2Vec更合理。
@@ -121,7 +121,7 @@ Glove(Global Vectors for Word Representation)是一种无监督的词嵌入方�
 ### ELMo
 ELMo（Embeddings from Language Models）是有AI2提出，该模型不仅去学习**单词特征**，还有**句法特征**与**语义特征**。其通过在大型语料上预训练一个深度BiLSTM语言模型网络来获取词向量，也就是每次输入一句话，可以根据这句话的上下文语境获得每个词的向量，这样子就可以解决一词多义问题。
 
-![ELMo](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150545462.png)
+![ELMo](https://oss.imzhanghao.com/img/202111150545462.png)
 
 Elmo模型的**本质思想**是先用语言模型学习一个单词的 Word Embedding，此时无法区分一词多义问题。在实际使用Word Embedding的时候，单词已经具备特定的上下文，这时可以根据上下文单词的语义调整单词的 Word Embedding 表示，这样经过调整后的 Word Embedding 更能表达上下文信息，自然就解决了多义词问题。
 
@@ -134,7 +134,7 @@ Elmo模型的**本质思想**是先用语言模型学习一个单词的 Word Emb
 GPT（Generative Pre-Training）模型用单向Transformer代替ELMo的LSTM来完成预训练任务，其将12个Transformer叠加起来。训练的过程较简单，将句子的n个词向量加上位置编码(positional encoding)后输入到 Transformer中 ，n个输出分别预测该位置的下一个词。
 
  GPT的单项Transformer结构和GPT的模型结构，如图所示：
-![GPT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150547484.png)
+![GPT](https://oss.imzhanghao.com/img/202111150547484.png)
 
 **评价**
 - 第一个结合 Transformer 架构（Decoder）和自监督预训练目标的模型
@@ -143,7 +143,7 @@ GPT（Generative Pre-Training）模型用单向Transformer代替ELMo的LSTM来�
 ### BERT
 BERT采用和GPT完全相同的两阶段模型，首先是语言模型预训练，其次是后续任务的拟合训练。和GPT最主要不同在于预训练阶段采了类似ELMo的双向语言模型技术、MLM(mask language model)技术以及 NSP(next sentence prediction) 机制。
 
-![BERT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150548149.png)
+![BERT](https://oss.imzhanghao.com/img/202111150548149.png)
 
 **评价**
 - 采用了Transformer结构能够更好的捕捉全局信息。
@@ -159,17 +159,17 @@ BERT采用和GPT完全相同的两阶段模型，首先是语言模型预训练�
 - 多模态预训练模型，multi-modal PTMs
 - 领域特定的预训练模型，domain-specific PTMs
 - 压缩预训练模型，compressed PTMs
-![预训练的延伸方向](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150915051.png)
+![预训练的延伸方向](https://oss.imzhanghao.com/img/202111150915051.png)
 摘自《Pre-trained models for natural language processing: A survey》
 
 ### 模型衍生
-![模型衍生](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111160553063.png)
+![模型衍生](https://oss.imzhanghao.com/img/202111160553063.png)
 摘自《Pre-Trained Models: Past, Present and Future》
 
 
 ## 应用于下游任务
 ### 迁移学习
-![迁移学习](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111150901877.png)
+![迁移学习](https://oss.imzhanghao.com/img/202111150901877.png)
 
 - 不同的PTMs在相同的下游任务上有着不同的效果，这是因为PTMs有着不同的预训练任务，模型架构和语料。针对不同的下游任务需要**选择合适的预训练任务、模型架构和语料库**。
 - 给定一个预训练的模型，不同的网络层捕获了不同的信息，基础的句法信息出现在浅层的网络中，高级的语义信息出现在更高的层级中。针对不通的任务需要**选择合适的网络层**。

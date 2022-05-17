@@ -17,14 +17,14 @@ description: 介绍了应用类广告第三方归因的方法，详细分析了�
 广告归因方案多种多样，我们这里主要讨论**应用类广告、海外移动生态、第三方归因**的方案。
 海外移动广告生态，拥有比较成熟可信的第三方归因平台，比如Appflyer，Adjust以及Kochava等等。归因的核心逻辑是最后归因模型，即“Last Click”。
 
-![应用广告归因](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271433410.png)
+![应用广告归因](https://oss.imzhanghao.com/img/202110271433410.png)
 媒体的广告曝光后，若用户对广告进行了点击，媒体会将广告点击的媒体信息、用户设备信息（核心是IDFA/IMEI）、时间戳、网络状态等信息通过302跳转的方式给到第三方归因平台（即广告点击后，会通过302重定向跳转到第三方归因平台的后台，然后再跳到Google Play或者App Store）。此时，第三方归因平台其实是没有广告的曝光相关信息的。
 
 应用激活后，可以通过接入归因SDK或者通过服务端对接的方式（S2S）的方式将应用相关信息回传给第三方归因平台，归因平台从数据库中找出匹配的媒体点击信息，通过匹配的应用包名、用户ID信息和广告的点击信息，按照最后一次点击的逻辑将应用的激活归因给对应的媒体和广告，完成一次归因的流程。
 
 ## 作弊的分类
 在全部广告作弊类型中，作弊者能够伪造在归因中使用的任ㄧ或两类“信号”（Signal）。这两类信号分别为广告交互（例如查看或点击，对应归因方式中2的位置）和应用活动（例如安装、会话或事件，对应归因方式中3的位置）。在此基础上，我们将作弊分为伪造广告交互和伪造用户应用内活动。前者称为**伪造归因（Spoofed Attribution）**，后者被称为**伪造用户（Spoofed Users）**。
-![作弊分类](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271118560.png)
+![作弊分类](https://oss.imzhanghao.com/img/202110271118560.png)
 - 类型1中的全部流量均为真实流量，即用户受到广告驱使，与应用所产生的真实互动。
 - 类型2指伪造归因，即作弊者伪造真实用户的广告交互。其目的是为了窃取用户与应用之间的自然交互或通过真实广告所产生的效果。此类型的伪造也被称为“窃取归因”或“流量盗取”(poaching)。
 - 类型3和4指伪造用户。此作弊类型专注于模拟用户的应用内活动行为。通过伪造不存在的用户而产生的应用安装和事件，作弊者可以窃取以应用转化为奖励的广告预算。“外挂”、“虚拟机器人”以及任何与“虚假用户”相关的手段都能归纳为此类型的作弊。
@@ -37,11 +37,11 @@ description: 介绍了应用类广告第三方归因的方法，详细分析了�
 
 欺诈性应用程序可能会在用户使用它时执行点击，或者在后台活动（例如启动、省电等）时执行点击。该应用程序甚至可以将展示次数报告为点击以呈现虚假的广告交互，而这一切都是在用户无意或不知情的情况下进行的。
 
-![大点击](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271647119.png)
+![大点击](https://oss.imzhanghao.com/img/202110271647119.png)
 
 **点击欺诈的形式**：
 - 广告堆叠点击(Ad Stacking Clicks)： 在单个广告展示位置中以层叠的方式放置多个广告，只有顶部广告可见。堆栈中的所有广告都按空间的每次展示或点击计费。欺诈者将多个广告投放到程序化广告活动中，并为未查看的广告创造收入。应用悄悄在后台加载和点击广告。
-![广告堆叠点击](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271546938.png)
+![广告堆叠点击](https://oss.imzhanghao.com/img/202110271546938.png)
 - 浏览点击（Views as Clicks）或“预缓存”：以点击方式发送视图，在广告显示之前点击它们。将展示作为点击发送的渠道。
 - 服务器到服务器的点击(Server2Server Clicks)：从Adx处获得流量直接给三方发送点击事件。
 这些形式都具有一个相同的特征：用户实际上并没有打算与广告进行互动，也没有兴趣下载显示的应用程序。发送人工点击目录的服务器。
@@ -54,11 +54,11 @@ description: 介绍了应用类广告第三方归因的方法，详细分析了�
 - long CTIT(Click-to-install-time) distribution rates
 - low click-to-install conversion rates
 - high multi-touch contributor rates (or)
-![CTIT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271900778.png)
+![CTIT](https://oss.imzhanghao.com/img/202110271900778.png)
 
 ### 点击劫持(Click Injection)
 点击劫持也叫Install Hijacking、点击注入、小点击，指的是作弊者通过安装在用户设备上的一个应用程序来“监听”其他应用程序的安装广播消息。当用户设备上安装了新的应用程序时，作弊者就会收到通知，然后在安装完成之前发送虚假点击利用归因模型的漏洞劫取相应的安装。特点是点击到安装时间过短，应用商店记录的下载时间早于点击广告的时间。
-![小点击](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271649228.png)
+![小点击](https://oss.imzhanghao.com/img/202110271649228.png)
 
 如果我们知道一个应用的下载或者安装时间点，在这个时候将“点击”信息发送给第三方归因平台，由于这个时候离应用的激活更近，按照Last Click原理归因概率就非常高。而Android系统刚好提供了获取应用安装的广播机制。当应用安装的时候，Android系统会将应用安装的消息（android.intent.action.PACKAGE_ADDED）通过系统广播（Broadcast）的方式广播给在已经在系统注册文件上（Manifest.xml）注册了安装广播监听能力的应用。获取到应用的安装信息（核心信息是应用的包名）之后，此时广告联盟SDK就会根据这个包名从广告后台中获取对应的广告信息，并将相关的用户设备信息，媒体信息通过“虚拟点击”的方式传到第三方归因平台。
 
@@ -69,7 +69,7 @@ description: 介绍了应用类广告第三方归因的方法，详细分析了�
 **识别方法**
 - short CTIT(Click-to-install-time) distribution rates
 - high click-to-install conversion rates
-![CTIT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271901841.png)
+![CTIT](https://oss.imzhanghao.com/img/202110271901841.png)
 
 根据安装的不同来源，我们的过滤方法稍有差异。
 - Google paly和华为:Google 和华为的 referrer API 会创建时间戳，这些时间戳可以用来甄别是否出现了点击劫持。首先，我们会将点击的时间与 intall_begin_time 做比对；如果点击发生在该时间戳后，基本可以肯定就是点击劫持。SDK还会收集install_finish_time时间戳，进行第二层过滤。
@@ -81,15 +81,15 @@ description: 介绍了应用类广告第三方归因的方法，详细分析了�
 
 ### 模拟器(Bots)
 模拟器指的是作弊者通过自动化脚本或计算机程序模拟真实用户的点击、下载、安装甚至是应用内行为，伪装成为真实用户， 从而骗取广告主的CPI/CPA预算。
-![模拟器](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271700101.png)
+![模拟器](https://oss.imzhanghao.com/img/202110271700101.png)
 **特点**是IP离散度密集、新设备率过高、用户行为异常、机型/系统/时间等分布异常等。
 
 ### 设备农场(Device Farms)
 设备农场指的是作弊者购买大量真实设备进行广告点击、下载、安装和应用内行为，并通过修改设备广告跟踪符等方式隐藏设备信息。
-![设备农场](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271913495.png)
+![设备农场](https://oss.imzhanghao.com/img/202110271913495.png)
 
 设备农场主使用各种策略来隐藏他们的活动，包括隐藏在新的IP地址后面，使用各种设备，同时启用限制广告跟踪或隐藏在 DeviceID重置欺诈后面（每次安装时重置他们的 DeviceID）。当大规模实施时，这种欺诈也称为DeviceID重置Marathons。
-![设备农场操作流程](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202110271910424.png)
+![设备农场操作流程](https://oss.imzhanghao.com/img/202110271910424.png)
 **特点**是IP离散度密集、新设备率过高、用户行为异常、机型/系统分布异常等
 
 ### SDK伪造(SDK Spoofing)
@@ -105,7 +105,7 @@ SDK伪造是指作弊者通过执行“中间人攻击”破解第三方SDK的�
 ### 点击安装时间
 点击安装时间(Click to install time,CTIT)衡量用户旅程中时间戳之间的伽玛分布 - 用户的初始广告互动和他们的首次应用启动。
 
-![CTIT](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201343440.png)
+![CTIT](https://oss.imzhanghao.com/img/202111201343440.png)
 
 CTIT 可用于识别基于点击的欺诈的不同案例:
 - 短 CTIT（低于 10 秒）：可能存在安装劫持欺诈(install hijacking)
@@ -116,12 +116,12 @@ CTIT 可用于识别基于点击的欺诈的不同案例:
 
 有新设备当然是正常的，因为会有新用户安装应用程序或者现有用户更换设备。但是，必须密切关注其活动可接受的新设备率，因为该比率由测量的新设备ID决定。因此，它可以被设备ID重置欺诈策略所操纵，这在设备农场中很常见。
 
-![NDR](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201721503.png)
+![NDR](https://oss.imzhanghao.com/img/202111201721503.png)
 
 ### 传感器
 设备传感器(Device sensors)可以收集设备电池电量到倾斜角度等上百个指标，可以用来进行生物识别行为分析。
 
-![传感器](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202111201354087.png)
+![传感器](https://oss.imzhanghao.com/img/202111201354087.png)
 
 这些指标有助于为每次安装创建配置文件——分析每次安装的设备和用户行为及其与真实用户测量的正常趋势的兼容性。
 

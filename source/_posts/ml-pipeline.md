@@ -18,13 +18,13 @@ description: 本文梳理机器学习管道，从一个业务问题开始，分�
 
 **机器学习**：利用过去收集的各种数据,自动推导出数据中隐藏的模式。然后,利用模式创建模型,应用于新数据,从而提供更明智的自适应预测。
 
-![机器学习VS经典编程](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281403309.png)
+![机器学习VS经典编程](https://oss.imzhanghao.com/img/202112281403309.png)
 
 ### 什么是模型？
 机器学习中的模型是指经过训练的算法，用于识别数据中的模式。关键在于，他是通过机器学习过程来训练的，而不像经典编程一样，是由编程人员通过设置规则手动创建的。
 
 ### ML管道
-![机器学习管道](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112220844576.jpg)
+![机器学习管道](https://oss.imzhanghao.com/img/202112220844576.jpg)
 
 - **业务问题**：需要确定能够从机器学习中受益的业务问题。
 - **定义问题**：需要理清业务问题并将其转化为机器学习问题。
@@ -36,7 +36,7 @@ description: 本文梳理机器学习管道，从一个业务问题开始，分�
 
 
 ## 问题定义
-![问题定义](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281301865.jpg)
+![问题定义](https://oss.imzhanghao.com/img/202112281301865.jpg)
 问题定义是管道中研究性阶段，是对需要解决的问题进行分析和定义的过程。这项工作是所有ML项目的起始点，因为我们需要充分确定某个问题，才能制造确定出相应的解决方案。
 
 ### 确定问题
@@ -58,7 +58,7 @@ description: 本文梳理机器学习管道，从一个业务问题开始，分�
   - 可以识别出**不当的模型效果指标**
 
 ## 数据收集和整合
-![数据收集和整合](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281302881.jpg)
+![数据收集和整合](https://oss.imzhanghao.com/img/202112281302881.jpg)
 ### 选择数据
 - **了解数据**：有多少数据，位于哪里，数据量，数据位置以及可否访问。
 - **寻找领域专家**：是否拥有解决问题**所需的数据**？数据是否有**代表性**？
@@ -69,12 +69,12 @@ description: 本文梳理机器学习管道，从一个业务问题开始，分�
 
 当数据以不同格式存储在各个不同的位置时,组织经常会面临访问和分析其数据的挑战。随着数据不断收集自各种来源,如果不能妥善处理,这一挑战只会随着组织的成熟和发展而变得越来越严峻。无法轻松访问数据会导致工作流程出现瓶颈,因为员工经常需要向IT部门寻求帮助,以访问构建、训练和部署机器学习模型所需的信息。为了应对这些挑战,组织不得不寻求这样一种解决方案:**能够提供单一数据来源,让员工能够随时根据需要轻松访问数据。** 本地解决方案通常很难做到这一点,而且维护成本很高。
 
-![数据湖](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112230809278.png)
+![数据湖](https://oss.imzhanghao.com/img/202112230809278.png)
 数据湖架构可以提供一个坚实的基础,用于构建解决方案应对这一挑战。借助数据湖, 可以将大量数据存储在一个集中存储库,以便组织内的各个团队随时对其进行分类、处理、扩充和使用。
 但是,建立数据湖并没有什么灵丹妙药。在大多数情况下,构建数据湖需要使用多种 技术、工具和环境,包括来自第三方的数据。如果操作正确,数据湖将为全新的高级 分析方法打开一扇大门,从而推动数据科学和机器学习。
 
 ## 数据预处理和可视化
-![数据预处理和可视化](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281303539.jpg)
+![数据预处理和可视化](https://oss.imzhanghao.com/img/202112281303539.jpg)
 ### 重新格式化数据
 - **Pandas**：Pandas 是一个开源 Python 库,可用于重新格式化特定数据。Pandas 将 CSV、JSON、 Excel、Pickle 等各种格式的数据重新格式化为表格形式,以行和列的形式呈现出来。Pandas将数据格式化后得出的表格格式称为DataFrame，可以进行计算统计信息，清理数据，对其进行可视化，甚至将清理或转换后的数据重新以其原始格式存储。
 - **NumPy**:NumPy是一个Python库,可在与 Python 搭配使用进行科学计算时用作基础 软件包。这是一个通用的数组处理程序包,可提供高性能的多维数组对象以及用于处理这些数组的工具。
@@ -130,7 +130,7 @@ df = pd.DataFrame({'speed': speed,
                    'lifespan': lifespan}, index=index)
 ax = df.plot.bar(rot=0)
 ```
-![条形图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252018884.png)
+![条形图](https://oss.imzhanghao.com/img/202112252018884.png)
 
 #### 数值数据可视化
 
@@ -143,7 +143,7 @@ df = pd.DataFrame({
     }, index=['pig', 'rabbit', 'duck', 'chicken', 'horse'])
 hist = df.hist(bins=3)
 ```
-![直方图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252017101.png)
+![直方图](https://oss.imzhanghao.com/img/202112252017101.png)
 
 **密度图**
 密度图展示了单个特征的分布，密度图类似于直方图，但它使用核密度函数展示了平滑版的直方图密度。
@@ -151,7 +151,7 @@ hist = df.hist(bins=3)
 s = pd.Series([1, 2, 2.5, 3, 3.5, 4, 5])
 ax = s.plot.kde()
 ```
-![密度图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252020274.png)
+![密度图](https://oss.imzhanghao.com/img/202112252020274.png)
 
 **箱线图**
 箱线图使用四分位间距来描绘特征的分布。
@@ -160,7 +160,7 @@ data = np.random.randn(25, 4)
 df = pd.DataFrame(data, columns=list('ABCD'))
 ax = df.plot.box()
 ```
-![箱线图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252028029.png)
+![箱线图](https://oss.imzhanghao.com/img/202112252028029.png)
 
 #### 属性之间的关系
 对于具有多个变量或特征的情况,您可能需要查看它们之间的相关性。确定属性之间 的相关性很重要,因为两个属性之间的高相关性有时会导致模型性能较差。如果特征 之间密切相关,并且全都用于同一个模型中以预测响应变量,就可能会出现问题,例 如,模型损失不能收敛到最小状态。因此,请注意数据集中高度相关的特征。
@@ -174,27 +174,27 @@ ax1 = df.plot.scatter(x='length',
                       y='width',
                       c='DarkBlue')
 ```
-![散点图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252033581.png)
+![散点图](https://oss.imzhanghao.com/img/202112252033581.png)
 
 ``` Python
 df = pd.DataFrame(np.random.randn(1000, 4), columns=['A','B','C','D'])
 pd.plotting.scatter_matrix(df, alpha=0.2)
 ```
-![散点图矩阵](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252035865.png)
+![散点图矩阵](https://oss.imzhanghao.com/img/202112252035865.png)
 
 **相关性矩阵热图**
 numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视化。
-![相关性矩阵热图](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112252041244.png)
+![相关性矩阵热图](https://oss.imzhanghao.com/img/202112252041244.png)
 
 ## 模型训练和优化
-![模型训练和优化](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304798.jpg)
+![模型训练和优化](https://oss.imzhanghao.com/img/202112281304798.jpg)
 在训练过程中,机器学习算法会更新一组称为参数或权重的数字。目标是更新模型中 的参数,使计算或预测的输出尽可能接近真实的输出(就像在数据中看到的一样)。
 
 一次迭代无法完成,因为算法还没有学会;它不知道改变权重会如何使输出更接近期望值。因此,它会观察之前迭代中的权重和输出,使权重降低生成的输出的误差。执 行完定义的迭代次数后或当误差变化低于目标值时,此迭代过程将会停止。
 
 如果输出误差随着每次连续迭代逐渐减小,则我们可以说该模型已收敛,训练成功。 但如果误差在迭代之间增大或随机变化,则需要重新评估构建模型时的假设。
 
-![模型训练过程](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261107474.png)
+![模型训练过程](https://oss.imzhanghao.com/img/202112261107474.png)
 
 ### 数据拆分
 对数据进行预处理之后，就可以开始训练了。首先需要确定拆分数据的最佳方式，一般而言，机器学习目标是构建一个泛化能力较强的模型。换句话说，模型不仅要能处理已知数据，还要能处理未知数据。因此拆分数据很重要。
@@ -203,9 +203,9 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 
 测试和验证方法
 - **简单留出验证**：将数据拆分为多个数据集，通常为训练集、验证集和测试集。
-![简单留出验证](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112260724131.png)
+![简单留出验证](https://oss.imzhanghao.com/img/202112260724131.png)
 - **K折交叉验证**：把数据集分成K份，每个子集互不相交且大小相同，依次从K份中选出1份作为验证集，其余K-1份作为训练集，这样进行K次单独的模型训练和验证，最后将K次验证结果取平均值，作为此模型的验证误差。
-![K折交叉验证](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261104698.png)
+![K折交叉验证](https://oss.imzhanghao.com/img/202112261104698.png)
 - **留一交叉验证**：测试集是一个数据点，适用于**非常小**的数据集
 - **分层K折交叉验证**：训练集和测试集平衡类别分布，适用于**不平衡**的数据。
 - **打乱数据的迭代K折验证**
@@ -217,10 +217,10 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 
 损失函数分为经验风险损失函数和结构风险损失函数。经验风险损失函数指预测结果和实际结果的差别，结构风险损失函数是指经验风险损失函数加上正则项。
 
-![损失函数](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261818366.png)
+![损失函数](https://oss.imzhanghao.com/img/202112261818366.png)
 
 ### 优化器
-![梯度下降](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112261822292.png)
+![梯度下降](https://oss.imzhanghao.com/img/202112261822292.png)
 
 - **批量梯度下降法（Batch Gradient Descent）**：批量梯度下降法，是梯度下降法最常用的形式，具体做法也就是在更新参数时使用所有的样本来进行更新，
 - **随机梯度下降法（Stochastic Gradient Descent）**：随机梯度下降法，其实和批量梯度下降法原理类似，区别在与求梯度时没有用所有的m个样本的数据，而是仅仅选取一个样本j来求梯度。
@@ -231,14 +231,14 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 步长的大小至关重要,因为步长较大可能会导致模型超过最低点,从而使模型来回摆动,永远不会达到最小值。但是,步长较小可能会导致模型非常缓慢地朝着最小值移动,在给定时间内无法达到最小值。步长大小又称“学习速率”,它是模型的超参数。
 
 ## 模型评估
-![模型评估](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281304583.jpg)
+![模型评估](https://oss.imzhanghao.com/img/202112281304583.jpg)
 ### 过拟合和欠拟合
-![过拟合和欠拟合](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270845483.png)
+![过拟合和欠拟合](https://oss.imzhanghao.com/img/202112270845483.png)
 
 - **欠拟合**是指模型不能在训练集上获得足够低的误差。换句换说，就是模型复杂度低，模型在训练集上就表现很差，没法学习到数据背后的规律。
 -  **过拟合**是指训练误差和测试误差之间的差距太大。换句换说，就是模型复杂度高于实际问题，模型在训练集上表现很好，但在测试集上却表现很差。模型对训练集"死记硬背"，没有理解数据背后的规律，泛化能力差。
 
-![过拟合和欠拟合](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270848369.png)
+![过拟合和欠拟合](https://oss.imzhanghao.com/img/202112270848369.png)
 
 **解决方案**
 - **欠拟合**
@@ -254,14 +254,14 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 - **偏差**：预测值于真实值之间的差距，即学习算法的拟合能力。
 - **方差**：预测值的分散程度，训练集与验证集的差异造成的模型表现的差异。
 
-![方差和偏差](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270851712.png)
+![方差和偏差](https://oss.imzhanghao.com/img/202112270851712.png)
 
 |        | 低偏差  | 高偏差  |
 |  ----  | ----  | ----  |
 | **低方差**  | 射手很稳，枪的准星也很准。 | 射手很稳，但是枪的准星有问题，所有子弹都固定地偏向一侧。 |
 | **高方差**  | 射手不太稳，但枪的准星没问题，虽然弹着点分布很散，但没有整体偏移。 | 射手不稳，而且枪的准星也有问题，弹着点分布很散且有规律地偏向一侧。|
 
-![偏差和方差](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270900432.png)
+![偏差和方差](https://oss.imzhanghao.com/img/202112270900432.png)
 
 我们希望偏差与方差越小越好，但实际并非如此。一般来说，偏差与方差是有冲突的，称为**偏差-方差窘境 (bias-variance dilemma)**。
 - 给定一个学习任务，在训练初期，由于训练不足，网络的拟合能力不够强，偏差比较大，也是由于拟合能力不强，数据集的特征也无法使网络产生显著变化，也就是欠拟合的情况。
@@ -270,7 +270,7 @@ numpy.corrcoef 计算相关性矩阵，使用Matplotlib或者Seaborn进行可视
 
 ### 评估指标
 #### 分类问题指标
-![混淆矩阵](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112270937734.png)
+![混淆矩阵](https://oss.imzhanghao.com/img/202112270937734.png)
 标签解释
 - **P**：样本数据中的正例数。
 - **N**：样本数据中的负例数。
@@ -302,14 +302,14 @@ $$R^{2}=1-\frac{\sum_{i}\left(\hat{y}_{i}-y_{i}\right)^{2}}{\sum_{i}\left(y_{i}-
 R方的含义是，该预测模型解释了变量的方差的比例。方差衡量的是变量取值的分散程度或者波动范围，方差越小，说明变量值波动越小，换言之，变量的取值越容易被预测和猜中。假设R方=0.8，则说明拟合之后，变量的方差减小了80%，则变量的取值更容易被确定。比如，我们需要对房子进行估价，采用房型和面积对房子价格进行拟合之后，发现房屋价格的方差减小了80%，那么我们更容易得到房子价格的准确估计。
 
 ## 特征设计和模型优化
-![特征设计和模型优化](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305843.jpg)
+![特征设计和模型优化](https://oss.imzhanghao.com/img/202112281305843.jpg)
 
 特征工程是从现有数据中提取更多信息，以便提高模型的预测能力和学习速度的一门科学。在特征工程中，我们不会添加任何新的数据，而是让已有的数据发挥更大的作用。这一过程往往需要依靠数据领域的知识才能设计更有效的特征。
 
 **特征抽取**和**特征选择**是DimensionalityReduction（降维）的两种方法。
 
 **维数灾难**：当维数增大时，空间数据会变得更稀疏，这将导致bias和variance的增加，最后影响模型的预测效果。
-![维数灾难](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112280738673.png)
+![维数灾难](https://oss.imzhanghao.com/img/202112280738673.png)
 
 ### 特征抽取
 **特征抽取**:从现有特征中创建新特征来自动降低数据集中维数的过程，特征抽取后的新特征是原来特征的一个映射。
@@ -318,7 +318,7 @@ Feature Extraction: Creatting a subset of new features by combinations of the ex
 - **目的**：减少特征数据集中的属性(或者称为特征)的数目，DimensionalityReduction（降维）
 - **手段**：通过属性间的关系，如组合不同的属性得新的属性，这样就改变了原来的特征空间
 
-![特征抽取](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281042712.png)
+![特征抽取](https://oss.imzhanghao.com/img/202112281042712.png)
 
 ### 特征选择
 **特征选择**:根据预测的重要性对现有属性进行排序，然后选择最相关的属性。特征选择后的特征是原来特征的一个子集。
@@ -327,7 +327,7 @@ Feature Selection: Choosing a subset of all the features(the ones more informati
 - **目的**：减少特征数据集中的属性(或者称为特征)的数目，DimensionalityReduction（降维）
 - **手段**：从原始特征数据集中选择出子集，是一种包含的关系，没有更改原始的特征空间。
 
-![特征选择](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281044198.png)
+![特征选择](https://oss.imzhanghao.com/img/202112281044198.png)
 
 ### 特征创建和转换
 于特征提取和特征选择不同，特征创建和转换不是一个减少维数的方法，相反，**特征创建和转换是从现有特征中生成新特征的过程。**
@@ -351,7 +351,7 @@ Feature Selection: Choosing a subset of all the features(the ones more informati
 
 ### 模型优化-超参优化
 #### 超参的三种类型
-![超参数的类型](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281109739.png)
+![超参数的类型](https://oss.imzhanghao.com/img/202112281109739.png)
 - **模型超参数**：可以帮助定义模型本身。例如,某些基于神经网络的模型需要我们在开始训练前先定义一个架构。这个架构会包含神经网络中特定数量的层,以及在其中使用的激活函数。以处理计算机视觉问题的神经网 络为例,我们需要定义架构的其他属性,例如筛选器大小、池化、步长和填充。
 - **优化器超参数**：与模型如何根据数据来确定模式相关,用于神经网络模型。这种类型的超参数包含梯度下降和随机梯度下降等优化器。还可以包含Adam等使用动量的优化器,或者使用Xavier初始化或He初始化等方法将参数权重初始化的优化器。
 - **数据超参数**：与数据本身的属性相关。这些属性包括定义不同的数据扩增方法(例如用于图像相关问题的裁剪或大小调整)的属性。这种参数一般在没有足够数 据或数据中没有足够变量时使用。
@@ -360,15 +360,15 @@ Feature Selection: Choosing a subset of all the features(the ones more informati
 - 网格搜索（grid search）是超参数优化的传统方法，是对超参数组合的子集进行穷举搜索，找到表现最佳的超参数子集。
 - 随机搜索（random search），是对超参数组合的子集简单地做固定次数的随机搜索，找到表现最佳的超参数子集。对于规模较大的参数空间，采用随机搜索往往效率更高。
 - 贝叶斯优化(Bayesian Optimization) 与网格/随机搜索最大的不同，在于考虑了历史调参的信息，使得调参更有效率。（但在高维参数空间下，贝叶斯优化复杂度较高，效果会近似随机搜索。）
-![网格搜索和随机搜索](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281118708.png)
-![贝叶斯优化](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281120191.png)
+![网格搜索和随机搜索](https://oss.imzhanghao.com/img/202112281118708.png)
+![贝叶斯优化](https://oss.imzhanghao.com/img/202112281120191.png)
 
 ## 模型部署
-![模型部署](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281305005.jpg)
+![模型部署](https://oss.imzhanghao.com/img/202112281305005.jpg)
 模型部署指的是将模型及其资源集成到一个生产环境中，用于创建预测。
 
 ### 生产环境基础设置
-![生产环境基础设施](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/202112281127053.png)
+![生产环境基础设施](https://oss.imzhanghao.com/img/202112281127053.png)
 
 ### 推理类型
 #### 批处理

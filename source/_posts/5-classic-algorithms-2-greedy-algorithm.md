@@ -38,7 +38,7 @@ description: 贪心算法是一种通过局部最优策略才近似全局最优�
 
 活动安排问题就是要在所给的活动集合中选出最大的相容活动子集合。
 
-![活动时间安排问题](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/活动时间安排问题.jpg)
+![活动时间安排问题](https://oss.imzhanghao.com/img/活动时间安排问题.jpg)
 
 > 上图为每个活动的开始和结束时间，我们的任务就是设计程序输出哪些活动可以占用会议室！
 

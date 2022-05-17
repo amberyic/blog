@@ -20,7 +20,7 @@ description: ESMM是阿里巴巴践行多目标任务优化模型的一个实践
 
 ## CVR预估的挑战
 **样本选择偏差（Sample Selection Bias，SSB）**
-![样本选择偏差](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/样本选择偏差.png)
+![样本选择偏差](https://oss.imzhanghao.com/img/样本选择偏差.png)
 传统的CVR训练用的是点击数据，用户点击后未转化为负样本，点击后转化为正样本。但点击事件仅仅是整个曝光空间的一个子集，数据分布是不一致的，模型的泛化能力就会受到影响。
 
 **数据稀疏问题（data sparsity Problem， DS）**
@@ -71,7 +71,7 @@ $$p(z=1 \mid y=1, \boldsymbol{x})=\frac{p(y=1, z=1 \mid \boldsymbol{x})}{p(y=1 \
 ESMM通过乘法形式避免了这种情况，就是用全样本使用一个模型来同时学习pCTR以及pCVR，然后二者相乘拟合pCTCVR，pCTR预估以及pCTCVR预估是可以使用全样本训练的。
 
 ### 网络结构
-![ESMM网络结构](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/ESMM网络结构.png)
+![ESMM网络结构](https://oss.imzhanghao.com/img/ESMM网络结构.png)
 ESMM是一个双塔模型，模型采用CTCVR和CTR来学习CVR，模型结构如上图。主要由两个子网组成：左侧所示的CVR网络和右侧所示的CTR网络，它们是共享底层Embedding的，只是上面的不一样，一个用来预测CVR，这个可以在全样本空间上进行训练，另一个是用来预测CTR，CTR是一个辅助任务。最后的pCTCVR可以在全样本空间中训练。
 
 ### 损失函数
@@ -108,12 +108,12 @@ $$L\left(\theta_{cvr}, \theta_{ctr}\right)=\sum_{i=1}^{N} l\left(y_{i}, f\left(x
 | ESMM-NS | ESMM结构两个任务不共享Embedding |
 
 ### Comparison of different models on Public Dataset
-![ESSM实验效果数据](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/ESMM实验效果数据.png)
+![ESSM实验效果数据](https://oss.imzhanghao.com/img/ESMM实验效果数据.png)
 
 与BASE模型相比，ESMM在CVR任务上实现了2.56％的AUC绝对值提升，这表明，即使对于有偏差的样本，它也具有良好的泛化性能。在具有完整样本的CTCVR任务上，它带来3.25％的AUC增益。这些结果验证了我们建模方法的有效性。
 
 ### Comparison of different models w.r.t. different sampling rates on Product Dataset
-![ESMM在生产环境中的效果](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/ESMM在生产环境中的效果.png)
+![ESMM在生产环境中的效果](https://oss.imzhanghao.com/img/ESMM在生产环境中的效果.png)
 与BASE模型相比，ESMM在CVR任务上实现2.18％的绝对AUC提升，在CTCVR任务上实现2.32％的绝对AUC提升。 对于工业应用而言，这是一项重大改进，在这种应用中，AUC提升高达0.1％
 
 
@@ -124,7 +124,7 @@ $$L\left(\theta_{cvr}, \theta_{ctr}\right)=\sum_{i=1}^{N} l\left(y_{i}, f\left(x
 4. ESMM可以看成一个MTL框架，其中子任务的网络结构可以替换，当中有很大的想象空间。
 
 最后，引用一下朱小强对ESMM的[评价](https://zhuanlan.zhihu.com/p/54822778)
->![深度学习时代MTL建模范式](https://imzhanghao.oss-cn-qingdao.aliyuncs.com/img/深度学习时代MTL建模范式.jpg)
+>![深度学习时代MTL建模范式](https://oss.imzhanghao.com/img/深度学习时代MTL建模范式.jpg)
 关于ESMM模型多说两句，我们展示了对同态的CTR和CVR任务联合建模，帮助CVR子任务解决样本偏差与稀疏两个挑战。事实上这篇文章是我们总结DL时代Multi-Task Learning建模方法的一个具体示例。图中给出了更为一般的网络架构。据我所知这个工作在这个领域是最早的一批，但不唯一。今天很多团队都吸收了MTL的思路来进行建模优化，不过大部分都集中在传统的MTL体系，如研究怎么对参数进行共享、多个Loss之间怎么加权或者自动学习、哪些Task可以用来联合学习等等。ESMM模型的特别之处在于我们额外关注了任务的Label域信息，通过展现>点击>购买所构成的行为链，巧妙地构建了multi-target概率连乘通路。传统MTL中多个task大都是隐式地共享信息、任务本身独立建模，ESMM细腻地捕捉了契合领域问题的任务间显式关系，从feature到label全面利用起来。这个角度对互联网行为建模是一个比较有效的模式，后续我们还会有进一步的工作来推进。
 
 ## 参考文献
