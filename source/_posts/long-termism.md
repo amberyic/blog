@@ -1,5 +1,5 @@
 ---
-title: 我理解的长期主义
+title: 关于长期主义的理解
 date: 2021-10-26
 updated: 2021-10-26
 categories:
