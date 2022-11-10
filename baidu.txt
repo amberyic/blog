@@ -1,4 +1,4 @@
-https://imzhanghao.com/2022/10/27/multimodal-machine-learning/
+https://imzhanghao.com/2022/10/27/multimodal-learning/
 https://imzhanghao.com/2022/08/20/cognitions/
 https://imzhanghao.com/2022/06/10/mlops/
 https://imzhanghao.com/2020/04/10/5-classic-algorithms-1-exhaustive-method/
