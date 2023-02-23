@@ -8,7 +8,7 @@ tags:
 - ChatGPT
 - InstructGPT
 keywords: ChatGPT,InstructGPT
-description: ChatGPT模型的三层理解，1）训练流程：白话讲解模型是怎么训练出来的。2）模型实现：基于论文讲解模型训练的细节，包括训练数据的准备，以及模型的训练方法。3）发展脉络：从模型演进的视角看其创新点和贡献。
+description: ChatGPT模型的三层理解，1）训练流程：白话讲解模型是怎么训练出来的；2）模型实现：基于论文讲解模型训练的细节；3）发展脉络：从模型演进的视角看其创新点和贡献。
 ---
 
 目前chatGPT的论文还没有公布，官方介绍里面讲：“ChatGPT is a sibling model to InstructGPT”，对比ChatGPT官网的模型训练流程和InstructGPT的流程图，基本是一致的，只是ChatGPT基于GPT-3.5进行的训练，我们下面的讲解就暂时以InstructGPT代替ChatGPT展开。
