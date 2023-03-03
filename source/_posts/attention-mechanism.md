@@ -34,8 +34,8 @@ Attention 机制很像人类看图片的逻辑，当我们看一张图片的时�
 生成目标句子单词的过程成了下面的形式：
 $$\begin{array}{l}
 \mathbf{Y}_{\mathbf{1}}=\mathbf{f} \mathbf{1}\left(\mathbf{C}\right) \\
-\mathbf{Y}_{2}=\mathbf{f} \mathbf{1}\left(\mathbf{C}, \mathbf{y}_{\mathbf{1}}\right) \\
-\mathbf{Y}_{3}=\mathbf{f} \mathbf{1}\left(\mathbf{C}, \mathbf{y}_{\mathbf{1}}, \mathbf{Y}_{2}\right)
+\mathbf{Y}_{2}=\mathbf{f} \mathbf{1}\left(\mathbf{C}, \mathbf{Y}_{\mathbf{1}}\right) \\
+\mathbf{Y}_{3}=\mathbf{f} \mathbf{1}\left(\mathbf{C}, \mathbf{Y}_{\mathbf{1}}, \mathbf{Y}_{2}\right)
 \end{array}$$
 其中f1是Decoder的非线性变换函数。从这里可以看出，在生成目标句子的单词时，不论生成哪个单词，它们使用的输入句子Source的语义编码C都是一样的，没有任何区别。
 
