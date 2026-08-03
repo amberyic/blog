@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://imzhanghao.com/2020/03/21/hexo-github-deploy/</loc>
+    <lastmod>2026-08-03</lastmod>
+  </url>
+  <url>
+    <loc>https://imzhanghao.com/2020/03/21/hadoop-spark-deploy/</loc>
+    <lastmod>2026-08-03</lastmod>
+  </url>
+  <url>
     <loc>https://imzhanghao.com/2020/06/10/computing-advertising-1-curriculum-structure/</loc>
     <lastmod>2026-08-03</lastmod>
   </url>
@@ -30,14 +38,6 @@
   </url>
   <url>
     <loc>https://imzhanghao.com/2020/06/22/computing-advertising-6-programmatic-direct-buying/</loc>
-    <lastmod>2026-08-03</lastmod>
-  </url>
-  <url>
-    <loc>https://imzhanghao.com/2020/03/21/hexo-github-deploy/</loc>
-    <lastmod>2026-08-03</lastmod>
-  </url>
-  <url>
-    <loc>https://imzhanghao.com/2020/03/21/hadoop-spark-deploy/</loc>
     <lastmod>2026-08-03</lastmod>
   </url>
   <url>
