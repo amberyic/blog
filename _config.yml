@@ -167,13 +167,9 @@ theme: fluid
 deploy:
   - type: git
     repository:
-      github: https://github.com/amberyic/blog.git,master
+      github: git@github.com:amberyic/blog.git,master
       server: root@47.105.106.15:/var/repo/blog.git,master
     ignore_hidden: false
-  - type: GooglePush # 谷歌提交
-# enable: 开启/关闭 推送
-# count: 每次提交最新的10篇文章
-# https://github.com/lete114/hexo-seo-autopush
 
 hexo_seo_autopush:
   baidu:

@@ -8,3 +8,4 @@ public/
 .deploy*/
 package-lock.json
 .MWebMetaData/
+.claude/
