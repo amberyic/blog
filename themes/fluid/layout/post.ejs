@@ -6,54 +6,52 @@ page.banner_mask_alpha = page.banner_mask_alpha || theme.post.banner_mask_alpha
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      <%- inject_point('postLeft') %>
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none"><%= page.subtitle || page.title %></h1>
-            <% if(theme.post.updated && theme.post.updated.enable) { %>
-              <p class="note note-info">
+            <h1 id="seo-header"><%= page.subtitle || page.title %></h1>
+            <% if (theme.post.updated.enable && theme.post.updated && compare_date(page.date, page.updated)) { %>
+              <p id="updated-time" class="note note-<%= theme.post.updated.note_class || 'info' %>" style="<%= theme.post.updated.relative ? 'display: none' : '' %>">
                 <% if (theme.post.updated.relative) { %>
-                  <%- theme.post.updated.content %><%- relative_date(page.updated, theme.post.meta.date.format) %>
+                  <% if (theme.post.updated.content) { %>
+                    <!-- compatible with older versions-->
+                    <%- theme.post.updated.content %><%- date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ') %>
+                  <% } else { %>
+                    <%- __('post.updated', date(page.updated, 'YYYY-MM-DDTHH:mm:ssZ')) %>
+                  <% } %>
+                  <%- partial('_partials/plugins/moment.ejs') %>
                 <% } else { %>
-                  <%- theme.post.updated.content %><%- date(page.updated, theme.post.meta.date.format) %>
+                  <% if (theme.post.updated.content) { %>
+                    <!-- compatible with older versions-->
+                    <%- theme.post.updated.content %><%- date(page.updated, theme.post.updated.date_format) %>
+                  <% } else { %>
+                    <%- __('post.updated', date(page.updated, theme.post.updated.date_format)) %>
+                  <% } %>
                 <% } %>
               </p>
             <% } %>
-            <div class="markdown-body">
+            <% if (page.encrypt === true) { %>
+              <%- inject_point('postMarkdownBegin') %>
               <%- page.content %>
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                <% if (page.categories && page.categories.length > 0) { %>
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    <% page.categories.each(function(cate) { %>
-                      <a class="hover-with-bg" href="<%= url_for(cate.path) %>"><%- cate.name %></a>
-                    <% }) %>
-                  </div>
-                <% } %>
-                <% if (page.tags && page.tags.length > 0 ) { %>
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    <% page.tags.each(function(tag) { %>
-                      <a class="hover-with-bg" href="<%= url_for(tag.path) %>"><%- tag.name %></a>
-                    <% }) %>
-                  </div>
-                <% } %>
+              <%- partial('_partials/plugins/encrypt') %>
+              <%- inject_point('postMarkdownEnd') %>
+            <% } else { %>
+              <div class="markdown-body">
+                <%- inject_point('postMarkdownBegin') %>
+                <%- page.content %>
+                <%- inject_point('postMarkdownEnd') %>
               </div>
-              <% if(theme.post.copyright.enable && theme.post.copyright.content && page.copyright !== false) { %>
-                <p class="note note-warning">
-                  <% if (typeof page.copyright === 'string' && page.copyright !== '') { %>
-                    <%- page.copyright %>
-                  <% } else { %>
-                    <%- theme.post.copyright.content %>
-                  <% } %>
-                </p>
-              <% } %>
+            <% } %>
+            <hr/>
+            <div>
+              <%- inject_point('postMetaBottom') %>
+
+              <%- inject_point('postCopyright') %>
 
               <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
                   crossorigin="anonymous"></script>
@@ -67,24 +65,25 @@ page.banner_mask_alpha = page.banner_mask_alpha || theme.post.banner_mask_alpha
                   (adsbygoogle = window.adsbygoogle || []).push({});
               </script>
 
-              <% if(theme.post.prev_next.enable && !page.hide) { %>
-                <div class="post-prevnext">
+              <% if (theme.post.prev_next.enable && !page.hide) { %>
+                <div class="post-prevnext my-3">
+
                   <article class="post-prev col-6">
                     <% const prev = prev_post(page) %>
                     <% if (prev) { %>
-                      <a href="<%= url_for(prev.path) %>">
+                      <a href="<%= url_for(prev.path) %>" title="<%= prev.title %>">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"><%- prev.title %></span>
-                        <span class="visible-mobile"><%= __('post.pre') %></span>
+                        <span class="hidden-mobile"><%= prev.title %></span>
+                        <span class="visible-mobile"><%- __('post.prev_post') %></span>
                       </a>
                     <% } %>
                   </article>
                   <article class="post-next col-6">
                     <% const next = next_post(page) %>
                     <% if (next) { %>
-                      <a href="<%= url_for(next.path) %>">
-                        <span class="hidden-mobile"><%- next.title %></span>
-                        <span class="visible-mobile"><%= __('post.next') %></span>
+                      <a href="<%= url_for(next.path) %>" title="<%= next.title %>">
+                        <span class="hidden-mobile"><%= next.title %></span>
+                        <span class="visible-mobile"><%- __('post.next_post') %></span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     <% } %>
@@ -93,31 +92,22 @@ page.banner_mask_alpha = page.banner_mask_alpha || theme.post.banner_mask_alpha
               <% } %>
             </div>
 
-            <% if(page.comments && theme.post.comments.enable) { %>
-              <!-- Comments -->
-              <article class="comments" id="comments">
-                <% if (typeof page.comment === 'string' && page.comment !== '') { %>
-                  <% type = '_partial/comments/' + page.comment %>
-                <% } else { %>
-                  <% type = '_partial/comments/' + theme.post.comments.type %>
-                <% } %>
-                <%- partial(type) %>
-              </article>
-            <% } %>
+            <%- inject_point('postComments') %>
           </article>
         </div>
       </div>
     </div>
-    <% if(theme.post.toc.enable && page.toc !== false){ %>
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <%- partial('_partial/toc') %>
-      </div>
-    <% } %>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      <%- inject_point('postRight') %>
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
-<% if(theme.post.custom.enable && theme.post.custom.content && page.custom !== false) { %>
+<%- partial('_partials/markdown-plugins') %>
+
+<% if(theme.post.custom && theme.post.custom.enable && theme.post.custom.content && page.custom !== false) { %>
+  <!-- Custom -->
   <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
       <%- page.custom || theme.post.custom.content %>

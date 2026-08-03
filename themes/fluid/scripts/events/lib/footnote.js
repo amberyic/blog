@@ -1,17 +1,30 @@
 'use strict';
 
+const { stripHTML } = require('hexo-util');
+
+function escapeAttr(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 // Register footnotes filter
 module.exports = (hexo) => {
   const config = hexo.theme.config;
   if (config.post.footnote.enable) {
-    hexo.extend.filter.register('before_post_render', function(page) {
-      page.content = renderFootnotes(page.content, page.footnote);
+    hexo.extend.filter.register('before_post_render', (page) => {
+      if (page.footnote !== false) {
+        page.content = renderFootnotes(page.content, page.footnote);
+      }
       return page;
     });
   }
 
   /**
-   * Modify by https://github.com/kchen0x/hexo-reference
+   * Modified from https://github.com/kchen0x/hexo-reference
    *
    * Render markdown footnotes
    * @param {String} text
@@ -22,14 +35,23 @@ module.exports = (hexo) => {
     const reFootnoteContent = /\[\^(\d+)]: ?([\S\s]+?)(?=\[\^(?:\d+)]|\n\n|$)/g;
     const reInlineFootnote = /\[\^(\d+)]\((.+?)\)/g;
     const reFootnoteIndex = /\[\^(\d+)]/g;
+    const reCodeBlock = /<pre>[\s\S]*?<\/pre>/g;
+
     let footnotes = [];
     let html = '';
+    let codeBlocks = [];
+
+    // extract code block
+    text = text.replace(reCodeBlock, function(match) {
+      codeBlocks.push(match);
+      return 'CODE_BLOCK_PLACEHOLDER';
+    });
 
     // threat all inline footnotes
     text = text.replace(reInlineFootnote, function(match, index, content) {
       footnotes.push({
         index  : index,
-        content: content
+        content: content ? content.trim() : ''
       });
       // remove content of inline footnote
       return '[^' + index + ']';
@@ -39,7 +61,7 @@ module.exports = (hexo) => {
     text = text.replace(reFootnoteContent, function(match, index, content) {
       footnotes.push({
         index  : index,
-        content: content
+        content: content ? content.trim() : ''
       });
       // remove footnote content
       return '';
@@ -63,9 +85,7 @@ module.exports = (hexo) => {
         if (!indexMap[index]) {
           return match;
         }
-        let tooltip = indexMap[index].content;
-        tooltip = hexo.render.renderSync({ text: tooltip, engine: 'markdown' });
-        tooltip = tooltip.replace(/(<.+?>)/g, '');
+        const tooltip = escapeAttr(stripHTML(indexMap[index].content));
         return '<sup id="fnref:' + index + '" class="footnote-ref">'
           + '<a href="#fn:' + index + '" rel="footnote">'
           + '<span class="hint--top hint--rounded" aria-label="'
@@ -79,12 +99,12 @@ module.exports = (hexo) => {
     });
 
     // render footnotes (HTML)
-    footnotes.forEach(function(footNote) {
-      html += '<li><span id="fn:' + footNote.index + '" class="footnote-text">';
+    footnotes.forEach(function(item) {
+      html += '<li><span id="fn:' + item.index + '" class="footnote-text">';
       html += '<span>';
-      const fn = hexo.render.renderSync({ text: footNote.content.trim(), engine: 'markdown' });
-      html += fn.replace(/(<p>)|(<\/p>)/g, '');
-      html += '<a href="#fnref:' + footNote.index + '" rev="footnote" class="footnote-backref"> ↩</a></span></span></li>';
+      const fn = hexo.render.renderSync({ text: item.content, engine: 'markdown' });
+      html += fn.replace(/(<p>)|(<\/p>)/g, '').replace(/<br>/g, '');
+      html += '<a href="#fnref:' + item.index + '" rev="footnote" class="footnote-backref"> ↩</a></span></span></li>';
     });
 
     // add footnotes at the end of the content
@@ -95,6 +115,12 @@ module.exports = (hexo) => {
       text += '<ol>' + html + '</ol>';
       text += '</div></section>';
     }
+
+    // restore code block
+    text = text.replace(/CODE_BLOCK_PLACEHOLDER/g, function() {
+      return codeBlocks.shift();
+    });
+
     return text;
   }
 };

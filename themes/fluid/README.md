@@ -8,8 +8,8 @@
 ![ScreenShot](https://cdn.jsdelivr.net/gh/fluid-dev/static@master/hexo-theme-fluid/screenshots/index.png)
 
 <p align="center">
-  <a title="Hexo Version" target="_blank" href="https://hexo.io/zh-cn/"><img alt="Hexo Version" src="https://img.shields.io/badge/Hexo-%3E%3D%203.0-orange?style=flat"></a>
-  <a title="Node Version" target="_blank" href="https://nodejs.org/zh-cn/"><img alt="Node Version" src="https://img.shields.io/badge/Node-%3E%3D%208.10.0-yellowgreen?style=flat"></a>
+  <a title="Hexo Version" target="_blank" href="https://hexo.io/zh-cn/"><img alt="Hexo Version" src="https://img.shields.io/badge/Hexo-%3E%3D%205.0-orange?style=flat"></a>
+  <a title="Node Version" target="_blank" href="https://nodejs.org/zh-cn/"><img alt="Node Version" src="https://img.shields.io/badge/Node-%3E%3D%2010.13.0-yellowgreen?style=flat"></a>
   <a title="License" target="_blank" href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/fluid-dev/hexo-theme-fluid.svg?style=flat"></a>
   <br>
   <a title="GitHub Release" target="_blank" href="https://github.com/fluid-dev/hexo-theme-fluid/releases"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/fluid-dev/hexo-theme-fluid?style=flat"></a>
@@ -82,7 +82,6 @@ hexo new page about
 ```yaml
 ---
 title: about
-date: 2020-02-23 19:20:33
 layout: about
 ---
 
@@ -95,44 +94,67 @@ layout: about
 
 ## 功能特性
 
-- [x] 图片懒加载
-- [x] 自定义代码高亮方案
-- [x] 内置多语言
-- [x] 支持多款评论插件
-- [x] 支持使用[数据文件](https://hexo.io/zh-cn/docs/data-files)存放配置
-- [x] 自定义静态资源 CDN
 - [x] 无比详实的[用户文档](https://hexo.fluid-dev.com/docs/)
-- [x] 内置文章搜索
-- [x] 页脚备案信息
-- [x] 网页访问统计
+- [x] 页面组件懒加载
+- [x] 多种代码高亮方案
+- [x] 多语言配置
+- [x] 内置多款评论插件
+- [x] 内置网页访问统计
+- [x] 内置文章本地搜索
+- [x] 支持暗色模式
 - [x] 支持脚注语法
 - [x] 支持 LaTeX 数学公式
 - [x] 支持 mermaid 流程图
-- [x] 暗色模式
+
+## 鸣谢
+
+<table>
+  <thead>
+    <tr>
+      <th align="center" style="width: 240px;">
+        <a href="https://www.jetbrains.com/?from=hexo-theme-fluid">
+          <img src="https://raw.githubusercontent.com/fluid-dev/static/690616966f34a58d66aa15ac7b550dd7bbc03967/hexo-theme-fluid/jetbrains.svg" height="200px"><br>
+          <sub>免费开发工具提供方 JetBrains</sub><br>
+        </a>
+      </th>
+      <th align="center" style="width: 240px;">
+        <a href="https://dartnode.com">
+          <img src="https://dartnode.com/branding/DN-Open-Source-sm.png" height="200px"><br>
+          <sub>免费 VPS 提供方 DartNode</sub><br>
+        </a>
+      </th>
+    </tr>
+  </thead>
+</table>
 
 ## 贡献者
 
 [![contributors](https://opencollective.com/hexo-theme-fluid/contributors.svg?width=890&button=false)](https://github.com/fluid-dev/hexo-theme-fluid/graphs/contributors)
 
-英文文档翻译：[@EatRice](https://eatrice.top/) [@橙子杀手](https://ruru.eatrice.top)
+英文文档翻译：[@EatRice](https://eatrice.top/) [@橙子杀手](https://ruru.eatrice.top) [@Sinetian](https://sinetian.github.io/)
 
-其他贡献：[@zhugaoqi](https://github.com/zhugaoqi) [@julydate](https://github.com/julydate)
+其他贡献：[@zhugaoqi](https://github.com/zhugaoqi) [@julydate](https://github.com/julydate) [@xiyuvi](https://xiyu.pro/)
 
 如你也想贡献代码，可参照[贡献指南](https://hexo.fluid-dev.com/docs/contribute/)
 
-## 支持
+## 支持我们
 
-你可以扫描下方微信赞赏码支持我们的开源创作，资金将用于服务器及域名开销以及今后的公共接口服务。
+如果你觉得这个项目有帮助，并愿意支持它的发展，可以通过以下方式支持我们的开源创作：
 
-<img src="https://github.com/fluid-dev/static/blob/master/hexo-theme-fluid/sponsor.png?s=200&v=4" width="200" alt="微信赞赏码">
+<table>
+  <thead>
+    <tr>
+      <th align="center" width="240">
+        <div>
+          <img src="https://github.com/fluid-dev/static/blob/master/hexo-theme-fluid/sponsor.png?s=200&v=4" height="200px" alt="微信赞赏码"><br>
+          <sub>微信赞赏码</sub>
+        </div>
+      </th>
+    </tr>
+  </thead>
+</table>
 
-同时我们正在寻找商业赞助商，如果贵司想在本页展示广告位（每月 6K+ Views 定向流量曝光），或者有其他赞助形式，可将联系方式发送邮件至 zkqiang#126.com (#替换为@)。
-
-## 鸣谢
-
-<a title="鸣谢 JetBrains 免费授权开发工具" href="https://www.jetbrains.com/?from=hexo-theme-fluid" target="_blank">
-  <img src="https://raw.githubusercontent.com/fluid-dev/static/690616966f34a58d66aa15ac7b550dd7bbc03967/hexo-theme-fluid/jetbrains.svg" width="150" alt="JetBrains">
-</a>
+同时我们正在**寻求商业赞助**，如果贵司想在本页显著位置展示广告位（每月 6K+ Views 定向流量曝光），或者有其他赞助形式，可将联系方式发送邮件至 zkqiang#126.com (#替换为@)。
 
 ## Star 趋势
 

@@ -5,10 +5,8 @@ html
   letter-spacing $letter-spacing
 
 html, body
-  font-family $font-family
-
-html, body, header
   height 100%
+  font-family $font-family
   overflow-wrap break-word
 
 body
@@ -50,7 +48,7 @@ img[lazyload]
 
 ::-webkit-scrollbar
   width 6px
-  height 4px
+  height 6px
 
 ::-webkit-scrollbar-thumb
   background-color var(--scrollbar-color)
@@ -61,3 +59,13 @@ img[lazyload]
 
 ::-webkit-scrollbar-corner
   background-color transparent
+
+label
+  margin-bottom 0
+
+i.iconfont
+  font-size 1em
+  line-height 1
+
+body.mobile-menu-open
+  overflow hidden

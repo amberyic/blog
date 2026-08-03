@@ -1,4 +1,4 @@
-/* global Fluid, CONFIG */
+/* global Fluid */
 
 Fluid.boot = {};
 
@@ -11,14 +11,12 @@ Fluid.boot.registerEvents = function() {
   Fluid.events.registerImageLoadedEvent();
 };
 
-Fluid.boot.initPlugins = function() {
-  CONFIG.anchorjs.enable && Fluid.plugins.initAnchor();
-  CONFIG.toc.enable && Fluid.plugins.initTocBot();
-  CONFIG.image_zoom.enable && Fluid.plugins.initFancyBox();
-  CONFIG.copy_btn && Fluid.plugins.initCopyCode();
+Fluid.boot.refresh = function() {
+  Fluid.plugins.fancyBox();
+  Fluid.plugins.codeWidget();
+  Fluid.events.refresh();
 };
 
 document.addEventListener('DOMContentLoaded', function() {
   Fluid.boot.registerEvents();
-  Fluid.boot.initPlugins();
 });

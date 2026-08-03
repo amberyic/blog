@@ -5,6 +5,11 @@
 const { stripHTML } = require('hexo-util');
 
 const getWordCount = (post) => {
+  if (!post.wordcount) {
+    // post.origin is the original post content of hexo-blog-encrypt
+    const content = stripHTML(post.origin || post.content).replace(/[\s\r\n]/g, '');
+    post.wordcount = content.length;
+  }
   return post.wordcount;
 };
 
@@ -32,10 +37,3 @@ hexo.extend.helper.register('wordtotal', (site) => {
   });
   return symbolsCount(count);
 });
-
-hexo.extend.filter.register('after_post_render', (page) => {
-  const meta = hexo.theme.config.post.meta;
-  if (meta.wordcount.enable || meta.min2read.enable) {
-    page.wordcount = stripHTML(page.content).replace(/\r?\n|\r/g, '').replace(/\s+/g, '').length;
-  }
-}, 0);

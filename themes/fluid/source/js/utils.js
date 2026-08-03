@@ -15,6 +15,16 @@ Fluid.utils = {
     window.removeEventListener('scroll', callback);
   },
 
+  listenDOMLoaded(callback) {
+    if (document.readyState !== 'loading') {
+      callback();
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        callback();
+      });
+    }
+  },
+
   scrollToElement: function(target, offset) {
     var of = jQuery(target).offset();
     if (of) {
@@ -26,48 +36,56 @@ Fluid.utils = {
   },
 
   elementVisible: function(element, offsetFactor) {
-    offsetFactor = (offsetFactor && offsetFactor >= 0) ? offsetFactor : 0;
+    offsetFactor = offsetFactor && offsetFactor >= 0 ? offsetFactor : 0;
     var rect = element.getBoundingClientRect();
-    var height = window.innerHeight || document.documentElement.clientHeight;
-    var top = rect.top;
-    return (top >= 0 && top <= height * (offsetFactor + 1))
-      || (top <= 0 && top >= -(height * offsetFactor) - rect.height);
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var vw = window.innerWidth || document.documentElement.clientWidth;
+    var expandH = vh * offsetFactor;
+    var expandW = vw * offsetFactor;
+    // 判断元素矩形与视口（上下左右各扩展 offsetFactor 屏）是否有重叠
+    return rect.bottom > -expandH
+      && rect.top < vh + expandH
+      && rect.right > -expandW
+      && rect.left < vw + expandW;
   },
 
   waitElementVisible: function(selectorOrElement, callback, offsetFactor) {
     var runningOnBrowser = typeof window !== 'undefined';
-    var isBot = (runningOnBrowser && !('onscroll' in window)) ||
-      (typeof navigator !== 'undefined' && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent));
+    var isBot = (runningOnBrowser && !('onscroll' in window))
+      || (typeof navigator !== 'undefined' && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent));
     if (!runningOnBrowser || isBot) {
       return;
     }
 
-    offsetFactor = (offsetFactor && offsetFactor >= 0) ? offsetFactor : 0;
+    offsetFactor = offsetFactor && offsetFactor >= 0 ? offsetFactor : 0;
 
     function waitInViewport(element) {
-      if (Fluid.utils.elementVisible(element, offsetFactor)) {
-        callback();
-        return;
-      }
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function(entries, ob) {
-          if (entries[0].isIntersecting) {
-            callback();
-            ob.disconnect();
-          }
-        }, {
-          threshold : [0],
-          rootMargin: (window.innerHeight || document.documentElement.clientHeight) * offsetFactor + 'px'
-        });
-        io.observe(element);
-      } else {
-        var wrapper = Fluid.utils.listenScroll(function() {
-          if (Fluid.utils.elementVisible(element, offsetFactor)) {
-            Fluid.utils.unlistenScroll(wrapper);
-            callback();
-          }
-        });
-      }
+      Fluid.utils.listenDOMLoaded(function() {
+        if (Fluid.utils.elementVisible(element, offsetFactor)) {
+          callback();
+          return;
+        }
+        if ('IntersectionObserver' in window) {
+          var margin = (window.innerHeight || document.documentElement.clientHeight) * offsetFactor + 'px';
+          var io = new IntersectionObserver(function(entries, ob) {
+            if (entries[0].isIntersecting) {
+              callback();
+              ob.disconnect();
+            }
+          }, {
+            threshold : [0],
+            rootMargin: margin + ' 0px'
+          });
+          io.observe(element);
+        } else {
+          var wrapper = Fluid.utils.listenScroll(function() {
+            if (Fluid.utils.elementVisible(element, offsetFactor)) {
+              Fluid.utils.unlistenScroll(wrapper);
+              callback();
+            }
+          });
+        }
+      });
     }
 
     if (typeof selectorOrElement === 'string') {
@@ -81,8 +99,8 @@ Fluid.utils = {
 
   waitElementLoaded: function(selector, callback) {
     var runningOnBrowser = typeof window !== 'undefined';
-    var isBot = (runningOnBrowser && !('onscroll' in window)) ||
-      (typeof navigator !== 'undefined' && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent));
+    var isBot = (runningOnBrowser && !('onscroll' in window))
+      || (typeof navigator !== 'undefined' && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent));
     if (!runningOnBrowser || isBot) {
       return;
     }
@@ -97,7 +115,7 @@ Fluid.utils = {
       });
       mo.observe(document, { childList: true, subtree: true });
     } else {
-      document.addEventListener('DOMContentLoaded', function() {
+      Fluid.utils.listenDOMLoaded(function() {
         var waitLoop = function() {
           var ele = document.querySelector(selector);
           if (ele) {
@@ -130,10 +148,9 @@ Fluid.utils = {
         s.onload = onload;
       }
     }
-    var e = document.getElementsByTagName('script')[0]
-    || document.getElementsByTagName('head')[0]
-    || document.head || document.documentElement;
-    e.parentNode.insertBefore(s, e);
+    var ss = document.getElementsByTagName('script');
+    var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+    e.parentNode.insertBefore(s, e.nextSibling);
   },
 
   createCssLink: function(url) {
@@ -142,22 +159,51 @@ Fluid.utils = {
     l.setAttribute('type', 'text/css');
     l.setAttribute('href', url);
     var e = document.getElementsByTagName('link')[0]
-    || document.getElementsByTagName('head')[0]
-    || document.head || document.documentElement;
+      || document.getElementsByTagName('head')[0]
+      || document.head || document.documentElement;
     e.parentNode.insertBefore(l, e);
   },
 
-  loadComments: function(selectors, loadFunc) {
+  loadComments: function(selector, loadFunc) {
     var ele = document.querySelector('#comments[lazyload]');
     if (ele) {
       var callback = function() {
         loadFunc();
         ele.removeAttribute('lazyload');
       };
-      Fluid.utils.waitElementVisible(selectors, callback, CONFIG.lazyload.offset_factor);
+      Fluid.utils.waitElementVisible(selector, callback, CONFIG.lazyload.offset_factor);
     } else {
       loadFunc();
     }
+  },
+
+  getBackgroundLightness(selectorOrElement) {
+    var ele = selectorOrElement;
+    if (typeof selectorOrElement === 'string') {
+      ele = document.querySelector(selectorOrElement);
+    }
+    var view = ele.ownerDocument.defaultView;
+    if (!view) {
+      view = window;
+    }
+    var rgbArr = view.getComputedStyle(ele).backgroundColor.replace(/rgba*\(/, '').replace(')', '').split(/,\s*/);
+    if (rgbArr.length < 3) {
+      return 0;
+    }
+    var colorCast = (0.213 * rgbArr[0]) + (0.715 * rgbArr[1]) + (0.072 * rgbArr[2]);
+    return colorCast === 0 || colorCast > 255 / 2 ? 1 : -1;
+  },
+
+  retry(handler, interval, times) {
+    if (times <= 0) {
+      return;
+    }
+    var next = function() {
+      if (--times >= 0 && !handler()) {
+        setTimeout(next, interval);
+      }
+    };
+    setTimeout(next, interval);
   }
 
 };
@@ -171,6 +217,7 @@ function Debouncer(callback) {
   this.callback = callback;
   this.ticking = false;
 }
+
 Debouncer.prototype = {
   constructor: Debouncer,
 

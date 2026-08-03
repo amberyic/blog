@@ -1,7 +1,271 @@
+// Rewrite navbar
+.navbar
+  background-color transparent
+  font-size 0.875rem
+  box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+  -webkit-box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+
+  .navbar-brand
+    color var(--navbar-text-color)
+
+  .navbar-toggler .animated-icon span
+    background-color var(--navbar-text-color)
+
+  .nav-item .nav-link
+    display block
+    color var(--navbar-text-color)
+    transition color .2s ease-in-out, background-color .2s ease-in-out
+
+    &:hover
+      color var(--link-hover-color)
+
+    &:focus
+      color var(--navbar-text-color)
+
+    i
+      font-size 0.875rem
+      line-height inherit
+
+    i:only-child
+      margin 0 .2rem
+
+  .navbar-toggler
+    border-width 0
+    outline 0
+
+  &.scrolling-navbar
+    will-change background, padding
+    -webkit-transition background 0.5s ease-in-out, padding 0.5s ease-in-out
+    transition background 0.5s ease-in-out, padding 0.5s ease-in-out
+
+    @media (min-width: 600px)
+      &
+        padding-top 12px
+        padding-bottom 12px
+
+      & .navbar-nav > li
+        -webkit-transition-duration 1s
+        transition-duration 1s
+
+    &.top-nav-collapse
+      padding-top 5px
+      padding-bottom 5px
+
+  .dropdown-menu
+    font-size 0.875rem
+    color var(--navbar-text-color)
+    background-color rgba(0, 0, 0, 0.3)
+    border none
+    min-width 8rem
+    -webkit-transition background .5s ease-in-out,padding .5s ease-in-out
+    transition background .5s ease-in-out,padding .5s ease-in-out
+
+    @media (max-width: 991.98px)
+      text-align center
+
+  .dropdown-item
+    color var(--navbar-text-color)
+
+    &:hover, &:focus
+      color var(--link-hover-color)
+      background-color rgba(0, 0, 0, 0.1)
+
+  @media (min-width: 992px)
+    .dropdown:hover > .dropdown-menu
+      display block
+
+    .dropdown > .dropdown-toggle:active
+      pointer-events none
+
+    .dropdown-menu
+      top 95%
+
+  .animated-icon
+    width 30px
+    height 20px
+    position relative
+    margin 0
+    -webkit-transform rotate(0deg)
+    -moz-transform rotate(0deg)
+    -o-transform rotate(0deg)
+    transform rotate(0deg)
+    -webkit-transition .5s ease-in-out
+    -moz-transition .5s ease-in-out
+    -o-transition .5s ease-in-out
+    transition .5s ease-in-out
+    cursor pointer
+
+    span
+      display block
+      position absolute
+      height 3px
+      width 100%
+      border-radius 9px
+      opacity 1
+      left 0
+      -webkit-transform rotate(0deg)
+      -moz-transform rotate(0deg)
+      -o-transform rotate(0deg)
+      transform rotate(0deg)
+      -webkit-transition .25s ease-in-out
+      -moz-transition .25s ease-in-out
+      -o-transition .25s ease-in-out
+      transition .25s ease-in-out
+      background #ffffff
+
+      &:nth-child(1)
+        top 0
+
+      &:nth-child(2)
+        top 10px
+
+      &:nth-child(3)
+        top 20px
+
+    &.open
+      span
+        &:nth-child(1)
+          top 11px
+          -webkit-transform rotate(135deg)
+          -moz-transform rotate(135deg)
+          -o-transform rotate(135deg)
+          transform rotate(135deg)
+
+        &:nth-child(2)
+          opacity 0
+          left -60px
+
+        &:nth-child(3)
+          top 11px
+          -webkit-transform rotate(-135deg)
+          -moz-transform rotate(-135deg)
+          -o-transform rotate(-135deg)
+          transform rotate(-135deg)
+
+.navbar .dropdown-collapse, .top-nav-collapse, .navbar-col-show
+  if $navbar-glass-enable
+    ground-glass($navbar-glass-px, $navbar-bg-color, $navbar-glass-alpha)
+  else
+    background-color var(--navbar-bg-color)
+
 @media (max-width: 767px)
-  #subtitle
+  .navbar
+    font-size 1rem
+    line-height 2.5rem
+
+.banner-text
+  color var(--subtitle-color)
+  max-width calc(960px - 6rem)
+  width 80%
+  overflow-wrap break-word
+
+  .typed-cursor
+    margin 0 .2rem
+
+@media (max-width: 767px)
+  #subtitle, .typed-cursor
     font-size 1.5rem
 
 @media (max-width: 575px)
-  #subtitle
+  .banner-text
+    font-size 0.9rem
+
+  #subtitle, .typed-cursor
     font-size 1.35rem
+
+// Mobile grid menu (九宫格)
+#mobile-grid-menu
+  display block
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  z-index 1029
+  overflow-y auto
+  -webkit-overflow-scrolling touch
+  pointer-events none
+  opacity 0
+  transform translateY(-12px)
+  transition opacity .18s ease, transform .18s ease
+  will-change opacity, transform
+
+  if $navbar-glass-enable
+    ground-glass($navbar-glass-px, $navbar-bg-color, $navbar-glass-alpha)
+  else
+    background-color var(--navbar-bg-color)
+
+  &.show
+    pointer-events auto
+    opacity 1
+    transform translateY(0)
+
+    // Staggered cell pop-in — delays are set via JS
+    .mobile-grid-cell, .mobile-grid-group-header
+      animation mobile-grid-cell-in .18s ease both
+
+  .mobile-grid-menu-inner
+    padding-top 70px
+    padding-bottom 2rem
+
+  .mobile-grid-group-header
+    color var(--navbar-text-color)
+    font-size 0.8rem
+    opacity 0.6
+    text-transform uppercase
+    letter-spacing 0.05em
+    padding 1rem 15px 0.4rem
+    border-top 1px solid rgba(255, 255, 255, 0.1)
+    margin-top 0.5rem
+
+    &:first-child
+      border-top none
+      margin-top 0
+
+    i
+      margin-right 0.3rem
+      font-size 0.8rem
+
+  .mobile-grid-cell
+    padding 0.5rem
+
+  .mobile-grid-item
+    display flex
+    flex-direction column
+    align-items center
+    justify-content center
+    padding 1rem 0.5rem
+    border-radius 12px
+    background-color rgba(255, 255, 255, 0.08)
+    transition background-color .2s ease-in-out, transform .15s ease-in-out
+    cursor pointer
+    min-height 80px
+
+    &:hover, &:active
+      background-color rgba(255, 255, 255, 0.18)
+      transform scale(0.96)
+
+    i
+      font-size 1.6rem
+      color var(--navbar-text-color)
+      margin-bottom 0.4rem
+      line-height 1
+
+    span
+      font-size 0.78rem
+      color var(--navbar-text-color)
+      text-align center
+      line-height 1.2
+      word-break break-word
+
+  a
+    text-decoration none
+    color var(--navbar-text-color)
+
+    &:hover
+      color var(--navbar-text-color)
+
+// On mobile, suppress the original collapse list — grid menu takes over
+@media (max-width: 991.98px)
+  #navbarSupportedContent
+    display none !important

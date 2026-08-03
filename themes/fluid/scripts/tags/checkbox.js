@@ -7,21 +7,24 @@ const checkbox = (args) => {
   args = args.join(' ').split(',');
   const text = (args[0] || '').trim();
 
+  !text && hexo.log.warn('[Fluid] Checkbox text must be defined!');
+
   if (text === 'checked' || text === 'true' || text === 'false') {
     const checked = text === 'checked' || text === 'true';
     return `<input type="checkbox" disabled ${checked ? 'checked="checked"' : ''}>`;
   }
-  !text && hexo.log.warn('[Fluid] Checkbox text must be defined!');
 
   const checked = (args[1] || '').length > 0 && args[1].trim() !== 'false';
   const inline = (args[2] || '').length > 0 && args[2].trim() !== 'false';
+  const disabled = (args[3] || '').length > 0 && args[3].trim() !== 'false';
+  const content = hexo.render.renderSync({ text: text, engine: 'markdown' }).replace(/(<p>)|(<\/p>)/g, '').replace(/<br>/g, '');
 
   return `${!inline ? '<div>' : ''}
-            <input type="checkbox" disabled ${checked ? 'checked="checked"' : ''}>${text}
+            <input type="checkbox" ${disabled ? 'disabled' : ''} ${checked ? 'checked="checked"' : ''}>${content}
           ${!inline ? '</div>' : ''}`;
 
 };
 
-// {% cb text, checked?, inline? %}
+// {% cb text, checked?, inline?, disabled? %}
 hexo.extend.tag.register('checkbox', checkbox, { ends: false });
 hexo.extend.tag.register('cb', checkbox, { ends: false });
