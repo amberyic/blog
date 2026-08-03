@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -44,54 +47,115 @@
 <meta name="twitter:image" content="https://oss.imzhanghao.com/img/202203260629357.png">
   
   
+  
   <title>元宇宙的关键技术和实现路径 - 张浩在路上</title>
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
-    
-  
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":"G-PKN25ZF7R2","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":{"measurement_id":"G-PKN25ZF7R2"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-PKN25ZF7R2", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-PKN25ZF7R2');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
 </head>
 
 
 <body>
-  <header style="height: 45vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 45vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>张浩在路上</strong>
@@ -103,7 +167,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -112,9 +176,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/technology/">
+              <a class="nav-link" href="/technology/" target="_self">
                 <i class="iconfont icon-bug"></i>
-                技术
+                <span>技术</span>
               </a>
             </li>
           
@@ -124,9 +188,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/monetization/">
+              <a class="nav-link" href="/monetization/" target="_self">
                 <i class="iconfont icon-briefcase"></i>
-                变现
+                <span>变现</span>
               </a>
             </li>
           
@@ -136,9 +200,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/thinking/">
+              <a class="nav-link" href="/thinking/" target="_self">
                 <i class="iconfont icon-books"></i>
-                思考
+                <span>思考</span>
               </a>
             </li>
           
@@ -148,9 +212,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -160,9 +224,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -172,9 +236,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -182,14 +246,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -197,57 +263,188 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="元宇宙的关键技术和实现路径">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-26 10:00" pubdate>
-        2022年3月26日 上午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      7.2k 字
-    </span>
-  
-
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      60 分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
           
-        </div>
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/technology/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-bug"></i>
+                  <span>技术</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/monetization/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>变现</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/thinking/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-books"></i>
+                  <span>思考</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
       </div>
     </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="元宇宙的关键技术和实现路径"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-26 10:00" pubdate>
+          2022年3月26日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          60 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
   </header>
 
   <main>
@@ -256,26 +453,31 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">元宇宙的关键技术和实现路径</h1>
+            <h1 id="seo-header">元宇宙的关键技术和实现路径</h1>
             
-            <div class="markdown-body">
-              <blockquote>
+            
+              <div class="markdown-body">
+                
+                <blockquote>
 <p>一千个人心中，有一千个元宇宙。</p>
 </blockquote>
 <h2 id="什么是元宇宙"><a class="markdownIt-Anchor" href="#什么是元宇宙"></a> 什么是元宇宙</h2>
-<p>元宇宙（Metaversion）出自1992年出版的科幻小说作家尼尔·斯蒂芬森（Neal Stephenson）的第三部著作《雪崩》（Snow Crash）。</p>
+<p>元宇宙（Metaverse）出自1992年出版的科幻小说作家尼尔·斯蒂芬森（Neal Stephenson）的第三部著作《雪崩》（Snow Crash）。</p>
 <p>斯蒂芬森创造了一个并非以往想象中的互联网，而是和社会紧密联系的三维数字空间——虚拟实境（Metaverse），与现实世界平行，在现实世界中地理位置彼此隔绝的人们可以通过各自的“化身”进行交流娱乐；</p>
 <p>在这个虚拟现实中，人们表现为自己设计的“化身”，从事世俗的（谈话、调情）和非凡的（斗剑、雇佣军间谍活动）活动。像互联网一样，元宇宙是一种集体的、互动的努力，总是在进行，并且不受任何一个人的控制。就像在游戏中一样，人们居住并控制着在空间中移动的角色</p>
 <p><img src="https://oss.imzhanghao.com/img/202203260629357.png" srcset="/img/loading.gif" lazyload alt="元宇宙" /></p>
 <h3 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h3>
 <p><strong>元宇宙(Metaverse)</strong> 是利用科技手段进行链接与创造，与现实世界映射与交互的虚拟世界，以及具备新型社会体系的数字生态空间。“Metaverse”这个词由meta和verse组成，meta表示超越，verse取自universe，合起来就是“超越宇宙”，被翻译成“元宇宙”。</p>
-<p>关于元宇宙的概念，目前并没有一个明确的定义，可以参考一下专家对他的定义。</p>
+<p>关于元宇宙的概念，目前并没有一个明确的定义，可以参考一下专家对它的定义。</p>
 <p>清华大学新闻学院<strong>沈阳教授</strong>这样定义元宇宙：</p>
 <blockquote>
 <p>“元宇宙是整合多种新技术而产生的新型虚实相融的互联网应用和社会形态，它基于扩展现实技术提供沉浸式体验，以及数字孪生技术生成现实世界的镜像，通过区块链技术搭建经济体系，将虚拟世界与现实世界在经济系统、社交系统、身份系统上密切融合，并且允许每个用户进行内容生产和编辑。”</p>
@@ -287,8 +489,8 @@
 <h3 id="理解"><a class="markdownIt-Anchor" href="#理解"></a> 理解</h3>
 <ul>
 <li><strong>基础理解</strong>：元宇宙是<strong>下一代互联网</strong>：物联网+区块链+人工智能+高速移动互联网+AR/VR</li>
-<li><strong>进阶理解</strong>：元宇宙是人类社会形态进步，是<strong>人类数字生存新形态</strong>，是物理生存的实时混合生存状态。国界、组织边界、公司边界一些意义、一些功能上，会趋于消失，跨境跨界合作更普遍、高效、低成本。</li>
-<li><strong>高阶理解</strong>：让地球的<strong>价值+信息</strong>高度自由流动，让没有信任和社交关系的人和物，低成本、远程、实时互联协作，是人类写作进化的新阶段～</li>
+<li><strong>进阶理解</strong>：元宇宙是人类社会形态进步，是<strong>人类数字生存新形态</strong>，是物理生存的实时混合生存状态。国界、组织边界、公司边界在一些意义、一些功能上，会趋于消失，跨境跨界合作更普遍、高效、低成本。</li>
+<li><strong>高阶理解</strong>：让地球的<strong>价值+信息</strong>高度自由流动，让没有信任和社交关系的人和物，低成本、远程、实时互联协作，是人类进化的新阶段～</li>
 </ul>
 <p>目前关于元宇宙的畅想有一些影视作品可以参考，我们可以观看一下影片，辅助我们理解元宇宙：<strong>《阿凡达》</strong> 帮助我们理解数字孪生的真实人格人生; <strong>《头号玩家》</strong> 帮助我们理解元宇宙现实经济、线上经济和价值的融合互通;<strong>《失控玩家》</strong> 帮助我们理解元宇宙纯AI人格; <strong>《黑客帝国》</strong> 帮助我们理解元宇宙人脑创造和计算能力被AI控制和利用的假想。</p>
 <h3 id="关键特征"><a class="markdownIt-Anchor" href="#关键特征"></a> 关键特征</h3>
@@ -312,7 +514,7 @@
 <img src="https://oss.imzhanghao.com/img/202203260621731.png" srcset="/img/loading.gif" lazyload alt="元宇宙的8大要素" /></p>
 <h3 id="四大特性"><a class="markdownIt-Anchor" href="#四大特性"></a> 四大特性</h3>
 <p><strong>社交第一性</strong><br />
-元宇宙作为人类社会形态发展新的阶段，基于硬件技术、内容生态的高度发达，开始追求超脱与物理世界层面，实现在虚拟空间之中寻求社交与场景的延展。</p>
+元宇宙作为人类社会形态发展新的阶段，基于硬件技术、内容生态的高度发达，开始追求超脱于物理世界层面，实现在虚拟空间之中寻求社交与场景的延展。</p>
 <ul>
 <li>元宇宙是人类社会形态发展新的阶段</li>
 <li>每个个体都拥有独立的“数字化身”</li>
@@ -344,7 +546,7 @@
 <img src="https://oss.imzhanghao.com/img/202203231142877.png" srcset="/img/loading.gif" lazyload alt="元宇宙的四大支柱BAND" /></p>
 <ul>
 <li><strong>BLOCKCHAIN</strong>：区块链技术提供了去中心化的清结算平台和价值传递机制，能够保障元宇宙的价值归属与流转，从而保障经济系统的稳定、高效，保障规则的透明和确定性执行。去中心化的虚拟资产能够跨平台、脱离内容本身进行流通，变得更加“真实”。</li>
-<li><strong>GAME</strong>：电子游戏为元宇宙提供交互内容，是元宇宙发展的关键赛道,用户创作成为元宇宙游戏发展的趋势提供了丰富的内容，玩家并非像传统游戏一样成为游戏主策中的提线木偶，游戏UGC模式广受市场认可也改变着人们对虚拟资产的观念。</li>
+<li><strong>GAME</strong>：电子游戏为元宇宙提供交互内容，是元宇宙发展的关键赛道,用户创作成为元宇宙游戏发展的趋势，为游戏提供了丰富的内容，玩家并非像传统游戏一样成为游戏主策划中的提线木偶，游戏UGC模式广受市场认可也改变着人们对虚拟资产的观念。</li>
 <li><strong>NETWORK</strong>：网络与算力技术的升级保障了信息的传输与计算能力，5G、AIoT、算力为次时代应用创新打下了坚实基础。云计算是近年来发展最快的科技领域之一，伴随通信速率和云算力的持续升级，云端游戏已经成为现实。</li>
 <li><strong>DISPLAY</strong>：超高清及AR/VR设备也实现了持续迭代升级，用户已经可以获得较好的沉浸式体验。</li>
 </ul>
@@ -402,7 +604,7 @@
 <h3 id="网络及运算技术n"><a class="markdownIt-Anchor" href="#网络及运算技术n"></a> 网络及运算技术(N)</h3>
 <p>网络及运算技术(Network)为了满足元宇宙对网络<strong>高同步低延时</strong>的要求，从而用户可以获得<strong>实时、流畅的完美体验</strong>。根据独立第三方网络测试机构Open Signal的测试数据，4G LTE的端到端时延可达98毫秒，满足视频会议、线上课堂等场景的互动需求，但远不能满足元宇宙对于低时延的严苛要求。VR设备一大难题是传输时延造成的眩晕感，其指标为转动头部到转动画面的延迟，5G带宽与传输速率的提升能有效改善时延并降低眩晕感。</p>
 <h3 id="物联网技术t"><a class="markdownIt-Anchor" href="#物联网技术t"></a> 物联网技术(T)</h3>
-<p>物联网技术(Internet of Things)既承担了物理世界数字化的前端<strong>采集</strong>与处理职能,同时也承担了元宇宙虚实共生的虚拟世界去<strong>渗透</strong>乃至管理物理世界的职能。只有真正实现了万物互联,元宇宙实现虚实共生才真正有了可能!物理网技术的发展,为数字孪生后的虚拟世界提供了实时精准持续的鲜活数据供给,使元宇宙虚拟世界里的人们足不出网就可以明察物理世界的秋毫。</p>
+<p>物联网技术(Internet of Things)既承担了物理世界数字化的前端<strong>采集</strong>与处理职能,同时也承担了元宇宙虚实共生的虚拟世界去<strong>渗透</strong>乃至管理物理世界的职能。只有真正实现了万物互联,元宇宙实现虚实共生才真正有了可能!物联网技术的发展,为数字孪生后的虚拟世界提供了实时精准持续的鲜活数据供给,使元宇宙虚拟世界里的人们足不出网就可以明察物理世界的秋毫。</p>
 <p>也有更细化的版本：We aimed to begin<br />
 <img src="https://oss.imzhanghao.com/img/202203251751787.png" srcset="/img/loading.gif" lazyload alt="元宇宙技术We aimed to begin" /></p>
 <h2 id="实现路径"><a class="markdownIt-Anchor" href="#实现路径"></a> 实现路径</h2>
@@ -417,7 +619,7 @@
 <p>这时，元宇宙就不会再局限于社交和娱乐等基本活动，它<strong>几乎可以取代真实世界中的一切事情</strong>，在虚拟世界中，将会有真正的工作、商业买卖、虚拟的资产和货币、甚至可以会出现独立的政府，而这一切，又可以与真实世界互通，届时将会出现新的基于元宇宙社会的应用，也会有基于元宇宙的职业。</p>
 <h3 id="阶段四虚拟和现实融为一体"><a class="markdownIt-Anchor" href="#阶段四虚拟和现实融为一体"></a> 阶段四：虚拟和现实融为一体</h3>
 <p>到了元宇宙的终极形态，<strong>虚拟和现实可能就已经完全融为一体</strong>了。</p>
-<p>这时，人类能在是虚拟世界中，体验现实世界所有能够尝试的体验，甚至可以<strong>做到在真实世界中所做不到的事情</strong>，人类是都充满想象力的，之前我们的幻想只能停留在视觉和听觉这两个维度上，比如我们可以把幻想拍成电影供大家欣赏，但是在元宇宙的终极形态中，<strong>虚拟技术也许可以控制人类的大脑皮层，实现味觉、嗅觉、触觉等感官的模拟</strong>，让你坐在自家沙发，就可以感受到吃到虚拟美食的快感、深处花圃中的芬芳或者遨游太空的失重感等等。</p>
+<p>这时，人类能在是虚拟世界中，体验现实世界所有能够尝试的体验，甚至可以<strong>做到在真实世界中所做不到的事情</strong>，人类是都充满想象力的，之前我们的幻想只能停留在视觉和听觉这两个维度上，比如我们可以把幻想拍成电影供大家欣赏，但是在元宇宙的终极形态中，<strong>虚拟技术也许可以控制人类的大脑皮层，实现味觉、嗅觉、触觉等感官的模拟</strong>，让你坐在自家沙发，就可以感受到吃到虚拟美食的快感、身处花圃中的芬芳或者遨游太空的失重感等等。</p>
 <p>如果元宇宙的终极形态可以实现，那么很显然，现在现实社会中的所有活动都可以在元宇宙中实现，反过来，元宇宙中的活动现实社会中却不一定能够做到，从这个角度来看，元宇宙的经济规模必然会大于现实世界。</p>
 <h2 id="产业生态"><a class="markdownIt-Anchor" href="#产业生态"></a> 产业生态</h2>
 <p>随着芯片技术的提升，5G技术的普及，云计算、区块链技术的成熟，元宇宙的发展也有了足够的土壤，另外资本也在加速进军这一领域，近几年包括Facebook，微软，苹果等科技巨头都相继入场，尤其是Facebook以及All in元宇宙，这必将会推动元宇宙的发展，并吸引更多的资金来进场，毕竟元宇宙看上去还是一个数十万亿的产业，嗅觉敏感的资本必然不会放过这样的机会。</p>
@@ -457,34 +659,95 @@
 [4]<a target="_blank" rel="noopener" href="http://www.199it.com/archives/1384572.html">清华大学：元宇宙发展研究报告2.0版</a><br />
 [5]<a target="_blank" rel="noopener" href="https://www.shangyexinzhi.com/article/4664830.html">2022元宇宙产业发展趋势报告-速途元宇宙研究院</a></p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/technical-insight/">技术洞察</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%85%83%E5%AE%87%E5%AE%99/">元宇宙</a>
-                    
-                  </div>
                 
               </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/technical-insight/" class="category-chain-item">技术洞察</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%85%83%E5%AE%87%E5%AE%99/" class="print-no-link">#元宇宙</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>元宇宙的关键技术和实现路径</div>
+      <div>https://imzhanghao.com/2022/03/26/metaverse/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangHao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
               
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
 
               <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
                   crossorigin="anonymous"></script>
@@ -499,11 +762,12 @@
               </script>
 
               
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
+
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/16/web3/">
+                      <a href="/2022/04/16/web3/" title="Web 3.0的范式、技术和生态">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Web 3.0的范式、技术和生态</span>
                         <span class="visible-mobile">上一篇</span>
@@ -513,7 +777,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/07/black-market/">
+                      <a href="/2022/03/07/black-market/" title="网络黑灰产的行业现状和产业链条">
                         <span class="hidden-mobile">网络黑灰产的行业现状和产业链条</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -525,32 +789,71 @@
             </div>
 
             
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
+  
+  
+    <article id="comments" lazyload>
+      
 
-              </article>
-            
+    </article>
+  
+
+
           </article>
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
 
 
     
@@ -575,45 +878,43 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-    
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
   
-  <!-- 备案信息 -->
-  <div class="beian">
-    <span>
-      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
-        陕ICP备20008129号
-      </a>
-    </span>
-    
-  </div>
-
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      陕ICP备20008129号
+    </a>
+  </span>
+  
+</div>
 
   
-</footer>
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -624,15 +925,27 @@
   </script>
 
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -642,105 +955,181 @@
 
 
 
-  
-
-
 
   
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
   
-  
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
-  
-  
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
-  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
 
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-        typing(title);
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-  
-
-  
-    <!-- KaTeX -->
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
-  
-
-
-
-
-
-
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
 
 
   
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
 
-  
-    <!-- Google Analytics -->
-    <script defer>
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-      ga.l = +new Date;
-      ga('create', 'UA-166608124-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-  
 
-  
-    <!-- Google gtag.js -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKN25ZF7R2"></script>
-    <script defer>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-PKN25ZF7R2');
-    </script>
-  
+  <script>Fluid.plugins.imageCaption();</script>
 
-  
+  <script defer src="/js/openkounter.js" ></script>
 
-  
-
-  
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

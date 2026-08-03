@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -72,54 +75,115 @@
 <meta name="twitter:image" content="https://oss.imzhanghao.com/img/202302240527749.png">
   
   
+  
   <title>ChatGPT模型的三层理解 - 张浩在路上</title>
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
-    
-  
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":"G-PKN25ZF7R2","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":{"measurement_id":"G-PKN25ZF7R2"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-PKN25ZF7R2", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-PKN25ZF7R2');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
 </head>
 
 
 <body>
-  <header style="height: 45vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 45vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>张浩在路上</strong>
@@ -131,7 +195,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -140,9 +204,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/technology/">
+              <a class="nav-link" href="/technology/" target="_self">
                 <i class="iconfont icon-bug"></i>
-                技术
+                <span>技术</span>
               </a>
             </li>
           
@@ -152,9 +216,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/monetization/">
+              <a class="nav-link" href="/monetization/" target="_self">
                 <i class="iconfont icon-briefcase"></i>
-                变现
+                <span>变现</span>
               </a>
             </li>
           
@@ -164,9 +228,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/thinking/">
+              <a class="nav-link" href="/thinking/" target="_self">
                 <i class="iconfont icon-books"></i>
-                思考
+                <span>思考</span>
               </a>
             </li>
           
@@ -176,9 +240,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -188,9 +252,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -200,9 +264,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -210,14 +274,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -225,57 +291,188 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ChatGPT模型的三层理解">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-02-24 10:00" pubdate>
-        2023年2月24日 上午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      11k 字
-    </span>
-  
-
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      93 分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
           
-        </div>
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/technology/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-bug"></i>
+                  <span>技术</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/monetization/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>变现</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/thinking/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-books"></i>
+                  <span>思考</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
       </div>
     </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ChatGPT模型的三层理解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-24 10:00" pubdate>
+          2023年2月24日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          93 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
   </header>
 
   <main>
@@ -284,16 +481,21 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">ChatGPT模型的三层理解</h1>
+            <h1 id="seo-header">ChatGPT模型的三层理解</h1>
             
-            <div class="markdown-body">
-              <p>目前chatGPT的论文还没有公布，官方介绍里面讲：“ChatGPT is a sibling model to InstructGPT”，对比ChatGPT官网的模型训练流程和InstructGPT的流程图，基本是一致的，只是ChatGPT基于GPT-3.5进行的训练，我们下面的讲解就暂时以InstructGPT代替ChatGPT展开。</p>
+            
+              <div class="markdown-body">
+                
+                <p>目前chatGPT的论文还没有公布，官方介绍里面讲：“ChatGPT is a sibling model to InstructGPT”，对比ChatGPT官网的模型训练流程和InstructGPT的流程图，基本是一致的，只是ChatGPT基于GPT-3.5进行的训练，我们下面的讲解就暂时以InstructGPT代替ChatGPT展开。</p>
 <p><img src="https://oss.imzhanghao.com/img/202302240527749.png" srcset="/img/loading.gif" lazyload alt="ChatGPT vs InstructGPT" /></p>
 <h2 id="第一层训练流程"><a class="markdownIt-Anchor" href="#第一层训练流程"></a> 第一层：训练流程</h2>
 <blockquote>
@@ -335,7 +537,7 @@ GPT真实的输出是一个概率分布，“你好”的输入，可能跟“�
 </blockquote>
 <h2 id="第二层工程实现"><a class="markdownIt-Anchor" href="#第二层工程实现"></a> 第二层：工程实现</h2>
 <blockquote>
-<p>重点讲解Instruct GPT的论文，《Training language models to follow instructions with human feedback》(训练语言模型是他能够服从人类的指示)。68页的论文主要内容在讲工程实现，包括怎么挑选合适的标注人员，各个模型都是如何准备训练数据的，甚至还给了很多标注表格的模板和训练样本范例。</p>
+<p>重点讲解Instruct GPT的论文，《Training language models to follow instructions with human feedback》(训练语言模型使他能够服从人类的指示)。68页的论文主要内容在讲工程实现，包括怎么挑选合适的标注人员，各个模型都是如何准备训练数据的，甚至还给了很多标注表格的模板和训练样本范例。</p>
 </blockquote>
 <p>大型语言模型中的一致性问题通常表现为：</p>
 <ul>
@@ -429,7 +631,7 @@ GPT真实的输出是一个概率分布，“你好”的输入，可能跟“�
 <p><img src="https://oss.imzhanghao.com/img/202302161450605.png" srcset="/img/loading.gif" lazyload alt="pairwise" /><br />
 奖励模型使用的是PairWise的训练方法，PairWise的基本思路是对样本进行两两比较，构建偏序文档对，从比较中学习顺序。PairWise就是希望通过正确估计一对文档的顺序，而得到整体的正确顺序，比如一个正确的排序为：“A&gt;B&gt;C”，PairWise通过学习两两之间的关系“A&gt;B”，“B&gt;C”和“A&gt;C”来推断“A&gt;B&gt;C”。</p>
 <p><img src="https://oss.imzhanghao.com/img/202302170636619.png" srcset="/img/loading.gif" lazyload alt="RM" /><br />
-奖励模型的结构是将SFT训练后的模型的最后的嵌入层去掉后的模型。它的输入是prompt和Reponse，输出是奖励值。GPT-3最大的模型时175B的，但是发现这种规模的模型训练不稳定，最后才用了6B的版本。</p>
+奖励模型的结构是将SFT训练后的模型的最后的嵌入层去掉后的模型。它的输入是prompt和Reponse，输出是奖励值。GPT-3最大的模型是175B的，但是发现这种规模的模型训练不稳定，最后才用了6B的版本。</p>
 <h3 id="25-强化学习reinforcement-learningrl"><a class="markdownIt-Anchor" href="#25-强化学习reinforcement-learningrl"></a> 2.5 强化学习Reinforcement learning（RL）</h3>
 <p><img src="https://oss.imzhanghao.com/img/202302161741774.png" srcset="/img/loading.gif" lazyload alt="强化学习" /><br />
 强化学习（Reinforcement learning，RL）讨论的问题是一个智能体（agent）怎么在一个复杂不确定的 环境（environment) 里面去极大化它能获得的奖励。通过感知所处环境的 状态（state) 对 动作（action） 的反应（reward），来指导更好的动作，从而获得最大的收益（return），这被称为在交互中学习，这样的学习方法就被称作强化学习。</p>
@@ -445,7 +647,7 @@ GPT真实的输出是一个概率分布，“你好”的输入，可能跟“�
 <li><strong>真实性</strong>：判断模型在封闭领域任务中有产生虚构事实的倾向。</li>
 <li><strong>无害性</strong>：标注者评估模型的输出是否适当、是否包含歧视性内容。</li>
 </ul>
-<p>跟SFT 175B的模型对比效果，所以我们可以看到SFT 175B的胜率是0.5。</p>
+<p>该模型跟SFT 175B的模型对比效果，所以我们可以看到SFT 175B的胜率是0.5。</p>
 <p>在对我们的prompt进行人工评估过程中，1.3B个参数的InstructGPT模型的输出优于 175B的GPT-3模型的输出，尽管参数少100倍。此外，InstructGPT模型显示了真实性的提高和有毒输出生成的减少，同时在公共数据集上的性能下降却很小。尽管InstructGPT 仍然会犯一些简单的错误，但我们的结果表明，<strong>根据人类反馈进行微调是使语言模型与人类意图保持一致的一个有前途的方向</strong>。</p>
 <h2 id="第三层发展脉络"><a class="markdownIt-Anchor" href="#第三层发展脉络"></a> 第三层：发展脉络</h2>
 <blockquote>
@@ -495,7 +697,7 @@ GPT真实的输出是一个概率分布，“你好”的输入，可能跟“�
 <p>Transformer出现后，开始取代RNN（循环神经网络）和 CNN（卷积神经网络）成为最热门的信息提取工具，以前做NLP（自然语言处理）研究的喜欢用RNN，做CV（计算机视觉）研究的喜欢用CNN，现在大家都用Transformer了，很多研究进展可以同步到另一个领域。</p>
 </blockquote>
 <h3 id="34-gpt"><a class="markdownIt-Anchor" href="#34-gpt"></a> 3.4 GPT</h3>
-<p>传统的NLP模型往往使用大量的数据对有监督的模型进行任务相关的模型训练，但是高质量的标注数据往往很难获得，而且不同任务的模型很难泛化到其他任务上，所以OpenAI在《Imporoving Language Understanding By Generative Pre-training》提出先在大量的无标签数据上训练一个语言模型，然后再在下游具体任务的有标签数据集上进行fine-tune。</p>
+<p>传统的NLP模型往往使用大量的数据对有监督的模型进行任务相关的模型训练，但是高质量的标注数据往往很难获得，而且不同任务的模型很难泛化到其他任务上，所以OpenAI在《Improving Language Understanding By Generative Pre-training》提出先在大量的无标签数据上训练一个语言模型，然后再在下游具体任务的有标签数据集上进行fine-tune。</p>
 <p>GPT是典型的<strong>预训练+微调</strong>的两阶段模型。预训练阶段就是用海量的文本数据通过无监督学习的方式来获取语言学知识，而微调就是用下游任务的训练数据来获得特定任务的模型。</p>
 <p>举一个例子来形容预训练和微调的关系，我们从幼儿园到高中就像预训练过程，不断学习知识，这些知识包罗万象包括语数英物化生等等，最重要的特征就是预训练模型具有很好的通用性；然后读大学的时候需要确定一个专业方向作为未来的职业，所以就会去重点学习专业知识，从而让我们成为更加适合某个专业方向的人才，最重要的特征就是具有极强的专业性。</p>
 <p><img src="https://oss.imzhanghao.com/img/202302171642998.png" srcset="/img/loading.gif" lazyload alt="gpt使用的是transformer的Decoder部分" /></p>
@@ -503,7 +705,7 @@ GPT真实的输出是一个概率分布，“你好”的输入，可能跟“�
 <h3 id="35-bert"><a class="markdownIt-Anchor" href="#35-bert"></a> 3.5 BERT</h3>
 <p>2018年10月，Google发表《BERT_Pre-training of Deep Bidirectional Transformers for Language Understanding》，提出了类似于GPT的预训练模型BERT。</p>
 <p><img src="https://oss.imzhanghao.com/img/202302171650512.png" srcset="/img/loading.gif" lazyload alt="bert使用的是transformer的Encoder部分" /></p>
-<p>BERT和GPT采用了不同的技术路线，简单理解，BERT是一个双向模型，可以联系上下文进行分析，更擅长<strong>完形填空</strong>；而GPT是一个单项模型，只能从左到右进行阅读，更擅长<strong>写作文</strong>。</p>
+<p>BERT和GPT采用了不同的技术路线，简单理解，BERT是一个双向模型，可以联系上下文进行分析，更擅长<strong>完形填空</strong>；而GPT是一个单向模型，只能从左到右进行阅读，更擅长<strong>写作文</strong>。</p>
 <p>发布更早的GPT-1输给了晚4个月发布的BERT，而且是完败。在当时的竞赛排行榜上，阅读理解领域已经被BERT屠榜了。此后，BERT也成为了NLP领域最常用的模型。<br />
 <img src="https://oss.imzhanghao.com/img/202302181424811.png" srcset="/img/loading.gif" lazyload alt="bert on GLUE" /></p>
 <h3 id="36-gpt-2-gpt-3"><a class="markdownIt-Anchor" href="#36-gpt-2-gpt-3"></a> 3.6 GPT-2 &amp; GPT-3</h3>
@@ -544,7 +746,7 @@ GPT真实的输出是一个概率分布，“你好”的输入，可能跟“�
 <td>2020 年 5 月</td>
 <td>96</td>
 <td>96</td>
-<td>12888</td>
+<td>12288</td>
 <td>1750 亿</td>
 <td>45TB</td>
 </tr>
@@ -590,8 +792,8 @@ Facebook called it “an unacceptable error.” The company has struggled with o
 <p><img src="https://oss.imzhanghao.com/img/202302240540923.png" srcset="/img/loading.gif" lazyload alt="LLM模型" /></p>
 <p>大模型背后离不开大数据、大算力。GPT-2用于训练的数据取自于Reddit上高赞的文章，数据集共有约800万篇文章，累计体积约40G；GPT-3模型的神经网络是在超过45TB的文本上进行训练的，数据相当于整个维基百科英文版的160倍。</p>
 <p>在算力方面，GPT-3.5在微软Azure AI超算基础设施（由V100GPU组成的高带宽集群）上进行训练，总算力消耗约3640PF-days（即每秒一千万亿次计算，运行3640天）。可以说，大模型的训练就是靠烧钱烧出来的。据估算，OpenAI的模型训练成本高达1200万美元，GPT-3的单次训练成本高达460万美元。</p>
-<p>根据《财富》杂志报道的数据，2022年OpenAI的收入为3000万美元的收入，但净亏损总额预计为5.445亿美元。阿尔特曼在Twitter上回答马斯克的问题时表示，在用户与ChatGPT的每次交互中OpenAI花费的计算成本为“个位数美分”，随着ChatGPT变得流行，每月的计算成本可能达到数百万美元。</p>
-<p>大模型高昂的训练成本让普通创业公司难以为继，因此参与者基本都是的科技巨头。</p>
+<p>根据《财富》杂志报道的数据，2022年OpenAI的收入为3000万美元，但净亏损总额预计为5.445亿美元。阿尔特曼在Twitter上回答马斯克的问题时表示，在用户与ChatGPT的每次交互中OpenAI花费的计算成本为“个位数美分”，随着ChatGPT变得流行，每月的计算成本可能达到数百万美元。</p>
+<p>大模型高昂的训练成本让普通创业公司难以为继，因此参与者基本都是科技巨头。</p>
 <h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://openai.com/blog/chatgpt/">ChatGPT: Optimizing Language Models for Dialogue</a></li>
@@ -602,36 +804,97 @@ Facebook called it “an unacceptable error.” The company has struggled with o
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2109.01652">Instruct Learning_Finetuned Language Models Are Zero-Shot Learners</a></li>
 </ul>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/machinelearning/">机器学习</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/ChatGPT/">ChatGPT</a>
-                    
-                      <a class="hover-with-bg" href="/tags/InstructGPT/">InstructGPT</a>
-                    
-                  </div>
                 
               </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/machinelearning/" class="category-chain-item">机器学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ChatGPT/" class="print-no-link">#ChatGPT</a>
+      
+        <a href="/tags/InstructGPT/" class="print-no-link">#InstructGPT</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ChatGPT模型的三层理解</div>
+      <div>https://imzhanghao.com/2023/02/24/chatgpt/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangHao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
               
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
 
               <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
                   crossorigin="anonymous"></script>
@@ -646,7 +909,8 @@ Facebook called it “an unacceptable error.” The company has struggled with o
               </script>
 
               
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
+
                   <article class="post-prev col-6">
                     
                     
@@ -654,7 +918,7 @@ Facebook called it “an unacceptable error.” The company has struggled with o
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/27/multimodal-learning/">
+                      <a href="/2022/10/27/multimodal-learning/" title="多模态学习(MultiModal Learning)">
                         <span class="hidden-mobile">多模态学习(MultiModal Learning)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -666,32 +930,71 @@ Facebook called it “an unacceptable error.” The company has struggled with o
             </div>
 
             
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
+  
+  
+    <article id="comments" lazyload>
+      
 
-              </article>
-            
+    </article>
+  
+
+
           </article>
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
 
 
     
@@ -716,45 +1019,43 @@ Facebook called it “an unacceptable error.” The company has struggled with o
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-    
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
   
-  <!-- 备案信息 -->
-  <div class="beian">
-    <span>
-      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
-        陕ICP备20008129号
-      </a>
-    </span>
-    
-  </div>
-
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      陕ICP备20008129号
+    </a>
+  </span>
+  
+</div>
 
   
-</footer>
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -765,15 +1066,27 @@ Facebook called it “an unacceptable error.” The company has struggled with o
   </script>
 
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -783,105 +1096,181 @@ Facebook called it “an unacceptable error.” The company has struggled with o
 
 
 
-  
-
-
 
   
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
   
-  
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
-  
-  
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
-  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
 
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-        typing(title);
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-  
-
-  
-    <!-- KaTeX -->
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
-  
-
-
-
-
-
-
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
 
 
   
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
 
-  
-    <!-- Google Analytics -->
-    <script defer>
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-      ga.l = +new Date;
-      ga('create', 'UA-166608124-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-  
 
-  
-    <!-- Google gtag.js -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKN25ZF7R2"></script>
-    <script defer>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-PKN25ZF7R2');
-    </script>
-  
+  <script>Fluid.plugins.imageCaption();</script>
 
-  
+  <script defer src="/js/openkounter.js" ></script>
 
-  
-
-  
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

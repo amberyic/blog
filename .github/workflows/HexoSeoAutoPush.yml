@@ -1,0 +1,32 @@
+
+name: Hexo SEO Auto Push
+
+on:
+  schedule:
+    - cron: 0 4 * * *
+  watch:
+    types: [started]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id || github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@main
+        
+          
+      - uses: actions/setup-node@main
+        with:
+          node-version: latest
+      - run: |
+          npm init -y
+          npm install hexo-seo-autopush
+
+      
+        
+      
+      - name: bing push
+        run: curl -X POST "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlBatch?apikey=${{secrets.bing_apikey}}" -H "Content-Type:application/json" -H "charset:utf-8" -d @bing.json
+
+      - name: baidu push
+        run: curl -H "Content-Type:text/plain" --data-binary @baidu.txt "http://data.zz.baidu.com/urls?site=https://imzhanghao.com&token=${{secrets.baidu_token}}"
+  

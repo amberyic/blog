@@ -1,7 +1,7 @@
 /* global Fluid */
 
 /**
- * Modify by https://blog.skk.moe/post/hello-darkmode-my-old-friend/
+ * Modified from https://blog.skk.moe/post/hello-darkmode-my-old-friend/
  */
 (function(window, document) {
   var rootElement = document.documentElement;
@@ -11,6 +11,7 @@
   var defaultColorSchemaAttributeName = 'data-default-color-scheme';
   var colorToggleButtonSelector = '#color-toggle-btn';
   var colorToggleIconSelector = '#color-toggle-icon';
+  var iframeSelector = 'iframe';
 
   function setLS(k, v) {
     try {
@@ -101,6 +102,9 @@
     // 根据当前模式设置图标
     setButtonIcon(current);
 
+    // 设置代码高亮
+    setHighlightCSS(current);
+
     // 设置其他应用
     setApplications(current);
   }
@@ -149,31 +153,73 @@
       }
       var iconElement = document.querySelector(colorToggleIconSelector);
       if (iconElement) {
-        iconElement.setAttribute(
-          'class',
-          'iconfont ' + icon
-        );
-        iconElement.setAttribute(
-          'data',
-          invertColorSchemaObj[schema]
-        );
+        iconElement.setAttribute('class', 'iconfont ' + icon);
+        iconElement.setAttribute('data', invertColorSchemaObj[schema]);
       } else {
-        // 如果图标不存在则说明图标还没加载出来，等到页面全部加载再尝试切换
         Fluid.utils.waitElementLoaded(colorToggleIconSelector, function() {
           var iconElement = document.querySelector(colorToggleIconSelector);
           if (iconElement) {
-            iconElement.setAttribute(
-              'class',
-              'iconfont ' + icon
-            );
-            iconElement.setAttribute(
-              'data',
-              invertColorSchemaObj[schema]
-            );
+            iconElement.setAttribute('class', 'iconfont ' + icon);
+            iconElement.setAttribute('data', invertColorSchemaObj[schema]);
           }
         });
       }
+
+      // 同步更新移动端按钮文字：light 状态显示"关灯"，dark 状态显示"开灯"
+      var mobileBtn = document.querySelector('#mobile-color-toggle-btn');
+      if (mobileBtn) {
+        var label = document.querySelector('#mobile-color-toggle-label');
+        if (label) {
+          // schema 是当前模式：light→显示 dark 标签（关灯），dark→显示 light 标签（开灯）
+          label.textContent = schema === 'dark'
+            ? (mobileBtn.getAttribute('data-label-light') || '')
+            : (mobileBtn.getAttribute('data-label-dark') || '');
+        }
+        // 同步图标
+        var mobileIcon = document.querySelector('#mobile-color-toggle-icon');
+        if (mobileIcon) {
+          mobileIcon.setAttribute('class', 'iconfont ' + icon);
+        }
+      }
+
+      if (document.documentElement.getAttribute('data-user-color-scheme')) {
+        var color = getComputedStyle(document.documentElement).getPropertyValue('--navbar-bg-color').trim();
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', color);
+      }
     }
+  }
+
+  function setHighlightCSS(schema) {
+    // 启用对应的代码高亮的样式
+    var lightCss = document.getElementById('highlight-css');
+    var darkCss = document.getElementById('highlight-css-dark');
+    if (schema === 'dark') {
+      if (darkCss) {
+        darkCss.removeAttribute('disabled');
+      }
+      if (lightCss) {
+        lightCss.setAttribute('disabled', '');
+      }
+    } else {
+      if (lightCss) {
+        lightCss.removeAttribute('disabled');
+      }
+      if (darkCss) {
+        darkCss.setAttribute('disabled', '');
+      }
+    }
+
+    setTimeout(function() {
+      // 设置代码块组件样式
+      document.querySelectorAll('.markdown-body pre').forEach((pre) => {
+        var cls = Fluid.utils.getBackgroundLightness(pre) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+        var widget = pre.querySelector('.code-widget-light, .code-widget-dark');
+        if (widget) {
+          widget.classList.remove('code-widget-light', 'code-widget-dark');
+          widget.classList.add(cls);
+        }
+      });
+    }, 200);
   }
 
   function setApplications(schema) {
@@ -190,15 +236,25 @@
     // 设置 utterances 评论主题
     var utterances = document.querySelector('.utterances-frame');
     if (utterances) {
-      var theme = window.UtterancesThemeLight;
-      if (schema === 'dark') {
-        theme = window.UtterancesThemeDark;
-      }
+      var utterancesTheme = schema === 'dark' ? window.UtterancesThemeDark : window.UtterancesThemeLight;
       const message = {
         type : 'set-theme',
-        theme: theme
+        theme: utterancesTheme
       };
       utterances.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+
+    // 设置 giscus 评论主题
+    var giscus = document.querySelector('iframe.giscus-frame');
+    if (giscus) {
+      var giscusTheme = schema === 'dark' ? window.GiscusThemeDark : window.GiscusThemeLight;
+      const message = {
+        setConfig: {
+          theme: giscusTheme,
+        }
+      };
+      // giscus.style.cssText += 'color-scheme: normal;';
+      giscus.contentWindow.postMessage({ 'giscus': message }, 'https://giscus.app');
     }
   }
 
@@ -226,5 +282,18 @@
         });
       }
     }
+
+    // 绑定移动端菜单按钮的事件
+    var mobileButton = document.querySelector('#mobile-color-toggle-btn');
+    if (mobileButton) {
+      mobileButton.addEventListener('click', function() {
+        applyCustomColorSchemaSettings(toggleCustomColorSchema());
+      });
+    }
   });
+
+  Fluid.utils.waitElementLoaded(iframeSelector, function() {
+    applyCustomColorSchemaSettings();
+  });
+
 })(window, document);

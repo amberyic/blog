@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" href="/img/favicon/favicon-32x32.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -28,7 +31,7 @@
 <meta property="og:image" content="https://oss.imzhanghao.com/img/%E5%A4%A7%E6%95%B0%E7%9B%B8%E4%B9%98.png">
 <meta property="og:image" content="https://oss.imzhanghao.com/img/%E5%BE%AA%E7%8E%AF%E8%B5%9B%E6%97%A5%E7%A8%8B%E8%A1%A8.jpg">
 <meta property="article:published_time" content="2020-04-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-13T23:18:28.509Z">
+<meta property="article:modified_time" content="2026-08-03T22:13:55.754Z">
 <meta property="article:author" content="ZhangHao">
 <meta property="article:tag" content="五大经典算法">
 <meta property="article:tag" content="分治算法">
@@ -36,54 +39,115 @@
 <meta name="twitter:image" content="https://oss.imzhanghao.com/img/%E5%A4%A7%E6%95%B0%E7%9B%B8%E4%B9%98.png">
   
   
+  
   <title>五大经典算法|3.分治法 - 张浩在路上</title>
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
-    
-  
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
-  
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":"UA-166608124-1","gtag":"G-PKN25ZF7R2","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"imzhanghao.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"0c64a5657309290fd8f5efe33fcbcdb4","google":{"measurement_id":"G-PKN25ZF7R2"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-PKN25ZF7R2", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-PKN25ZF7R2');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="张浩在路上" type="application/atom+xml">
 </head>
 
 
 <body>
-  <header style="height: 45vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 45vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>张浩在路上</strong>
@@ -95,7 +159,7 @@
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible content (desktop) -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
         
@@ -104,9 +168,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/technology/">
+              <a class="nav-link" href="/technology/" target="_self">
                 <i class="iconfont icon-bug"></i>
-                技术
+                <span>技术</span>
               </a>
             </li>
           
@@ -116,9 +180,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/monetization/">
+              <a class="nav-link" href="/monetization/" target="_self">
                 <i class="iconfont icon-briefcase"></i>
-                变现
+                <span>变现</span>
               </a>
             </li>
           
@@ -128,9 +192,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/thinking/">
+              <a class="nav-link" href="/thinking/" target="_self">
                 <i class="iconfont icon-books"></i>
-                思考
+                <span>思考</span>
               </a>
             </li>
           
@@ -140,9 +204,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -152,9 +216,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -164,9 +228,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -174,14 +238,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -189,57 +255,188 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="五大经典算法|3.分治法">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-04-20 00:00" pubdate>
-        2020年4月20日 凌晨
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      6.6k 字
-    </span>
-  
-
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      55 分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
           
-        </div>
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/technology/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-bug"></i>
+                  <span>技术</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/monetization/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-briefcase"></i>
+                  <span>变现</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/thinking/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-books"></i>
+                  <span>思考</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
       </div>
     </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="五大经典算法|3.分治法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-04-20 00:00" pubdate>
+          2020年4月20日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          55 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
   </header>
 
   <main>
@@ -248,16 +445,21 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">五大经典算法|3.分治法</h1>
+            <h1 id="seo-header">五大经典算法|3.分治法</h1>
             
-            <div class="markdown-body">
-              <p>分治算法（Divide And Conquer）把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并。</p>
+            
+              <div class="markdown-body">
+                
+                <p>分治算法（Divide And Conquer）把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并。</p>
 <h2 id="分治算法的概念"><a class="markdownIt-Anchor" href="#分治算法的概念"></a> 分治算法的概念</h2>
 <p>在计算机科学中，分治法是一种很重要的算法。字面上的解释是“分而治之”，就是把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并。这个技巧是很多高效算法的基础，如排序算法(快速排序，归并排序)，傅立叶变换(快速傅立叶变换)……</p>
 <p>任何一个可以用计算机求解的问题所需的计算时间都与其规模有关。问题的规模越小，越容易直接求解，解题所需的计算时间也越少。例如，对于n个元素的排序问题，当n=1时，不需任何计算。n=2时，只要作一次比较即可排好序。n=3时只要作3次比较即可，…。而当n较大时，问题就不那么容易处理了。要想直接解决一个规模较大的问题，有时是相当困难的。</p>
@@ -286,24 +488,24 @@
 <p>例如：{ 1, 2, 3, 4, 5 } 找 3，返回下标 2（下标从 0 开始计算）。</p>
 <details>
   <summary>二分查找算法C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-keyword">int</span> a[<span class="hljs-number">100</span>]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">12</span>,<span class="hljs-number">12</span>,<span class="hljs-number">12</span>,<span class="hljs-number">15</span>,<span class="hljs-number">29</span>,<span class="hljs-number">55</span>&#125;;<span class="hljs-comment">//数组中的数（由小到大）</span><br><span class="hljs-keyword">int</span> k;<span class="hljs-comment">//要找的数字</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">found</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> m=x+(y-x)/<span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (x&gt;y) &#123; <span class="hljs-comment">//查找完毕没有找到答案，返回-1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (a[m]==k)<br>        <span class="hljs-keyword">return</span> m; <span class="hljs-comment">//找到!返回位置.</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (a[m]&gt;k)<br>        <span class="hljs-keyword">return</span> found(x,m<span class="hljs-number">-1</span>);<span class="hljs-comment">//找左边</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> found(m+<span class="hljs-number">1</span>,y);<span class="hljs-comment">//找右边</span><br><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">cin</span>&gt;&gt;k;<span class="hljs-comment">//输入要找的数字c语言把cin换为scanf即可</span><br>    <span class="hljs-built_in">cout</span>&lt;&lt;found(<span class="hljs-number">0</span>,<span class="hljs-number">9</span>);<span class="hljs-comment">//从数组a[0]到a[9]c语言把cout换为printf即可</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br>using namespace <span class="hljs-built_in">std</span>;<br><span class="hljs-type">int</span> a[<span class="hljs-number">100</span>]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">12</span>,<span class="hljs-number">12</span>,<span class="hljs-number">12</span>,<span class="hljs-number">15</span>,<span class="hljs-number">29</span>,<span class="hljs-number">55</span>&#125;;<span class="hljs-comment">//数组中的数（由小到大）</span><br><span class="hljs-type">int</span> k;<span class="hljs-comment">//要找的数字</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">found</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> y)</span> &#123;<br>    <span class="hljs-type">int</span> m=x+(y-x)/<span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> (x&gt;y) &#123; <span class="hljs-comment">//查找完毕没有找到答案，返回-1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (a[m]==k)<br>        <span class="hljs-keyword">return</span> m; <span class="hljs-comment">//找到!返回位置.</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (a[m]&gt;k)<br>        <span class="hljs-keyword">return</span> found(x,m<span class="hljs-number">-1</span>);<span class="hljs-comment">//找左边</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> found(m+<span class="hljs-number">1</span>,y);<span class="hljs-comment">//找右边</span><br><br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-built_in">cin</span>&gt;&gt;k;<span class="hljs-comment">//输入要找的数字c语言把cin换为scanf即可</span><br>    <span class="hljs-built_in">cout</span>&lt;&lt;found(<span class="hljs-number">0</span>,<span class="hljs-number">9</span>);<span class="hljs-comment">//从数组a[0]到a[9]c语言把cout换为printf即可</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 </details>
 <h3 id="大数相乘"><a class="markdownIt-Anchor" href="#大数相乘"></a> 大数相乘</h3>
-<p>对于两个相同位数的大数A,B，且位数为2的整数次方，我们可以吧每个数按位数从中间分成两个数的和，如下图：<br />
+<p>对于两个相同位数的大数A,B，且位数为2的整数次方，我们可以把每个数按位数从中间分成两个数的和，如下图：<br />
 <img src="https://oss.imzhanghao.com/img/%E5%A4%A7%E6%95%B0%E7%9B%B8%E4%B9%98.png" srcset="/img/loading.gif" lazyload alt="大数相乘" /><br />
 将A分成a1和a0， 将B分成b1和b0<br />
 普通的做法是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>∗</mo><mi>B</mi><mo>=</mo><mi>a</mi><mn>1</mn><mo>∗</mo><mi>b</mi><mn>1</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mi>n</mi></msup><mo>+</mo><mo stretchy="false">(</mo><mi>a</mi><mn>1</mn><mo>∗</mo><mi>b</mi><mn>0</mn><mo>+</mo><mi>b</mi><mn>1</mn><mo>∗</mo><mi>a</mi><mn>0</mn><mo stretchy="false">)</mo><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mo stretchy="false">(</mo></msup><mn>2</mn><mi mathvariant="normal">/</mi><mi>n</mi><mo stretchy="false">)</mo><mo>+</mo><mi>a</mi><mn>0</mn><mo>∗</mo><mi>b</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">A*B=a1*b1*10^n+(a1*b0+b1*a0)*10^(2/n)+a0*b0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">b</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mopen mtight">(</span></span></span></span></span></span></span></span><span class="mord">2</span><span class="mord">/</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord">0</span></span></span></span></p>
 <p>举个例子：</p>
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1234</mn><mo>∗</mo><mn>9876</mn><mo>=</mo><mo stretchy="false">(</mo><mn>12</mn><mo>∗</mo><mn>98</mn><mo stretchy="false">)</mo><mo>∗</mo><mn>10000</mn><mo>+</mo><mo stretchy="false">(</mo><mn>12</mn><mo>∗</mo><mn>76</mn><mo>+</mo><mn>98</mn><mo>∗</mo><mn>34</mn><mo stretchy="false">)</mo><mo>∗</mo><mn>100</mn><mo>+</mo><mn>34</mn><mo>∗</mo><mn>76</mn></mrow><annotation encoding="application/x-tex">1234*9876=(12*98)*10000+(12*76+98*34)*100+34*76</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">2</span><span class="mord">3</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">9</span><span class="mord">8</span><span class="mord">7</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">9</span><span class="mord">8</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">7</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">9</span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">3</span><span class="mord">4</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span><span class="mord">6</span></span></span></span></p>
-<p>对于这个算法的时间复杂度，我们需要做4次n/2级别的乘法和3加法。即T(n)=4*T(n/2)+O(n),时间复杂度是O(n²）.</p>
+<p>对于这个算法的时间复杂度，我们需要做4次n/2级别的乘法和3次加法。即T(n)=4*T(n/2)+O(n),时间复杂度是O(n²）.</p>
 <p>分治法的算法是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>∗</mo><mi>B</mi><mo>=</mo><mi>a</mi><mn>1</mn><mo>∗</mo><mi>b</mi><mn>1</mn><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mi>n</mi></msup><mo>+</mo><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mi>a</mi><mn>1</mn><mo>+</mo><mi>a</mi><mn>0</mn><mo stretchy="false">)</mo><mo>∗</mo><mo stretchy="false">(</mo><mi>b</mi><mn>0</mn><mo>+</mo><mi>b</mi><mn>1</mn><mo stretchy="false">)</mo><mo>−</mo><mi>a</mi><mn>1</mn><mo>∗</mo><mi>a</mi><mn>0</mn><mo>−</mo><mi>b</mi><mn>1</mn><mo>∗</mo><mi>b</mi><mn>0</mn><mo stretchy="false">]</mo><mo>∗</mo><mn>1</mn><msup><mn>0</mn><mi>n</mi></msup><mi mathvariant="normal">/</mi><mn>2</mn><mo>+</mo><mi>a</mi><mn>0</mn><mo>∗</mo><mi>b</mi><mn>0</mn></mrow><annotation encoding="application/x-tex">A*B=a1*b1*10^n+[(a1+a0)*(b0+b1)-a1*a0-b1*b0]*10^n/2+a0*b0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">b</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord">0</span></span></span></span></p>
 <p>对于这个算法的时间复杂度，我们需要做3次n/2级别的乘法。即T(n)=3*T(n/2)+O(n),时间复杂度是T(n) = O(n^log2(3) ) = O(n^1.59).</p>
 <details>
   <summary>分治法解决大数相乘问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">multiply</span><span class="hljs-params">(<span class="hljs-built_in">string</span> num1, <span class="hljs-built_in">string</span> num2)</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> init_len = <span class="hljs-number">4</span>;<br>	<span class="hljs-keyword">if</span> (num1.length() &gt; <span class="hljs-number">2</span> || num2.length() &gt; <span class="hljs-number">2</span>) &#123;<br>		<span class="hljs-keyword">int</span> max_len = max(num1.length(), num2.length());<br>		<span class="hljs-keyword">while</span> (init_len &lt; max_len)	init_len *= <span class="hljs-number">2</span>;<br>		add_pre_zero(num1, init_len - num1.length());<br>		add_pre_zero(num2, init_len - num2.length());<br>	&#125;<br>	<span class="hljs-keyword">if</span> (num1.length() == <span class="hljs-number">1</span>) &#123;<br>		add_pre_zero(num1, <span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">if</span> (num2.length() == <span class="hljs-number">1</span>) &#123;<br>		add_pre_zero(num2, <span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">int</span> n = num1.length();<br><br>	<span class="hljs-built_in">string</span> result;<br><br>	<span class="hljs-built_in">string</span> a1, a0, b1, b0;<br>	<span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">1</span>) &#123;<br>		a1 = num1.substr(<span class="hljs-number">0</span>, n / <span class="hljs-number">2</span>);<br>		a0 = num1.substr(n / <span class="hljs-number">2</span>, n);<br>		b1 = num2.substr(<span class="hljs-number">0</span>, n / <span class="hljs-number">2</span>);<br>		b0 = num2.substr(n / <span class="hljs-number">2</span>, n);<br>	&#125;<br>	<span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) &#123;<br>		<span class="hljs-keyword">int</span> x1 = atoi(a1.c_str());<br>		<span class="hljs-keyword">int</span> x2 = atoi(a0.c_str());<br>		<span class="hljs-keyword">int</span> y1 = atoi(b1.c_str());<br>		<span class="hljs-keyword">int</span> y2 = atoi(b0.c_str());<br>		<span class="hljs-keyword">int</span> z = (x1 * <span class="hljs-number">10</span> + x2) * (y1 * <span class="hljs-number">10</span> + y2);<br>		result = to_string(z);<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-built_in">string</span> c2 = multiply(a1, b1);<br>		<span class="hljs-built_in">string</span> c0 = multiply(a0, b0);<br>		<span class="hljs-built_in">string</span> temp_c1_1 = add(a0, a1);<br>		<span class="hljs-built_in">string</span> temp_c1_2 = add(b1, b0);<br>		<span class="hljs-built_in">string</span> temp_c1_3 = add(c2, c0);<br>		<span class="hljs-built_in">string</span> temp_c1 = multiply(temp_c1_1, temp_c1_2);<br>		<span class="hljs-built_in">string</span> c1 = subtract(temp_c1, temp_c1_3);<br>		<span class="hljs-built_in">string</span> s1 = add_last_zero(c1, n / <span class="hljs-number">2</span>);<br>		<span class="hljs-built_in">string</span> s2 = add_last_zero(c2, n);<br>		result = add(add(s1, s2), c0);<br>	&#125;<br>	<span class="hljs-keyword">return</span> result;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-built_in">string</span> <span class="hljs-title function_">multiply</span><span class="hljs-params">(<span class="hljs-built_in">string</span> num1, <span class="hljs-built_in">string</span> num2)</span> &#123;<br>	<span class="hljs-type">int</span> init_len = <span class="hljs-number">4</span>;<br>	<span class="hljs-keyword">if</span> (num1.length() &gt; <span class="hljs-number">2</span> || num2.length() &gt; <span class="hljs-number">2</span>) &#123;<br>		<span class="hljs-type">int</span> max_len = max(num1.length(), num2.length());<br>		<span class="hljs-keyword">while</span> (init_len &lt; max_len)	init_len *= <span class="hljs-number">2</span>;<br>		add_pre_zero(num1, init_len - num1.length());<br>		add_pre_zero(num2, init_len - num2.length());<br>	&#125;<br>	<span class="hljs-keyword">if</span> (num1.length() == <span class="hljs-number">1</span>) &#123;<br>		add_pre_zero(num1, <span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-keyword">if</span> (num2.length() == <span class="hljs-number">1</span>) &#123;<br>		add_pre_zero(num2, <span class="hljs-number">1</span>);<br>	&#125;<br>	<span class="hljs-type">int</span> n = num1.length();<br><br>	<span class="hljs-built_in">string</span> result;<br><br>	<span class="hljs-built_in">string</span> a1, a0, b1, b0;<br>	<span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">1</span>) &#123;<br>		a1 = num1.substr(<span class="hljs-number">0</span>, n / <span class="hljs-number">2</span>);<br>		a0 = num1.substr(n / <span class="hljs-number">2</span>, n);<br>		b1 = num2.substr(<span class="hljs-number">0</span>, n / <span class="hljs-number">2</span>);<br>		b0 = num2.substr(n / <span class="hljs-number">2</span>, n);<br>	&#125;<br>	<span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span>) &#123;<br>		<span class="hljs-type">int</span> x1 = atoi(a1.c_str());<br>		<span class="hljs-type">int</span> x2 = atoi(a0.c_str());<br>		<span class="hljs-type">int</span> y1 = atoi(b1.c_str());<br>		<span class="hljs-type">int</span> y2 = atoi(b0.c_str());<br>		<span class="hljs-type">int</span> z = (x1 * <span class="hljs-number">10</span> + x2) * (y1 * <span class="hljs-number">10</span> + y2);<br>		result = to_string(z);<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-built_in">string</span> c2 = multiply(a1, b1);<br>		<span class="hljs-built_in">string</span> c0 = multiply(a0, b0);<br>		<span class="hljs-built_in">string</span> temp_c1_1 = add(a0, a1);<br>		<span class="hljs-built_in">string</span> temp_c1_2 = add(b1, b0);<br>		<span class="hljs-built_in">string</span> temp_c1_3 = add(c2, c0);<br>		<span class="hljs-built_in">string</span> temp_c1 = multiply(temp_c1_1, temp_c1_2);<br>		<span class="hljs-built_in">string</span> c1 = subtract(temp_c1, temp_c1_3);<br>		<span class="hljs-built_in">string</span> s1 = add_last_zero(c1, n / <span class="hljs-number">2</span>);<br>		<span class="hljs-built_in">string</span> s2 = add_last_zero(c2, n);<br>		result = add(add(s1, s2), c0);<br>	&#125;<br>	<span class="hljs-keyword">return</span> result;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 </details>
 <h3 id="第k大数"><a class="markdownIt-Anchor" href="#第k大数"></a> 第K大数</h3>
-<p>在一个未排序的数组中找到第k大的元素，注意此言的第k大就是排序后的第k大的数，</p>
+<p>在一个未排序的数组中找到第k大的元素，注意此处的第k大就是排序后的第k大的数，</p>
 <p>总是将要划界的数组段末尾的元素为划界元，将比其小的数交换至前，比其大的数交换至后，最后将划界元放在“中间位置”(左边小，右边大)。划界将数组分解成两个子数组(可能为空)。</p>
 <p>设数组下表从low开始，至high结束。</p>
 <ul>
@@ -321,7 +523,7 @@
 </ul>
 <details>
   <summary>分治法解决第K大数问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-comment">//思路首先：</span><br><span class="hljs-comment">//快排划界，如果划界过程中当前划界元的中间位置就是k则找到了</span><br><span class="hljs-comment">//time,o(n*lg(k)),space,o(1)</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">//对数组vec，low到high的元素进行划界，并获取vec[high]的“中间位置”</span><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">quickPartion</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; &amp;vec, <span class="hljs-keyword">int</span> low,<span class="hljs-keyword">int</span> high)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> x = vec[high];<br>        <span class="hljs-keyword">int</span> i = low - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = low; j &lt;= high - <span class="hljs-number">1</span>; j++) &#123;<br>            <span class="hljs-keyword">if</span> (vec[j] &lt;= x)<span class="hljs-comment">//小于x的划到左边</span><br>                swap(vec,++i,j);<br>        &#125;<br>        swap(vec,++i,high);<span class="hljs-comment">//找到划界元的位置</span><br>        <span class="hljs-keyword">return</span> i;<span class="hljs-comment">//返回位置</span><br>    &#125;<br><br>    <span class="hljs-comment">//交换数组元素i和j的位置</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> temp = nums[i];<br>        nums[i]=nums[j];<br>        nums[j]=temp;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getQuickSortK</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; &amp;vec, <span class="hljs-keyword">int</span> low,<span class="hljs-keyword">int</span> high, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(low &gt;= high) <span class="hljs-keyword">return</span> vec[low];<br>        <span class="hljs-keyword">int</span>  midpos = quickPartion(vec, low,high);   <span class="hljs-comment">//对原数组vec[low]到vec[high]的元素进行划界</span><br>        <span class="hljs-keyword">if</span> (midpos == vec.size() - k) <span class="hljs-comment">//如果midpos==n-k，那么返回该值，这就是第k大的数</span><br>            <span class="hljs-keyword">return</span> vec[midpos];<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (midpos &lt; vec.size() - k) <span class="hljs-comment">//如果midpos&lt;n-k，那么第k大的数在右半数组</span><br>            <span class="hljs-keyword">return</span> getQuickSortK(vec, midpos+<span class="hljs-number">1</span>, high, k);<br>        <span class="hljs-keyword">else</span>  <span class="hljs-comment">//如果midpos&gt;n-k，那么第k大的数在左半数组</span><br>            <span class="hljs-keyword">return</span> getQuickSortK(vec, low, midpos<span class="hljs-number">-1</span>, k);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">findKthLargest</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> getQuickSortK(nums,<span class="hljs-number">0</span>,nums.size()<span class="hljs-number">-1</span>,k);<br>    &#125;<br>&#125;;<br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">//思路首先：</span><br><span class="hljs-comment">//快排划界，如果划界过程中当前划界元的中间位置就是k则找到了</span><br><span class="hljs-comment">//time,o(n*lg(k)),space,o(1)</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br>public:<br>    <span class="hljs-comment">//对数组vec，low到high的元素进行划界，并获取vec[high]的“中间位置”</span><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">quickPartion</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; &amp;vec, <span class="hljs-type">int</span> low,<span class="hljs-type">int</span> high)</span> &#123;<br>        <span class="hljs-type">int</span> x = vec[high];<br>        <span class="hljs-type">int</span> i = low - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = low; j &lt;= high - <span class="hljs-number">1</span>; j++) &#123;<br>            <span class="hljs-keyword">if</span> (vec[j] &lt;= x)<span class="hljs-comment">//小于x的划到左边</span><br>                swap(vec,++i,j);<br>        &#125;<br>        swap(vec,++i,high);<span class="hljs-comment">//找到划界元的位置</span><br>        <span class="hljs-keyword">return</span> i;<span class="hljs-comment">//返回位置</span><br>    &#125;<br><br>    <span class="hljs-comment">//交换数组元素i和j的位置</span><br>    <span class="hljs-type">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span>&#123;<br>        <span class="hljs-type">int</span> temp = nums[i];<br>        nums[i]=nums[j];<br>        nums[j]=temp;<br>    &#125;<br><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getQuickSortK</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; &amp;vec, <span class="hljs-type">int</span> low,<span class="hljs-type">int</span> high, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">if</span>(low &gt;= high) <span class="hljs-keyword">return</span> vec[low];<br>        <span class="hljs-type">int</span>  midpos = quickPartion(vec, low,high);   <span class="hljs-comment">//对原数组vec[low]到vec[high]的元素进行划界</span><br>        <span class="hljs-keyword">if</span> (midpos == vec.size() - k) <span class="hljs-comment">//如果midpos==n-k，那么返回该值，这就是第k大的数</span><br>            <span class="hljs-keyword">return</span> vec[midpos];<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (midpos &lt; vec.size() - k) <span class="hljs-comment">//如果midpos&lt;n-k，那么第k大的数在右半数组</span><br>            <span class="hljs-keyword">return</span> getQuickSortK(vec, midpos+<span class="hljs-number">1</span>, high, k);<br>        <span class="hljs-keyword">else</span>  <span class="hljs-comment">//如果midpos&gt;n-k，那么第k大的数在左半数组</span><br>            <span class="hljs-keyword">return</span> getQuickSortK(vec, low, midpos<span class="hljs-number">-1</span>, k);<br>    &#125;<br><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">findKthLargest</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-keyword">return</span> getQuickSortK(nums,<span class="hljs-number">0</span>,nums.size()<span class="hljs-number">-1</span>,k);<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
 </details>
 <h3 id="循环赛日程表"><a class="markdownIt-Anchor" href="#循环赛日程表"></a> 循环赛日程表</h3>
 <p>设有n=2^k个运动员要进行网球循环赛。现要设计一个满足以下要求的比赛日程表：</p>
@@ -335,39 +537,100 @@
 <p>按分治策略，我们可以将所有的选手分为两半，则n个选手的比赛日程表可以通过n/2个选手的比赛日程表来决定。递归地用这种一分为二的策略对选手进行划分，直到只剩下两个选手时，比赛日程表的制定就变得很简单。这时只要让这两个选手进行比赛就可以了。如上图，所列出的正方形表是8个选手的比赛日程表。其中左上角与左下角的两小块分别为选手1至选手4和选手5至选手8前3天的比赛日程。据此，将左上角小块中的所有数字按其相对位置抄到右下角，又将左下角小块中的所有数字按其相对位置抄到右上角，这样我们就分别安排好了选手1至选手4和选手5至选手8在后4天的比赛日程。依此思想容易将这个比赛日程表推广到具有任意多个选手的情形。</p>
 <details>
   <summary>分治法解决循环赛日程表问题的C语言实现代码</summary>
-<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-keyword">int</span> a[<span class="hljs-number">10000</span>][<span class="hljs-number">10000</span>];<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">table</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;<br>        a[<span class="hljs-number">1</span>][i] = i;<br>    &#125;<br>    <span class="hljs-keyword">int</span> m = <span class="hljs-number">1</span>;  <span class="hljs-comment">//每次填充起始位置</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> s = <span class="hljs-number">1</span>; s &lt;= k; s++) &#123;<br>        n/=<span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> t = <span class="hljs-number">1</span>; t &lt;= n; t++)  <span class="hljs-comment">//分的块数</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = m+<span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">2</span>*m; i++)<br>                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = m+<span class="hljs-number">1</span>; j &lt;= <span class="hljs-number">2</span>*m; j++) &#123;<br>                    a[i][j+(t<span class="hljs-number">-1</span>)*m*<span class="hljs-number">2</span>] = a[i-m][j+(t<span class="hljs-number">-1</span>)*m*<span class="hljs-number">2</span>-m];  <span class="hljs-comment">//右下角的值等于左上角的值</span><br>                    a[i][j+(t<span class="hljs-number">-1</span>)*m*<span class="hljs-number">2</span>-m] = a[i-m][j+(t<span class="hljs-number">-1</span>)*m*<span class="hljs-number">2</span>];  <span class="hljs-comment">//左下角的值等于右上角的值</span><br>                    <span class="hljs-comment">//printf(&quot;i = %d\t j+(t-1)*m*2 = %d\t j+(t-1)*m*2-m = %d\t, i-m=%d\n&quot;, i, j+(t-1)*m*2, j+(t-1)*m*2-m, i-m);</span><br>                &#125;<br>        m *= <span class="hljs-number">2</span>; <span class="hljs-comment">//更新填充起始位置</span><br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> k;<br>    <span class="hljs-built_in">cin</span> &gt;&gt; k;<br><br>    <span class="hljs-keyword">int</span> n = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= k; i++)<br>        n *= <span class="hljs-number">2</span>;<br>    table(k, n);<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j ++) &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d%c&quot;</span>, a[i][j], j!=n?<span class="hljs-string">&#x27; &#x27;</span>:<span class="hljs-string">&#x27;\n&#x27;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs C"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br>using namespace <span class="hljs-built_in">std</span>;<br><span class="hljs-type">int</span> a[<span class="hljs-number">10000</span>][<span class="hljs-number">10000</span>];<br><span class="hljs-type">void</span> <span class="hljs-title function_">table</span><span class="hljs-params">(<span class="hljs-type">int</span> k, <span class="hljs-type">int</span> n)</span> &#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;<br>        a[<span class="hljs-number">1</span>][i] = i;<br>    &#125;<br>    <span class="hljs-type">int</span> m = <span class="hljs-number">1</span>;  <span class="hljs-comment">//每次填充起始位置</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> s = <span class="hljs-number">1</span>; s &lt;= k; s++) &#123;<br>        n/=<span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> t = <span class="hljs-number">1</span>; t &lt;= n; t++)  <span class="hljs-comment">//分的块数</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = m+<span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">2</span>*m; i++)<br>                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = m+<span class="hljs-number">1</span>; j &lt;= <span class="hljs-number">2</span>*m; j++) &#123;<br>                    a[i][j+(t<span class="hljs-number">-1</span>)*m*<span class="hljs-number">2</span>] = a[i-m][j+(t<span class="hljs-number">-1</span>)*m*<span class="hljs-number">2</span>-m];  <span class="hljs-comment">//右下角的值等于左上角的值</span><br>                    a[i][j+(t<span class="hljs-number">-1</span>)*m*<span class="hljs-number">2</span>-m] = a[i-m][j+(t<span class="hljs-number">-1</span>)*m*<span class="hljs-number">2</span>];  <span class="hljs-comment">//左下角的值等于右上角的值</span><br>                    <span class="hljs-comment">//printf(&quot;i = %d\t j+(t-1)*m*2 = %d\t j+(t-1)*m*2-m = %d\t, i-m=%d\n&quot;, i, j+(t-1)*m*2, j+(t-1)*m*2-m, i-m);</span><br>                &#125;<br>        m *= <span class="hljs-number">2</span>; <span class="hljs-comment">//更新填充起始位置</span><br>    &#125;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">int</span> k;<br>    <span class="hljs-built_in">cin</span> &gt;&gt; k;<br><br>    <span class="hljs-type">int</span> n = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= k; i++)<br>        n *= <span class="hljs-number">2</span>;<br>    table(k, n);<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j ++) &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d%c&quot;</span>, a[i][j], j!=n?<span class="hljs-string">&#x27; &#x27;</span>:<span class="hljs-string">&#x27;\n&#x27;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 </details>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/programming/">程序开发</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E4%BA%94%E5%A4%A7%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/">五大经典算法</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/">分治算法</a>
-                    
-                  </div>
                 
               </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/programming/" class="category-chain-item">程序开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BA%94%E5%A4%A7%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/" class="print-no-link">#五大经典算法</a>
+      
+        <a href="/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/" class="print-no-link">#分治算法</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>五大经典算法|3.分治法</div>
+      <div>https://imzhanghao.com/2020/04/20/5-classic-algorithms-3-divide-and-conquer/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ZhangHao</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年4月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
               
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
 
               <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5495814268572722"
                   crossorigin="anonymous"></script>
@@ -382,11 +645,12 @@
               </script>
 
               
-                <div class="post-prevnext">
+                <div class="post-prevnext my-3">
+
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/25/5-classic-algorithms-4-dynamic-programming/">
+                      <a href="/2020/04/25/5-classic-algorithms-4-dynamic-programming/" title="五大经典算法|4.动态规划">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">五大经典算法|4.动态规划</span>
                         <span class="visible-mobile">上一篇</span>
@@ -396,7 +660,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/04/15/5-classic-algorithms-2-greedy-algorithm/">
+                      <a href="/2020/04/15/5-classic-algorithms-2-greedy-algorithm/" title="五大经典算法|2.贪心算法">
                         <span class="hidden-mobile">五大经典算法|2.贪心算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -408,32 +672,71 @@
             </div>
 
             
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
+  
+  
+    <article id="comments" lazyload>
+      
 
-              </article>
-            
+    </article>
+  
+
+
           </article>
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
 
 
     
@@ -458,45 +761,43 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-    
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-
   
-  <!-- 备案信息 -->
-  <div class="beian">
-    <span>
-      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
-        陕ICP备20008129号
-      </a>
-    </span>
-    
-  </div>
-
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      陕ICP备20008129号
+    </a>
+  </span>
+  
+</div>
 
   
-</footer>
+</div>
 
+  </footer>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
   
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -507,15 +808,27 @@
   </script>
 
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -525,105 +838,181 @@
 
 
 
-  
-
-
 
   
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
   
-  
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
-  
-  
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
-  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
 
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-        typing(title);
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-  
-
-  
-    <!-- KaTeX -->
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
-  
-
-
-
-
-
-
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
 
 
   
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?0c64a5657309290fd8f5efe33fcbcdb4";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
 
-  
-    <!-- Google Analytics -->
-    <script defer>
-      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-      ga.l = +new Date;
-      ga('create', 'UA-166608124-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-  
 
-  
-    <!-- Google gtag.js -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKN25ZF7R2"></script>
-    <script defer>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-PKN25ZF7R2');
-    </script>
-  
+  <script>Fluid.plugins.imageCaption();</script>
 
-  
+  <script defer src="/js/openkounter.js" ></script>
 
-  
-
-  
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
