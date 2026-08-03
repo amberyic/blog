@@ -2,7 +2,7 @@
 title: hadoop & spark 分布式集群搭建
 date: 2020-03-21
 categories:
-- 并行计算
+- 程序开发
 tags:
 - hadoop
 - spark
