@@ -13,7 +13,7 @@ tags:
 - Bahdanau Attention
 - Luong Attention
 keywords: Hard Attention, Soft Attention, Global Attention, Local Attention, Bahdanau Attention, Luong Attention, attention variants
-description: 介绍Attention机制多种变体，对进行对比。包括hard attention和soft attention的对比，global attention 和 local attention的对比，bahdanau attention 和 luong attention的对比。
+description: 介绍Attention机制多种变体，并对其进行对比。包括hard attention和soft attention的对比，global attention 和 local attention的对比，bahdanau attention 和 luong attention的对比。
 ---
 
 ## hard attention vs soft attention
@@ -64,7 +64,7 @@ $$Z \sim x_{i}, \alpha_{i}$$
 ![hard attention的注意力](https://oss.imzhanghao.com/img/202109060831750.png)
 
 ## global attention vs local attention
-global attention和local attenion的区别在于“注意力”是放在所有源位置还是仅放在几个源位置。
+global attention和local attention的区别在于“注意力”是放在所有源位置还是仅放在几个源位置。
 在[《Effective Approaches to Attention-based Neural Machine Translation 》](https://arxiv.org/pdf/1508.04025.pdf)中，Luong做了详细的说明和对比。
 
 
@@ -89,7 +89,7 @@ $$
 
 ### local attention
 ![local attention](https://oss.imzhanghao.com/img/202109070603083.png)
-为了进一步减少计算代价，在解码过程的每一个时间步仅关注输入序列的一个子集，于是在计算每个位置的attetnion是会固定一个上下文窗口，而不是在全局范围计算attention。局部注意力只会关注部分隐状态，首先对于第t个位置的输出词语，我们在原文中找到它的一个对应位置pt。然后我们在对齐位置pt前后扩张D个长度，得到一个范围[pt-D,pt+D],这个范围就是现在Ct所能够接触到的所有可以参与attention计算的隐藏层范围，最后在这个范围内计算局部对齐权重即可。
+为了进一步减少计算代价，在解码过程的每一个时间步仅关注输入序列的一个子集，于是在计算每个位置的attention时会固定一个上下文窗口，而不是在全局范围计算attention。局部注意力只会关注部分隐状态，首先对于第t个位置的输出词语，我们在原文中找到它的一个对应位置pt。然后我们在对齐位置pt前后扩张D个长度，得到一个范围[pt-D,pt+D],这个范围就是现在Ct所能够接触到的所有可以参与attention计算的隐藏层范围，最后在这个范围内计算局部对齐权重即可。
 
 从前面的描述我们可以知道，该机制的重点就在于如何确定预测词对应的隐状态，即找到一个合适的pt，论文中提出了两种方法：
 **monotonic alignment(local-m)**
@@ -103,7 +103,7 @@ $$\boldsymbol{a}_{t}(s)=\operatorname{align}\left(\boldsymbol{h}_{t}, \overline{
 经验上标准差设置为$\sigma=D / 2$，pt是一个真实的数字，s是一个以pt为中心的窗口中的整数。
 
 ### 总结
-目前我们大量使用的都是global attention，因为local attetnion在encoder不长时，计算量并没有减少，并且位置向量pt的预测并不是非常准确，直接影响到local attention的效果。
+目前我们大量使用的都是global attention，因为local attention在encoder不长时，计算量并没有减少，并且位置向量pt的预测并不是非常准确，直接影响到local attention的效果。
 ![Alignment functions](https://oss.imzhanghao.com/img/202109070950753.png)
 
 ## bahdanau attention vs luong attention

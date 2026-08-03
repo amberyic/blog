@@ -8,11 +8,11 @@ tags:
 - 编码器-解码器
 - Seq2Seq
 keywords: 编码器-解码器,Encoder-Decoder,Seq2Seq,序列到序列
-description: 分别介绍了Encoder-Decoder框架和Seq2Seq模型的结构，完成的工作，以及两者之间的关系。最后给予Encoder-Decoder的框架实现了Seq2Seq的模型，方便大家理解。
+description: 分别介绍了Encoder-Decoder框架和Seq2Seq模型的结构，完成的工作，以及两者之间的关系。最后基于Encoder-Decoder的框架实现了Seq2Seq的模型，方便大家理解。
 ---
 
 ## Encoder-Decoder简介
-Encoder-Decoder框架是一种文本处理领域的研究模式，他并不是特指某种具体的算法，而是一类算法统称。Encoder和Decoder部分可以是任意的文字，语音，图像，视频数据，模型可以采用CNN，RNN，BiRNN、LSTM、GRU等等。所以基于Encoder-Decoder，我们可以设计出各种各样的应用算法。
+Encoder-Decoder框架是一种文本处理领域的研究模式，它并不是特指某种具体的算法，而是一类算法统称。Encoder和Decoder部分可以是任意的文字，语音，图像，视频数据，模型可以采用CNN，RNN，BiRNN、LSTM、GRU等等。所以基于Encoder-Decoder，我们可以设计出各种各样的应用算法。
 
 ![Encoder-Decoder框架](https://oss.imzhanghao.com/img/20210526143504.png)
 
@@ -27,12 +27,12 @@ Cho在2014年提出了[Encoder–Decoder结构](https://arxiv.org/pdf/1406.1078.
 
 Encoder-Decoder将可变长度序列编码为固定长度向量，然后将定长度向量表示解码回可变长度序列。可以形式化为：$p\left(y_{1}, \ldots, y_{T^{\prime}} \mid x_{1}, \ldots, x_{T}\right)$，这里$T$和$T^{\prime}$可以不一样，即输入的长度跟输出的长度可以不一致。
 
-**Encoder**是一个RNN，他顺序地读取输入序列$x$的每个符号，当读到一个符号时，RNN的隐藏状态$h$会根据下面的等式发生变化。在读取序列的结尾（用序列结束符号标记）后，RNN的隐藏状态是整个输入序列的摘要$c$。
+**Encoder**是一个RNN，它顺序地读取输入序列$x$的每个符号，当读到一个符号时，RNN的隐藏状态$h$会根据下面的等式发生变化。在读取序列的结尾（用序列结束符号标记）后，RNN的隐藏状态是整个输入序列的摘要$c$。
 $$\mathbf{h}_{\langle t\rangle}=f\left(\mathbf{h}_{\langle t-1\rangle}, x_{t}\right)$$
 > $x$是输入序列 $\mathbf{x}=\left(x_{1}, \ldots, x_{T}\right)$
 > $f$是非线性激活函数。$f$可能像逻辑回归sigmoid函数一样简单，也可能像LSTM单元一样复杂
 
-**Decoder**是另一个RNN，他被用来生成输出序列，根据Encoder生成的摘要$c$和后续隐状态和输入状态来得到后续状态，Decoder中t时刻内部状态的$h_t$为：
+**Decoder**是另一个RNN，它被用来生成输出序列，根据Encoder生成的摘要$c$和后续隐状态和输入状态来得到后续状态，Decoder中t时刻内部状态的$h_t$为：
 $$\mathbf{h}_{\langle t\rangle}=f\left(\mathbf{h}_{\langle t-1\rangle}, y_{t-1}, \mathbf{c}\right)$$
 该时刻的概率表示为：
 $$P\left(y_{t} \mid y_{t-1}, y_{t-2}, \ldots, y_{1}, \mathbf{c}\right)=g\left(\mathbf{h}_{\langle t\rangle}, y_{t-1}, \mathbf{c}\right)$$
@@ -43,13 +43,13 @@ $$\max _{\boldsymbol{\theta}} \frac{1}{N} \sum_{n=1}^{N} \log p_{\boldsymbol{\th
 > $(x_n, y_n)$ 是训练集中(输入序列, 输出序列)的一组样本
 
 ## Seq2Seq
-Seq2Seq（是 Sequence-to-sequence 的缩写），他输入一个序列，输出另一个序列。这种结构最重要的地方在于输入序列和输出序列的长度是可变的。
+Seq2Seq（是 Sequence-to-sequence 的缩写），它输入一个序列，输出另一个序列。这种结构最重要的地方在于输入序列和输出序列的长度是可变的。
 
 2014年Google的Sutskever提出了[Seq2Seq](https://arxiv.org/pdf/1409.3215.pdf)，只不过比Cho晚了一点。论文中的模型结构更简单，Decoder在t时刻yt是由ht，yt−1决定，而没有c，Encoder 和 Decoder都用的LSTM结构。
 ![Seq2Seq](https://oss.imzhanghao.com/img/20210827093601.png)
 
 ## Encoder-Decoder和Seq2Seq的关系
-这两种叫法基本都是前后脚被提出来的，其实是技术发展到一定阶段自然的一次演进，基本上可以划上等号，如果非要讲他们的差别，那么就只能说下面着两条了。
+这两种叫法基本都是前后脚被提出来的，其实是技术发展到一定阶段自然的一次演进，基本上可以划上等号，如果非要讲它们的差别，那么就只能说下面这两条了。
 - Seq2Seq使用的具体方法基本都属于Encoder-Decoder模型的范畴。
 - Seq2Seq不特指具体方法，只要满足输入序列到输出序列的目的，都可以统称为Seq2Seq模型，即Seq2Seq强调目的，Encoder-Decoder强调方法。
 
@@ -61,7 +61,7 @@ Seq2Seq（是 Sequence-to-sequence 的缩写），他输入一个序列，输出
 网上找到了一个比较好的[实现](https://github.com/ChunML/NLP/blob/master/machine_translation/train_simple_tf2.py)，基于Tensorflow2.x的KerasAPI实现，可读性很高。
 
 **模型定义**
-模型结构定义部分，Encoder和Docoder都是继承tf.keras.Model基类构建自定义模型，实现了__init__和call方法。
+模型结构定义部分，Encoder和Decoder都是继承tf.keras.Model基类构建自定义模型，实现了__init__和call方法。
 - vocab_size： 训练数据词表大小
 - embedding_size：词嵌入的维度，一般越大计算成本越高，建议<10
 - lstm_size：LSTM的输出维度

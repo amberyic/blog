@@ -6,7 +6,7 @@ description: 自己搭建在github Page上搭建博客的笔记.
 ---
 自己搭建在github Page上搭建博客的笔记.
 Hexo是基于Node.js驱动的一款博客框架
-主要内容:1)准备环境,2)安装)Hexo,3)GitHub绑定,4)常用命令,5)绑定域名,6)hexo备份,7)hexo恢复
+主要内容:1)准备环境,2)安装Hexo,3)GitHub绑定,4)常用命令,5)绑定域名,6)hexo备份,7)hexo恢复
 <!-- more -->
 
 ## 准备环境

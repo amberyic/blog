@@ -286,8 +286,8 @@ CLIPDraw也是利用文字来指导图像生成的一个工作，只是想法更
 ![CLIPDraw](https://oss.imzhanghao.com/img/202211100613302.png)
 
 **ViLD: Open-vocabulary Object Detection via Vision and Language Knowledge Distillation / Google**
-用CLIP来做物体检测和分割的任务，在CLIP出来一个月半月以后，就Google就出了这篇文章。
-作者指出，如果你用传统的物体检测方法，算法只能告诉你这些只是玩具，也就是下图蓝色的base categories，但是当你利用了这种自然语言之后，你就拜托了基础类的这个限制，就可以检测出来新的类，也就是红色的noval categories。
+用CLIP来做物体检测和分割的任务，在CLIP出来一个月半月以后，Google就出了这篇文章。
+作者指出，如果你用传统的物体检测方法，算法只能告诉你这些只是玩具，也就是下图蓝色的base categories，但是当你利用了这种自然语言之后，你就摆脱了基础类的这个限制，就可以检测出来新的类，也就是红色的noval categories。
 ![ViLD](https://oss.imzhanghao.com/img/202211100622320.png)
 
 **CLIPasso: Semantically-Aware Object Sketching (SIGGRAPH 2022 Best Paper Award)**

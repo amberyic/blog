@@ -52,7 +52,7 @@ $ sudo ufw allow ssh
 ```
 $ sudo useradd -m hadoop -s /bin/bash
 $ sudo passwd hadoop
-修改/etc/sudoder文件，给hadoop用户增加sudo权限。
+修改/etc/sudoers文件，给hadoop用户增加sudo权限。
 ```
 
 ### 修改Host

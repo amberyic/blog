@@ -31,7 +31,7 @@ description: ESMM是阿里巴巴践行多目标任务优化模型的一个实践
 
 ## 目前已有的解决方案
 **样本选择偏差**
-- 缺失值作为负样本（All Missing As Negative，AMAN）采用随机抽样策略把选择未点击的展示作为负示例，这在某种程度上可以减轻样本选择偏差的问题，但通常会会导致预测值偏低。
+- 缺失值作为负样本（All Missing As Negative，AMAN）采用随机抽样策略把选择未点击的展示作为负示例，这在某种程度上可以减轻样本选择偏差的问题，但通常会导致预测值偏低。
 
 - 无偏采样（Unbias Sampling）通过蒙特·卡罗拒绝采样法（Rejection Sampling）来拟合观测值的真实基础分布，从而解决了CTR建模中的样本选择偏差问题。但是，通过拒绝概率的除法对样本加权时，可能会遇到数值不稳定性。
 
@@ -66,7 +66,7 @@ $$\underbrace{p(y=1, z=1 \mid \boldsymbol{x})}_{pCTCVR}=\underbrace{p(y=1 \mid \
 ### 预估CVR
 常规的CVR模型只用了点击以后的样本去预估pCVR，这个会有样本选择偏差的问题，好消息是pCTCVR和pCTR是可以在全量数据集上学习的，我们变换一下上面的公式，就可以根据pCTCVR和pCTR这两个在全量数据集上学习到的值计算出pCVR。
 $$p(z=1 \mid y=1, \boldsymbol{x})=\frac{p(y=1, z=1 \mid \boldsymbol{x})}{p(y=1 \mid \boldsymbol{x})}$$
-然而，实际上，pCTR很小，除以pCTR会引起数值不稳定，而且有可能是的pCVR超过1，这明显不合理。
+然而，实际上，pCTR很小，除以pCTR会引起数值不稳定，而且有可能使得pCVR超过1，这明显不合理。
 
 ESMM通过乘法形式避免了这种情况，就是用全样本使用一个模型来同时学习pCTR以及pCVR，然后二者相乘拟合pCTCVR，pCTR预估以及pCTCVR预估是可以使用全样本训练的。
 
@@ -88,7 +88,7 @@ $$L\left(\theta_{cvr}, \theta_{ctr}\right)=\sum_{i=1}^{N} l\left(y_{i}, f\left(x
 - 这个可以从模型的损失函数中看出来，loss只和pCTR与pCTCVR相关，而pCTCVR是pCVR与pCTR相乘得到的，模型拟合了pCTR和pCTCVR，那么pCVR相当于隐含地被训练了，并且pCVR这块输出使用sigmoid激活的保证了值域稳定。
 
 ### 解决常规CVR预估的问题
-**解决样本选择（BBS）问题**
+**解决样本选择（SSB）问题**
 * 全空间建模： 和CTR一样，在全部展现样本上建模。pCTCVR、pCTR和pCVR都定义在全样本空间。通过分别估算单独训练的模型pCTR和pCTCVR并通过关系式可以获得pCVR，三个关联的任务共同训练分类器，能够利用数据的序列模式并相互传递信息，保障物理意义。
 
 **解决样本稀疏（DS）问题**

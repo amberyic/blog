@@ -39,9 +39,9 @@ ImageNet这个数据集，数据量足够大，而且分类齐全，不限定领
 自然语言处理的预训练方法属于**自然语言的表示学习**，自然语言表示学习的形成已经经过了长期的历史发展。
 
 - 1948年N-gram分布式模型被提出来，使用one-hot对单词进行编码，这是最初的语言模型，存在维度灾难和语义鸿沟等问题。
-- 1986年出现了分布式语义表示，即用一个词的上下文来表示该词的词义，他在one-hot的基础上压缩了描述语料库的维度，从原先的V-dim降低为了自己设定的K值。当时通用的方案是基于向量空间模型（Vector Space Model，VSM）的**词袋假说**（Bag of Words Hypothesis），即一篇文档的词频（而不是词序）代表了文档的主题，我们可以构造一个term-document矩阵，提取行向量做为word的语义向量，或者提取列向量作为文档的主题向量，使用奇异值分解(SVD)的进行计算。
+- 1986年出现了分布式语义表示，即用一个词的上下文来表示该词的词义，它在one-hot的基础上压缩了描述语料库的维度，从原先的V-dim降低为了自己设定的K值。当时通用的方案是基于向量空间模型（Vector Space Model，VSM）的**词袋假说**（Bag of Words Hypothesis），即一篇文档的词频（而不是词序）代表了文档的主题，我们可以构造一个term-document矩阵，提取行向量做为word的语义向量，或者提取列向量作为文档的主题向量，使用奇异值分解(SVD)的进行计算。
 - 2003年经典的NNLM神经语言模型被提出，开始使用神经网络来进行语言建模。更早期百度 IDL（深度学习研究院）的徐伟在他2000年发表的文章《Can Artificial Neural Networks Learn Language Models?》中也有相似方向的探索。
-- 2013年word2vec被提出并在NLP领域大获成功，他基于向量空间模型的**分布假说**（Distributional Hypothesis），即上下文环境相似的两个词有着相近的语义，构造一个word-context的矩阵，矩阵的列变成了context里的word，矩阵的元素也变成了一个context窗口里word的共现次数。Word Embedding是Word2Vec模型的中间产物，是在不断最小化损失函数时候，不断迭代更新生成的。
+- 2013年word2vec被提出并在NLP领域大获成功，它基于向量空间模型的**分布假说**（Distributional Hypothesis），即上下文环境相似的两个词有着相近的语义，构造一个word-context的矩阵，矩阵的列变成了context里的word，矩阵的元素也变成了一个context窗口里word的共现次数。Word Embedding是Word2Vec模型的中间产物，是在不断最小化损失函数时候，不断迭代更新生成的。
 - 2018年出现了预训练语言模型。
 
 ### 传统的预训练技术 VS 神经网络预训练技术
@@ -119,7 +119,7 @@ Glove(Global Vectors for Word Representation)是一种无监督的词嵌入方�
 通过预训练得到高质量的词向量一直是具有挑战性的问题，主要有两方面的难点，一个是词本身具有的**语法语义复杂**属性，另一个是这些语法语义的复杂属性如何随着上下文语境产生变化，也就是**一词多义性**问题。传统的词向量方法例如word2vec、GloVe等都是训练完之后，每个词向量就固定下来，这样就无法解决一词多义的问题。接下来的模型就是基于解决这个问题展开的。
 
 ### ELMo
-ELMo（Embeddings from Language Models）是有AI2提出，该模型不仅去学习**单词特征**，还有**句法特征**与**语义特征**。其通过在大型语料上预训练一个深度BiLSTM语言模型网络来获取词向量，也就是每次输入一句话，可以根据这句话的上下文语境获得每个词的向量，这样子就可以解决一词多义问题。
+ELMo（Embeddings from Language Models）是由AI2提出，该模型不仅去学习**单词特征**，还有**句法特征**与**语义特征**。其通过在大型语料上预训练一个深度BiLSTM语言模型网络来获取词向量，也就是每次输入一句话，可以根据这句话的上下文语境获得每个词的向量，这样子就可以解决一词多义问题。
 
 ![ELMo](https://oss.imzhanghao.com/img/202111150545462.png)
 
@@ -133,12 +133,12 @@ Elmo模型的**本质思想**是先用语言模型学习一个单词的 Word Emb
 ### GPT
 GPT（Generative Pre-Training）模型用单向Transformer代替ELMo的LSTM来完成预训练任务，其将12个Transformer叠加起来。训练的过程较简单，将句子的n个词向量加上位置编码(positional encoding)后输入到 Transformer中 ，n个输出分别预测该位置的下一个词。
 
- GPT的单项Transformer结构和GPT的模型结构，如图所示：
+ GPT的单向Transformer结构和GPT的模型结构，如图所示：
 ![GPT](https://oss.imzhanghao.com/img/202111150547484.png)
 
 **评价**
 - 第一个结合 Transformer 架构（Decoder）和自监督预训练目标的模型
-- 语言模型使用的是单行语言模型为目标任务。
+- 语言模型使用的是单向语言模型为目标任务。
 
 ### BERT
 BERT采用和GPT完全相同的两阶段模型，首先是语言模型预训练，其次是后续任务的拟合训练。和GPT最主要不同在于预训练阶段采了类似ELMo的双向语言模型技术、MLM(mask language model)技术以及 NSP(next sentence prediction) 机制。

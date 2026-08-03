@@ -14,7 +14,7 @@ description: 介绍联盟营销的工作原理、为什么选择联盟营销来�
 
 >  Affiliate marketing is a type of performance-based marketing in which a business rewards one or more affiliates for each visitor or customer brought by the affiliate's own marketing efforts. The industry has four core players: the merchant (also known as 'retailer' or 'brand'), the network (that contains offers for the affiliate to choose from and also takes care of the payments), the publisher (also known as 'the affiliate'), and the customer.
 
-- 商家利用网站联盟服务，扩展其线上及线下业务扩大销售空间和销售渠道，按照营销世纪效果支付费用。
+- 商家利用网站联盟服务，扩展其线上及线下业务扩大销售空间和销售渠道，按照营销实际效果支付费用。
 
 - affiliate marketing这种网络联盟营销模式大致有四个要素：
     - Merchant:产品的广告商，有的也称之为advertiser
@@ -25,13 +25,13 @@ description: 介绍联盟营销的工作原理、为什么选择联盟营销来�
 > 简单来讲：商家给你一件商品，如果你把这个产品推广出去，并且有人下单付费了，那么你就可以赚到佣金。
 
 ## 为什么选择联盟营销来赚钱
-- 起步门槛底，没有任何风险
+- 起步门槛低，没有任何风险
 - 没有库存，没有资金压力
 - 不需要客服，维护起来方便
 - 办公地点不限制
 - 收益是可持续的。
 - 潜力无限大
-> 中国生产的货品，老外通过包装可以获得很大的溢价空间，我们其实可以取赚这部分钱。
+> 中国生产的货品，老外通过包装可以获得很大的溢价空间，我们其实可以赚取这部分钱。
 
 ## 联盟营销的运作流程
 - 选取产品->进行推广->客户购买->获取佣金
@@ -53,7 +53,7 @@ description: 介绍联盟营销的工作原理、为什么选择联盟营销来�
 -----
 ## 我的理解
 - 1.这是一门赚钱的生意
-    - 联盟营销起源于亚马逊，他提高了营销的效率，在整个营销过程中的参与者都能够获得利润。
+    - 联盟营销起源于亚马逊，它提高了营销的效率，在整个营销过程中的参与者都能够获得利润。
 - 2.这是一件有趣的事情
     - 中间有很多的套路，需要对于规则和人性有很深入的理解才能赚到钱，一旦掌握了这门技术，可以在多个领域里面应用。
 

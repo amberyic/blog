@@ -115,7 +115,7 @@ description: 张一鸣说：对事情的认知是最关键的，你对事情的�
 ## 三、如何提高认知
 认知能力受到一系列因素的影响，包括遗传素质和个体经历。
 
-虽然我们无法改变自己的基因，但是我么可以做一些力所能及的事情来保护和最大化自己的认知能力.
+虽然我们无法改变自己的基因，但是我们可以做一些力所能及的事情来保护和最大化自己的认知能力.
 
 ### 3.1 多阅读，多思考，不盲从
 ![多阅读，多思考，不盲从](https://oss.imzhanghao.com/img/202208211643857.png)
@@ -152,7 +152,7 @@ description: 张一鸣说：对事情的认知是最关键的，你对事情的�
 
 
 ## 参考资料
-[认知能力与认知科学 / CogniFit]([https://www.cognifit.com/cn/cognition)
+[认知能力与认知科学 / CogniFit](https://www.cognifit.com/cn/cognition)
 [你觉得你很努力，其实你在逃避—《认知三部曲》](https://zhuanlan.zhihu.com/p/36490527)
 [认知水平越低的人，越爱抬杠](https://zhuanlan.zhihu.com/p/383802013)
 [提高认知水平的3种路径 / 逆习](https://mp.weixin.qq.com/s/_-cY_S_LUjCOONEtqgXpmA)

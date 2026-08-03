@@ -27,7 +27,7 @@ description: 1.如何挖掘Niche市场？2.创作内容的工具有那些？3.�
 - 工具
     - Keyword Tool：https://keywordtool.io/
     - AnswerThePublic： https://answerthepublic.com/
-    - BuzzSumo：https://buzzsumo.com/ 社交内容抓去
+    - BuzzSumo：https://buzzsumo.com/ 社交内容抓取
     - portent： https://www.portent.com/tools/title-maker
 
 
@@ -42,6 +42,6 @@ description: 1.如何挖掘Niche市场？2.创作内容的工具有那些？3.�
 - 我们能够接触到的人和事其实都是很局限的，要能找到一般人找不到的市场和机会，就需要依靠工具，帮助我们开拓思路，并且去验证我们的想法，所以工具是必须要用的。好工具更是能够大大提升效率。
 - 打Niche市场关键点就两个：
     - 1.选择一个上升趋势的产品。-- 需要使用第一小节的选品工具
-    - 2.吸引精准流量进行营销。--  用户永远都是因为内容才会来到你这里，所以什么样内容就能引来什么样的流量。需要实用二三小节的工具，进行内容创作。
+    - 2.吸引精准流量进行营销。--  用户永远都是因为内容才会来到你这里，所以什么样内容就能引来什么样的流量。需要使用二三小节的工具，进行内容创作。
 
 > 本文系顾小北老师《联盟营销网络赚钱系列》的第3课笔记。

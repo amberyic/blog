@@ -61,7 +61,7 @@ $$
 #### Attention中的mask操作
 整个Transformer中包含三种类型的attention,且目的并不相同。
 - Encoder的self-attention，考虑到batch的并行化，通常会进行padding，因此会对序列中mask=0的token进行mask后在进行attention score的softmax归一化。
-- Decoder中的self-attention，为了避免预测时后续tokens的影所以必须令后续tokens的mask=0，其具体做法为构造一个三角矩阵。
+- Decoder中的self-attention，为了避免预测时后续tokens的影响，所以必须令后续tokens的mask=0，其具体做法为构造一个三角矩阵。
 - Decoder中的encode-decoder attention，涉及到decoder中当前token与整个encoder的sequence的计算，所以encoder仍然需要考虑mask。
 
 综上，无论对于哪个类型的attention，在进行sotmax归一化前，都需要考虑mask操作。
@@ -77,7 +77,7 @@ Embeddings和Softmax跟在常规的序列转换模型中起到的作用是相同
 
 ### Layer Normalization
 Layer Normalization是作用于每个时序样本的归一化方法，其作用主要体现在：
-- 作用于非线性激活函数前，能够将输入拉离激活函数非饱（防止梯度消失）和非线性区域（保证非线性）；
+- 作用于非线性激活函数前，能够将输入拉离激活函数非饱和（防止梯度消失）和非线性区域（保证非线性）；
 - 保证样本输入的同分布。
 
 ### Positional Encoding

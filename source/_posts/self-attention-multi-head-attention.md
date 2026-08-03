@@ -31,7 +31,7 @@ Self Attention可以捕获同一个句子中单词之间的一些句法特征（
 Self Attention可以捕获同一个句子中单词之间的一些语义特征（比如图展示的its的指代对象Law）。
 ![可视化Self Attention机制](https://oss.imzhanghao.com/img/202109151007208.png)
 
-很明显，引入Self Attention后会更容易捕获句子中长距离的相互依赖的特征，因为如果是RNN或者LSTM，需要依次序序列计算，对于远距离的相互依赖的特征，要经过若干时间步步骤的信息累积才能将两者联系起来，而距离越远，有效捕获的可能性越小。
+很明显，引入Self Attention后会更容易捕获句子中长距离的相互依赖的特征，因为如果是RNN或者LSTM，需要按序列依次计算，对于远距离的相互依赖的特征，要经过若干时间步步骤的信息累积才能将两者联系起来，而距离越远，有效捕获的可能性越小。
 
 但是Self Attention在计算过程中会直接将句子中任意两个单词的联系通过一个计算步骤直接联系起来，所以远距离依赖特征之间的距离被极大缩短，有利于有效地利用这些特征。除此外，Self Attention对于增加计算的并行性也有直接帮助作用。这是为何Self Attention逐渐被广泛使用的主要原因。
 
@@ -58,12 +58,12 @@ V=W_{v} X
 
 ![计算Self-Attention Score](https://oss.imzhanghao.com/img/202109151123929.png)
 
-**第三步：对Self-Attention Socre进行缩放和归一化,得到Softmax Socre**
+**第三步：对Self-Attention Score进行缩放和归一化,得到Softmax Score**
 对 Step 2 中计算的分数进行缩放，这里通过除以8( 论文中维度是64，这可以让模型有更稳定的梯度，默认值是64，也可以是其它值)，将结果进行softmax归一化。
 ![计算Softmax Socre](https://oss.imzhanghao.com/img/202109151127016.png)
 
 
-**第四步：Softmax Socre乘以Value向量，求和得到Attention Value**
+**第四步：Softmax Score乘以Value向量，求和得到Attention Value**
 每个Value向量乘以softmax Score得到加权的v1和v2，对加权的v1和v2进行求和得到z1。这样，我们就计算出了第一个词Thinking的注意力值。其他的词用相同的方法进行计算。
 ![Socre乘以Value向量](https://oss.imzhanghao.com/img/202109151133617.png)
 
@@ -94,7 +94,7 @@ $$
 
 ### Single-Head Attention VS Multi-Head Attention
 ![Scaled Dot-Product Attention VS Multi-Head Attention](https://oss.imzhanghao.com/img/202109151148991.png)
-上图对比了多头注意力机制的计算过程和多头注意力机制的计算过程。
+上图对比了单头注意力机制的计算过程和多头注意力机制的计算过程。
 
 ### Multi-Head Attention的作用
 多头注意力的机制进一步细化了注意力层，通过以下两种方式提高了注意力层的性能：
