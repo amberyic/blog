@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 计算广告|4.合约广告
 date: 2020-06-15
 categories:

@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 联盟营销|7.如何获取流量
 date: 2020-05-23
 categories:

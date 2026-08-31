@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 计算广告|6.多方数据变现-程序化交易
 date: 2020-06-22
 categories:

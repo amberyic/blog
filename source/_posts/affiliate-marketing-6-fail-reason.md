@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 联盟营销|6.为什么你做的联盟营销会失败
 date: 2020-05-22
 categories:

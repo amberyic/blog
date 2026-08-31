@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 计算广告|3.相关方法
 date: 2020-06-12
 categories:

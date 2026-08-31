@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 计算广告|2.认识商业体系
 date: 2020-06-11
 categories:

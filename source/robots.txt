@@ -1,1 +1,5 @@
 User-agent: *
+Allow: /
+
+Sitemap: https://imzhanghao.com/sitemap.xml
+Sitemap: https://imzhanghao.com/baidusitemap.xml

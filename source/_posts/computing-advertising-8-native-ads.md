@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 计算广告|8.场景数据利用 -- 原生广告
 date: 2020-08-12
 categories:

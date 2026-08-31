@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 计算广告|5.竞价广告-精细数据变现
 date: 2020-06-18
 categories:

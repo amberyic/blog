@@ -1,4 +1,5 @@
 ---
+no_ads: true
 title: 计算广告|1.课程体系
 date: 2020-06-10
 categories:
