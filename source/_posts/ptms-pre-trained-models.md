@@ -68,7 +68,7 @@ Transformer之所以表现优异有以下几点原因：
 - 可以直接捕获序列中的长距离依赖关系。
 - 可以产生更具可解释性的模型。
 
-想详细了解Transfromer，可以参考我以前的文章[《Attention Is All You Need -- Transformer》](https://imzhanghao.com/2021/09/18/transformer/)
+想详细了解Transfromer，可以参考我以前的文章[《Attention Is All You Need -- Transformer》](https://v2grad.com/2021/09/18/transformer/)
 
 ### 自监督学习
 自监督学习是无监督学习的一种特殊方式，这些自监督的方法的核心是一个叫做 “pretext task” 的框架，它允许我们使用数据本身来生成标签，并使用监督的方法来解决非监督的问题。NLP预训练模型，就是利用自监督学习实现的，可以看做是一种去噪自编码器denoising Auto-Encoder。**这可以让我们在大规模无标注数据集上学习知识。**
@@ -189,7 +189,7 @@ BERT采用和GPT完全相同的两阶段模型，首先是语言模型预训练�
 - [A Neural Probabilistic Language Model/ paperweekly/ zhihu](https://zhuanlan.zhihu.com/p/21240807)
 - [Efficient Estimation of Word Representations in Vector Space / Tomas Mikolov](https://arxiv.org/pdf/1301.3781.pdf)
 - [GloVe: Global Vectors for Word Representation / Jeffrey Pennington](https://nlp.stanford.edu/pubs/glove.pdf)
-- [Attention Is All You Need -- Transformer / zhanghao](https://imzhanghao.com/2021/09/18/transformer/)
+- [Attention Is All You Need -- Transformer / zhanghao](https://v2grad.com/2021/09/18/transformer/)
 - [Deep contextualized word representations](https://arxiv.org/pdf/1802.05365.pdf)
 - [Improving Language Understanding by Generative Pre-Training](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)
 - [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf)

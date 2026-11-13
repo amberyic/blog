@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://imzhanghao.com
+url: https://v2grad.com
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -145,6 +145,7 @@ pagination_dir: page
 ## include:/exclude: options only apply to the 'source/' folder
 include:
 exclude:
+  - ssl/** # 证书与私钥不进入静态网站产物
 ignore:
 
 

@@ -9,3 +9,12 @@ public/
 package-lock.json
 .MWebMetaData/
 .claude/
+
+# 域名证书下载目录及证书、私钥材料不纳入后续提交
+/28467091_www.v2grad.com_nginx/
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx

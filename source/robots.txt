@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://imzhanghao.com/sitemap.xml
-Sitemap: https://imzhanghao.com/baidusitemap.xml
+Sitemap: https://v2grad.com/sitemap.xml
+Sitemap: https://v2grad.com/baidusitemap.xml

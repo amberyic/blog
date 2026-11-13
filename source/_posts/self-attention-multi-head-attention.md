@@ -18,7 +18,7 @@ Self Attention就是Q、K、V均为同一个输入向量映射而来的Encoder-D
 Multi-Head Attention同时计算多个Attention，并最终得到合并结果，通过计算多次来捕获不同子空间上的相关信息。
 
 ## 自注意力机制(Self-Attention)
-Self Attention跟Attention机制本质上是一回事，我们在[《Attention机制的基本思想与实现原理》](https://imzhanghao.com/2021/09/01/attention-mechanism/)中已经详细的介绍了Attention机制，这里我们主要讲解一下Self Attention机制的特别之处。
+Self Attention跟Attention机制本质上是一回事，我们在[《Attention机制的基本思想与实现原理》](https://v2grad.com/2021/09/01/attention-mechanism/)中已经详细的介绍了Attention机制，这里我们主要讲解一下Self Attention机制的特别之处。
 
 一般我们说Attention的时候，他的输入Source和输出Target内容是不一样的，比如在翻译的场景中，Source是一种语言，Target是另一种语言，Attention机制发生在Target元素Query和Source中所有元素之间。而Self Attention指的不是Target和Source之间的Attention机制，而是Source内部元素之间或者Target内部元素之间发生的Attention机制，也可以理解为Target=Source这种特殊情况下的注意力计算机制。
 
@@ -103,7 +103,7 @@ $$
 ![两个head学到的Attention效果](https://oss.imzhanghao.com/img/202109151146086.png)
 
 ## 参考文献
-[1][Attention机制的基本思想与实现原理](https://imzhanghao.com/2021/09/01/attention-mechanism/)
+[1][Attention机制的基本思想与实现原理](https://v2grad.com/2021/09/01/attention-mechanism/)
 [2][深度学习中的注意力模型（2017版）/ 张俊林 / 知乎](https://zhuanlan.zhihu.com/p/37601161)
 [3][The Illustrated Transformer / Jay Alammar](https://jalammar.github.io/illustrated-transformer/)
 [4][Illustrated: Self-Attention / Raimi Karim](https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a#570c)

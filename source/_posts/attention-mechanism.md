@@ -27,7 +27,7 @@ Attention 机制很像人类看图片的逻辑，当我们看一张图片的时�
 ![人类的视觉注意力](https://oss.imzhanghao.com/img/20210526141037.png)
 
 ## Encoder-Decoder的缺陷
-上一篇文章我们已经介绍了[Encoder-Decoder模型框架](https://imzhanghao.com/2021/08/26/encoder-decoder/)，不了解的朋友可以返回去再看一下。
+上一篇文章我们已经介绍了[Encoder-Decoder模型框架](https://v2grad.com/2021/08/26/encoder-decoder/)，不了解的朋友可以返回去再看一下。
 
 ![Encoder-Decoder框架](https://oss.imzhanghao.com/img/20210526143504.png)
 
