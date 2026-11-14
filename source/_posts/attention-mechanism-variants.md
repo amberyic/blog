@@ -23,7 +23,7 @@ description: 介绍Attention机制多种变体，并对其进行对比。包括h
 [《Neural Machine Translation by Jointly Learning to Align and Translate》](https://arxiv.org/pdf/1409.0473.pdf)中Dzmitry Bahdanau提出了soft attention的方法。
 
 [《Show, Attend and Tell: Neural Image Caption Generation with Visual Attention》](https://arxiv.org/pdf/1502.03044.pdf)中Kelvin Xu将这两种方法在Image Caption进行了比较，两种方案生成的注意力效果如下图所示。
-![soft attention vs hard attention](https://oss.imzhanghao.com/img/202109060829391.png)
+![soft attention vs hard attention](https://static.v2grad.com/img/202109060829391.png)
 
 目前我们大量的使用的都是soft attention，虽然hard attention有时能获得更好的训练效果，但是训练难度也会高很多。
 这两种attention计算方法主要的差别在于**计算context vector Z的方法不一样**。
@@ -43,10 +43,10 @@ $$\alpha_{i}=\operatorname{softmax}\left(s_{1}, s_{2}, \ldots, s_{i}, \ldots\rig
 $$Z=\sum_{i} \alpha_{i} x_{i}$$
 我们把最终得到的Z代替原始输入x，当作LSTM的输入。
 
-![soft attention计算过程](https://oss.imzhanghao.com/img/202109060853898.png)
+![soft attention计算过程](https://static.v2grad.com/img/202109060853898.png)
 
 **soft attention的注意力**
-![soft attention的注意力](https://oss.imzhanghao.com/img/202109060831176.png)
+![soft attention的注意力](https://static.v2grad.com/img/202109060831176.png)
 
 ### hard attention
 * 采样得到Z，权重服从贝努利分布，非0即1，对特定时间特定区域只有关注与不关注。
@@ -58,10 +58,10 @@ x1~xn分别覆盖图像的一个子部分。我们为每个xi计算一个权重�
 
 $$Z \sim x_{i}, \alpha_{i}$$
 
-![hard attention计算过程](https://oss.imzhanghao.com/img/202109060854596.png)
+![hard attention计算过程](https://static.v2grad.com/img/202109060854596.png)
 
 **hard attention的注意力**
-![hard attention的注意力](https://oss.imzhanghao.com/img/202109060831750.png)
+![hard attention的注意力](https://static.v2grad.com/img/202109060831750.png)
 
 ## global attention vs local attention
 global attention和local attention的区别在于“注意力”是放在所有源位置还是仅放在几个源位置。
@@ -69,7 +69,7 @@ global attention和local attention的区别在于“注意力”是放在所有�
 
 
 ### global attention
-![global attention](https://oss.imzhanghao.com/img/202109070602175.png)
+![global attention](https://static.v2grad.com/img/202109070602175.png)
 全局注意力模型的思想是在推导上下文向量ct的时候考虑编码器的所有隐藏状态,在该模型类型中，通过将当前目标隐藏状态ht与每个源隐藏状态hs进行比较，得出大小等于源侧时间步数的可变长度对齐向量。
 $$
 \begin{aligned}
@@ -88,7 +88,7 @@ $$
 $$
 
 ### local attention
-![local attention](https://oss.imzhanghao.com/img/202109070603083.png)
+![local attention](https://static.v2grad.com/img/202109070603083.png)
 为了进一步减少计算代价，在解码过程的每一个时间步仅关注输入序列的一个子集，于是在计算每个位置的attention时会固定一个上下文窗口，而不是在全局范围计算attention。局部注意力只会关注部分隐状态，首先对于第t个位置的输出词语，我们在原文中找到它的一个对应位置pt。然后我们在对齐位置pt前后扩张D个长度，得到一个范围[pt-D,pt+D],这个范围就是现在Ct所能够接触到的所有可以参与attention计算的隐藏层范围，最后在这个范围内计算局部对齐权重即可。
 
 从前面的描述我们可以知道，该机制的重点就在于如何确定预测词对应的隐状态，即找到一个合适的pt，论文中提出了两种方法：
@@ -104,12 +104,12 @@ $$\boldsymbol{a}_{t}(s)=\operatorname{align}\left(\boldsymbol{h}_{t}, \overline{
 
 ### 总结
 目前我们大量使用的都是global attention，因为local attention在encoder不长时，计算量并没有减少，并且位置向量pt的预测并不是非常准确，直接影响到local attention的效果。
-![Alignment functions](https://oss.imzhanghao.com/img/202109070950753.png)
+![Alignment functions](https://static.v2grad.com/img/202109070950753.png)
 
 ## bahdanau attention vs luong attention
 luong attention和bahdanau attention是比较流行和经典的两种attention机制实现，是用作者名字命名的，分别是在Minh-Thang Luong的[《Effective Approaches to Attention-based Neural Machine Translation》](https://arxiv.org/pdf/1508.04025.pdf)和Dzmitry Bahdanau的[《Neural Machine Translation by Jointly Learning to Align and Translate》](https://arxiv.org/pdf/1409.0473.pdf)中被提出来的方法。
 
-![bahdanau attention vs luong attention](https://oss.imzhanghao.com/img/202109070948179.png)
+![bahdanau attention vs luong attention](https://static.v2grad.com/img/202109070948179.png)
 这两种机制很相似，区别Luong在他的paper的3.1章节中进行了说明：
 1.在Bahdanau Attention机制中，第t步的注意力对齐中，使用的是Decoder中第t-1步的隐藏状态$h_{t-1}$和Encoder中所有的隐藏状态$\overline{\mathbf{h}}_{s}$加权得出的，但是在Luong使用的是第t步的隐藏状态$h_{t}$。
 2.在Bahdanau Attention机制中，decoder在第t步时，输入是由$c_t$和Decoder第t-1步的隐藏状态$h_{t-1}$拼接得出的，得到第t步的隐藏状态$h_{t}$并直接输出$\hat{\mathbf{y}}_{t+1}$。而 Luong Attention 机制在 decoder部分建立了一层额外的网络结构，输入是有$c_t$和Decoder第t步的隐藏状态$h_{t}$拼接作为输入，得到第t步的隐藏状态$\tilde{\mathbf{h}}_{t}$并输出$\hat{\mathbf{y}}_{t}$。
