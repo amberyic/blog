@@ -1,0 +1,5 @@
+{% for post in posts %}{% if post.source == 'about/index.md' %}{{ post.permalink | replace('/index.html', '/') | uriencode }}{% else %}{{ post.permalink | uriencode }}{% endif %}
+{% endfor %}{{ config.url | uriencode }}
+{% for tag in tags %}{{ tag.permalink | uriencode }}
+{% endfor %}{% for cat in categories %}{{ cat.permalink | uriencode }}
+{% endfor %}
