@@ -4,7 +4,8 @@
 
 # Site
 title: 持续迭代
-subtitle: v2grad · Way to Gradient
+# 页面标题后缀和订阅源副标题共用这个短品牌名
+subtitle: v2grad
 description: 算法工程师，关注机器学习和商业化变现，这里分享自己平时的学习笔记和日常思考。
 keywords: 算法工程师, 机器学习, 深度学习, 推荐系统, 计算广告, 商业化变现, 个人成长
 author: ZhangHao

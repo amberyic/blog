@@ -1,14 +1,15 @@
 <%
 var separator = theme.title_join_string || theme.tab_title_separator
-var title = page.title ? [page.title, config.title].join(separator) : config.title
+var pageTitle = page.title
 
 if (is_current('technology')) {
-  title = [__('技术系列文章'), config.title].join(separator)
+  pageTitle = __('技术系列文章')
 } else if (is_current('monetization')) {
-  title = [__('变现系列文章'), config.title].join(separator)
+  pageTitle = __('变现系列文章')
 } else if (is_current('thinking')) {
-  title = [__('思考系列文章'), config.title].join(separator)
+  pageTitle = __('思考系列文章')
 }
+var title = pageTitle ? [pageTitle, config.subtitle || config.title].join(separator) : config.title
 
 var keywords = page.keywords || config.keywords
 if (is_current('technology')) {
